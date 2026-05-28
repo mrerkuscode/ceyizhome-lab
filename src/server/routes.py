@@ -1,4 +1,4 @@
-"""Sprint 1 + Sprint 2 — GET and POST endpoints for browser mode."""
+"""Sprint 1 + Sprint 2 + Sprint 3 — GET and POST endpoints for browser mode."""
 from __future__ import annotations
 
 import json
@@ -6,8 +6,10 @@ import logging
 from pathlib import Path
 
 from flask import Blueprint, jsonify, request, send_from_directory
+from werkzeug.utils import secure_filename
 
 from server import controller_proxy as proxy
+from server import job_manager
 
 logger = logging.getLogger(__name__)
 
@@ -15,6 +17,43 @@ api_bp = Blueprint("api", __name__, url_prefix="/api")
 
 # Output directory served as static files
 _OUTPUT_DIR = Path(__file__).resolve().parents[2] / "output"
+
+# Sprint 3 — file upload helpers
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+_UPLOAD_INPUT_DIR = _PROJECT_ROOT / "input"
+_UPLOAD_FONTS_DIR = _PROJECT_ROOT / "assets" / "fonts"
+_UPLOAD_TEMP_DIR = _PROJECT_ROOT / "input" / "upload_temp"
+_MAX_UPLOAD_BYTES = 16 * 1024 * 1024  # 16 MB
+
+_ALLOWED = {
+    "excel":   {".xlsx", ".xls"},
+    "font":    {".ttf", ".otf"},
+    "visual":  {".png", ".jpg", ".jpeg", ".svg"},
+    "pack":    {".zip", ".cdr", ".ai", ".pdf"},
+    "preview": {".png", ".jpg", ".jpeg"},
+}
+
+
+def _save_upload(file_storage, dest_dir: Path, allowed_exts: set[str]) -> dict:
+    """Validate and save an uploaded file. Returns {status, path, filename}."""
+    if not file_storage or file_storage.filename == "":
+        return {"status": "ERROR", "error": "Dosya seçilmedi"}
+    suffix = Path(file_storage.filename).suffix.lower()
+    if suffix not in allowed_exts:
+        return {
+            "status": "ERROR",
+            "error": f"İzin verilmeyen format: {suffix}. Kabul edilen: {', '.join(sorted(allowed_exts))}",
+        }
+    file_storage.seek(0, 2)
+    size = file_storage.tell()
+    file_storage.seek(0)
+    if size > _MAX_UPLOAD_BYTES:
+        return {"status": "ERROR", "error": f"Dosya çok büyük (maks {_MAX_UPLOAD_BYTES // (1024*1024)} MB)"}
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    safe_name = secure_filename(file_storage.filename)
+    dest = dest_dir / safe_name
+    file_storage.save(str(dest))
+    return {"status": "OK", "path": str(dest), "filename": safe_name, "size_bytes": size}
 
 
 def _ok(data):
@@ -406,5 +445,114 @@ def restore_label_outputs():
         payload = request.get_json() or {}
         relative_paths = payload.get("relative_paths", [])
         return _ok(proxy.restore_label_outputs(relative_paths))
+    except Exception as exc:
+        return _err(exc)
+
+
+# ── Sprint 3 — File Upload endpoints ────────────────────────────────────────
+
+@api_bp.route("/upload_excel", methods=["POST"])
+def upload_excel():
+    try:
+        f = request.files.get("file")
+        result = _save_upload(f, _UPLOAD_INPUT_DIR, _ALLOWED["excel"])
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/upload_font", methods=["POST"])
+def upload_font():
+    try:
+        f = request.files.get("file")
+        result = _save_upload(f, _UPLOAD_FONTS_DIR, _ALLOWED["font"])
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/upload_design_visual", methods=["POST"])
+def upload_design_visual():
+    try:
+        f = request.files.get("file")
+        result = _save_upload(f, _UPLOAD_TEMP_DIR, _ALLOWED["visual"])
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/upload_template_pack", methods=["POST"])
+def upload_template_pack():
+    try:
+        f = request.files.get("file")
+        result = _save_upload(f, _UPLOAD_TEMP_DIR, _ALLOWED["pack"])
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/upload_label_preview", methods=["POST"])
+def upload_label_preview():
+    try:
+        f = request.files.get("file")
+        result = _save_upload(f, _UPLOAD_TEMP_DIR, _ALLOWED["preview"])
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+# ── Sprint 3 — Subprocess / Job endpoints ───────────────────────────────────
+
+@api_bp.route("/start_render_labels", methods=["POST"])
+def start_render_labels():
+    try:
+        payload = request.get_json() or {}
+        excel_path = payload.get("excel_path", "")
+        job_id = job_manager.start_job(
+            "render_labels",
+            job_manager._browser_render_labels,
+            excel_path,
+        )
+        return _ok({"status": "OK", "job_id": job_id, "message": "Render başlatıldı"})
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/start_run_dry", methods=["POST"])
+def start_run_dry():
+    try:
+        payload = request.get_json() or {}
+        excel_path = payload.get("excel_path", "")
+        job_id = job_manager.start_job(
+            "run_dry",
+            job_manager._browser_run_dry,
+            excel_path,
+        )
+        return _ok({"status": "OK", "job_id": job_id, "message": "Dry run başlatıldı"})
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/job_status/<job_id>")
+def job_status(job_id: str):
+    try:
+        return _ok(job_manager.get_status(job_id))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/job_log/<job_id>")
+def job_log(job_id: str):
+    try:
+        tail = int(request.args.get("tail", 100))
+        return _ok(job_manager.get_log(job_id, tail=tail))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/cancel_job/<job_id>", methods=["POST"])
+def cancel_job(job_id: str):
+    try:
+        return _ok(job_manager.cancel_job(job_id))
     except Exception as exc:
         return _err(exc)

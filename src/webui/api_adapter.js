@@ -227,17 +227,99 @@
     restore_label_outputs: function (relative_paths_json, callback) {
       var paths = (typeof relative_paths_json === "string") ? JSON.parse(relative_paths_json || "[]") : relative_paths_json;
       postJson("/api/restore_label_outputs", { relative_paths: paths }, callback);
+    },
+
+    // ── Sprint 3: File Upload + Subprocess ──────────────────────────────────
+
+    // GRUP A — File Upload (multipart/form-data)
+    uploadExcel: function (formData, callback) {
+      fetch("/api/upload_excel", { method: "POST", body: formData })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    uploadFont: function (formData, callback) {
+      fetch("/api/upload_font", { method: "POST", body: formData })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    uploadDesignVisual: function (formData, callback) {
+      fetch("/api/upload_design_visual", { method: "POST", body: formData })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    uploadTemplatePack: function (formData, callback) {
+      fetch("/api/upload_template_pack", { method: "POST", body: formData })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    uploadLabelPreview: function (formData, callback) {
+      fetch("/api/upload_label_preview", { method: "POST", body: formData })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    // GRUP B — Subprocess Jobs
+    start_render_labels: function (excel_path, callback) {
+      postJson("/api/start_render_labels", { excel_path: excel_path || "" }, callback);
+    },
+
+    renderLabels: function (callback) {
+      postJson("/api/start_render_labels", {}, callback);
+    },
+
+    start_run_dry: function (excel_path, callback) {
+      postJson("/api/start_run_dry", { excel_path: excel_path || "" }, callback);
+    },
+
+    run_dry_run: function (callback) {
+      postJson("/api/start_run_dry", {}, callback);
+    },
+
+    runDry: function (callback) {
+      postJson("/api/start_run_dry", {}, callback);
+    },
+
+    getJobStatus: function (job_id, callback) {
+      fetchJson("/api/job_status/" + encodeURIComponent(job_id), callback);
+    },
+
+    getJobLog: function (job_id, tail, callback) {
+      var t = tail || 100;
+      fetchJson("/api/job_log/" + encodeURIComponent(job_id) + "?tail=" + t, callback);
+    },
+
+    cancelJob: function (job_id, callback) {
+      postJson("/api/cancel_job/" + encodeURIComponent(job_id), {}, callback);
+    },
+
+    cancel_running_job: function (callback) {
+      // Browser mode: no single running job concept — list and cancel latest
+      fetchJson("/api/state", function (stateStr) {
+        if (typeof callback === "function") {
+          callback(JSON.stringify({ status: "BROWSER_MODE", message: "Aktif job yok veya zaten durdu." }));
+        }
+      });
     }
 
   };
 
-  // ── Sprint 3+ stubs: warn but don't crash ────────────────────────────────
-  // Sprint 2 methods are now fully implemented above.
-  // Remaining stubs: file-open dialogs, subprocess, desktop-only actions.
+  // ── Sprint 4+ stubs: warn but don't crash ────────────────────────────────
+  // Sprint 2: 30 POST methods implemented.
+  // Sprint 3: file upload + subprocess/job methods implemented.
+  // Remaining stubs: Qt-desktop-only actions (file dialogs, folder opens).
 
   var _notImpl = [
-    "select_excel", "chooseExcel", "run_dry_run", "runDry",
-    "run_production", "runProduction", "render_labels", "renderLabels",
+    "select_excel", "chooseExcel",
+    "run_production", "runProduction",
     "bulk_generate_and_add_to_queue", "bulk_generate_selected_and_add_to_queue",
     "render_manual_label", "render_manual_label_fields",
     "render_manual_label_fields_to_queue", "preview_manual_label_fields",
@@ -254,7 +336,7 @@
     "open_laser_folder", "openLaser", "reveal_file_in_folder", "open_file_safe",
     "open_svg", "open_project_file", "quitApplication",
     "editTemplate", "showHelp", "showSettings",
-    "create_calibration_pdf", "cancel_running_job"
+    "create_calibration_pdf"
   ];
 
   _notImpl.forEach(function (method) {
@@ -276,6 +358,6 @@
   cyzella.logChanged   = { connect: function () {} };
 
   window.cyzella = cyzella;
-  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST endpoints)");
+  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job endpoints)");
 
 }());
