@@ -1477,9 +1477,9 @@ function showSection(id, options = {}) {
     }, 180);
     setTimeout(scheduleFieldOverlaySync, 700);
     setTimeout(scheduleFieldOverlaySync, 1500);
-  } } else if (id === "reports") {
+  } else if (id === "reports") {
     setTimeout(fetchMetrics, 50);
-  else if (id === "fontTestLab") {
+  } else if (id === "fontTestLab") {
     setTimeout(renderFontTestLab, 80);
   }
 }
