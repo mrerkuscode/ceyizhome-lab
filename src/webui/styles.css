@@ -672,64 +672,46 @@ input[type=range]{accent-color:var(--accent)}
 .app.nav-collapsed .sidebar-footer{display:flex;justify-content:center}
 .sidebar-toggle{cursor:pointer}
 
-/* ===== FEATURE CSS — TRENDYOL İSİM DOĞRULAMA ===== */
-.tyv-screen{max-width:1180px;margin:0 auto;padding:var(--s-5)}
-.tyv-tabs{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:var(--s-4)}
-.tyv-tab{font-size:var(--fs-2);color:var(--text-2);padding:9px 13px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
-.tyv-tab.active{color:var(--brand);font-weight:600;border-bottom-color:var(--accent)}
-.tyv-head{display:flex;align-items:flex-end;gap:var(--s-4);flex-wrap:wrap;margin-bottom:var(--s-4)}
-.tyv-title{font-family:var(--font-serif);font-size:var(--fs-5);font-weight:600;color:var(--brand);margin:0}
-.tyv-sub{color:var(--text-2);font-size:var(--fs-2);margin:3px 0 0}
-.tyv-batch{margin-left:auto;display:flex;align-items:center;gap:var(--s-3);flex-wrap:wrap}
-.tyv-kbd{font-size:11px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:5px 9px}
-.tyv-wrap{display:grid;grid-template-columns:300px 1fr;gap:var(--s-4);align-items:start}
-.tyv-queue{display:flex;flex-direction:column;gap:var(--s-2)}
-.tyv-qitem{text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:11px 12px;cursor:pointer;display:flex;flex-direction:column;gap:4px;font:inherit;transition:border-color .12s,background .12s}
-.tyv-qitem:hover{border-color:var(--line-strong)}
-.tyv-qitem.active{border-color:var(--accent);background:var(--surface-2)}
-.tyv-qtop{display:flex;align-items:center;gap:7px}
-.tyv-dot{width:8px;height:8px;border-radius:50%;flex:none}
-.tyv-qname{font-size:var(--fs-2);font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tyv-qconf{margin-left:auto;font-size:11px;font-weight:600}
-.tyv-qmeta{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tyv-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:var(--s-4)}
-.tyv-cust{display:flex;align-items:center;gap:11px;margin-bottom:var(--s-3)}
-.tyv-ava{width:40px;height:40px;border-radius:50%;background:var(--accent-soft);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:none}
-.tyv-cname{font-weight:600;font-size:var(--fs-3);color:var(--brand);line-height:1.2}
-.tyv-corder{font-size:var(--fs-1);color:var(--text-2)}
-.tyv-conf{margin-left:auto;font-size:12px;font-weight:600;padding:4px 11px;border-radius:var(--r-pill);white-space:nowrap}
-.tyv-ctx{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-3);font-size:var(--fs-1);color:var(--text-2);background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);padding:9px 11px;margin-bottom:var(--s-3)}
-.tyv-ctx .ico{color:var(--muted);margin-right:5px;vertical-align:-2px}
-.tyv-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
-.tyv-thread{display:flex;flex-direction:column;gap:6px;margin-bottom:var(--s-3)}
-.tyv-msg{font-size:var(--fs-2);line-height:1.55;background:var(--surface-2);border:1px solid transparent;border-radius:var(--r-md);padding:8px 11px}
-.tyv-msg.latest{border-color:var(--line-strong);background:#fff}
-.tyv-time{font-size:11px;color:var(--muted)}
-.tyv-msg mark{background:var(--accent-soft);color:var(--accent-ink);padding:0 4px;border-radius:4px}
-.tyv-corr{display:flex;gap:8px;align-items:flex-start;font-size:var(--fs-1);color:#2c4f7c;background:#eaf1fb;border:1px solid #d6e3f5;border-radius:var(--r-md);padding:9px 11px;margin-bottom:var(--s-3)}
-.tyv-field{margin-bottom:var(--s-3)}
-.tyv-grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3)}
-.tyv-srcrow{display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap}
-.tyv-chip{font-size:10.5px;color:var(--text-2);background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-pill);padding:2px 8px}
-.tyv-warns{display:flex;flex-direction:column;gap:6px;margin-bottom:var(--s-3)}
-.tyv-warn{display:flex;gap:8px;align-items:flex-start;font-size:var(--fs-1)}
-.tyv-warn .ico{flex:none;margin-top:1px}
-.tyv-preview{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-3);margin-bottom:var(--s-4)}
-.tyv-pv{border:1px solid var(--line);border-radius:var(--r-md);padding:14px;text-align:center;background:#fff}
-.tyv-pv.laser{border-style:dashed;border-color:var(--line-strong);display:flex;flex-direction:column;justify-content:center}
-.tyv-pv-cap{font-size:11px;color:var(--muted);margin-bottom:6px}
-.tyv-pv-ibare{font-size:11px;color:var(--text-2);letter-spacing:.05em}
-.tyv-pv-name{font-family:var(--font-serif);font-size:21px;color:var(--brand);line-height:1.25}
-.tyv-pv-laser{font-family:var(--font-serif);font-style:italic;font-size:23px;color:var(--brand)}
-.tyv-pv-date{font-size:11px;color:var(--text-2);margin-top:3px}
-.tyv-cc{font-size:11px;color:var(--muted)}
-.tyv-actions{display:flex;align-items:center;gap:var(--s-2);flex-wrap:wrap}
-.btn.tyv-go{background:var(--accent);border-color:var(--accent);color:#fff}
-.btn.tyv-go:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
-.tyv-verified{display:inline-flex;align-items:center;gap:6px;font-size:var(--fs-2);color:var(--ok);font-weight:600}
-.c-ok{color:var(--ok)}.c-warn{color:var(--warn)}.c-danger{color:var(--danger)}
-.bg-ok{background:var(--ok)}.bg-warn{background:var(--warn)}.bg-danger{background:var(--danger)}
-.conf-ok{background:#e9f3ec;color:var(--ok)}.conf-warn{background:#fbf1de;color:var(--warn)}.conf-danger{background:#f9e8e5;color:var(--danger)}
-@media(max-width:900px){.tyv-wrap{grid-template-columns:1fr}.tyv-preview,.tyv-grid2{grid-template-columns:1fr}}
-</style>
+/* ===================================================================== */
+/* === DİNAMİK BİLEŞEN PORTU #1 — TRENDYOL ÜRETİM OPERASYON LİSTESİ ===== */
+/* app.js #trendyolOperatorWorklist içine bu sınıflarla render eder.     */
+/* Eski 29k CSS'te vardı, redesign'da yoktu → 6 hücre sola yığılıyordu.  */
+#trendyolOrders .trendyol-op-grid-head,
+#trendyolOrders .trendyol-op-grid{
+  display:grid;
+  grid-template-columns:minmax(150px,.85fr) minmax(140px,.75fr) minmax(250px,1.5fr) minmax(150px,.8fr) minmax(220px,1.15fr) minmax(290px,1.62fr);
+}
+.trendyol-op-grid-head{gap:0;align-items:center;padding:9px var(--s-2);background:var(--surface-2);
+  border:1px solid var(--line);border-bottom:0;border-radius:var(--r-md) var(--r-md) 0 0;
+  font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.trendyol-op-grid-head span{padding:0 10px}
+.trendyol-suggestion-card{display:block;background:var(--surface);border:1px solid var(--line);border-top:0;cursor:pointer;transition:background .12s}
+.trendyol-suggestion-card:first-of-type{border-top:1px solid var(--line)}
+.trendyol-suggestion-card:last-of-type{border-radius:0 0 var(--r-md) var(--r-md)}
+.trendyol-suggestion-card:hover{background:var(--surface-2)}
+.trendyol-suggestion-card.selected{box-shadow:inset 3px 0 0 var(--accent)}
+.trendyol-suggestion-card.low-confidence{box-shadow:inset 3px 0 0 var(--warn)}
+.trendyol-op-row-head{display:flex;align-items:center;gap:var(--s-2);padding:9px var(--s-3);border-bottom:1px dashed var(--line)}
+.trendyol-op-row-head>div:first-child{display:flex;flex-direction:column;min-width:0}
+.trendyol-op-row-head b{font-size:var(--fs-2);color:var(--brand)}
+.trendyol-op-row-head>div:first-child span{font-size:11px;color:var(--muted)}
+.trendyol-more-btn{margin-left:auto;flex:none;width:28px;height:28px;border:1px solid var(--line);background:#fff;border-radius:8px;color:var(--text-2);cursor:pointer}
+.trendyol-more-btn:hover{background:var(--surface-2)}
+.trendyol-status-pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--r-pill);background:var(--surface-2);border:1px solid var(--line);color:var(--text-2)}
+.trendyol-badge-row,.trendyol-badge-stack{display:flex;flex-wrap:wrap;gap:6px;padding:8px var(--s-3) 0}
+.trendyol-source-warning{margin:8px var(--s-3) 0;font-size:11.5px;color:var(--warn);display:flex;gap:6px;align-items:center}
+.trendyol-op-grid{gap:0;border-top:1px solid var(--line);margin-top:8px}
+.trendyol-op-cell{padding:10px 12px;border-right:1px solid var(--line);font-size:var(--fs-1);color:var(--text);min-width:0;overflow-wrap:anywhere}
+.trendyol-op-cell:last-child{border-right:0}
+.trendyol-cell-title{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:5px}
+.trendyol-mini-kv{display:flex;flex-direction:column;gap:3px;font-size:var(--fs-1)}
+.trendyol-mini-kv b,.trendyol-mini-kv strong{color:var(--brand)}
+.trendyol-row-select{margin-bottom:6px}
+.trendyol-bulk-check{display:flex;align-items:center;gap:8px;padding:10px var(--s-3);background:var(--surface-2);border:1px solid var(--line);border-top:0;font-size:var(--fs-1)}
+.trendyol-bulk-summary{padding:10px var(--s-3);font-size:var(--fs-1);color:var(--text-2)}
+@media (max-width:1200px){
+  #trendyolOrders .trendyol-op-grid-head{display:none}
+  #trendyolOrders .trendyol-op-grid{grid-template-columns:1fr 1fr}
+  .trendyol-op-cell{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media (max-width:760px){ #trendyolOrders .trendyol-op-grid{grid-template-columns:1fr} }

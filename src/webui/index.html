@@ -1,12 +1,10 @@
 ﻿<!doctype html>
 <!--
   CeyizHome Lab — YENIDEN TASARIM . BIRLESIK index.html (10 ekran + kabuk)
-  CODE ICIN:
-   1) Gomulu CSS = ceyizhome-redesign.css → src/webui/styles.css ile degistir.
-   2) Sidebar+topbar + tum section'lari index.html'e tasi (class="nav-item nav-btn" + data-page korunsun).
-   3) Tum id/onclick/data-* AYNI; app.js'e dokunma. ETKILESIMLER icin ceyizhome-redesign-interactions.js'i
-      app.js sonuna ekle (sol menu ac/kapa + fare tekerlegi zoom + studio'ya girince ekrana sigdir).
-   4) Alttaki <script> SADECE bu onizleme icindir — TASIMA.
+  CODE ICIN: 1) Gomulu CSS = ceyizhome-redesign.css → styles.css ile degistir.
+   2) Sidebar+topbar + section'lari tasi (class/id/onclick/data-* korunsun). 3) app.js'e dokunma;
+      ETKILESIM icin ceyizhome-redesign-interactions.js'i app.js sonuna ekle.
+   4) Alttaki <script> SADECE onizleme — TASIMA.
 -->
 <html lang="tr">
 <head>
@@ -1120,7 +1118,6 @@
           <button class="trendyol-tab" data-trendyol-tab="mapping" onclick="showTrendyolTab('mapping')">Ürün Eşleştirme</button>
           <button class="trendyol-tab" data-trendyol-tab="questions" onclick="showTrendyolTab('questions')">Kanıt Eşleştirme</button>
           <button class="trendyol-tab" data-trendyol-tab="history" onclick="showTrendyolTab('history')">Aktarım Geçmişi</button>
-          <button class="trendyol-tab" data-trendyol-tab="nameverify" onclick="showTrendyolTab('nameverify')">İsim Doğrulama</button>
         </div>
 
         <div id="trendyolTabOrders" class="trendyol-tab-panel active">
@@ -1191,26 +1188,6 @@
 
         <div id="trendyolTabHistory" class="trendyol-tab-panel">
           <article class="card"><div class="card-title"><h3>Aktarım Geçmişi</h3><span>Excel ve sipariş aktarımı</span></div><div id="trendyolTransferHistory" class="compact-list"></div></article>
-        </div>
-
-        <!-- ============ İSİM DOĞRULAMA SEKMESI ============ -->
-        <div id="trendyolTabNameVerify" class="trendyol-tab-panel">
-          <div class="tyv-head">
-            <div>
-              <h2 class="tyv-title">İsim Doğrulama</h2>
-              <p class="tyv-sub">Sorulardan gelen isim · özel gün · ibare → operatör onayıyla hatasız üretim</p>
-            </div>
-            <div class="tyv-batch">
-              <span class="tyv-kbd">j/k gez · Enter doğrula · e düzenle</span>
-              <button class="btn" onclick="tyVerifyConfirmAllHighConf()">Yüksek güvenlileri doğrula</button>
-            </div>
-          </div>
-          <div class="tyv-wrap">
-            <div class="tyv-queue" id="tyVerifyQueue"></div>
-            <div class="tyv-panel" id="tyVerifyPanel">
-              <div class="ty-empty"><b>Doğrulama kuyruğu boş.</b><p>Trendyol soruları/mesajları okunduğunda isim içeren müşteri kayıtları buraya gelir.</p></div>
-            </div>
-          </div>
         </div>
       </section>
 
