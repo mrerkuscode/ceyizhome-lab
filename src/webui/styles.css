@@ -29801,3 +29801,11 @@ body.label-studio-active #label.studio-mode-simple .corel-statusbar {
 }
 
 /* === /Üretim Nabzı KPI Dashboard === */
+
+/* ── Geliştirici Modu menü gizleme ──────────────────────────────────────────
+   .nav-btn'in display:flex'i [hidden]'ı eziyor.
+   CSS !important ile body class üzerinden kontrol sağlanır.          */
+[data-dev-module] { display: none !important; }
+body.dev-mode [data-dev-module] { display: flex !important; }
+#devModuleDetails { display: none !important; }
+body.dev-mode #devModuleDetails { display: block !important; }

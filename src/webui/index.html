@@ -23,8 +23,8 @@ h﻿<!doctype html>
         <div class="nav-section">
           <div class="nav-label">ANA</div>
           <button class="nav-btn active" data-page="home" onclick="showSection('home')" title="Ana Sayfa"><span class="nav-icon">⌂</span><span class="nav-text">Ana Sayfa</span></button>
-          <button class="nav-btn" data-page="designLab" data-dev-module="true" hidden onclick="showSection('designLab')" title="Design Lab"><span class="nav-icon">◆</span><span class="nav-text">Design Lab</span></button>
-          <button class="nav-btn" data-page="fontTestLab" data-dev-module="true" hidden onclick="showSection('fontTestLab')" title="Font Test Lab"><span class="nav-icon">Aa</span><span class="nav-text">Font Test Lab</span></button>
+          <button class="nav-btn" data-page="designLab" data-dev-module="true" onclick="showSection('designLab')" title="Design Lab"><span class="nav-icon">◆</span><span class="nav-text">Design Lab</span></button>
+          <button class="nav-btn" data-page="fontTestLab" data-dev-module="true" onclick="showSection('fontTestLab')" title="Font Test Lab"><span class="nav-icon">Aa</span><span class="nav-text">Font Test Lab</span></button>
         </div>
         <div class="nav-section">
           <div class="nav-label">ETİKET</div>
@@ -3881,15 +3881,11 @@ h﻿<!doctype html>
       if (typeof refreshState === "function") { refreshState(); }
     }
   </script>
-  <!-- Geliştirici Modu: gizli menü öğelerini göster/gizle -->
+  <!-- Geliştirici Modu: CSS body.dev-mode class üzerinden gizle/göster -->
   <script>
     function applyDevMode(enabled) {
       localStorage.setItem("cyz_dev_mode", enabled ? "1" : "0");
-      document.querySelectorAll("[data-dev-module]").forEach(function(el) {
-        el.hidden = !enabled;
-      });
-      var details = document.getElementById("devModuleDetails");
-      if (details) details.hidden = !enabled;
+      document.body.classList.toggle("dev-mode", enabled);
       var toggle = document.getElementById("devModeToggle");
       if (toggle) toggle.checked = enabled;
     }

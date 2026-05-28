@@ -134,11 +134,12 @@ def test_dev_mode_toggle_hides_modules():
         page.goto(BASE_URL, wait_until="networkidle")
         page.wait_for_timeout(600)
 
-        # Dev mode kapali oldugunda Design Lab gizli olmali
-        dl_hidden = page.evaluate(
-            "document.querySelector('[data-page=\"designLab\"]')?.hidden !== false"
+        # Dev mode kapali oldugunda body.dev-mode class YOK olmali
+        # CSS: [data-dev-module] { display:none !important }
+        no_dev_class = page.evaluate(
+            "!document.body.classList.contains('dev-mode')"
         )
-        assert dl_hidden, "Design Lab dev mode kapali iken gorunuyor olmamali"
+        assert no_dev_class, "Varsayilan durumda body.dev-mode class olmamali"
 
         # applyDevMode fonksiyonu tanimli olmali
         has_fn = page.evaluate("typeof applyDevMode === 'function'")
