@@ -3865,7 +3865,16 @@ h﻿<!doctype html>
       <div id="pdfPreviewStage" class="pdf-stage"></div>
     </div>
   </div>
+  <!-- Browser mode: load fetch-based adapter before app.js (harmless in desktop mode) -->
+  <script src="api_adapter.js"></script>
   <script src="./app.js"></script>
+  <!-- Browser mode: wire bridge = cyzella after app.js defines refreshState -->
+  <script>
+    if (!window.qt && window.cyzella) {
+      bridge = window.cyzella;
+      if (typeof refreshState === "function") { refreshState(); }
+    }
+  </script>
 </body>
 </html>
 
