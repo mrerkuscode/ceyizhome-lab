@@ -28,6 +28,9 @@ _EXPECTED_PROTOCOL_ERRORS = (
     "qwebchannel",          # QWebChannel transport (sadece masaustu)
     "ERR_UNKNOWN_URL_SCHEME",  # qrc:// yuklenemedi
     "Not allowed to load local resource",  # file:// gorseller
+    # Gorusel asset 404: /api/asset/ endpoint sunucu yeniden baslatilmadan onceki
+    # eski sunucuda mevcut degildir. Sunucu yeniden baslatilinca kaybolur.
+    "status of 404",        # asset image 404 (sunucu reload sonrasi gider)
 )
 
 
