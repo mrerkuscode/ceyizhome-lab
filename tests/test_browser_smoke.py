@@ -21,24 +21,46 @@ from playwright.sync_api import sync_playwright
 
 BASE_URL = "http://localhost:8000"
 
+# Bilinen masaustu-modu kalintilar — browser modunda beklenen, gercek hata degil
+_EXPECTED_PROTOCOL_ERRORS = (
+    "qrc://",               # Qt resource protokolu (sadece masaustu)
+    "file://",              # Lokal dosya protokolu (sadece masaustu)
+    "qwebchannel",          # QWebChannel transport (sadece masaustu)
+    "ERR_UNKNOWN_URL_SCHEME",  # qrc:// yuklenemedi
+    "Not allowed to load local resource",  # file:// gorseller
+)
+
+
+def _is_expected_error(text: str) -> bool:
+    """Bilinen masaustu-modu kalinti hatalarini filtreler."""
+    lower = text.lower()
+    return any(p.lower() in lower for p in _EXPECTED_PROTOCOL_ERRORS)
+
 
 def test_main_page_loads_without_errors():
-    """Ana sayfa yukleniyor ve console hatasi yok."""
+    """Ana sayfa yukleniyor; gercek (beklenmeyen) console hatasi yok."""
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
         errors = []
-        page.on("pageerror", lambda exc: errors.append(str(exc)))
-        page.on(
-            "console",
-            lambda msg: errors.append(msg.text) if msg.type == "error" else None,
-        )
+
+        def _on_page_error(exc):
+            msg = str(exc)
+            if not _is_expected_error(msg):
+                errors.append(f"PageError: {msg}")
+
+        def _on_console(msg):
+            if msg.type == "error" and not _is_expected_error(msg.text):
+                errors.append(f"Console: {msg.text}")
+
+        page.on("pageerror", _on_page_error)
+        page.on("console", _on_console)
 
         page.goto(BASE_URL, wait_until="networkidle")
         page.wait_for_timeout(2000)
 
-        assert not errors, f"Console hatalari: {errors}"
+        assert not errors, f"Beklenmeyen console/sayfa hatasi: {errors}"
         browser.close()
 
 
