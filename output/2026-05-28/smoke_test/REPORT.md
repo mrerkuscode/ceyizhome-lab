@@ -1,69 +1,109 @@
 # Browser Mode Smoke Test Raporu
 
-**Tarih:** 2026-05-28
-**Hazırlayan:** Claude Chrome (browser automation)
-**Test dosyası:** `tests/test_browser_smoke.py` (commit dc33750)
+**Tarih:** 2026-05-28  
+**Hazırlayan:** Claude Code (terminal — PowerShell)  
+**Test dosyası:** `tests/test_browser_smoke.py`  
+**Playwright:** 1.60.0 · Chromium headless  
+**Sunucu:** localhost:8000 (çalışır durumda, yeni başlatılmadı)
 
 ---
 
-## ⚠️ ÖNEMLİ NOT — Çalıştırma Durumu
+## Sonuç: 4/5 PASS
 
-Bu smoke test scripti **yazıldı ve commit edildi**, ancak **henüz çalıştırılmadı**.
+| Test | Sonuç | Not |
+|------|-------|-----|
+| Ana sayfa hata yok | ⚠️ FAIL | Beklenen browser-mode sınırları (detay aşağıda) |
+| Menü navigasyonu çalışır | ✅ PASS | 4 menü tıklandı, sorunsuz |
+| Raporlar KPI bandı var | ✅ PASS | |
+| /api/state 200 | ✅ PASS | |
+| /api/metrics 200 | ✅ PASS | |
 
-**Neden çalıştırılmadı:** Bu testlerin koşması için yerel makinede şu adımlar gerekiyor: (1) `pip install playwright` + `playwright install chromium`, (2) Flask sunucusunun `localhost:8000`'de arka planda başlatılması, (3) `pytest` ile yürütülmesi. Bu adımlar yerel kabuk (PowerShell/terminal) erişimi gerektirir. Claude Chrome yalnızca tarayıcı üzerinden çalışır ve yerel `localhost:8000` ortamına veya Windows kabuğuna erişemez. Bu nedenle gerçek bir PASS/FAIL sonucu **gözlemlenmedi** ve uydurulmadı.
+---
 
-**Sonuç çalıştırmasını kim yapmalı:** Leyla veya Code, aşağıdaki komutla testi yerel olarak çalıştırmalı:
+## FAIL Analizi — test_main_page_loads_without_errors
+
+**Bu bir regresyon DEĞİL.** İki tür beklenen hata var:
+
+### 1. `net::ERR_UNKNOWN_URL_SCHEME`
+**Kaynak:** `<script src="qrc:///qtwebchannel/qwebchannel.js">` — Qt WebEngine'e özgü protokol.  
+**Neden:** Browser modunda bu `qrc://` URL'i yüklenemiyor. Bu **tasarım gereği** — masaüstünde Qt sağlar, tarayıcıda sağlamaz.  
+**Etki:** Sıfır. `initBridge()` zaten `QWebChannel === undefined` kontrol edip browser moduna geçiyor.
+
+### 2. `Not allowed to load local resource: file:///...`
+**Kaynak:** `assets/label_backgrounds/` görselleri, state'te mutlak `file://` path ile saklanıyor.  
+**Neden:** Browser güvenlik politikası — tarayıcı `file://` URL'lerini HTTP context'ten yükleyemiyor.  
+**Etki:** Etiket arka plan görselleri browser modunda gösterilmiyor (masaüstünde görünür). İşlevsel sorun yok.
+
+**Sonuç:** Bu hatalar Sprint 1+2+3 öncesinde de vardı. Test filtresini genişletmek için `test_browser_smoke.py` güncellenmesi önerilir (aşağıda).
+
+---
+
+## Konsol Hataları (tam liste)
+
+```
+1. Failed to load resource: net::ERR_UNKNOWN_URL_SCHEME
+   → qrc:///qtwebchannel/qwebchannel.js (Qt protokolü, beklenir)
+
+2-13. Not allowed to load local resource: file:///...
+   → assets/label_backgrounds/normalized/01_a_gold_preview_50x30.png
+   → assets/label_backgrounds/04_a_qa_preview.png
+   → assets/label_backgrounds/03_a_gold_preview.jpg
+   (file:// URL'ler browser'da yüklenemiyor, beklenir)
+```
+
+---
+
+## Genel Durum
+
+```
+✅ Browser mode SAĞLAM
+✅ Menü navigasyonu çalışıyor (syntax fix 6ed4c2b sonrası)
+✅ API endpoint'leri: /api/state, /api/metrics → HTTP 200
+✅ 61/61 birim test PASS (Sprint 1+2+3 + bug fix)
+⚠️ Browser'da label görselleri yüklenmiyor (file:// kısıtı — bilinen sınır)
+```
+
+---
+
+## Önerilen Test Güncellemesi (Sprint 4)
+
+`test_main_page_loads_without_errors` testinde bilinen browser-mode hataları filtre edilmeli:
+
+```python
+BROWSER_MODE_EXPECTED_ERRORS = (
+    "ERR_UNKNOWN_URL_SCHEME",   # qrc:// protokolü
+    "Not allowed to load local resource",  # file:// görseller
+)
+
+filtered = [e for e in errors
+            if not any(x in e for x in BROWSER_MODE_EXPECTED_ERRORS)]
+assert not filtered, f"Beklenmeyen hatalar: {filtered}"
+```
+
+---
+
+## Sonraki Adımlar
+
+- Her sprint sonrası smoke test çalıştırılmalı:
+  ```
+  .venv\Scripts\python.exe -m pytest tests\test_browser_smoke.py -v
+  ```
+- Sprint 4'te `test_main_page_loads_without_errors` filtresi güncellenmeli → 5/5 PASS
+- Label background görselleri Flask'tan `/api/files/` üzerinden servis edilebilir (Sprint 4)
+
+---
+
+## Çalıştırma Komutu
 
 ```powershell
-# 1. Playwright kurulumu (ilk sefer)
-.venv\Scripts\pip.exe install playwright
-.venv\Scripts\python.exe -m playwright install chromium
+# Flask zaten çalışıyorsa:
+.venv\Scripts\python.exe -m pytest tests\test_browser_smoke.py -v
 
-# 2. Flask sunucuyu arka planda başlat
+# Flask çalışmıyorsa önce başlat:
 Start-Job -ScriptBlock {
   cd "C:\Users\Pc\Documents\New project\production-bot"
   .venv\Scripts\python.exe -m src.server.flask_app
 }
 Start-Sleep -Seconds 4
-
-# 3. Smoke testi çalıştır
 .venv\Scripts\python.exe -m pytest tests\test_browser_smoke.py -v
-
-# 4. Sunucuyu durdur
-Get-Job | Stop-Job
-Get-Job | Remove-Job
 ```
-
----
-
-## Sonuç: PENDING (henüz çalıştırılmadı)
-
-| Test | Beklenen | Gerçek Sonuç |
-| ---- | -------- | ------------ |
-| Ana sayfa yüklenir, hata yok | ✅ | ⏳ PENDING |
-| Menü navigasyonu çalışır | ✅ | ⏳ PENDING |
-| Raporlar KPI bandı | ✅ | ⏳ PENDING |
-| /api/state cevap verir | ✅ | ⏳ PENDING |
-| /api/metrics cevap verir | ✅ | ⏳ PENDING |
-
-## Konsol Hataları (varsa):
-
-Test çalıştırılmadığı için konsol hatası verisi yok. `test_main_page_loads_without_errors` testi `pageerror` ve `console.error` olaylarını yakalayıp `errors` listesinde toplar; çalıştırıldığında bu bölüm doldurulmalıdır.
-
-## Test Kapsamı (yazılan 5 senaryo)
-
-1. **test_main_page_loads_without_errors** — Ana sayfa `networkidle` ile yüklenir; `pageerror` ve `console.error` olayları toplanır; liste boş olmalı.
-2. **test_navigation_menu_clickable** — `home`, `labelStudio`, `printQueue`, `reports` sayfalarına `[data-page]` selektörüyle tıklanır.
-3. **test_reports_kpi_band_present** — Raporlar sayfasında `#metricsBand / .kpi-band / [data-component="kpi-band"]` varlığı kontrol edilir.
-4. **test_api_state_endpoint_responds** — `GET /api/state` → HTTP 200 beklenir.
-5. **test_api_metrics_endpoint_responds** — `GET /api/metrics` → HTTP 200 beklenir.
-
-## Sonraki Adım
-
-- ⏳ Yerel çalıştırma sonrası bu rapor gerçek PASS/FAIL sonuçlarıyla güncellenmeli.
-- Beklenti: 5/5 PASS (Sprint 1+2+3 sonrası 61/61 birim testin geçtiği bilgisiyle uyumlu).
-- Eğer KPI bandı selektörü (`#metricsBand` vb.) gerçek DOM'da farklıysa `test_reports_kpi_band_present` selektörü güncellenmeli.
-
----
-
-> **Şeffaflık notu:** Bu rapordaki tüm PASS/FAIL hücreleri PENDING'dir çünkü test yerel ortamda yürütülmedi. Uydurma sonuç verilmedi.
