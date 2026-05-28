@@ -1477,7 +1477,9 @@ function showSection(id, options = {}) {
     }, 180);
     setTimeout(scheduleFieldOverlaySync, 700);
     setTimeout(scheduleFieldOverlaySync, 1500);
-  } else if (id === "fontTestLab") {
+  } } else if (id === "reports") {
+    setTimeout(fetchMetrics, 50);
+  else if (id === "fontTestLab") {
     setTimeout(renderFontTestLab, 80);
   }
 }
@@ -21389,3 +21391,123 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+
+// ============================================================
+// Uretim Nabzi KPI Dashboard -- feat/visual_reporting
+// ============================================================
+
+function fetchMetrics() {
+  if (!window.bridge || typeof bridge.metrics_payload !== 'function') {
+    showKPIError('Veri koprusu bulunamadi');
+    return;
+  }
+  var payload = JSON.stringify({ range: 'today' });
+  bridge.metrics_payload(payload, function(raw) {
+    try {
+      var data = JSON.parse(raw);
+      if (data.status !== 'OK') { showKPIError(data.message || 'Veri okunamadi'); return; }
+      if (data.empty) { showKPIEmpty(); return; }
+      renderKPICards(data);
+      var band = document.getElementById('kpi-band');
+      if (band) band.style.display = 'flex';
+    } catch(e) { console.error('metrics_payload parse error:', e); showKPIError('Veri cozumlenemedi'); }
+  });
+}
+
+function renderKPICards(data) {
+  renderTodayCard(data.today);
+  renderSparklineCard(data.weekly);
+  renderTop3Card(data.top3_models);
+  renderPreflightCard(data.preflight);
+  renderQueueCard(data.queue);
+}
+
+function renderTodayCard(today) {
+  var el = document.getElementById('kpi-today');
+  if (!el) return;
+  var delta = today.delta || 0;
+  var pct = (today.delta_pct !== null && today.delta_pct !== undefined) ? '(%' + today.delta_pct + ')' : '';
+  var dc = delta > 0 ? 'kpi-delta-up' : delta < 0 ? 'kpi-delta-down' : 'kpi-delta-neutral';
+  var sym = delta > 0 ? '+' : delta < 0 ? '' : '=';
+  var dtxt = delta !== 0 ? (sym + delta + ' ' + pct + ' vs dun') : '= Dunle ayni';
+  el.innerHTML = '<h3>Bugün Üretilen</h3><div class="kpi-today-number">' + (today.count || 0) + '</div><div class="' + dc + '">' + dtxt + '</div>';
+}
+
+function renderSparklineCard(weekly) {
+  var el = document.getElementById('kpi-week');
+  if (!el || !weekly) return;
+  var maxVal = 1;
+  for (var i = 0; i < weekly.length; i++) { if (weekly[i].count > maxVal) maxVal = weekly[i].count; }
+  var bars = '';
+  var days = ['Pt','Sa','Cr','Pe','Cu','Ct','Pz'];
+  for (var j = 0; j < weekly.length; j++) {
+    var d = weekly[j];
+    var h = Math.round((d.count / maxVal) * 34);
+    var clr = !d.has_data ? '#E0E0E0' : j === 6 ? '#1565C0' : '#4CAF50';
+    var x = j * 20;
+    bars += '<rect x="' + x + '" y="' + (38 - h) + '" width="14" height="' + h + '" fill="' + clr + '" rx="2"/>';
+    bars += '<text x="' + (x + 7) + '" y="52" text-anchor="middle" font-size="8" fill="#9E9E9E">' + days[j] + '</text>';
+  }
+  el.innerHTML = '<h3>Haftalık Trend</h3><svg class="kpi-sparkline" viewBox="0 0 140 55">' + bars + '</svg>';
+}
+
+function renderTop3Card(top3) {
+  var el = document.getElementById('kpi-top3');
+  if (!el) return;
+  if (!top3 || !top3.length) { el.innerHTML = '<h3>Top 3 Model</h3><div class="kpi-empty">Veri yok</div>'; return; }
+  var maxQty = top3[0].total_qty || 1;
+  var items = '';
+  for (var i = 0; i < top3.length; i++) {
+    var m = top3[i];
+    var bw = Math.round((m.total_qty / maxQty) * 80);
+    var lbl = (m.model_name || '?').substring(0, 20);
+    items += '<li><span class="kpi-top3-label">' + lbl + '</span><div class="kpi-top3-bar" style="width:' + bw + 'px"></div><span class="kpi-top3-qty">' + m.total_qty + '</span></li>';
+  }
+  el.innerHTML = '<h3>Top 3 Model</h3><ul class="kpi-top3-list">' + items + '</ul>';
+}
+
+function renderPreflightCard(pf) {
+  var el = document.getElementById('kpi-preflight');
+  if (!el || !pf) return;
+  var total = (pf.OK||0)+(pf.WARNING||0)+(pf.BLOKE||0)+(pf.NO_CHECK||0);
+  if (!total) { el.innerHTML = '<h3>Preflight Durum</h3><div class="kpi-empty">Veri yok</div>'; return; }
+  var clrs = {OK:'#4CAF50',WARNING:'#FF9800',BLOKE:'#F44336',NO_CHECK:'#9E9E9E'};
+  var lbls = {OK:'Hazir',WARNING:'Uyari',BLOKE:'Bloke',NO_CHECK:'Kontrol Yok'};
+  var r=32; var stroke=14; var cx=40; var cy=40; var circ=2*Math.PI*r;
+  var segs=''; var leg=''; var offset=0;
+  var keys=['OK','WARNING','BLOKE','NO_CHECK'];
+  for (var i=0;i<keys.length;i++) {
+    var k=keys[i]; var v=pf[k]||0; if(!v) continue;
+    var dash=(v/total)*circ; var gap=circ-dash;
+    segs+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+clrs[k]+'" stroke-width="'+stroke+'" stroke-dasharray="'+dash.toFixed(1)+' '+gap.toFixed(1)+'" stroke-dashoffset="'+(-(offset/total)*circ).toFixed(1)+'" transform="rotate(-90 '+cx+' '+cy+')"/>';
+    leg+='<li><span class="kpi-legend-dot" style="background:'+clrs[k]+'"></span>'+lbls[k]+': '+v+'</li>';
+    offset+=v;
+  }
+  el.innerHTML='<h3>Preflight Durum</h3><div class="kpi-donut-wrap"><svg class="kpi-donut" viewBox="0 0 80 80">'+segs+'</svg><ul class="kpi-donut-legend">'+leg+'</ul></div>';
+}
+
+function renderQueueCard(queue) {
+  var el = document.getElementById('kpi-queue');
+  if (!el || !queue) return;
+  var pct = queue.pct || 0;
+  el.innerHTML = '<h3>Kuyruk Doluluk</h3><div class="kpi-progress-wrap"><div class="kpi-progress"><div class="kpi-progress-fill" style="width:' + pct + '%"></div></div><div class="kpi-progress-label">' + (queue.added||0) + '/' + (queue.total||0) + ' eklendi (%' + pct + ')</div></div>';
+}
+
+function showKPIError(msg) {
+  var band = document.getElementById('kpi-band');
+  if (!band) return;
+  band.innerHTML = '<div class="kpi-error">' + (msg || 'Bilinmeyen hata') + '</div>';
+  band.style.display = 'block';
+}
+
+function showKPIEmpty() {
+  var band = document.getElementById('kpi-band');
+  if (!band) return;
+  band.innerHTML = '<div class="kpi-card"><div class="kpi-empty">Henuz uretim verisi bulunamadi.</div></div>';
+  band.style.display = 'block';
+}
+
+// ============================================================
+// /Uretim Nabzi KPI Dashboard
+// ============================================================
