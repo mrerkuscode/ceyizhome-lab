@@ -1290,3 +1290,4 @@ JPG/PNG/WebP içindeki eski yazı doğrudan değiştirilemez; o yazı görselin 
 CDR/AI kaynak dosyalar uygulama tarafından değiştirilmez. Native AI/CDR edit sadece `Kaynak Dosyadan Gerçek Yazı Tarama` adlı izole PoC panelindedir, yalnızca kopya dosya üzerinde denenir ve ortam uygun değilse `ENGINE_MISSING` veya `PARTIAL` olarak raporlanır.
 
 Güvenlik notu: Uygulama açılışta veya dry-run sırasında CorelDRAW, yazıcı, RDWorks ya da lazer başlatmaz. Direct print bu sürümde kapalıdır.
+<!-- Edit capability test by Claude Chrome — 2026-05-28 -->
