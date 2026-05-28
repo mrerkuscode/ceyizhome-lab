@@ -5854,19 +5854,32 @@ function labelModelVariant(model) {
   return model.label_variant || model.template_no || "Standart";
 }
 
+function _labelPreviewSrc(model) {
+  // Browser modunda file:// URL'leri çalışmaz; preview_image_path → /api/asset/ kullan.
+  if (model.preview_image_path) {
+    const rel = model.preview_image_path.replace(/^assets\//, "");
+    return "/api/asset/" + rel;
+  }
+  if (model.preview_image && !model.preview_image.startsWith("file://")) {
+    return model.preview_image;
+  }
+  return null;
+}
+
 function labelModelPreviewHtml(model, mode = "card") {
   const title = labelModelName(model);
   const isLarge = mode === "large";
   const placeholder = `
     <div class="missing-preview-placeholder preview-fallback">
       <span class="preview-placeholder-icon">▧</span>
-      <b>${model.preview_missing_file ? "Görsel bulunamadı" : "Önizleme henüz hazır değil"}</b>
-      <small>${model.preview_missing_file ? "Bağlı dosya bulunamadı. Yeni görsel bağlayın." : "Görsel bağlayarak modeli net görebilirsiniz."}</small>
+      <b>${model.preview_missing_file ? "Görsel bulunamadı" : "Görsel bağlı değil"}</b>
+      <small>${model.preview_missing_file ? "Bağlı dosya bulunamadı. Yeni görsel bağlayın." : "AI/CDR dosyasından PNG/JPG export edip bağlayın."}</small>
       <button class="btn small ghost" onclick="event.stopPropagation(); selectLabelModel(${jsArg(model.path)}); openPreviewBindingWizard();">Görsel Bağla</button>
     </div>`;
-  if (!model.preview_image) return placeholder;
+  const src = _labelPreviewSrc(model);
+  if (!src) return placeholder;
   return `
-    <img src="${esc(model.preview_image)}" alt="${esc(title)}" onerror="handleLabelModelPreviewError(this)" />
+    <img src="${esc(src)}" alt="${esc(title)}" onerror="handleLabelModelPreviewError(this)" />
     <div class="missing-preview-placeholder preview-fallback" hidden>
       <span class="preview-placeholder-icon">▧</span>
       <b>Görsel yüklenemedi</b>
@@ -6619,8 +6632,9 @@ function preferredFieldIndex(fields) {
 
 function fieldOverlayHtml(model, useManualText = false) {
   const dims = useManualText ? effectiveManualSize(model) : labelDimensions(model);
-  const previewStyle = model.preview_image
-    ? ` style="background-image:url(&quot;${esc(cssUrl(model.preview_image))}&quot;);"`
+  const _bgSrc = _labelPreviewSrc(model);
+  const previewStyle = _bgSrc
+    ? ` style="background-image:url(&quot;${esc(cssUrl(_bgSrc))}&quot;);"`
     : "";
   const guideHtml = useManualText ? `
     <div class="canvas-guides" aria-hidden="true">

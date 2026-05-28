@@ -17,6 +17,8 @@ api_bp = Blueprint("api", __name__, url_prefix="/api")
 
 # Output directory served as static files
 _OUTPUT_DIR = Path(__file__).resolve().parents[2] / "output"
+# Assets directory (label backgrounds, fonts, DXF library)
+_ASSETS_DIR = Path(__file__).resolve().parents[2] / "assets"
 
 # Sprint 3 — file upload helpers
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -129,10 +131,21 @@ def serve_output_file(filepath: str):
     """Serve PDF/PNG/CSV files from the output/ directory."""
     try:
         safe = Path(filepath)
-        # Block path traversal
         if ".." in safe.parts:
             return jsonify({"status": "ERROR", "error": "Geçersiz dosya yolu"}), 400
         return send_from_directory(str(_OUTPUT_DIR), filepath)
+    except Exception as exc:
+        return _err(exc, 404)
+
+
+@api_bp.route("/asset/<path:filepath>")
+def serve_asset_file(filepath: str):
+    """Serve project asset files (label backgrounds, fonts) for browser mode."""
+    try:
+        safe = Path(filepath)
+        if ".." in safe.parts:
+            return jsonify({"status": "ERROR", "error": "Geçersiz dosya yolu"}), 400
+        return send_from_directory(str(_ASSETS_DIR), filepath)
     except Exception as exc:
         return _err(exc, 404)
 
