@@ -21625,7 +21625,10 @@ function renderQueueCard(queue) {
 function showKPIError(msg) {
   var band = document.getElementById('kpi-band');
   if (!band) return;
-  band.innerHTML = '<div class="kpi-error">' + (msg || 'Bilinmeyen hata') + '</div>';
+  var note = msg && msg.indexOf('koprusu') !== -1
+    ? ' — Henüz veri yok. İlk üretim yapıldığında dolacak.'
+    : '';
+  band.innerHTML = '<div class="kpi-error">' + (msg || 'Bilinmeyen hata') + note + '</div>';
   band.style.display = 'block';
 }
 

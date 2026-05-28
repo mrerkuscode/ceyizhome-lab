@@ -107,10 +107,10 @@
           <h1 class="home-title">Hoş geldiniz, CeyizHome Lab</h1>
           <p class="home-subtitle">Etiket, Trendyol, toplu üretim ve lazer isim kesim operasyon merkezi.</p>
           <div class="home-status-row" aria-label="Üretim güvenliği durumu">
-            <span><b>Güvenli Mod:</b> <span id="homeSafetyModeStatus">Aktif</span></span>
-            <span><b>Direct Print:</b> <span id="homeDirectPrintStatus">Kapalı</span></span>
-            <span><b>Son kalite kontrol:</b> <span id="homeQualityStatusInline">—</span></span>
-            <span><b>Yazıcı:</b> <span id="homePrinterAutoStatus">Otomatik çalışmaz</span></span>
+            <span onclick="openSettingsSubpage('general')" style="cursor:pointer" title="Ayarlar > Güvenlik"><b>Güvenli Mod:</b> <span id="homeSafetyModeStatus">Aktif</span></span>
+            <span onclick="openSettingsSubpage('general')" style="cursor:pointer" title="Ayarlar > Genel"><b>Direct Print:</b> <span id="homeDirectPrintStatus">Kapalı</span></span>
+            <span onclick="showSection('reports')" style="cursor:pointer" title="Raporlara Git"><b>Son kalite kontrol:</b> <span id="homeQualityStatusInline">—</span></span>
+            <span onclick="openSettingsSubpage('printer-profiles')" style="cursor:pointer" title="Ayarlar > Yazıcı Profilleri"><b>Yazıcı:</b> <span id="homePrinterAutoStatus">Otomatik çalışmaz</span></span>
           </div>
           <div class="grid-3">
             <article class="workflow-card">
@@ -1684,7 +1684,7 @@
             <div class="name-cut-rd-brand">
               <span class="name-cut-rd-logo">C</span>
               <div>
-                <h1>Ceyizhome Lab · İsim Kesim</h1>
+                <h1>İsim Kesim Studio</h1>
                 <p>RDWorks uyumlu 800 x 600 mm lazer nesting ekranı</p>
               </div>
             </div>
@@ -3186,9 +3186,21 @@
             <button class="btn primary" onclick="saveSettingsFromCenter()">Ayarları Kaydet</button>
           </div>
         </div>
+        <!-- Ayarlar iç navigasyon -->
+        <nav class="settings-inner-nav" aria-label="Ayarlar bölümleri">
+          <a href="#s-genel">Genel</a>
+          <a href="#s-rulo">Rulo</a>
+          <a href="#s-font">Font</a>
+          <a href="#s-cikti">Çıktı</a>
+          <a href="#s-yedek">Yedekleme</a>
+          <a href="#s-bakimi">Veri Bakımı</a>
+          <a href="#s-guvenlik">Güvenlik</a>
+          <a href="#s-entegrasyon">Entegrasyon</a>
+          <a href="#s-yazici">Yazıcı</a>
+        </nav>
         <div id="settingsSafetyStrip" class="settings-safety-strip"></div>
         <div class="settings-center-layout">
-          <article class="card settings-wide-card" data-settings-panel="general">
+          <article id="s-genel" class="card settings-wide-card" data-settings-panel="general">
             <div class="card-title"><h3>Genel ve Etiket Ölçüleri</h3><span>Studio varsayılanı</span></div>
             <div id="labelDefaultsCards" class="settings-kpi-grid"></div>
             <p id="labelDefaultsText" class="muted">Yükleniyor.</p>
@@ -3206,7 +3218,7 @@
             </div>
             <div id="settingsSaveStatus" class="settings-save-status"></div>
           </article>
-          <article class="card">
+          <article id="s-rulo" class="card">
             <div class="card-title"><h3>Rulo Ayarları</h3><span>Yerleşim kontrolü</span></div>
             <div class="settings-form-grid compact">
               <label>Rulo genişliği mm<input id="settingsRollWidthMm" type="number" min="1" step="0.1" /></label>
@@ -3214,19 +3226,19 @@
             </div>
             <div id="settingsRollSummary" class="settings-roll-preview"></div>
           </article>
-          <article class="card">
+          <article id="s-font" class="card">
             <div class="card-title"><h3>Font ve Renk</h3><span>Normal kullanıcı ayarı</span></div>
             <div id="settingsFontColorInfo" class="settings-check-list"></div>
           </article>
-          <article class="card">
+          <article id="s-cikti" class="card">
             <div class="card-title"><h3>Çıktı Klasörleri</h3><span>Güvenli proje içi yollar</span></div>
             <div id="settingsOutputFolders" class="settings-check-list"></div>
           </article>
-          <article class="card">
+          <article id="s-yedek" class="card">
             <div class="card-title"><h3>Yedekleme ve Geri Alma</h3><span>Değişiklik öncesi backup</span></div>
             <div id="settingsBackupInfo" class="settings-backup-info"></div>
           </article>
-          <article class="card data-maintenance-card" data-settings-panel="data-maintenance">
+          <article id="s-bakimi" class="card data-maintenance-card" data-settings-panel="data-maintenance">
             <div class="card-title"><h3>Veri Bakımı</h3><span>JSON persistence yedekleme / geri yükleme</span></div>
             <div id="dataMaintenanceStatus" class="status-line ok" hidden></div>
             <div class="settings-check-list">
@@ -3263,12 +3275,12 @@
             <div id="dxfLibraryList" class="dxf-library-list"></div>
             <p class="safe-note">Leyla bir ismi <code>assets/dxf_library/&lt;boyut&gt;/</code> altına atınca otomatik izleme açıksa kütüphane güncellenir. Manuel tarama her zaman çalışır.</p>
           </article>
-          <article class="card">
+          <article id="s-guvenlik" class="card">
             <div class="card-title"><h3>Güvenlik</h3><span>Koruma aktif</span></div>
             <div id="settingsSecurityList" class="settings-check-list"></div>
             <p class="safe-note">Yazıcı otomatik çalışmaz. PDF’i kontrol ettikten sonra manuel yazdırın.</p>
           </article>
-          <article class="card live-integration-security-card" data-settings-panel="other-integrations">
+          <article id="s-entegrasyon" class="card live-integration-security-card" data-settings-panel="other-integrations">
             <div class="card-title"><h3>Entegrasyon Güvenliği</h3><span>Dry-run guard</span></div>
             <div id="liveIntegrationSecurityStatus" class="status-line warn">Canlı entegrasyon bağlı değil. Dry-run modunda.</div>
             <div id="liveIntegrationSecurityGrid" class="settings-check-list"></div>
@@ -3281,7 +3293,7 @@
             <div id="liveIntegrationRiskRegistry" class="integration-risk-registry"></div>
             <p class="safe-note">Bu fazda canlı Trendyol statü/kargo/fatura, direct print, lazer ve RDWorks kapalıdır. Dry-run yalnızca izin, ayar ve audit kontrolü yapar.</p>
           </article>
-          <article class="card printer-profile-card" data-settings-panel="printer-profiles">
+          <article id="s-yazici" class="card printer-profile-card" data-settings-panel="printer-profiles">
             <div class="card-title"><h3>Yazıcı Profilleri</h3><span>Ayarlar > Yazıcı Profilleri</span></div>
             <div id="printerProfileList" class="printer-profile-list"></div>
             <div class="settings-form-grid compact">
