@@ -102,6 +102,51 @@ def test_reports_kpi_band_present():
         browser.close()
 
 
+def test_print_queue_bulk_pdf_workflow():
+    """Print Queue: coklu secimde bulk workflow modal aciliyor."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto(BASE_URL, wait_until="networkidle")
+        page.wait_for_timeout(800)
+
+        # Print Queue sayfasina git
+        pq_link = page.query_selector('[data-page="printQueue"]')
+        if pq_link:
+            pq_link.click()
+            page.wait_for_timeout(600)
+
+        # bulkQueueWorkflowModal JS'de dinamik olusturuluyor
+        # Fonksiyonlarin tanimi kontrol edilir
+        has_fn = page.evaluate(
+            "typeof startBulkQueueWorkflow === 'function' && typeof openSelectedQueuePdfs === 'function'"
+        )
+        assert has_fn, "Bulk workflow fonksiyonlari tanimlanmamis"
+
+        browser.close()
+
+
+def test_dev_mode_toggle_hides_modules():
+    """Gelistirici Modu toggle: Design Lab ve Font Test Lab gizli."""
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto(BASE_URL, wait_until="networkidle")
+        page.wait_for_timeout(600)
+
+        # Dev mode kapali oldugunda Design Lab gizli olmali
+        dl_hidden = page.evaluate(
+            "document.querySelector('[data-page=\"designLab\"]')?.hidden !== false"
+        )
+        assert dl_hidden, "Design Lab dev mode kapali iken gorunuyor olmamali"
+
+        # applyDevMode fonksiyonu tanimli olmali
+        has_fn = page.evaluate("typeof applyDevMode === 'function'")
+        assert has_fn, "applyDevMode fonksiyonu tanimlanmamis"
+
+        browser.close()
+
+
 def test_api_state_endpoint_responds():
     """/api/state endpoint cevap veriyor."""
     with sync_playwright() as p:

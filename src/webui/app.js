@@ -19804,22 +19804,136 @@ function showQueueBatchResult(total, failed, successLabel) {
   else alert(message);
 }
 
+// ── Yarı-otomatik toplu yazdırma/PDF akışı ──────────────────────────────────
+
+var _bulkWorkflow = null;
+
+function _ensureBulkWorkflowModal() {
+  if (byId("bulkQueueWorkflowModal")) return;
+  var el = document.createElement("div");
+  el.id = "bulkQueueWorkflowModal";
+  el.setAttribute("hidden", "");
+  el.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;";
+  el.innerHTML = [
+    '<div style="background:var(--surface,#fff);border-radius:var(--radius-lg,12px);',
+    "padding:24px 28px;min-width:340px;max-width:480px;box-shadow:0 8px 32px rgba(0,0,0,.18)\">",
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">',
+    '<strong id="bwTitle" style="font-size:1.05rem"></strong>',
+    '<button onclick="cancelBulkQueueWorkflow()" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:2px 6px" title="İptal">✕</button>',
+    "</div>",
+    '<div id="bwProgress" style="color:var(--text-muted,#777);font-size:.875rem;margin-bottom:8px"></div>',
+    '<div id="bwItem" style="font-size:.88rem;font-family:monospace;word-break:break-all;',
+    "background:var(--surface-2,#f5f5f5);padding:8px 10px;border-radius:6px;margin-bottom:12px;min-height:34px\"></div>",
+    '<div id="bwStatus" style="font-size:.85rem;color:var(--text-muted,#777);margin-bottom:16px;min-height:18px"></div>',
+    '<div style="display:flex;gap:8px;justify-content:flex-end">',
+    '<button onclick="cancelBulkQueueWorkflow()" class="btn small">İptal</button>',
+    '<button onclick="bulkWorkflowSkip()" class="btn small">Atla →</button>',
+    '<button id="bwActionBtn" onclick="bulkWorkflowDoAction()" class="btn small gold"></button>',
+    "</div></div>"
+  ].join("");
+  document.body.appendChild(el);
+}
+
+function startBulkQueueWorkflow(rows, mode) {
+  _ensureBulkWorkflowModal();
+  _bulkWorkflow = { rows: rows, index: 0, mode: mode, done: 0, skipped: 0 };
+  _renderBulkWorkflowStep();
+  var modal = byId("bulkQueueWorkflowModal");
+  if (modal) modal.removeAttribute("hidden");
+}
+
+function _renderBulkWorkflowStep() {
+  if (!_bulkWorkflow) return;
+  var w = _bulkWorkflow;
+  var item = w.rows[w.index];
+  var total = w.rows.length;
+  var isPdf = w.mode === "pdf";
+  var title = byId("bwTitle");
+  var progress = byId("bwProgress");
+  var itemEl = byId("bwItem");
+  var status = byId("bwStatus");
+  var actionBtn = byId("bwActionBtn");
+  if (title) title.textContent = isPdf ? "Sıralı PDF Açma" : "Sıralı Yazdırma";
+  if (progress) progress.textContent = (w.index + 1) + " / " + total + "  —  ✅ " + w.done + " tamamlandı  ↷ " + w.skipped + " atlandı";
+  if (itemEl) {
+    var name = item.label_text || item.source_label || (queueItemPath(item).split(/[\\/]/).pop()) || item.id || "—";
+    itemEl.textContent = name;
+  }
+  if (status) status.textContent = "";
+  if (actionBtn) actionBtn.textContent = isPdf ? "PDF Aç" : "Yazdır";
+}
+
+function bulkWorkflowDoAction() {
+  if (!_bulkWorkflow) return;
+  var w = _bulkWorkflow;
+  var item = w.rows[w.index];
+  var status = byId("bwStatus");
+  if (w.mode === "pdf") {
+    var path = queueItemPath(item);
+    if (!path) {
+      if (status) status.textContent = "⚠️ Dosya yolu yok — atlanıyor";
+      setTimeout(bulkWorkflowSkip, 700);
+      return;
+    }
+    openPdfPreview(path);
+    w.done++;
+    if (status) status.textContent = "✅ PDF açıldı";
+  } else {
+    safePrint(item.id);
+    w.done++;
+    if (status) status.textContent = "✅ Yazdırma başlatıldı";
+  }
+  setTimeout(_bulkWorkflowAdvance, 700);
+}
+
+function bulkWorkflowSkip() {
+  if (!_bulkWorkflow) return;
+  _bulkWorkflow.skipped++;
+  _bulkWorkflowAdvance();
+}
+
+function _bulkWorkflowAdvance() {
+  if (!_bulkWorkflow) return;
+  _bulkWorkflow.index++;
+  if (_bulkWorkflow.index >= _bulkWorkflow.rows.length) {
+    _bulkWorkflowFinish();
+  } else {
+    _renderBulkWorkflowStep();
+  }
+}
+
+function _bulkWorkflowFinish() {
+  var w = _bulkWorkflow;
+  _bulkWorkflow = null;
+  var modal = byId("bulkQueueWorkflowModal");
+  if (modal) modal.setAttribute("hidden", "");
+  var msg = "Toplu işlem tamamlandı: " + (w ? w.done : 0) + "/" + (w ? w.rows.length : 0) + " başarılı" + (w && w.skipped ? ", " + w.skipped + " atlandı" : "") + ".";
+  if (typeof showToast === "function") showToast(msg, "success"); else alert(msg);
+}
+
+function cancelBulkQueueWorkflow() {
+  var w = _bulkWorkflow;
+  _bulkWorkflow = null;
+  var modal = byId("bulkQueueWorkflowModal");
+  if (modal) modal.setAttribute("hidden", "");
+  if (w && (w.done || w.skipped)) {
+    var msg = "İşlem iptal edildi: " + w.done + " tamamlandı, " + w.skipped + " atlandı.";
+    if (typeof showToast === "function") showToast(msg, "warning"); else alert(msg);
+  }
+}
+
 function printSelectedQueueItems() {
   const rows = selectedQueueRows();
-  if (!rows.length) {
-    showPrintQueueSelectionRequired();
-    return;
-  }
-  safePrint(rows[0].id);
+  if (!rows.length) { showPrintQueueSelectionRequired(); return; }
+  if (rows.length === 1) { safePrint(rows[0].id); return; }
+  startBulkQueueWorkflow(rows, "print");
 }
 
 function openSelectedQueuePdfs() {
   const rows = selectedQueueRows();
-  if (!rows.length) {
-    showPrintQueueSelectionRequired();
-    return;
-  }
-  openPdfPreview(queueItemPath(rows[0]));
+  if (!rows.length) { showPrintQueueSelectionRequired(); return; }
+  if (rows.length === 1) { openPdfPreview(queueItemPath(rows[0])); return; }
+  startBulkQueueWorkflow(rows, "pdf");
 }
 
 function removeSelectedQueueItems() {
