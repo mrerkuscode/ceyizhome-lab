@@ -8813,8 +8813,33 @@ function prepareManualLaserTransfer() {
 }
 
 function setManualZoom(mode) {
+  // 'in'/'out' — zoom adımları: fit → 100 → 150 → 200
+  if (mode === 'in' || mode === 'out') {
+    const _steps = ['fit', '100', '150', '200'];
+    const _cur = Math.max(0, _steps.indexOf(manualZoomMode || 'fit'));
+    mode = _steps[mode === 'in' ? Math.min(_cur + 1, _steps.length - 1) : Math.max(_cur - 1, 0)];
+  }
   manualZoomMode = mode || "fit";
   setText("manualZoomLabel", mode === "fit" ? "Ekrana sığdır" : `%${mode}`);
+  // 'fit' modunda artboard'u canvas-stage'e sığdır
+  if (mode === 'fit') {
+    const _stage = document.querySelector('#label .canvas-stage');
+    const _board = byId('manualPreview');
+    if (_stage && _board && _stage.clientWidth > 100 && _stage.clientHeight > 100) {
+      const _pad = 18;
+      const _avW = _stage.clientWidth - _pad * 2;
+      const _avH = _stage.clientHeight - _pad * 2;
+      const _bW = _board.offsetWidth || 520;
+      const _bH = _board.offsetHeight || 320;
+      if (_bW > 0 && _bH > 0 && _avW > 60 && _avH > 60) {
+        const _asp = _bW / _bH;
+        let _w = _avW, _h = _w / _asp;
+        if (_h > _avH) { _h = _avH; _w = _h * _asp; }
+        _board.style.width  = Math.round(_w * 0.94) + 'px';
+        _board.style.height = Math.round(_h * 0.94) + 'px';
+      }
+    }
+  }
   const label = byId("manualPreview")?.querySelector(".preview-label.editor-live");
   if (label) {
     label.classList.remove("zoom-100", "zoom-150", "zoom-200");
@@ -16218,11 +16243,32 @@ function nameCutZoom(delta = 0) {
   const next = clampNumber(Number(nameCutLayoutConfig.preview_zoom || 100) + Number(delta || 0), 50, 320);
   nameCutLayoutConfig.preview_zoom = next;
   renderLaserLayoutPreview(currentNameCutLayout());
+  const _ro = byId('nameCutScaleReadout');
+  if (_ro) _ro.textContent = '%' + Math.round(next);
 }
 
 function nameCutFitToScreen() {
   nameCutLayoutConfig.preview_zoom = 100;
   renderLaserLayoutPreview(currentNameCutLayout());
+  // Render sonrası gerçek board boyutunu ölç ve stage'e sığdıracak zoom'u hesapla
+  setTimeout(() => {
+    const _stage = document.querySelector('#nameCutStudio .nc-stage');
+    const _board = (_stage && (_stage.querySelector('[data-namecut-board]') || byId('nameCutStudioLayoutPreview')));
+    if (!_stage || !_board) return;
+    const _pad = 18;
+    const _avW = _stage.clientWidth  - _pad * 2;
+    const _avH = _stage.clientHeight - _pad * 2;
+    if (_avW <= 60 || _avH <= 60) return;
+    const _bW = _board.offsetWidth;
+    const _bH = _board.offsetHeight;
+    if (_bW <= 0 || _bH <= 0) return;
+    const _scale = Math.min(_avW / _bW, _avH / _bH) * 0.94;
+    const _newZ  = clampNumber(Math.round(100 * _scale), 10, 500);
+    if (Math.abs(_newZ - 100) > 3) {
+      nameCutLayoutConfig.preview_zoom = _newZ;
+      renderLaserLayoutPreview(currentNameCutLayout());
+    }
+  }, 80);
 }
 
 function nameCutSetActualSize() {
@@ -21643,6 +21689,73 @@ function showKPIEmpty() {
   band.innerHTML = '<div class="kpi-card"><div class="kpi-empty">Henuz uretim verisi bulunamadi.</div></div>';
   band.style.display = 'block';
 }
+
+// ============================================================
+// Yeniden Tasarım UI Yardımcıları (redesign helpers)
+// ============================================================
+
+function setReportTab(el) {
+  document.querySelectorAll('.report-tabs .btn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+}
+
+function setReportRange(range, el) {
+  document.querySelectorAll('.report-range .rng').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const box = byId('reportBox');
+  if (box && box.dataset.selected) selectReport(box.dataset.selected);
+}
+
+function setQueueStatus(val, el) {
+  document.querySelectorAll('.queue-status-chips .queue-chip').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const sel = byId('queueStatusFilter');
+  if (sel) { sel.value = val; refreshPrintQueueFilters(); }
+}
+
+function toggleStudioInspector(btn) {
+  const shell = document.querySelector('#label .studio-shell');
+  if (!shell) return;
+  shell.classList.toggle('no-inspector');
+  if (btn) btn.classList.toggle('active', shell.classList.contains('no-inspector'));
+  setTimeout(() => setManualZoom('fit'), 50);
+}
+
+function toggleNameCutInspector() {
+  const shell = document.querySelector('#nameCutStudio .nc-shell');
+  if (!shell) return;
+  shell.classList.toggle('no-settings');
+  const btn = byId('nameCutInspectorToggle');
+  if (btn) btn.classList.toggle('active', shell.classList.contains('no-settings'));
+  setTimeout(() => { if (typeof nameCutFitToScreen === 'function') nameCutFitToScreen(); }, 50);
+}
+
+function toggleNameCutFullBoard(btn) {
+  const shell = document.querySelector('#nameCutStudio .nc-shell');
+  if (!shell) return;
+  const on = !shell.classList.contains('no-settings');
+  shell.classList.toggle('no-settings', on);
+  shell.classList.toggle('no-source', on);
+  if (btn) btn.classList.toggle('active', on);
+  setTimeout(() => { if (typeof nameCutFitToScreen === 'function') nameCutFitToScreen(); }, 50);
+}
+
+// Wheel zoom — .canvas-stage ve .nc-stage üzerinde fare tekerleği ile zoom
+// capture:true zorunlu: labelScrollGuard (satır ~1886) capture+stopPropagation kullanıyor,
+// bubble-phase listener'a event ulaşmıyor.
+(function attachRedesignWheelZoom() {
+  document.addEventListener('wheel', function(e) {
+    if (e.target.closest && e.target.closest('.canvas-stage')) {
+      e.preventDefault();
+      e.stopPropagation();
+      setManualZoom(e.deltaY < 0 ? 'in' : 'out');
+    } else if (e.target.closest && e.target.closest('.nc-stage')) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof nameCutZoom === 'function') nameCutZoom(e.deltaY < 0 ? 10 : -10);
+    }
+  }, { passive: false, capture: true });
+})();
 
 // ============================================================
 // /Uretim Nabzi KPI Dashboard

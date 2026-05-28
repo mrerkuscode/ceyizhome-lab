@@ -8,228 +8,169 @@
   <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
 </head>
 <body>
-  <div class="app app-shell">
-    <aside class="sidebar" aria-label="Ana navigasyon">
-      <div class="brand">
-        <div class="brand-logo">C</div>
-        <div class="brand-copy">
-          <div class="brand-title">CeyizHome Lab</div>
-          <div class="brand-sub">Production & Label Studio</div>
-        </div>
-        <button class="sidebar-toggle" type="button" onclick="toggleSidebarCollapse()" aria-label="Menüyü daralt/genişlet" title="Menüyü daralt/genişlet">☰</button>
+  <div class="app" id="appShell">
+  <aside class="sidebar" aria-label="Ana navigasyon">
+    <div class="brand"><div class="brand-logo">C</div><div class="brand-copy"><div class="brand-title">CeyizHome Lab</div><div class="brand-sub">Production &amp; Label</div></div><button class="sidebar-toggle" type="button" onclick="toggleSidebarCollapse()" title="Daralt"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
+    <nav>
+      <div class="nav-group"><div class="nav-group-label">Ana</div>
+        <button class="nav-item nav-btn active" data-page="home" onclick="showSection('home')" title="Ana Sayfa"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span class="nav-text">Ana Sayfa</span></button>
       </div>
-
-      <nav>
-        <div class="nav-section">
-          <div class="nav-label">ANA</div>
-          <button class="nav-btn active" data-page="home" onclick="showSection('home')" title="Ana Sayfa"><span class="nav-icon">⌂</span><span class="nav-text">Ana Sayfa</span></button>
-          <button class="nav-btn" data-page="designLab" data-dev-module="true" onclick="showSection('designLab')" title="Design Lab"><span class="nav-icon">◆</span><span class="nav-text">Design Lab</span></button>
-          <button class="nav-btn" data-page="fontTestLab" data-dev-module="true" onclick="showSection('fontTestLab')" title="Font Test Lab"><span class="nav-icon">Aa</span><span class="nav-text">Font Test Lab</span></button>
-        </div>
-        <div class="nav-section">
-          <div class="nav-label">ETİKET</div>
-          <button class="nav-btn" data-page="labelModels" onclick="showSection('labelModels')" title="Etiket Modelleri"><span class="nav-icon">▦</span><span class="nav-text">Etiket Modelleri</span></button>
-          <button class="nav-btn" data-page="label" onclick="openLabelStudio()" title="Etiket Studio"><span class="nav-icon">✎</span><span class="nav-text">Etiket Studio</span></button>
-          <button class="nav-btn" data-page="manualLabel" onclick="openManualLabelStudio()" title="Manuel Etiket"><span class="nav-icon">□</span><span class="nav-text">Manuel Etiket</span></button>
-          <button class="nav-btn" data-page="bulkLabel" onclick="showSection('bulkLabel')" title="Toplu Üretim Studio"><span class="nav-icon">▤</span><span class="nav-text">Toplu Üretim Studio</span><span class="nav-badge subtle">Yeni</span><span class="sr-only">Toplu Etiket (Excel)</span></button>
-          <button class="nav-btn" data-page="nameCutStudio" onclick="showSection('nameCutStudio')" title="İsim Kesim Studio"><span class="nav-icon">✂</span><span class="nav-text">İsim Kesim</span></button>
-          <button class="nav-btn" data-page="printQueue" onclick="showSection('printQueue')" title="Yazdırma Sırası"><span class="nav-icon">⇢</span><span class="nav-text">Yazdırma Sırası</span></button>
-          <button class="nav-btn" data-page="labelOutputs" onclick="showSection('labelOutputs')" title="Etiket Çıktıları"><span class="nav-icon">◫</span><span class="nav-text">Etiket Çıktıları</span></button>
-          <button class="nav-btn" data-page="productionAudit" onclick="showSection('productionAudit')" title="Üretim Geçmişi"><span class="nav-icon">↺</span><span class="nav-text">Üretim Geçmişi</span></button>
-        </div>
-        <div class="nav-section nav-group open" data-nav-group="trendyol">
-          <div class="nav-label">TRENDYOL ENTEGRASYONU</div>
-          <!-- Ana Trendyol butonu — her zaman görünür -->
-          <button class="nav-btn" data-page="trendyolOrders" onclick="showSection('trendyolOrders')" title="Trendyol Sipariş Merkezi"><span class="nav-icon">T</span><span class="nav-text">Trendyol Merkezi</span></button>
-          <!-- Alt sekmeler — Trendyol sayfasının üst tablarında zaten var; sadece dev-mode'da göster -->
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="orders" onclick="openTrendyolSidebarTab('orders')" title="Trendyol Siparişleri"><span class="nav-icon">T</span><span class="nav-text">Siparişler</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="worklist" onclick="openTrendyolSidebarTab('worklist')" title="Kontrol Kuyruğu"><span class="nav-icon">!</span><span class="nav-text">Kontrol Kuyruğu</span><span id="sidebarBadgeReview" class="nav-badge">0</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="mapping" onclick="openTrendyolSidebarTab('mapping')" title="Ürün Eşleştirme"><span class="nav-icon">↔</span><span class="nav-text">Ürün Eşleştirme</span><span id="sidebarBadgeMapping" class="nav-badge">0</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="questions" onclick="openTrendyolSidebarTab('questions')" title="Kanıt Eşleştirme"><span class="nav-icon">⌕</span><span class="nav-text">Kanıt Eşleştirme</span><span id="sidebarBadgeEvidence" class="nav-badge">0</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="history" onclick="openTrendyolSidebarTab('history')" title="Aktarım Geçmişi"><span class="nav-icon">↺</span><span class="nav-text">Aktarım Geçmişi</span><span id="sidebarBadgeHistory" class="nav-badge subtle">0</span></button>
-        </div>
-        <div class="nav-section nav-group" data-nav-group="settings">
-          <div class="nav-label">AYARLAR</div>
-          <button class="nav-btn" data-page="settings" data-settings-subpage="general" onclick="openSettingsSubpage('general')" title="Genel Ayarlar"><span class="nav-icon">⚙</span><span class="nav-text">Genel Ayarlar</span></button>
-          <button class="nav-btn" data-page="settings" data-settings-subpage="users" onclick="openSettingsSubpage('users')" title="Kullanıcılar"><span class="nav-icon">◌</span><span class="nav-text">Kullanıcılar</span></button>
-          <button class="nav-btn" data-page="settings" data-settings-subpage="roles" onclick="openSettingsSubpage('roles')" title="Roller"><span class="nav-icon">◎</span><span class="nav-text">Roller</span></button>
-          <div class="nav-subgroup">
-            <div class="nav-subgroup-title"><span class="nav-text">Entegrasyonlar</span><span class="nav-chevron">⌄</span></div>
-            <button class="nav-btn nav-sublink" data-page="settings" data-settings-subpage="trendyol-api" onclick="openSettingsSubpage('trendyol-api')" title="Trendyol API"><span class="nav-icon">T</span><span class="nav-text">Trendyol API</span></button>
-            <button class="nav-btn nav-sublink" data-page="settings" data-settings-subpage="shipping" onclick="openSettingsSubpage('shipping')" title="Kargo Firmaları"><span class="nav-icon">⇄</span><span class="nav-text">Kargo Firmaları</span></button>
-            <button class="nav-btn nav-sublink" data-page="settings" data-settings-subpage="other-integrations" onclick="openSettingsSubpage('other-integrations')" title="Diğer Ayarlar"><span class="nav-icon">⋯</span><span class="nav-text">Diğer Ayarlar</span></button>
-          </div>
-          <button class="nav-btn" data-page="settings" data-settings-subpage="printer-profiles" onclick="openSettingsSubpage('printer-profiles')" title="Yazıcı Profilleri"><span class="nav-icon">▣</span><span class="nav-text">Yazıcı Profilleri</span></button>
-          <button class="nav-btn" data-page="products" onclick="showSection('products')" title="Ürün Tanımları"><span class="nav-icon">◳</span><span class="nav-text">Ürün Tanımları</span></button>
-          <button class="nav-btn" data-page="settings" data-settings-subpage="data-maintenance" onclick="openSettingsSubpage('data-maintenance')" title="Veri Bakımı"><span class="nav-icon">◫</span><span class="nav-text">Veri Bakımı</span></button>
-        </div>
-        <div class="nav-section">
-          <div class="nav-label">SİSTEM</div>
-          <button class="nav-btn" data-page="reports" onclick="showSection('reports')" title="Raporlar"><span class="nav-icon">◎</span><span class="nav-text">Raporlar</span></button>
-          <button class="nav-btn" data-page="reports" onclick="showSystemNotice('Loglar / Hata Kayıtları')" title="Loglar / Hata Kayıtları"><span class="nav-icon">◇</span><span class="nav-text">Loglar / Hata Kayıtları</span></button>
-          <button class="nav-btn" onclick="quitApplication()" title="Çıkış Yap"><span class="nav-icon">↩</span><span class="nav-text">Çıkış Yap</span></button>
-        </div>
-        <details class="nav-section technical-nav" id="devModuleDetails" hidden>
-          <summary><span>Teknik araçlar</span><small>Normal üretimde gerekmez</small></summary>
-          <button class="nav-btn technical" data-page="nativeTools" onclick="showSection('nativeTools')" title="Native AI/CDR Deneme"><span class="nav-icon">◇</span><span class="nav-text">Native AI/CDR Deneme</span><span class="sr-only">CDR / AI Model teknik deneme</span></button>
-          <button class="nav-btn technical" data-page="laser" onclick="showSection('laser')" title="Lazer"><span class="nav-icon">⌁</span><span class="nav-text">Lazer</span></button>
-          <button class="nav-btn technical" data-page="folders" onclick="showSection('folders')" title="Çıktı Klasörleri"><span class="nav-icon">▣</span><span class="nav-text">Çıktı Klasörleri</span></button>
-        </details>
-      </nav>
-
-      <div class="system-card">
-        <div class="system-row"><span>Güvenli Mod</span><b class="status-ok">Aktif</b></div>
-        <div class="system-row"><span>Direct Print</span><b>Kapalı</b></div>
-        <div class="system-row"><span>CorelDRAW</span><b>Otomatik açılmaz</b></div>
-        <div class="system-row"><span>RDWorks / Lazer</span><b>Kapalı</b></div>
+      <div class="nav-group"><div class="nav-group-label">Etiket</div>
+        <button class="nav-item nav-btn" data-page="labelModels" onclick="showSection('labelModels')" title="Etiket Modelleri"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="nav-text">Etiket Modelleri</span></button>
+        <button class="nav-item nav-btn" data-page="label" onclick="showSection('label')" title="Etiket Studio"><svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M14.5 4.5l5 5L8 21l-5 1 1-5z"/></svg><span class="nav-text">Etiket Studio</span></button>
+        <button class="nav-item nav-btn" data-page="bulkLabel" onclick="showSection('bulkLabel')" title="Toplu Üretim Studio"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M7 20h14V8"/></svg><span class="nav-text">Toplu Üretim Studio</span><span class="nav-badge">Yeni</span></button>
+        <button class="nav-item nav-btn" data-page="nameCutStudio" onclick="showSection('nameCutStudio')" title="İsim Kesim"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.5 15.5M14 14l6 6M8.5 8.5L11 11"/></svg><span class="nav-text">İsim Kesim</span></button>
+        <button class="nav-item nav-btn" data-page="printQueue" onclick="showSection('printQueue')" title="Yazdırma Sırası"><svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg><span class="nav-text">Yazdırma Sırası</span></button>
+        <button class="nav-item nav-btn" data-page="labelOutputs" onclick="showSection('labelOutputs')" title="Etiket Çıktıları"><svg viewBox="0 0 24 24"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg><span class="nav-text">Etiket Çıktıları</span></button>
+        <button class="nav-item nav-btn" data-page="productionAudit" onclick="showSection('productionAudit')" title="Üretim Geçmişi"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/></svg><span class="nav-text">Üretim Geçmişi</span></button>
       </div>
-      <div class="version">v2.1 Studio UI</div>
-      <div style="padding:6px 12px 10px;font-size:.75rem;color:var(--text-muted,#888)">
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none">
-          <input type="checkbox" id="devModeToggle" onchange="applyDevMode(this.checked)" style="cursor:pointer">
-          <span>Geliştirici Modu</span>
-        </label>
+      <div class="nav-group"><div class="nav-group-label">Siparişler</div>
+        <button class="nav-item nav-btn" data-page="customerOrders" onclick="showSection('customerOrders')" title="Müşteri Siparişleri"><svg viewBox="0 0 24 24"><path d="M9 3h6l1 4H8z"/><path d="M5 7h14l-1 13H6z"/><path d="M9 11v4M15 11v4"/></svg><span class="nav-text">Müşteri Siparişleri</span></button>
+        <button class="nav-item nav-btn" data-page="trendyolOrders" onclick="showSection('trendyolOrders')" title="Trendyol Merkezi"><svg viewBox="0 0 24 24"><path d="M6 7h15l-1.5 9H7.5z"/><path d="M6 7L5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><span class="nav-text">Trendyol Merkezi</span></button>
       </div>
-    </aside>
-    <div class="sidebar-backdrop" onclick="closeMobileSidebar()" aria-hidden="true"></div>
+      <div class="nav-group"><div class="nav-group-label">Ayarlar</div>
+        <button class="nav-item nav-btn" data-page="settings" onclick="showSection('settings')" title="Ayarlar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.3-1.3L13.7 2h-3.4l-.3 2.5a7 7 0 0 0-2.3 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.3 1.3l.3 2.5h3.4l.3-2.5a7 7 0 0 0 2.3-1.3l2.3 1 2-3.4-2-1.5A7 7 0 0 0 19 12z"/></svg><span class="nav-text">Ayarlar ve Güvenlik</span></button>
+      </div>
+      <div class="nav-group"><div class="nav-group-label">Sistem</div>
+        <button class="nav-item nav-btn" data-page="reports" onclick="showSection('reports')" title="Raporlar"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="nav-text">Raporlar</span></button>
+      </div>
+    </nav>
+    <div class="sidebar-footer"><label class="dev-toggle"><input type="checkbox" id="devModeToggle" onchange="applyDevMode(this.checked)" /><span class="switch"></span><span>Geliştirici Modu</span></label></div>
+  </aside>
 
-    <main class="main page-shell">
+    <div class="main">
       <header class="topbar">
-        <button class="icon-btn mobile-menu-btn" onclick="toggleSidebarCollapse()" title="Menüyü aç" aria-label="Menüyü aç">☰</button>
-        <div class="topbar-search" aria-hidden="true">Ara (⌘F)</div>
-        <button class="icon-btn" onclick="toggleTheme()" title="Tema değiştir">☾</button>
-        <button class="icon-btn" onclick="openHelpCenter()" title="Yardım">?</button>
-        <div class="user-pill" title="CeyizHome Lab">CeyizHome</div>
+        <div class="topbar-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input type="search" placeholder="Ara…" /><kbd>⌘F</kbd></div>
+        <div class="topbar-spacer"></div>
+        <button class="icon-btn" onclick="toggleTheme()" title="Tema"><svg viewBox="0 0 24 24"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.6 6.6 0 0 0 9.8 9.8z"/></svg></button>
+        <button class="icon-btn" onclick="openHelpCenter()" title="Yardım"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 0 1 4.5 1.5c0 1.7-2.5 2-2.5 3.5"/><path d="M12 17.5h.01"/></svg></button>
+        <button class="user-chip"><span class="user-avatar">C</span>CeyizHome</button>
       </header>
+      <main class="content">
 
       <section id="home" class="page active">
+
         <div class="home-hero">
           <h1 class="home-title">Hoş geldiniz, CeyizHome Lab</h1>
           <p class="home-subtitle">Etiket, Trendyol, toplu üretim ve lazer isim kesim operasyon merkezi.</p>
           <div class="home-status-row" aria-label="Üretim güvenliği durumu">
-            <button class="home-status-pill home-status-pill-success" onclick="openSettingsSubpage('general')" title="Ayarlar > Güvenlik">
-              <span class="hsp-icon">✓</span><b>Güvenli Mod</b><span id="homeSafetyModeStatus">Aktif</span>
+            <button class="home-status-pill home-status-pill-success" onclick="openSettingsSubpage(‘general’)" title="Ayarlar › Güvenlik">
+              <span class="hsp-dot"></span><b>Güvenli Mod</b><span id="homeSafetyModeStatus">Aktif</span>
             </button>
-            <button class="home-status-pill home-status-pill-neutral" onclick="openSettingsSubpage('general')" title="Ayarlar > Genel">
-              <span class="hsp-icon">⊘</span><b>Direct Print</b><span id="homeDirectPrintStatus">Kapalı</span>
+            <button class="home-status-pill home-status-pill-neutral" onclick="openSettingsSubpage(‘general’)" title="Ayarlar › Genel">
+              <span class="hsp-dot"></span><b>Direct Print</b><span id="homeDirectPrintStatus">Kapalı</span>
             </button>
-            <button class="home-status-pill home-status-pill-warning" onclick="showSection('reports')" title="Raporlara Git">
-              <span class="hsp-icon">◌</span><b>Son Kontrol</b><span id="homeQualityStatusInline">—</span>
+            <button class="home-status-pill home-status-pill-warning" onclick="showSection(‘reports’)" title="Raporlara Git">
+              <span class="hsp-dot"></span><b>Son Kontrol</b><span id="homeQualityStatusInline">—</span>
             </button>
-            <button class="home-status-pill home-status-pill-neutral" onclick="openSettingsSubpage('printer-profiles')" title="Ayarlar > Yazıcı Profilleri">
-              <span class="hsp-icon">⚠</span><b>Yazıcı</b><span id="homePrinterAutoStatus">Otomatik çalışmaz</span>
+            <button class="home-status-pill home-status-pill-neutral" onclick="openSettingsSubpage(‘printer-profiles’)" title="Ayarlar › Yazıcı Profilleri">
+              <span class="hsp-dot"></span><b>Yazıcı</b><span id="homePrinterAutoStatus">Otomatik çalışmaz</span>
             </button>
           </div>
-          <div class="grid-3">
-            <article class="workflow-card">
-              <div class="workflow-art purple" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><path d="M4 20h16"/><path d="M7 17l10-10 2 2-10 10H7v-2z"/><path d="M14 7l3 3"/></svg>
-              </div>
-              <div>
-                <h3>Etiket Studio</h3>
-                <div class="micro-label">TEKLİ ÜRETİM</div>
-                <p><b>Tekli etiket hazırlayın.</b><br>Model seçin, yazıyı değiştirin, PDF/PNG oluşturun.</p>
-                <small class="when-line">Ne zaman kullanılır? Bir etiket veya hızlı prova hazırlarken.</small>
-                <button class="btn primary" onclick="openHomeStudio()">Etiket Hazırla</button>
-              </div>
-            </article>
-            <article class="workflow-card">
-              <div class="workflow-art blue" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 10h16"/><path d="M9 5v14"/><path d="M14 5v14"/></svg>
-              </div>
-              <div>
-                <h3>Toplu Etiket</h3>
-                <div class="micro-label">EXCEL ÜRETİMİ</div>
-                <p><b>Excel’den toplu etiket oluşturun.</b><br>Satırları kontrol edin, hataları görün, çıktı alın.</p>
-                <small class="when-line">Ne zaman kullanılır? Çoklu isim, tarih veya sipariş listelerinde.</small>
-                <button class="btn primary" onclick="showSection('bulkLabel')">Excel ile Başla</button>
-              </div>
-            </article>
-            <article class="workflow-card">
-              <div class="workflow-art" aria-hidden="true">
-                <svg viewBox="0 0 24 24" role="img"><rect x="4" y="5" width="7" height="6" rx="1.5"/><rect x="13" y="5" width="7" height="6" rx="1.5"/><rect x="4" y="13" width="7" height="6" rx="1.5"/><rect x="13" y="13" width="7" height="6" rx="1.5"/></svg>
-              </div>
-              <div>
-                <h3>Etiket Modelleri</h3>
-                <div class="micro-label">ETİKET MODEL KÜTÜPHANESİ</div>
-                <p><b>Hazır tasarımları yönetin, yeni model ekleyin.</b><br>Önizleme görseli ve hazırlık durumunu kontrol edin.</p>
-                <small class="when-line">Ne zaman kullanılır? Yeni tasarım eklerken veya model seçerken.</small>
-                <button class="btn primary" aria-label="Etiket Model Galerisini Aç" onclick="showSection('labelModels')">Modelleri Yönet</button>
-              </div>
-            </article>
-          </div>
-          <section class="home-section">
-            <div class="home-section-head">
-              <h2>Hızlı İşlemler</h2>
-              <span id="homeQuickStatus" class="home-inline-status">Hazır</span>
+        </div>
+
+        <div class="section-label">Ne yapmak istersiniz?</div>
+        <div class="grid-3">
+          <article class="workflow-card">
+            <div class="workflow-art espresso" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M14.5 4.5l5 5L8 21l-5 1 1-5z"/></svg>
             </div>
-            <div class="quick-actions">
-              <button class="btn" onclick="openHomeLastPdf()">Son PDF’i Aç</button>
-              <button class="btn" onclick="openHomeLastPng()">Son PNG’yi Önizle</button>
-              <button class="btn" onclick="showSection('printQueue')">Yazdırma Sırasını Gör</button>
-              <button class="btn gold" onclick="openHomeNewModel()">Yeni Model Ekle</button>
-              <button class="btn" onclick="openHomePreviewUpload()">Görsel Bağla</button>
-              <button class="btn" onclick="showSection('settings')">Ayarları Aç</button>
+            <h3>Etiket Studio</h3>
+            <div class="micro-label">Tekli üretim</div>
+            <p><b>Tekli etiket hazırlayın.</b><br>Model seçin, yazıyı değiştirin, PDF/PNG oluşturun.</p>
+            <small class="when-line">Bir etiket veya hızlı prova hazırlarken.</small>
+            <button class="btn primary" onclick="openHomeStudio()">Etiket Hazırla</button>
+          </article>
+          <article class="workflow-card">
+            <div class="workflow-art gold" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M7 20h14V8"/></svg>
+            </div>
+            <h3>Toplu Etiket</h3>
+            <div class="micro-label">Excel üretimi</div>
+            <p><b>Excel’den toplu etiket oluşturun.</b><br>Satırları kontrol edin, hataları görün, çıktı alın.</p>
+            <small class="when-line">Çoklu isim, tarih veya sipariş listelerinde.</small>
+            <button class="btn primary" onclick="showSection(‘bulkLabel’)">Excel ile Başla</button>
+          </article>
+          <article class="workflow-card">
+            <div class="workflow-art wine" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            </div>
+            <h3>Etiket Modelleri</h3>
+            <div class="micro-label">Model kütüphanesi</div>
+            <p><b>Hazır tasarımları yönetin, yeni model ekleyin.</b><br>Önizleme ve hazırlık durumunu kontrol edin.</p>
+            <small class="when-line">Yeni tasarım eklerken veya model seçerken.</small>
+            <button class="btn primary" aria-label="Etiket Model Galerisini Aç" onclick="showSection(‘labelModels’)">Modelleri Yönet</button>
+          </article>
+        </div>
+
+        <div class="section-label">Hızlı işlemler</div>
+        <div class="quick-actions">
+          <button class="btn" onclick="openHomeLastPdf()">Son PDF’i Aç</button>
+          <button class="btn" onclick="openHomeLastPng()">Son PNG’yi Önizle</button>
+          <button class="btn" onclick="showSection(‘printQueue’)">Yazdırma Sırası</button>
+          <button class="btn" onclick="openHomeNewModel()">Yeni Model Ekle</button>
+          <button class="btn" onclick="openHomePreviewUpload()">Görsel Bağla</button>
+          <button class="btn" onclick="showSection(‘settings’)">Ayarları Aç</button>
+          <span id="homeQuickStatus" class="home-inline-status">Hazır</span>
+        </div>
+
+        <div class="home-grid-2">
+          <section class="card">
+            <div class="home-section-head">
+              <h2>Bugünkü Üretim Özeti</h2>
+              <span class="home-inline-status" id="homeTodayStatus">Gerçek veriler</span>
+            </div>
+            <div class="home-metrics">
+              <div><b id="homeTodayPdfCount">0</b><span>PDF</span></div>
+              <div><b id="homeTodayPngCount">0</b><span>PNG</span></div>
+              <div><b id="homeQueueCount">0</b><span>Bekleyen iş</span></div>
+              <div><b id="homePrintedCount">0</b><span>Yazdırıldı</span></div>
+              <div><b id="homeReviewCount">0</b><span>Kontrol</span></div>
+              <div><b id="homeTodayQty">0</b><span>Toplam adet</span></div>
+              <div><b id="homeBatchCount">0</b><span>Batch</span></div>
+              <div><b id="homeDeliveredCount">0</b><span>Teslim</span></div>
+            </div>
+            <p class="home-data-line"><b>Son çıktı:</b> <span id="homeLastOutput">Bugün henüz çıktı oluşturulmadı.</span></p>
+            <p class="home-data-line"><b>Son kalite kontrol:</b> <span id="homeQualityStatus">Başarılı</span></p>
+          </section>
+
+          <section class="card">
+            <div class="home-section-head">
+              <h2>Model Durumu</h2>
+              <button class="btn small" onclick="openHomeModelHealth()">Kontrol Et</button>
+            </div>
+            <div class="home-metrics" style="grid-template-columns:repeat(2,1fr)">
+              <button class="home-metric-btn" type="button" onclick="openHomeModelStatus(‘ready’)" title="Hazır modelleri göster"><b id="homeReadyModelCount">0</b><span>Hazır</span></button>
+              <button class="home-metric-btn" type="button" onclick="openHomeModelStatus(‘missing’)" title="Görsel eksik modelleri göster"><b id="homeMissingPreviewCount">0</b><span>Görsel eksik</span></button>
+              <button class="home-metric-btn" type="button" onclick="openHomeModelStatus(‘issues’)" title="Kontrol gereken modelleri göster"><b id="homeFieldIssueCount">0</b><span>Alan uyarısı</span></button>
+              <button class="home-metric-btn" type="button" onclick="openHomeModelStatus(‘passive’)" title="Pasif veya taslak modelleri göster"><b id="homePassiveModelCount">0</b><span>Pasif/taslak</span></button>
+            </div>
+          </section>
+        </div>
+
+        <div class="home-grid-2">
+          <section class="card">
+            <div class="home-section-head">
+              <h2>Son İşler</h2>
+              <button class="btn small" onclick="showSection(‘labelOutputs’)">Tüm Çıktılar</button>
+            </div>
+            <div id="homeRecentJobsList" class="home-recent-list">
+              <div class="list-row">Henüz üretim geçmişi yok.</div>
             </div>
           </section>
 
-          <div class="home-dashboard">
-            <section class="home-section">
-              <div class="home-section-head">
-                <h2>Bugünkü Üretim Özeti</h2>
-                <span class="home-inline-status" id="homeTodayStatus">Gerçek veriler</span>
-              </div>
-              <div class="home-metrics">
-                <div><b id="homeTodayPdfCount">0</b><span>PDF</span></div>
-                <div><b id="homeTodayPngCount">0</b><span>PNG</span></div>
-                <div><b id="homeQueueCount">0</b><span>Bekleyen iş</span></div>
-                <div><b id="homePrintedCount">0</b><span>Yazdırıldı</span></div>
-                <div><b id="homeReviewCount">0</b><span>Kontrol</span></div>
-                <div><b id="homeTodayQty">0</b><span>Toplam adet</span></div>
-                <div><b id="homeBatchCount">0</b><span>Batch</span></div>
-                <div><b id="homeDeliveredCount">0</b><span>Teslim</span></div>
-              </div>
-              <p class="home-data-line"><b>Son çıktı:</b> <span id="homeLastOutput">Bugün henüz çıktı oluşturulmadı.</span></p>
-              <p class="home-data-line"><b>Son kalite kontrol:</b> <span id="homeQualityStatus">Başarılı</span></p>
-            </section>
-
-            <section class="home-section">
-              <div class="home-section-head">
-                <h2>Model Durumu</h2>
-                <button class="btn small" onclick="openHomeModelHealth()">Modelleri Kontrol Et</button>
-              </div>
-              <div class="home-metrics compact">
-                <button class="home-metric-btn" type="button" onclick="openHomeModelStatus('ready')" title="Hazır modelleri göster"><b id="homeReadyModelCount">0</b><span>Hazır</span></button>
-                <button class="home-metric-btn" type="button" onclick="openHomeModelStatus('missing')" title="Görsel eksik modelleri göster"><b id="homeMissingPreviewCount">0</b><span>Görsel eksik</span></button>
-                <button class="home-metric-btn" type="button" onclick="openHomeModelStatus('issues')" title="Kontrol gereken modelleri göster"><b id="homeFieldIssueCount">0</b><span>Alan uyarısı</span></button>
-                <button class="home-metric-btn" type="button" onclick="openHomeModelStatus('passive')" title="Pasif veya taslak modelleri göster"><b id="homePassiveModelCount">0</b><span>Pasif/taslak</span></button>
-              </div>
-            </section>
-          </div>
-
-          <div class="home-dashboard">
-            <section class="home-section">
-              <div class="home-section-head">
-                <h2>Son İşler</h2>
-                <button class="btn small" onclick="showSection('labelOutputs')">Tüm Çıktılar</button>
-              </div>
-              <div id="homeRecentJobsList" class="home-recent-list">
-                <div class="list-row">Henüz üretim geçmişi yok.</div>
-              </div>
-            </section>
-
-            <section class="home-section home-safety-panel">
-              <h2>Yazdırma Güvenliği</h2>
-              <div class="safety-check-list">
-                <div><b>Güvenli Mod</b><span>Aktif</span></div>
-                <div><b>Direct Print</b><span>Kapalı</span></div>
-                <div><b>Yazıcı</b><span>Otomatik çalışmaz</span></div>
-                <div><b>Lazer</b><span>Otomatik başlamaz</span></div>
-                <div><b>Corel / Illustrator</b><span>Otomatik açılmaz</span></div>
-              </div>
-            </section>
-          </div>
+          <section class="card">
+            <div class="home-section-head"><h2>Yazdırma Güvenliği</h2></div>
+            <div class="safety-check-list">
+              <div><b>Güvenli Mod</b><span>Aktif</span></div>
+              <div><b>Direct Print</b><span>Kapalı</span></div>
+              <div><b>Yazıcı</b><span>Otomatik çalışmaz</span></div>
+              <div><b>Lazer</b><span>Otomatik başlamaz</span></div>
+              <div><b>Corel / Illustrator</b><span>Otomatik açılmaz</span></div>
+            </div>
+          </section>
         </div>
+
       </section>
 
       <section id="fontTestLab" class="page font-test-lab-page">
@@ -1605,275 +1546,249 @@
 
       <section id="labelModels" class="page">
         <div class="page-head">
-          <div>
-            <h1 class="page-title">Etiket Modelleri</h1>
-            <p class="page-subtitle">Modeli görselden seçin, hazırlık durumunu kontrol edin ve Studio’da düzenlemeye başlayın.</p>
-          </div>
+          <div><h1 class="page-title">Etiket Modelleri</h1><p class="page-subtitle">Modeli görselden seçin, hazırlık durumunu kontrol edin ve Studio’da düzenlemeye başlayın.</p></div>
           <div class="toolbar">
             <button class="btn" onclick="refreshLabelModels()">Yenile</button>
-            <button class="btn gold" onclick="uploadDesignVisualForSelectedModel()">Tasarım Görseli Yükle</button>
+            <button class="btn accent" onclick="uploadDesignVisualForSelectedModel()">Tasarım Görseli Yükle</button>
             <button class="btn primary" onclick="openNewLabelModelWizard()">Yeni Model Ekle</button>
             <button class="btn" onclick="openCloneLabelModelWizard()">Varyant Oluştur</button>
-            <label class="check technical-mode-toggle"><input id="labelTechnicalMode" type="checkbox" onchange="toggleLabelTechnicalMode()" /> Teknik Mod</label>
+            <label class="check"><input id="labelTechnicalMode" type="checkbox" onchange="toggleLabelTechnicalMode()" /> Teknik Mod</label>
           </div>
         </div>
         <div id="labelModelStatus" class="status-line" hidden></div>
         <div id="labelModelHealthSummary" class="model-health-summary"></div>
-        <div class="toolbar filterbar">
-          <input id="modelSearch" placeholder="Model no veya model adı ara" oninput="renderLabelModels()" />
-          <select id="variantFilter" onchange="renderLabelModels()">
-            <option value="">Tüm varyantlar</option>
-            <option>GOLD</option><option>SILVER</option><option>WHITE</option><option>RED</option><option>CUSTOM</option><option>NONE</option>
-          </select>
-          <select id="activeFilter" onchange="renderLabelModels()">
-            <option value="">Aktif/Pasif hepsi</option>
-            <option value="true">Aktif</option>
-            <option value="false">Pasif</option>
-          </select>
-          <select id="healthFilter" onchange="renderLabelModels()">
-            <option value="">Tüm hazırlık durumları</option>
-            <option value="Hazır">Hazır</option>
-            <option value="Görsel eksik">Görsel eksik</option>
-            <option value="Yazı alanı eksik">Yazı alanı eksik</option>
-            <option value="Alan çakışması">Alan çakışması</option>
-            <option value="Kontrol gereken">Kontrol gereken</option>
-            <option value="Kontrol gerekiyor">Kontrol gerekiyor</option>
-            <option value="Taslak/Pasif">Taslak/Pasif</option>
-          </select>
-          <label class="check"><input id="missingPreviewFilter" type="checkbox" onchange="renderLabelModels()" /> Önizleme eksik olanlar</label>
-          <label class="check"><input id="readyOnlyFilter" type="checkbox" onchange="renderLabelModels()" /> Sadece hazır modeller</label>
-          <select id="modelSort" onchange="renderLabelModels()">
-            <option value="ready">Hazır modeller önce</option>
-            <option value="name">Ada göre sırala</option>
-            <option value="variant">Varyanta göre sırala</option>
-          </select>
-          <button class="btn ghost" onclick="clearModelFilters()">Filtreleri Temizle</button>
+        <div class="filter-bar">
+          <input id="modelSearch" type="search" placeholder="Model no veya model adı ara" oninput="renderLabelModels()" />
+          <select id="variantFilter" onchange="renderLabelModels()"><option value="">Tüm varyantlar</option><option>GOLD</option><option>SILVER</option><option>WHITE</option><option>RED</option><option>CUSTOM</option><option>NONE</option></select>
+          <select id="healthFilter" onchange="renderLabelModels()"><option value="">Tüm hazırlık durumları</option><option value="Hazır">Hazır</option><option value="Görsel eksik">Görsel eksik</option><option value="Yazı alanı eksik">Yazı alanı eksik</option><option value="Alan çakışması">Alan çakışması</option><option value="Kontrol gereken">Kontrol gereken</option><option value="Taslak/Pasif">Taslak/Pasif</option></select>
+          <select id="modelSort" onchange="renderLabelModels()"><option value="ready">Hazır modeller önce</option><option value="name">Ada göre sırala</option><option value="variant">Varyanta göre sırala</option></select>
+          <details class="filter-more">
+            <summary class="btn small ghost">Daha fazla filtre ▾</summary>
+            <div class="filter-more-panel">
+              <select id="activeFilter" onchange="renderLabelModels()"><option value="">Aktif/Pasif hepsi</option><option value="true">Aktif</option><option value="false">Pasif</option></select>
+              <label class="check"><input id="missingPreviewFilter" type="checkbox" onchange="renderLabelModels()" /> Önizleme eksik olanlar</label>
+              <label class="check"><input id="readyOnlyFilter" type="checkbox" onchange="renderLabelModels()" /> Sadece hazır modeller</label>
+              <button class="btn small ghost" onclick="clearModelFilters()">Filtreleri Temizle</button>
+            </div>
+          </details>
         </div>
         <div class="library-layout">
-          <div id="labelModelGallery" class="model-gallery"></div>
-          <aside class="detail-panel">
-            <h2>Seçili Model</h2>
+          <div id="labelModelGallery" class="model-gallery"><div class="gallery-empty-hint">Modeller yükleniyor…</div></div>
+          <aside class="card detail-panel">
+            <div class="card-title"><h3>Seçili Model</h3></div>
             <div id="selectedModelPreview" class="large-preview empty">Model seçin</div>
             <div id="selectedModelInfo" class="detail-copy">Galeriden bir model seçildiğinde detaylar burada görünür.</div>
             <div id="selectedModelHealthPanel" class="model-health-panel"></div>
             <div class="button-grid">
               <button class="btn primary" onclick="useSelectedModelForManual()">Etiket Hazırla</button>
-              <button class="btn gold" onclick="useSelectedModelForManual()">Studio’da Düzenle</button>
               <button class="btn" onclick="previewSelectedModelOnly()">Önizle</button>
               <button class="btn" onclick="openPreviewBindingWizard()">Görsel Bağla</button>
-              <button class="btn" onclick="openCloneLabelModelWizard()">Varyant Oluştur</button>
               <button class="btn" onclick="runSelectedModelHealthCheck()">Modeli Kontrol Et</button>
             </div>
             <div id="modelRepairActions" class="repair-action-grid"></div>
             <div id="modelRepairResult" class="repair-result-panel" hidden></div>
-            <details class="model-backup-panel">
-              <summary>Backup Geçmişi</summary>
-              <div id="modelBackupHistory" class="compact-list">Model seçildiğinde backup geçmişi burada görünür.</div>
-            </details>
             <div id="modelHealthCheckResult" class="preview-diagnostic" hidden></div>
-            <p class="safe-note">Önizleme görseli eksikse modeli seçebilir, ama tasarım konumunu kontrol etmek için önce görsel bağlamanız önerilir.</p>
+            <details class="model-backup-panel"><summary>Backup Geçmişi</summary><div id="modelBackupHistory" class="compact-list">Model seçildiğinde backup geçmişi burada görünür.</div></details>
             <details class="technical-details" id="selectedModelTechnicalWrap">
               <summary>Gelişmiş Teknik Detaylar</summary>
-              <p class="safe-note">AI/CDR dosyası kaynak tasarımdır ve bu ekrandan değiştirilmez. Program içinde doğru tasarımı görmek için PNG/JPG/WebP/PDF/SVG önizleme görseli bağlanır.</p>
+              <p class="safe-note">AI/CDR dosyası kaynak tasarımdır ve bu ekrandan değiştirilmez. Doğru tasarımı görmek için PNG/JPG/PDF/SVG önizleme görseli bağlanır.</p>
               <div id="selectedModelTechnical" class="field-list"></div>
-              <div class="button-grid">
-                <button class="btn ghost" onclick="openAdvancedTemplateEditor()">Gelişmiş Şablon Düzenleyici</button>
-                <button class="btn ghost" onclick="bridge.open_print_templates_folder()">Teknik: Klasörde Göster</button>
-                <button class="btn ghost" onclick="bridge.open_project_file((selectedLabelModel && selectedLabelModel.source_file) || '')">Harici Programda Aç</button>
-              </div>
+              <div class="button-grid"><button class="btn ghost" onclick="openAdvancedTemplateEditor()">Gelişmiş Şablon Düzenleyici</button></div>
             </details>
           </aside>
         </div>
       </section>
 
       <section id="nameCutStudio" class="page name-cut-rd-page">
-        <div class="name-cut-rd-shell">
-          <header class="name-cut-rd-header">
-            <div class="name-cut-rd-brand">
-              <span class="name-cut-rd-logo">C</span>
-              <div>
-                <h1>İsim Kesim Studio</h1>
-                <p>RDWorks uyumlu 800 x 600 mm lazer nesting ekranı</p>
-              </div>
+        <div class="nc-shell">
+          <header class="nc-header">
+            <span class="nc-logo">C</span>
+            <div><h1>İsim Kesim Studio</h1><p>Lazer kesim yerleşimi — güvenli hazırlık, otomatik başlatma yok.</p></div>
+            <div class="nc-chips">
+              <span class="nc-chip ok">Güvenli Mod</span><span class="nc-chip">Lazer otomatik başlamaz</span><span class="nc-chip">Önce dosya kontrolü</span>
             </div>
-            <div class="name-cut-rd-status-chips" aria-label="İsim Kesim durumu">
-              <span>Path/outline hazır</span>
-              <span>Hedef ölçü: 80 x 40 mm</span>
-              <span>Min boşluk: 1 mm</span>
-              <span>Harfler birleşik</span>
-              <span>İsimler ayrı</span>
-              <span>Tek parça: Geçti</span>
-              <span>Temas yok</span>
-            </div>
-            <div class="name-cut-rd-header-actions">
-              <button class="btn" id="nameCutInspectorToggle" onclick="toggleNameCutInspector()" type="button">Inspector Kapat</button>
-              <button class="btn" onclick="showNameCutFeatureNotice('Ayarlar')" type="button">⚙ Ayarlar</button>
-              <button class="btn" onclick="showNameCutFeatureNotice('Rehber video')" type="button">▶ Rehber Video</button>
-            </div>
+            <button class="icon-btn" id="nameCutInspectorToggle" onclick="toggleNameCutInspector()" title="Ayar panelini aç/kapat"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            <button class="icon-btn" onclick="showNameCutFeatureNotice('Ayarlar')" title="Ayarlar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.5 12a7.5 7.5 0 0 0-.1-1.3l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-2.3-1.3L14.2 2H9.8L9.4 4.4a7.5 7.5 0 0 0-2.3 1.3l-2.4-1-2 3.4 2 1.6A7.5 7.5 0 0 0 4.5 12l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 2.3 1.3l.4 2.7h4.4l.4-2.7a7.5 7.5 0 0 0 2.3-1.3l2.4 1 2-3.4-2-1.6z"/></svg></button>
+            <button class="icon-btn" onclick="showNameCutFeatureNotice('Rehber video')" title="Rehber video"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z"/></svg></button>
           </header>
 
-          <nav class="name-cut-rd-toolbar" aria-label="İsim Kesim araçları">
-            <button onclick="resetNameCutProject()" type="button">□<span>Yeni</span></button>
-            <button onclick="showNameCutFeatureNotice('Aç')" type="button">▱<span>Aç</span></button>
-            <button onclick="saveNameCutProject()" type="button">▣<span>Kaydet</span></button>
-            <button onclick="saveNameCutProject(true)" type="button">▤<span>Farklı Kaydet</span></button>
-            <i></i>
-            <button onclick="openManualNameCutModal()" type="button">＋<span>Manuel İsim</span></button>
-            <button onclick="showSection('bulkLabel')" type="button">▣<span>Excel / Toplu</span></button>
-            <button onclick="openNameCutPasteModal()" type="button">▤<span>Yapıştır</span></button>
-            <i></i>
-            <button onclick="showNameCutFeatureNotice('Geri')" type="button">↶<span>Geri</span></button>
-            <button onclick="showNameCutFeatureNotice('İleri')" type="button">↷<span>İleri</span></button>
-            <i></i>
-            <button onclick="nameCutZoom(-10)" type="button">⌕<span>Uzaklaştır</span></button>
-            <button onclick="nameCutZoom(10)" type="button">⌕<span>Yakınlaştır</span></button>
-            <button onclick="nameCutFitToScreen()" type="button">⛶<span>Ekrana Sığdır</span></button>
-            <button onclick="nameCutSetActualSize()" type="button">▣<span>Gerçek Boyut</span></button>
-            <i></i>
-            <button onclick="toggleNameCutMirror('horizontal')" type="button">⇋<span>Ayna Yatay</span></button>
-            <button onclick="toggleNameCutMirror('vertical')" type="button">⇅<span>Ayna Dikey</span></button>
-            <button onclick="rotateNameCutSelection(180)" type="button">↻<span>180° Döndür</span></button>
-            <button class="active" onclick="autoNestNameCutItems()" type="button">⇄<span>Otomatik Diz</span></button>
-            <button onclick="nameCutInternalWeld()" type="button">⛓<span>Birleştir (Weld)</span></button>
-            <button onclick="nameCutBridgeDots()" type="button">⌘<span>Noktaları Bağla</span></button>
-            <button onclick="runNameCutBreakCheck()" type="button">✓<span>Kontrol Et</span></button>
-            <button onclick="nameCutAiSuggest()" type="button">✦<span>AI Yerleşim Öner</span></button>
-            <button class="export" onclick="prepareNameCutFiles()" type="button">▣<span>Çıktı Al / Dışa Aktar</span></button>
-          </nav>
+          <div class="nc-toolbar" aria-label="Araç çubuğu">
+            <button class="tbtn" onclick="resetNameCutProject()"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Yeni</button>
+            <button class="tbtn" onclick="showNameCutFeatureNotice('Aç')"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9H3z"/></svg>Aç</button>
+            <button class="tbtn" onclick="saveNameCutProject()"><svg viewBox="0 0 24 24"><path d="M5 3h12l3 3v15H5z"/><path d="M8 3v5h7"/></svg>Kaydet</button>
+            <button class="tbtn" onclick="saveNameCutProject(true)"><svg viewBox="0 0 24 24"><path d="M5 3h10l3 3v8M5 21V3"/><path d="M18 17v6M15 20h6"/></svg>Farklı</button>
+            <span class="studio-divider"></span>
+            <button class="tbtn" onclick="openManualNameCutModal()"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Manuel</button>
+            <button class="tbtn" onclick="showSection('bulkLabel')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="14" height="14" rx="2"/><path d="M7 20h14V8"/></svg>Toplu</button>
+            <button class="tbtn" onclick="openNameCutPasteModal()"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4h6v3H9z"/></svg>Yapıştır</button>
+            <span class="studio-divider"></span>
+            <button class="tbtn" onclick="showNameCutFeatureNotice('Geri')"><svg viewBox="0 0 24 24"><path d="M9 7L4 12l5 5"/><path d="M4 12h11a5 5 0 0 1 0 10h-1"/></svg>Geri</button>
+            <button class="tbtn" onclick="showNameCutFeatureNotice('İleri')"><svg viewBox="0 0 24 24"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg>İleri</button>
+            <span class="studio-divider"></span>
+            <!-- DÜZELTME: zoom-out ve zoom-in artık FARKLI ikon -->
+            <button class="tbtn" onclick="nameCutZoom(-10)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8 11h6"/></svg>Uzaklaş</button>
+            <button class="tbtn" onclick="nameCutZoom(10)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg>Yakınlaş</button>
+            <button class="tbtn" onclick="nameCutFitToScreen()"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Sığdır</button>
+            <button class="tbtn" onclick="nameCutSetActualSize()"><svg viewBox="0 0 24 24"><path d="M7 8V6h2v12M14 6h3v12M14 12h3"/></svg>1:1</button>
+            <span class="studio-divider"></span>
+            <button class="tbtn" onclick="toggleNameCutMirror('horizontal')"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M8 7l-4 5 4 5z"/><path d="M16 7l4 5-4 5z"/></svg>Ayna Y</button>
+            <button class="tbtn" onclick="toggleNameCutMirror('vertical')"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M7 8l5-4 5 4z"/><path d="M7 16l5 4 5-4z"/></svg>Ayna D</button>
+            <button class="tbtn" onclick="rotateNameCutSelection(180)"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>Çevir</button>
+            <span class="studio-divider"></span>
+            <button class="tbtn active" onclick="autoNestNameCutItems()"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="6" rx="1"/><rect x="13" y="3" width="8" height="10" rx="1"/><rect x="3" y="11" width="8" height="10" rx="1"/><rect x="13" y="15" width="8" height="6" rx="1"/></svg>Otomatik Diz</button>
+            <button class="tbtn" onclick="nameCutInternalWeld()"><svg viewBox="0 0 24 24"><path d="M9 12a3 3 0 0 1 3-3h2a3 3 0 0 1 0 6h-2"/><path d="M15 12a3 3 0 0 1-3 3h-2a3 3 0 0 1 0-6h2"/></svg>İç Kaynak</button>
+            <button class="tbtn" onclick="nameCutBridgeDots()"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/><path d="M6.5 12h4M13.5 12h4" stroke-dasharray="2 2"/></svg>Köprü</button>
+            <span class="studio-divider"></span>
+            <button class="tbtn" onclick="runNameCutBreakCheck()"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Kopma Kontrol</button>
+            <button class="tbtn export" onclick="nameCutAiSuggest()"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M18 15l.8 1.8L20.5 18l-1.7.7L18 20.5l-.8-1.8L15.5 18l1.7-.7z"/></svg>AI Öneri</button>
+            <button class="btn accent" onclick="prepareNameCutFiles()" style="margin-left:6px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 11l4 4 4-4M5 21h14"/></svg> Lazer Dosyalarını Hazırla</button>
+          </div>
 
-          <div class="name-cut-rd-workspace">
-            <aside class="name-cut-source-panel">
-              <div class="section-mini-head"><b>İsim Kaynağı</b><span>?</span></div>
-              <div class="name-cut-source-actions">
-                <button class="btn primary" onclick="openManualNameCutModal()" type="button">Manuel Ekle</button>
-                <button class="btn" onclick="showSection('bulkLabel')" type="button">Excel’den Al</button>
-                <button class="btn" onclick="openNameCutPasteModal()" type="button">Kopyala / Yapıştır</button>
-                <button class="btn" onclick="sendLaserBulkItemsToNameCutQueue()" type="button">Toplu Üretim’den Al</button>
-                <button class="btn" onclick="openTrendyolSidebarTab('orders')" type="button">Trendyol’dan Al</button>
-                <button class="btn danger-soft" onclick="clearNameCutItems()" type="button">Temizle</button>
+          <div class="nc-body">
+            <aside class="nc-source">
+              <div class="card-title" style="margin-bottom:8px"><h3 style="font-size:14px">Kaynak Listesi</h3></div>
+              <div class="nc-source-actions">
+                <button class="btn small" onclick="openManualNameCutModal()">Manuel Ekle</button>
+                <button class="btn small" onclick="showSection('bulkLabel')">Toplu'dan</button>
+                <button class="btn small" onclick="openNameCutPasteModal()">Yapıştır</button>
+                <button class="btn small" onclick="sendLaserBulkItemsToNameCutQueue()">Kuyruğa</button>
               </div>
-              <div id="nameCutSourceStats" class="name-cut-source-stats"></div>
-              <div id="nameCutSourceList" class="name-cut-source-list"></div>
-              <div id="nameCutTransferHistory" class="name-cut-transfer-history"></div>
-              <div class="name-cut-source-footer">
-                <button class="btn small" onclick="moveSelectedNameCutItem(-1)" type="button">↑ Yukarı</button>
-                <button class="btn small" onclick="moveSelectedNameCutItem(1)" type="button">↓ Aşağı</button>
-                <button class="btn small danger-soft" onclick="deleteSelectedNameCutItem()" type="button">Sil</button>
+              <button class="btn small ghost" onclick="openTrendyolSidebarTab('orders')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h15l-1.5 9H7.5z"/><path d="M6 7L5 3H2"/></svg> Trendyol siparişlerinden çek</button>
+              <div id="nameCutSourceStats" class="status-line" style="margin:6px 0">Liste boş — kaynak ekleyin.</div>
+              <div id="nameCutSourceList" class="compact-list" style="flex:1;min-height:80px"></div>
+              <details><summary style="font-size:13px;font-weight:600;color:var(--text-2);cursor:pointer">Aktarım Geçmişi</summary><div id="nameCutTransferHistory" class="compact-list" style="margin-top:8px"></div></details>
+              <div class="nc-source-foot">
+                <button class="tool-chip" onclick="moveSelectedNameCutItem(-1)" title="Yukarı"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+                <button class="tool-chip" onclick="moveSelectedNameCutItem(1)" title="Aşağı"><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+                <button class="tool-chip danger" onclick="deleteSelectedNameCutItem()" title="Sil"><svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13"/></svg></button>
               </div>
+              <button class="btn small ghost" onclick="clearNameCutItems()">Listeyi Temizle</button>
             </aside>
 
-            <aside class="name-cut-tool-strip" aria-label="Temel araçlar">
-              <button class="active" type="button" title="Seç">⌖<span>Seç</span></button>
-              <button type="button" title="Taşı">✥<span>Taşı</span></button>
-              <button type="button" title="Yazı">T<span>Yazı</span></button>
-              <button type="button" title="Döndür">↻<span>Döndür</span></button>
-              <button type="button" title="Yakınlaştır">⌕<span>Yakınlaştır</span></button>
-              <button type="button" title="Ölçü">⌟<span>Ölçü</span></button>
-              <button type="button" title="Izgara">▦<span>Izgara</span></button>
-              <button type="button" title="Cetvel">╱<span>Cetvel</span></button>
+            <aside class="nc-toolstrip" aria-label="Araçlar">
+              <button class="tbtn active" title="Seç"><svg viewBox="0 0 24 24"><path d="M5 3l7 17 2.5-6.5L21 11z"/></svg></button>
+              <button class="tbtn" title="Taşı"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg></button>
+              <button class="tbtn" title="Yazı"><svg viewBox="0 0 24 24"><path d="M5 5h14M12 5v14M9 19h6"/></svg></button>
+              <button class="tbtn" title="Döndür"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></button>
+              <button class="tbtn" title="Yakınlaştır"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button>
+              <button class="tbtn" title="Ölçü"><svg viewBox="0 0 24 24"><path d="M3 8h18v8H3z"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></svg></button>
+              <button class="tbtn" title="Izgara"><svg viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></button>
+              <button class="tbtn" title="Cetvel"><svg viewBox="0 0 24 24"><path d="M4 16L16 4l4 4L8 20z"/><path d="M8 8l2 2M11 5l2 2M5 11l2 2"/></svg></button>
             </aside>
 
-            <main class="name-cut-board-column">
-              <div class="name-cut-board-title">
-                <b>Çalışma Alanı <span id="nameCutBoardSizeLabel">800.00 mm x 600.00 mm</span></b>
-                <small>Aynı isim içindeki harf/nokta/işaret tek parça; farklı isimler 1 mm boşlukla ayrı kalır.</small>
-              </div>
-              <div id="nameCutStudioLayoutPreview" class="laser-layout-preview name-cut-rd-preview"></div>
-              <details class="name-cut-bottom-details">
-                <summary>Nesne Inspector / Yerleşim Tablosu</summary>
-                <div id="nameCutBottomDetails"></div>
-              </details>
-              <div class="name-cut-layer-strip">
-                <span>Katmanlar</span>
-                <b class="cut"></b><b class="mark"></b><b class="engrave"></b><b class="guide"></b><b class="helper"></b><b class="pink"></b>
-                <span id="nameCutLayerStatus">Seçili Nesne: 0</span>
-                <span id="nameCutAreaStatus">Kullanılan Alan: %0</span>
-                <span id="nameCutPlacedStatus">Yerleşen isim: 0 / 0 · Yerleşen adet: 0 / 0</span>
-                <span id="nameCutTimeStatus">Tahmini Kesim Süresi: 00:00</span>
-              </div>
-            </main>
-
-            <aside class="name-cut-settings-panel">
-              <div class="name-cut-settings-tabs">
-                <button class="active" data-namecut-tab="layout" onclick="selectNameCutSettingsTab('layout')" type="button">Yerleşim</button>
-                <button data-namecut-tab="style" onclick="selectNameCutSettingsTab('style')" type="button">Yazı / Stil</button>
-                <button data-namecut-tab="thickening" onclick="selectNameCutSettingsTab('thickening')" type="button">Kalınlaştırma</button>
-                <button data-namecut-tab="layer" onclick="selectNameCutSettingsTab('layer')" type="button">Katman</button>
-                <button data-namecut-tab="reference" onclick="selectNameCutSettingsTab('reference')" type="button">Referans</button>
-                <button data-namecut-tab="control" onclick="selectNameCutSettingsTab('control')" type="button">Kontrol</button>
-              </div>
-
-              <div class="name-cut-settings-section active" data-namecut-panel="layout">
-                <label>Çalışma alanı en (mm)<input type="number" min="100" max="1800" step="10" value="800" oninput="updateNameCutLayoutConfig('width_mm', this.value)" /></label>
-                <label>Çalışma alanı boy (mm)<input type="number" min="100" max="1200" step="10" value="600" oninput="updateNameCutLayoutConfig('height_mm', this.value)" /></label>
-                <label>Hedef isim genişliği (mm)<input type="number" min="20" max="240" step="1" value="80" oninput="updateNameCutLayoutConfig('target_name_width_mm', this.value)" /></label>
-                <label>Hedef isim yüksekliği (mm)<input type="number" min="10" max="120" step="1" value="40" oninput="updateNameCutLayoutConfig('target_name_height_mm', this.value)" /></label>
-                <label>Başlangıç köşesi<select onchange="updateNameCutLayoutConfig('start_corner', this.value)"><option value="top-left" selected>Sol Üst</option><option value="top-right">Sağ Üst</option><option value="bottom-right">Sağ Alt</option><option value="bottom-left">Sol Alt</option></select></label>
-                <label>Dizilim yönü<select onchange="updateNameCutLayoutConfig('packing_direction', this.value)"><option value="left-to-right" selected>Soldan Sağa, Yukarıdan Aşağıya</option><option value="right-to-left">Sağdan Sola, Yukarıdan Aşağıya</option><option value="top-to-bottom">Yukarıdan Aşağıya, Sonra Yana</option></select></label>
-                <label>Minimum güvenli boşluk<input type="number" min="1" max="3" step="0.1" value="1" oninput="updateNameCutLayoutConfig('item_gap_mm', this.value)" /></label>
-                <label>Kenar boşluğu<input type="number" min="0" max="80" step="1" value="15" oninput="updateNameCutLayoutConfig('margin_mm', this.value)" /></label>
-                <label class="check-row"><input type="checkbox" checked onchange="updateNameCutLayoutConfig('dense_nesting', this.checked)" /> Daha Sıkı Diz (Nesting Modu)</label>
-                <button class="btn primary" onclick="autoNestNameCutItems()" type="button">Otomatik Diz</button>
-              </div>
-
-              <div class="name-cut-settings-section" data-namecut-panel="style">
-                <label>Font<select onchange="updateNameCutLayoutConfig('font_family', this.value)"><option selected>Mochary Use Personal</option><option>Mochary Personal Use Only</option><option>Ceyizhome Lab Script (Mochary)</option><option>Great Vibes</option><option>Parisienne</option><option>Allura</option><option>Alex Brush</option><option>Playfair Display</option></select></label>
-                <div class="name-cut-font-sample">AaBbCcÇçĞğİiÖöŞşÜü</div>
-                <label>Harf aralığı<input type="number" min="-20" max="40" step="1" value="0" oninput="updateNameCutLayoutConfig('letter_spacing', this.value)" /></label>
-                <label class="check-row"><input type="checkbox" checked onchange="updateNameCutLayoutConfig('script_connection_check', this.checked)" /> Script bağlantı kontrolü</label>
-                <button class="btn" onclick="runNameCutBreakCheck()" type="button">Noktalı harf önizleme</button>
-              </div>
-
-              <div class="name-cut-settings-section" data-namecut-panel="thickening">
-                <label>Kalınlaştırma miktarı<input type="number" min="0" max="1.5" step="0.05" value="0.30" oninput="updateNameCutLayoutConfig('offset_mm', this.value)" /></label>
-                <input type="range" min="0" max="1.5" step="0.05" value="0.30" oninput="updateNameCutLayoutConfig('offset_mm', this.value)" />
-                <label>Minimum boğaz kalınlığı<input type="number" min="0.12" max="1.5" step="0.02" value="0.28" oninput="updateNameCutLayoutConfig('min_stroke_mm', this.value)" /></label>
-                <label>Köşe tipi<select onchange="updateNameCutLayoutConfig('corner_type', this.value)"><option>Yuvarlak</option><option>Keskin</option><option>Yumuşak</option></select></label>
-                <label>Offset tipi<select onchange="updateNameCutLayoutConfig('offset_type', this.value)"><option>Dışa kalınlaştır</option><option>Ortadan kalınlaştır</option></select></label>
-                <label class="check-row"><input type="checkbox" checked onchange="updateNameCutLayoutConfig('turkish_mark_bridge', this.checked)" /> Türkçe karakter bağlantı düzeltmesi</label>
-                <label class="check-row"><input type="checkbox" checked onchange="updateNameCutLayoutConfig('dot_bridge_enabled', this.checked)" /> Nokta/işaret gövdeye bağla</label>
-                <p class="safe-note compact">Corel’deki kalınlaştırma mantığı burada üretim öncesi kontrol değerine taşınır. Amaç kopmayı önlemek ve ismi tek parça çıkarmaktır; RDWorks/lazer otomatik başlamaz.</p>
-                <button class="btn" onclick="applyNameCutOffsetToAll()" type="button">Kontrol Değerini Uygula</button>
-                <label class="check-row"><input type="checkbox" checked onchange="updateNameCutLayoutConfig('post_offset_check', this.checked)" /> Kalınlaştırma sonrası kontrol et</label>
-              </div>
-
-              <div class="name-cut-settings-section" data-namecut-panel="layer">
-                <div class="rdworks-layer-legend">
-                  <span><i class="layer-red"></i>Siyah/Kırmızı: Kesim</span>
-                  <span><i class="layer-blue"></i>Mavi: Gravür / yardımcı</span>
-                  <span><i class="layer-green"></i>Yeşil: Kalibrasyon</span>
+            <section class="nc-board">
+              <div class="nc-board-toolbar">
+                <span class="ttl">Lazer Tablası</span>
+                <span class="muted" id="nameCutBoardSizeLabel" style="font-size:12px">600 × 400 mm çalışma alanı</span>
+                <div class="zoom-cluster" style="margin-left:auto" aria-label="Yakınlaştırma">
+                  <!-- nameCutZoom / Fit / ActualSize app.js'te ZATEN var → bu butonlar gerçek de çalışır -->
+                  <button class="zoom-btn" onclick="nameCutZoom(-10)" title="Uzaklaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8 11h6"/></svg></button>
+                  <span class="zoom-readout" id="nameCutScaleReadout">%100</span>
+                  <button class="zoom-btn" onclick="nameCutZoom(10)" title="Yakınlaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg></button>
+                  <span class="studio-divider"></span>
+                  <button class="btn small" onclick="nameCutFitToScreen()">Sığdır</button>
+                  <button class="btn small" onclick="nameCutSetActualSize()">1:1</button>
+                  <button class="zoom-btn" onclick="toggleNameCutFullBoard(this)" title="Yan panelleri gizle — tablayı tam genişlet"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
                 </div>
-                <label>Hız (mm/s)<input type="number" min="1" max="500" value="100" /></label>
-                <label>Güç (%)<input type="number" min="1" max="100" value="30" /></label>
-                <p class="safe-note compact">Speed/power RDWorks dosyasına otomatik yazılmaz; kullanıcı RDWorks içinde manuel kontrol eder.</p>
+              </div>
+              <div class="nc-stage-wrap">
+                <div class="stage-corner"></div>
+                <div class="rule-top"></div>
+                <div class="rule-left"></div>
+                <div class="nc-stage">
+                  <!-- id=nameCutStudioLayoutPreview KORUNDU — app.js bedi/parçaları buraya çizer; ızgaralı tabla -->
+                  <div id="nameCutStudioLayoutPreview" class="nc-artboard" style="width:600px;height:400px">
+                    <div class="ph">
+                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--line-strong)" stroke-width="1.4"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.5 15.5M14 14l6 6"/></svg>
+                      <b>Yerleşim bekleniyor</b>
+                      <span style="font-size:12.5px">Soldan kaynak ekleyin, ardından "Otomatik Diz" ile tablaya yerleştirin.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="nameCutBottomDetails"></div>
+              <div class="nc-layerstrip">
+                <b style="color:var(--text)">Katmanlar:</b>
+                <span><i class="sw" style="background:#7a2e3a"></i>Kesim</span>
+                <span><i class="sw" style="background:var(--accent)"></i>İşaret</span>
+                <span><i class="sw" style="background:var(--info)"></i>Köprü</span>
+                <span style="margin-left:auto">Parça: <b id="nameCutLayerStatus">0</b></span>
+                <span>Alan: <b id="nameCutAreaStatus">0 mm²</b></span>
+                <span>Yerleşen: <b id="nameCutPlacedStatus">0</b></span>
+                <span>Süre: <b id="nameCutTimeStatus">-</b></span>
+              </div>
+            </section>
+
+            <aside class="nc-settings">
+              <div class="nc-tabs" role="tablist" aria-label="Ayarlar">
+                <button class="active" data-namecut-tab="layout" onclick="selectNameCutSettingsTab('layout')">Yerleşim</button>
+                <button data-namecut-tab="style" onclick="selectNameCutSettingsTab('style')">Stil</button>
+                <button data-namecut-tab="thickening" onclick="selectNameCutSettingsTab('thickening')">Kalınlaştır</button>
+                <button data-namecut-tab="layer" onclick="selectNameCutSettingsTab('layer')">Katman</button>
+                <button data-namecut-tab="reference" onclick="selectNameCutSettingsTab('reference')">Referans</button>
+                <button data-namecut-tab="control" onclick="selectNameCutSettingsTab('control')">Kontrol</button>
               </div>
 
-              <div class="name-cut-settings-section" data-namecut-panel="reference">
-                <div id="nameCutCorelReferencePanel"></div>
+              <div class="nc-panel active" data-namecut-panel="layout">
+                <label>Tabla genişliği (mm)<input type="number" value="600" oninput="updateNameCutLayoutConfig()" /></label>
+                <label>Tabla yüksekliği (mm)<input type="number" value="400" oninput="updateNameCutLayoutConfig()" /></label>
+                <label>Parçalar arası boşluk (mm)<input type="number" value="5" step="0.5" oninput="updateNameCutLayoutConfig()" /></label>
+                <label>Kenar payı (mm)<input type="number" value="10" step="0.5" oninput="updateNameCutLayoutConfig()" /></label>
+                <label class="check"><input type="checkbox" checked oninput="updateNameCutLayoutConfig()" /> Otomatik döndürerek sıkıştır</label>
+                <button class="btn primary" style="width:100%" onclick="autoNestNameCutItems()">Otomatik Diz</button>
               </div>
-
-              <div class="name-cut-settings-section" data-namecut-panel="control">
-                <div id="nameCutControlStats"></div>
-                <button class="btn" onclick="runNameCutBreakCheck()" type="button">Ön Kontrol Yap</button>
-                <button class="btn primary" onclick="prepareNameCutFiles()" type="button">Çıktı Oluştur</button>
+              <div class="nc-panel" data-namecut-panel="style">
+                <label>Yazı tipi<select oninput="runNameCutBreakCheck()"><option>Mochary Personal Use Only</option><option>Fraunces</option><option>Great Vibes</option><option>Allura</option></select></label>
+                <div class="nc-font-sample" id="nameCutFontSample">AaBbCcÇçĞğİiÖöŞşÜü</div>
+                <label>Harf yüksekliği (mm)<input type="number" value="40" /></label>
+                <label class="check"><input type="checkbox" checked /> Bağlı yazı (cursive birleştir)</label>
+                <button class="btn" style="width:100%" onclick="runNameCutBreakCheck()">Kopma Riskini Kontrol Et</button>
+              </div>
+              <div class="nc-panel" data-namecut-panel="thickening">
+                <label>İnce harfleri kalınlaştır (offset mm)<input type="range" min="0" max="2" step="0.05" value="0.3" /></label>
+                <p class="safe-note">Lazer kesimde kopmayı önlemek için ince uçları büyütür. 0.3–0.6 mm arası önerilir.</p>
+                <button class="btn primary" style="width:100%" onclick="applyNameCutOffsetToAll()">Tümüne Uygula</button>
+              </div>
+              <div class="nc-panel" data-namecut-panel="layer">
+                <div class="nc-legend">
+                  <span><i style="background:#7a2e3a"></i>Kesim katmanı</span>
+                  <span><i style="background:var(--accent)"></i>İşaret/çizik katmanı</span>
+                  <span><i style="background:var(--info)"></i>Köprü/bridge</span>
+                </div>
+                <label>Kesim hızı (mm/s)<input type="number" value="20" /></label>
+                <label>Güç (%)<input type="number" value="60" /></label>
+                <p class="safe-note">Değerler RDWorks'e otomatik gönderilmez; dosya hazırlanır, makineyi siz başlatırsınız.</p>
+              </div>
+              <div class="nc-panel" data-namecut-panel="reference">
+                <div id="nameCutCorelReferencePanel" class="status-line">Referans (Corel/şablon) görseli bağlandığında burada görünür.</div>
+                <p class="safe-note">Referans yalnızca göz kontrolü içindir; kesime gönderilmez.</p>
+              </div>
+              <div class="nc-panel" data-namecut-panel="control">
+                <div id="nameCutControlStats" class="settings-check-list">
+                  <div class="settings-check ok"><b>Kopma kontrolü</b><span>İnce uç taraması hazır.</span></div>
+                  <div class="settings-check ok"><b>Güvenlik</b><span>Lazer/RDWorks otomatik başlatılmaz.</span></div>
+                </div>
+                <div class="toolbar compact" style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">
+                  <button class="btn" onclick="runNameCutBreakCheck()">Kopma Kontrol</button>
+                  <button class="btn accent" onclick="prepareNameCutFiles()">Dosyaları Hazırla</button>
+                </div>
                 <div id="nameCutStudioExportPanel"></div>
-                <div id="nameCutStudioExportHistory" class="name-cut-export-history"></div>
-                <p id="nameCutStudioExportStatus" class="tiny-status"></p>
+                <details style="margin-top:8px"><summary style="font-size:13px;font-weight:600;color:var(--text-2);cursor:pointer">Dışa Aktarım Geçmişi</summary><div id="nameCutStudioExportHistory" class="compact-list" style="margin-top:8px"></div></details>
+                <div id="nameCutStudioExportStatus" class="tiny-status"></div>
               </div>
             </aside>
           </div>
 
-          <footer class="name-cut-statusbar">
-            <span>Hazır</span>
-            <span id="nameCutCoordinateStatus">X: 0.00 mm, Y: 0.00 mm</span>
-            <span id="nameCutScaleStatus">Ölçek: %100</span>
-            <span>Çalışma Alanı: 800.00 mm x 600.00 mm</span>
-            <span class="safety">RDWorks/lazer otomatik başlamaz</span>
+          <footer class="nc-footer">
+            <span id="nameCutCoordinateStatus">X: 0.0 · Y: 0.0 mm</span>
+            <span id="nameCutScaleStatus">Ölçek: 1:1</span>
+            <span class="safety">Güvenli Mod — lazer otomatik başlamaz</span>
           </footer>
 
-          <div id="nameCutStudioSummaryGrid" class="combined-summary-grid name-cut-studio-summary sr-only"></div>
-          <div id="nameCutStudioGalleryGrid" class="name-cut-gallery-grid sr-only"></div>
-          <aside id="nameCutStudioDetailPanel" class="name-cut-detail-panel card sr-only"></aside>
+          <!-- erişilebilirlik / JS render hedefleri (görünmez) -->
+          <div id="nameCutStudioSummaryGrid" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
+          <div id="nameCutStudioGalleryGrid" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
+          <div id="nameCutStudioDetailPanel" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
         </div>
       </section>
 
@@ -2186,335 +2101,145 @@
       </section>
 
       <section id="label" class="page">
-        <div class="page-head corel-page-head studio-fast-head">
-          <div class="studio-fast-brand">
-            <span id="labelStudioLogo" class="studio-fast-logo">E</span>
-            <div>
-              <h1 id="labelStudioPageTitle" class="page-title">Etiket Studio</h1>
-              <p id="labelStudioPageSubtitle" class="page-subtitle">Tekli etiket tasarımı, önizleme, çıktı ve üretim kuyruğu işlemleri.</p>
-            </div>
-            <span id="labelStudioModeChip" class="studio-fast-mode-chip">Hızlı Üretim</span>
-          </div>
-          <div class="studio-fast-filebar" aria-label="Dosya işlemleri">
-            <button class="studio-action" type="button" onclick="newManualWork()" title="Yeni çalışma"><span>□</span>Yeni</button>
-            <button class="studio-action" type="button" onclick="openManualWork()" title="Kayıtlı çalışma aç"><span>▱</span>Aç</button>
-            <button class="studio-action" type="button" onclick="saveManualWork()" title="Ctrl + S"><span>▣</span>Kaydet</button>
-            <button class="studio-action" type="button" onclick="saveManualWorkAs()" title="Ctrl + Shift + S"><span>▤</span>Farklı Kaydet</button>
-            <span class="corel-divider"></span>
-            <button id="manualUndoButton" class="studio-action icon" onclick="undoManualEdit()" type="button" disabled title="Ctrl + Z"><span>↶</span>Geri</button>
-            <button id="manualRedoButton" class="studio-action icon" onclick="redoManualEdit()" type="button" disabled title="Ctrl + Y"><span>↷</span>İleri</button>
-            <span id="corelSaveState" class="studio-save-state">Yerel taslak</span>
-          </div>
-          <div class="studio-fast-outputbar" aria-label="Çıktı işlemleri">
-            <button class="btn primary" onclick="renderManual()" type="button" title="PDF ve PNG çıktısını güvenli ön kontrolle oluşturur">↗ PDF</button>
-            <button class="btn primary soft" onclick="renderManual()" type="button" title="PNG önizlemesi PDF/PNG üretim sonucu içinde oluşturulur">▧ PNG</button>
-            <button class="btn print-primary" data-manual-requires-output="true" onclick="requestManualPrint()" type="button">▣ Yazdır</button>
-            <button class="btn gold" data-manual-requires-output="true" onclick="renderManualToQueue()" type="button">☷ Sıraya Ekle</button>
-            <button class="btn manual-only-action" data-manual-requires-laser="true" onclick="prepareManualLaserTransfer()" type="button" title="Lazer veya RDWorks başlatmaz; veriyi kontrol eder.">⌁ Lazer Kesime Gönder</button>
-            <button class="btn icon-only" onclick="toggleStudioMoreMenu()" type="button" title="Daha fazla">⋮</button>
-          </div>
-          <div class="studio-mode-switch" aria-label="Etiket Studio kullanım modu" hidden>
-            <button id="studioModeSimpleBtn" class="active" type="button" onclick="setStudioEditorMode('simple')">Hızlı Üretim</button>
-            <button id="studioModeAdvancedBtn" type="button" onclick="setStudioEditorMode('advanced')">Gelişmiş Düzenleme</button>
-          </div>
-        </div>
-        <div class="manual-studio corel-studio">
-          <div class="corel-property-bar corel-production-topbar" aria-label="Etiket Studio hızlı ayar çubuğu">
-            <div class="corel-editor-row studio-text-toolbar">
-              <div class="corel-file-actions compact-icon-set studio-text-toolbar-title" aria-label="Yazı araçları">
-                <b>Yazı / Font</b>
-                <span>Seçili metne uygula</span>
-              </div>
-              <div class="corel-model-title">
-                <strong id="corelTopModelName">Model seçin</strong>
-                <span id="corelStudioModeBadge">Manuel Çalışma</span>
-              </div>
-              <div class="corel-object-controls">
-                <select id="corelToolSelect" class="corel-native-sync-select" onchange="setCorelTool(this.value)" aria-label="Araç seçimi" hidden>
-                  <option value="select">Seçim</option>
-                  <option value="text">Yazı</option>
-                  <option value="hand">El</option>
-                  <option value="zoom">Zoom</option>
-                </select>
-                <div class="studio-combo dock-only-combo" data-select-id="corelToolSelect" data-dock-target="layers" aria-label="Araç seçimi"></div>
-                <label>X <input id="corelX" type="number" step="0.1" onchange="corelApplyGeometry()" /></label>
-                <label>Y <input id="corelY" type="number" step="0.1" onchange="corelApplyGeometry()" /></label>
-                <label>W <input id="corelW" type="number" step="0.1" onchange="corelApplyGeometry()" /></label>
-                <label>H <input id="corelH" type="number" step="0.1" onchange="corelApplyGeometry()" /></label>
-                <button id="corelLockBtn" class="tool-chip icon-only" type="button" onclick="toggleSelectedLayerLock()" title="Katmanı kilitle">🔒</button>
-                <select id="corelFontFamily" class="corel-native-sync-select" onchange="corelApplyTypography()" aria-label="Font" hidden>
-                  <option>Segoe UI</option>
-                  <option>Georgia</option>
-                  <option>Times New Roman</option>
-                  <option>Playfair Display</option>
-                  <option>Great Vibes</option>
-                </select>
-                <div class="studio-combo font-family-combo dock-only-combo" data-select-id="corelFontFamily" data-dock-target="text" aria-label="Font"></div>
-                <select id="corelFontPreset" class="corel-native-sync-select" onchange="applyFontPreset(this.value)" aria-label="Font preset" hidden>
-                  <option value="">Preset</option>
-                  <option value="romantic">Romantik</option>
-                  <option value="luxury">Lüks</option>
-                  <option value="minimal">Minimal</option>
-                  <option value="classic">Klasik</option>
-                  <option value="thin">Zarif</option>
-                  <option value="bold">Kalın</option>
-                  <option value="gold">Gold</option>
-                  <option value="baby">Bebek</option>
-                  <option value="chocolate">Çikolata</option>
-                  <option value="bouquet">Buket</option>
-                </select>
-                <div class="studio-combo preset-combo dock-only-combo" data-select-id="corelFontPreset" data-dock-target="text" aria-label="Font preset"></div>
-                <label class="compact">pt <input id="corelFontSize" type="number" min="5" step="0.1" onchange="corelApplyTypography()" /></label>
-                <input id="corelColor" type="color" value="#111111" onchange="applyColorSwatch(this.value)" title="Yazı rengi" />
-                <button class="tool-chip icon-only" type="button" onclick="toggleCorelTextStyle('bold')" title="Bold"><b>B</b></button>
-                <button class="tool-chip icon-only" type="button" onclick="toggleCorelTextStyle('italic')" title="Italic"><i>I</i></button>
-                <button class="tool-chip icon-only" type="button" onclick="alignSelectedField('left')" title="Sola hizala">≡</button>
-                <button class="tool-chip icon-only" type="button" onclick="alignSelectedField('center-h')" title="Yatay ortala">☰</button>
-                <button class="tool-chip icon-only" type="button" onclick="alignSelectedField('right')" title="Sağa hizala">≣</button>
-                <button class="tool-chip icon-only" type="button" onclick="toggleManualGuide('center')" title="Merkez kılavuzu">#</button>
-                <button class="tool-chip icon-only danger" type="button" onclick="deleteSelectedLayer()" title="Seçili ek yazıyı sil">×</button>
+        <div class="studio-shell">
+          <header class="studio-top">
+            <div class="studio-brand">
+              <span class="studio-logo" id="labelStudioLogo">E</span>
+              <div><h1 id="labelStudioPageTitle">Etiket Studio</h1><p id="labelStudioPageSubtitle">Tekli etiket tasarımı, önizleme, çıktı ve üretim kuyruğu.</p></div>
+              <!-- DÜZELTME: mode toggle artık GÖRÜNÜR (eski 'hidden' kaldırıldı) -->
+              <div class="seg" aria-label="Kullanım modu">
+                <button id="studioModeSimpleBtn" class="active" type="button" onclick="setStudioEditorMode('simple')">Hızlı Üretim</button>
+                <button id="studioModeAdvancedBtn" type="button" onclick="setStudioEditorMode('advanced')">Gelişmiş</button>
               </div>
             </div>
-            <div class="corel-quick-production-row studio-model-size-row" aria-label="Model ve etiket boyutu">
-              <div class="manual-model-dropdown studio-model-control">
-                <label>Model</label>
-                <button id="manualModelSelectButton" class="model-select-button" onclick="toggleManualModelDropdown()" type="button">
-                  <span id="manualSelectedModelName">Model seçin</span>
-                  <small id="manualSelectedModelSize">-</small>
-                </button>
-                <div id="manualModelDropdown" class="manual-model-dropdown-list" hidden></div>
-              </div>
-              <select id="manualTemplate" hidden></select>
-              <button class="btn studio-model-pick" onclick="showSection('labelModels')" type="button">⌘ Model Seç</button>
-              <div class="label-size-panel studio-size-control">
-                <label>Etiket Boyutu
-                  <select id="manualSizePreset" onchange="applyManualSizePreset(this.value)">
-                    <option value="50x30">50 x 30 mm</option>
-                    <option value="60x40">60 x 40 mm</option>
-                    <option value="40x40">40 x 40 mm</option>
-                    <option value="custom">Özel Boyut</option>
-                  </select>
-                </label>
-                <label>Genişlik (mm)<input id="manualWidthMm" type="number" min="10" max="300" step="0.1" oninput="updateManualSizeOverrideFromInputs()" /></label>
-                <label>Yükseklik (mm)<input id="manualHeightMm" type="number" min="10" max="300" step="0.1" oninput="updateManualSizeOverrideFromInputs()" /></label>
-                <label class="studio-lock-size" title="Oranı koru"><input id="manualUseDefaultSize" type="checkbox" checked onchange="toggleManualSizeDefault()" /> 🔒</label>
-                <button class="btn small" onclick="resetManualSizeToDefault()" type="button">Özel Boyut</button>
-              </div>
-              <div id="manualSizeNotice" class="tiny-status"></div>
+            <div class="studio-toolgroup" aria-label="Dosya">
+              <button class="tbtn" onclick="newManualWork()"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M12 11v6M9 14h6"/></svg>Yeni</button>
+              <button class="tbtn" onclick="openManualWork()"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9H3z"/></svg>Aç</button>
+              <button class="tbtn" onclick="saveManualWork()" title="Ctrl+S"><svg viewBox="0 0 24 24"><path d="M5 3h12l3 3v15H5z"/><path d="M8 3v5h7M8 21v-7h8v7"/></svg>Kaydet</button>
+              <button class="tbtn" onclick="saveManualWorkAs()" title="Ctrl+Shift+S"><svg viewBox="0 0 24 24"><path d="M5 3h10l3 3v8M5 21V3"/><path d="M18 17v6M15 20h6"/></svg>Farklı</button>
+              <span class="studio-divider"></span>
+              <button class="tbtn" id="manualUndoButton" onclick="undoManualEdit()" disabled title="Ctrl+Z"><svg viewBox="0 0 24 24"><path d="M9 7L4 12l5 5"/><path d="M4 12h11a5 5 0 0 1 0 10h-1"/></svg>Geri</button>
+              <button class="tbtn" id="manualRedoButton" onclick="redoManualEdit()" disabled title="Ctrl+Y"><svg viewBox="0 0 24 24"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg>İleri</button>
+              <span class="studio-save-state" id="corelSaveState">Yerel taslak</span>
             </div>
+            <div class="studio-outputbar" aria-label="Çıktı">
+              <button class="btn primary" onclick="renderManual()" title="PDF/PNG güvenli ön kontrolle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg> PDF</button>
+              <button class="btn" onclick="renderManual()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5L7 20"/></svg> PNG</button>
+              <button class="btn" data-manual-requires-output="true" onclick="requestManualPrint()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg> Yazdır</button>
+              <button class="btn accent" data-manual-requires-output="true" onclick="renderManualToQueue()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg> Sıraya Ekle</button>
+              <button class="btn" data-manual-requires-laser="true" onclick="prepareManualLaserTransfer()" title="Lazer/RDWorks başlatmaz; veriyi kontrol eder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><circle cx="12" cy="12" r="3"/></svg> Lazer'e Gönder</button>
+              <button class="icon-btn" onclick="toggleStudioMoreMenu()" title="Daha fazla"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+            </div>
+          </header>
+
+          <div class="studio-propbar" aria-label="Yazı / Font">
+            <div class="prop-model"><strong id="corelTopModelName">Model seçin</strong><span id="corelStudioModeBadge">Manuel Çalışma</span></div>
+            <span class="studio-divider"></span>
+            <div class="prop-num">X<input id="corelX" type="number" step="0.1" onchange="corelApplyGeometry()" /></div>
+            <div class="prop-num">Y<input id="corelY" type="number" step="0.1" onchange="corelApplyGeometry()" /></div>
+            <div class="prop-num">W<input id="corelW" type="number" step="0.1" onchange="corelApplyGeometry()" /></div>
+            <div class="prop-num">H<input id="corelH" type="number" step="0.1" onchange="corelApplyGeometry()" /></div>
+            <button class="tool-chip" id="corelLockBtn" onclick="toggleSelectedLayerLock()" title="Katmanı kilitle"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
+            <span class="studio-divider"></span>
+            <div class="prop-num">pt<input id="corelFontSize" type="number" min="5" step="0.1" onchange="corelApplyTypography()" /></div>
+            <input id="corelColor" type="color" value="#111111" onchange="applyColorSwatch(this.value)" title="Yazı rengi" style="width:34px" />
+            <button class="tool-chip" onclick="toggleCorelTextStyle('bold')" title="Kalın"><b>B</b></button>
+            <button class="tool-chip" onclick="toggleCorelTextStyle('italic')" title="İtalik"><i>I</i></button>
+            <span class="studio-divider"></span>
+            <!-- DÜZELTME: hizalama ikonları artık gerçek (eski ≡/☰/≣ = menü/hamburger değil) -->
+            <button class="tool-chip" onclick="alignSelectedField('left')" title="Sola hizala"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"/></svg></button>
+            <button class="tool-chip" onclick="alignSelectedField('center-h')" title="Ortala"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M5 18h14"/></svg></button>
+            <button class="tool-chip" onclick="alignSelectedField('right')" title="Sağa hizala"><svg viewBox="0 0 24 24"><path d="M4 6h16M10 12h10M7 18h13"/></svg></button>
+            <button class="tool-chip" onclick="toggleManualGuide('center')" title="Merkez kılavuzu"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg></button>
+            <button class="tool-chip danger" onclick="deleteSelectedLayer()" title="Seçili yazıyı sil"><svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13"/></svg></button>
           </div>
 
-          <aside class="corel-left-toolbar" aria-label="Etiket Studio araçları">
-            <button class="corel-tool active" type="button" onclick="setCorelTool('select')" data-tool="select"><span>↖</span>Seçim</button>
-            <button class="corel-tool tool-warning" type="button" onclick="setCorelTool('text')" data-tool="text" title="Yeni yazı alanı ekleme bu hızlı üretim ekranında uyarılıdır; ana alanlar İsim, Tarih ve Not olarak bağlıdır."><span>A</span>Yazı</button>
-            <button class="corel-tool tool-disabled" type="button" onclick="addStudioShape()" data-tool="shape" aria-disabled="true" title="Şekil aracı bu hızlı üretim ekranında güvenli çıktı motoruna bağlı değil."><span>⬡</span>Şekil</button>
-            <button class="corel-tool tool-disabled" type="button" onclick="addStudioImage()" data-tool="image" aria-disabled="true" title="Resim aracı bu hızlı üretim ekranında güvenli çıktı motoruna bağlı değil."><span>▧</span>Resim</button>
-            <button class="corel-tool" type="button" onclick="setCorelTool('hand')" data-tool="hand"><span>✋</span>Taşı</button>
-            <button class="corel-tool tool-disabled" type="button" onclick="rotateSelectedStudioField()" data-tool="rotate" aria-disabled="true" title="Döndürme bu hızlı üretim ekranında güvenli çıktı motoruna bağlı değil."><span>⟳</span>Döndür</button>
-            <button class="corel-tool" type="button" onclick="setCorelTool('zoom')" data-tool="zoom"><span>⌕</span>Yakınlaştır</button>
-            <button class="corel-tool" type="button" onclick="toggleManualGuide('center')"><span>⌗</span>Kılavuz</button>
-            <button class="corel-tool" type="button" onclick="toggleManualGuide('safe')"><span>□</span>Güvenli Alan</button>
-          </aside>
+          <div class="studio-modelrow" aria-label="Model ve boyut">
+            <button id="manualModelSelectButton" class="model-select-button" onclick="toggleManualModelDropdown()" type="button">
+              <span id="manualSelectedModelName">Model seçin</span><small id="manualSelectedModelSize">-</small>
+            </button>
+            <div id="manualModelDropdown" class="manual-model-dropdown-list" hidden></div>
+            <select id="manualTemplate" hidden></select>
+            <button class="btn" onclick="showSection('labelModels')" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Model Seç</button>
+            <span class="studio-divider"></span>
+            <label style="flex-direction:row;align-items:center;gap:8px">Boyut
+              <select id="manualSizePreset" onchange="applyManualSizePreset(this.value)" style="width:auto"><option value="50x30">50 × 30 mm</option><option value="60x40">60 × 40 mm</option><option value="40x40">40 × 40 mm</option><option value="custom">Özel</option></select>
+            </label>
+            <div class="prop-num">G<input id="manualWidthMm" type="number" min="10" max="300" step="0.1" oninput="updateManualSizeOverrideFromInputs()" /></div>
+            <div class="prop-num">Y<input id="manualHeightMm" type="number" min="10" max="300" step="0.1" oninput="updateManualSizeOverrideFromInputs()" /></div>
+            <label class="check" title="Oranı koru"><input id="manualUseDefaultSize" type="checkbox" checked onchange="toggleManualSizeDefault()" /> Oranı koru</label>
+            <button class="btn small ghost" onclick="resetManualSizeToDefault()" type="button">Sıfırla</button>
+            <div id="manualSizeNotice" class="tiny-status"></div>
+          </div>
 
-          <aside class="card model-picker" hidden>
-            <div class="card-title"><h3>Model Seç</h3></div>
-            <div id="manualModelGallery" class="manual-gallery"></div>
-          </aside>
+          <div class="studio-body">
+            <aside class="studio-rail" aria-label="Araçlar">
+              <button class="tbtn active" onclick="setCorelTool('select')" data-tool="select"><svg viewBox="0 0 24 24"><path d="M5 3l7 17 2.5-6.5L21 11z"/></svg>Seçim</button>
+              <button class="tbtn" onclick="setCorelTool('text')" data-tool="text"><svg viewBox="0 0 24 24"><path d="M5 5h14M12 5v14M9 19h6"/></svg>Yazı</button>
+              <button class="tbtn" onclick="addStudioShape()" data-tool="shape" aria-disabled="true" disabled title="Hızlı üretimde güvenli motora bağlı değil"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>Şekil</button>
+              <button class="tbtn" onclick="addStudioImage()" data-tool="image" aria-disabled="true" disabled title="Hızlı üretimde güvenli motora bağlı değil"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5L6 21"/></svg>Resim</button>
+              <button class="tbtn" onclick="setCorelTool('hand')" data-tool="hand"><svg viewBox="0 0 24 24"><path d="M8 13V6a1.5 1.5 0 0 1 3 0v5m0-1V5a1.5 1.5 0 0 1 3 0v6m0-1V6a1.5 1.5 0 0 1 3 0v8a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-3a1.6 1.6 0 0 1 2.6-1.8L8 14"/></svg>Taşı</button>
+              <button class="tbtn" onclick="rotateSelectedStudioField()" data-tool="rotate" aria-disabled="true" disabled title="Hızlı üretimde kapalı"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>Döndür</button>
+              <button class="tbtn" onclick="setCorelTool('zoom')" data-tool="zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Zoom</button>
+              <button class="tbtn" onclick="toggleManualGuide('center')"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg>Kılavuz</button>
+              <button class="tbtn" onclick="toggleManualGuide('safe')"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2" stroke-dasharray="3 3"/></svg>Güvenli</button>
+            </aside>
 
-          <section class="card preview-studio corel-canvas-panel">
-            <div class="card-title corel-canvas-title"><h3>Canlı Etiket Alanı</h3><span id="manualZoomLabel">Ekrana sığdır</span></div>
-            <div class="corel-ruler corel-ruler-top"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100 mm</span></div>
-            <div class="corel-canvas-stage">
-              <div class="corel-ruler corel-ruler-left"><span>0</span><span>10</span><span>20</span><span>30 mm</span></div>
-              <div id="manualPreview" class="studio-canvas">Model seçin</div>
-            </div>
-            <div class="toolbar corel-canvas-toolbar">
-              <button class="btn small" onclick="setManualZoom('fit')">Ekrana Sığdır</button>
-              <button class="btn small" onclick="setManualZoom('100')">%100</button>
-              <button class="btn small" onclick="setManualZoom('150')">%150</button>
-              <button class="btn small" onclick="setManualZoom('200')">%200</button>
-              <button class="btn small primary" onclick="renderManualPreview()">Gerçek Render Kontrolü</button>
-            </div>
-            <div class="studio-bottom-palette" aria-label="Hızlı renk paleti">
-              <b>Renk Paleti</b>
-              <button style="--swatch:#000000" onclick="applyColorSwatch('#000000')" type="button" title="Siyah"></button>
-              <button style="--swatch:#5b2d0f" onclick="applyColorSwatch('#5b2d0f')" type="button" title="Kahverengi"></button>
-              <button style="--swatch:#b7791f" onclick="applyColorSwatch('#b7791f')" type="button" title="Gold"></button>
-              <button style="--swatch:#d69e2e" onclick="applyColorSwatch('#d69e2e')" type="button" title="Açık gold"></button>
-              <button style="--swatch:#737373" onclick="applyColorSwatch('#737373')" type="button" title="Gri"></button>
-              <button style="--swatch:#ffffff" onclick="applyColorSwatch('#ffffff')" type="button" title="Beyaz"></button>
-              <button style="--swatch:#991b1b" onclick="applyColorSwatch('#991b1b')" type="button" title="Bordo"></button>
-              <button style="--swatch:#e11d48" onclick="applyColorSwatch('#e11d48')" type="button" title="Pembe"></button>
-              <button style="--swatch:#9333ea" onclick="applyColorSwatch('#9333ea')" type="button" title="Mor"></button>
-              <button style="--swatch:#4f46e5" onclick="applyColorSwatch('#4f46e5')" type="button" title="Indigo"></button>
-              <button style="--swatch:#2563eb" onclick="applyColorSwatch('#2563eb')" type="button" title="Mavi"></button>
-              <button style="--swatch:#059669" onclick="applyColorSwatch('#059669')" type="button" title="Yeşil"></button>
-              <button class="palette-more" onclick="selectCorelDockTab('color')" type="button" title="Detaylı renkler">+</button>
-            </div>
-          </section>
-
-          <aside class="card form-panel corel-inspector">
-            <div class="corel-dock-tabs" role="tablist" aria-label="Etiket Studio dock sekmeleri">
-              <button id="corelDockTabLayers" class="active" type="button" onclick="selectCorelDockTab('layers')">Alanlar</button>
-              <button id="corelDockTabText" type="button" onclick="selectCorelDockTab('text')">Stil</button>
-              <button id="corelDockTabSmart" type="button" onclick="selectCorelDockTab('smart')">Yerleşim</button>
-              <button id="corelDockTabOutput" type="button" onclick="selectCorelDockTab('output')">Çıktı</button>
-              <button id="corelDockTabColor" type="button" onclick="selectCorelDockTab('color')">Ayarlar</button>
-            </div>
-            <section id="corelDockLayers" class="corel-dock-panel active">
-              <div class="studio-right-panel-head">
-                <b>Etikete Yazılacak Alanlar</b>
-                <button class="btn tiny" type="button" onclick="selectCorelDockTab('output')">Çıktı</button>
-              </div>
-              <div class="studio-field-list">
-                <label class="studio-field-row"><span class="drag-grip field-drag-handle">⋮⋮</span><i class="field-type-icon">T</i><span class="field-name">İsim</span><input id="manualText" value="Ayşe & Mehmet" /><button type="button" onclick="toggleBasicFieldVisibility('label_text')" title="Etikette göster/gizle">◉</button><button type="button" onclick="showLabelStudioPassiveNotice('İsim alanı zorunlu üretim alanıdır; silmek yerine etikette gizleyebilirsiniz.')" title="Zorunlu alan">ⓘ</button></label>
-                <label class="studio-field-row"><span class="drag-grip field-drag-handle">⋮⋮</span><i class="field-type-icon">▣</i><span class="field-name">Tarih</span><input id="manualDateText" placeholder="12.05.2026" /><button type="button" onclick="toggleBasicFieldVisibility('date_text')" title="Etikette göster/gizle">◉</button><button type="button" onclick="showLabelStudioPassiveNotice('Tarih alanı zorunlu değildir; boş bırakılabilir veya etikette gizlenebilir.')" title="Alan bilgisi">ⓘ</button></label>
-                <label class="studio-field-row"><span class="drag-grip field-drag-handle">⋮⋮</span><i class="field-type-icon">T</i><span class="field-name">Not</span><input id="manualNoteText" placeholder="Söz Hatırası" /><button type="button" onclick="toggleBasicFieldVisibility('note_text')" title="Etikette göster/gizle">◉</button><button type="button" onclick="showLabelStudioPassiveNotice('Not alanı zorunlu değildir; boş bırakılabilir veya etikette gizlenebilir.')" title="Alan bilgisi">ⓘ</button></label>
-                <label class="studio-field-row"><span class="drag-grip field-drag-handle">⋮⋮</span><i class="field-type-icon">#</i><span class="field-name">Adet</span><input id="manualQty" type="number" min="1" value="1" /><button type="button" title="Adet çıktı sayısını belirler">ⓘ</button><button type="button" onclick="showLabelStudioPassiveNotice('Adet üretim çıktısı için kullanılır; etiket alanı değildir.')" title="Alan bilgisi">ⓘ</button></label>
-                <label class="studio-field-row laser"><span class="drag-grip field-drag-handle">⋮⋮</span><i class="field-type-icon">⌁</i><span class="field-name">Lazer isim</span><input id="manualLaserName" placeholder="Varsa lazer yazısı" /><button type="button" onclick="syncLaserNameFromLabel()" title="İsimden al">↙</button><button type="button" onclick="showLabelStudioPassiveNotice('Bu veri İsim Kesim entegrasyonu için saklanır; bu ekranda lazer veya RDWorks başlatılmaz.')" title="Lazer kesim alanı">ⓘ</button></label>
-              </div>
-              <div class="manual-quick-scenarios" aria-label="Manuel etiket hızlı örnekleri">
-                <b>Hızlı örnek</b>
-                <button type="button" onclick="applyManualQuickScenario('Ayşe & Mehmet')">Ayşe & Mehmet</button>
-                <button type="button" onclick="applyManualQuickScenario('Yağmur & Efe')">Yağmur & Efe</button>
-                <button type="button" onclick="applyManualQuickScenario('Mustafa Kemal & Yağmur')">Mustafa Kemal & Yağmur</button>
-                <button type="button" onclick="applyManualQuickScenario('Abdurrahman & Yağmur')">Abdurrahman & Yağmur</button>
-              </div>
-              <p class="studio-laser-note">Lazer kesim alanına otomatik gönderilir.</p>
-              <details id="manualOutputControlCard" class="studio-output-control-card" open>
-                <summary>
-                  <b>Çıktı ve Kontrol</b>
-                  <span id="manualOutputControlBadge" class="studio-output-badge neutral">Kontrol bekliyor</span>
-                </summary>
-                <div id="manualOutputControlSummary" class="studio-output-control-summary">
-                  PDF/PNG henüz hazırlanmadı. Üretimden önce çıktı kontrolü çalıştırın.
+            <section class="studio-canvas-panel">
+              <div class="canvas-bar">
+                <span class="ttl">Canlı Etiket Alanı</span>
+                <div class="zoom-cluster" aria-label="Yakınlaştırma">
+                  <!-- DÜZELTME: orta alan +/- ile büyüyüp küçülür (RDWorks gibi) -->
+                  <button class="zoom-btn" onclick="setManualZoom('out')" title="Uzaklaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8 11h6"/></svg></button>
+                  <span class="zoom-readout" id="manualZoomLabel">%100</span>
+                  <button class="zoom-btn" onclick="setManualZoom('in')" title="Yakınlaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg></button>
+                  <span class="studio-divider"></span>
+                  <button class="btn small" onclick="setManualZoom('fit')">Sığdır</button>
+                  <button class="btn small" onclick="setManualZoom('100')">%100</button>
+                  <button class="btn small" onclick="setManualZoom('200')">%200</button>
+                  <button class="btn small primary" onclick="renderManualPreview()">Gerçek Render</button>
+                  <button class="zoom-btn" onclick="toggleStudioInspector(this)" title="Yan paneli gizle/göster — alanı genişlet"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></svg></button>
                 </div>
-                <div id="manualOutputControlChecklist" class="studio-output-checklist"></div>
-                <div id="manualOutputControlFiles" class="studio-output-files"></div>
-              </details>
-              <div class="studio-field-actions">
-                <button class="btn wide" onclick="addLabelField('custom')" type="button">↗ Alan Ekle</button>
-                <button class="btn" onclick="resetSelectedField()" type="button">Alanları Sıfırla</button>
-                <button class="btn" onclick="toggleAllBasicFieldsVisibility()" type="button">Etikette Gizle / Göster</button>
               </div>
-              <div class="studio-check-list">
-                <span class="ok">✓ Alanlar tek panelden yönetiliyor</span>
-                <span class="warn">• Çıktı için PDF/PNG ön kontrolü çalıştırın</span>
-                <span class="warn">• Yazıcı otomatik başlatılmaz</span>
-              </div>
-              <details class="studio-technical-details">
-                <summary>Teknik Katmanlar</summary>
-                <div id="manualLayerPanel" class="corel-layer-panel"></div>
-                <div class="label-size-panel studio-size-summary" aria-label="Etiket boyutu özeti">
-                  <b>Etiket Boyutu</b>
-                  <span id="studioSizeSummaryText">50 x 30 mm</span>
+              <div class="stage-wrap">
+                <div class="stage-corner"></div>
+                <div class="rule-top"></div>
+                <div class="rule-left"></div>
+                <div class="canvas-stage">
+                  <!-- id=manualPreview KORUNDU — app.js gerçek render'ı buraya basar; artboard ızgaralı tabla -->
+                  <div id="manualPreview" class="artboard" style="width:520px;height:320px">Model seçin</div>
                 </div>
-              </details>
-            </section>
-            <section id="corelDockText" class="corel-dock-panel">
-            <div class="corel-text-section">
-              <b>Seçili Yazı</b>
-              <div id="manualLiveStatus" class="tiny-status"></div>
-              <div class="toolbar compact-toolbar">
-                <button class="btn small" onclick="resetSelectedField()" type="button">Alanı Sıfırla</button>
-                <button class="btn small ghost" onclick="toggleStudioShortcutHelp()" type="button">Kısayollar</button>
               </div>
-              <div id="manualUndoHistoryView" class="undo-history-view"></div>
-              <div id="studioShortcutHelp" class="studio-shortcut-help" hidden>
-                <b>Hızlı kullanım</b>
-                <span>Yazı alanını sürükleyin; köşeden büyütün, kenardan genişletin.</span>
-                <span>Ok tuşu 0.1 mm, Shift+Ok 1 mm, Alt+Ok 0.05 mm hareket ettirir.</span>
-                <span>Ctrl+Z geri alır, Ctrl+Y veya Ctrl+Shift+Z ileri alır.</span>
+              <div class="studio-palette" aria-label="Renk paleti">
+                <b>Renk</b>
+                <button class="swatch" style="--swatch:#000000" onclick="applyColorSwatch('#000000')" title="Siyah"></button>
+                <button class="swatch" style="--swatch:#5b2d0f" onclick="applyColorSwatch('#5b2d0f')" title="Kahverengi"></button>
+                <button class="swatch" style="--swatch:#a9762d" onclick="applyColorSwatch('#a9762d')" title="Gold"></button>
+                <button class="swatch" style="--swatch:#7a2e3a" onclick="applyColorSwatch('#7a2e3a')" title="Bordo"></button>
+                <button class="swatch" style="--swatch:#737373" onclick="applyColorSwatch('#737373')" title="Gri"></button>
+                <button class="swatch" style="--swatch:#2f8a57" onclick="applyColorSwatch('#2f8a57')" title="Yeşil"></button>
+                <button class="swatch" style="--swatch:#ffffff" onclick="applyColorSwatch('#ffffff')" title="Beyaz"></button>
+                <button class="btn small ghost" onclick="selectCorelDockTab('color')" title="Detaylı renkler">+ Daha fazla</button>
               </div>
-            </div>
-            <div id="manualSelectedFieldPanel" class="manual-selected-field"></div>
-            <div id="manualFontPresetPanel" class="font-preset-panel"></div>
-            <details class="advanced-manual-fields">
-              <summary>Gelişmiş Alanlar</summary>
-              <label>Özel Metin 1</label><input id="manualCustom1" />
-              <label>Özel Metin 2</label><input id="manualCustom2" />
-              <label>Özel Metin 3</label><input id="manualCustom3" />
-            </details>
-            <div id="corelInfoPanel" class="corel-info-panel">Seçili obje yok.</div>
             </section>
-            <section id="corelDockColor" class="corel-dock-panel">
-            <div id="studioOrderInfoPanel" class="studio-order-info-panel"></div>
-            <div id="manualColorPanel" class="corel-color-panel"></div>
-            </section>
-            <section id="corelDockSmart" class="corel-dock-panel">
-            <div class="alignment-panel corel-smart-panel" data-legacy-label="Hızlı Hizalama">
-              <b>Akıllı Düzen</b>
-              <small>Yazıları üretime hazır, dengeli ve güvenli alanda tutun.</small>
-              <div class="button-grid">
-                <button class="btn small align-tool primary" onclick="applySmartLearningLayout()" type="button">Akıllı Otomatik Yerleştir</button>
-                <button class="btn small align-tool" onclick="fitAllManualText()" type="button">Yazıları Sığdır</button>
-                <button class="btn small align-tool" onclick="prepareManualForProduction()" type="button">Üretime Hazırla</button>
-                <button class="btn small align-tool" onclick="moveAllFieldsIntoSafeArea()" type="button">Güvenli Alana Al</button>
-                <button class="btn small" title="Seçili yazıyı etiket merkezine alır" onclick="alignSelectedField('center')" type="button">Etiket Ortası</button>
-                <button class="btn small" onclick="alignSelectedField('center-h')" type="button">Yatay Ortala</button>
-                <button class="btn small" onclick="alignSelectedField('center-v')" type="button">Dikey Ortala</button>
-                <button class="btn small gold" onclick="shrinkSelectedFieldTextToFit()" type="button">Fontu Otomatik Küçült</button>
-                <button class="btn small" onclick="expandSelectedFieldToFit()" type="button">Alanı Genişlet</button>
-                <button class="btn small" onclick="splitSelectedFieldTextLine()" type="button">Satıra Böl</button>
-              </div>
-              <label class="layout-learn-toggle"><input id="manualLearnLayoutToggle" type="checkbox" checked /> Bu düzeni model için öğren</label>
-            </div>
-            <div id="manualLayoutQualityPanel" class="manual-layout-quality-panel"></div>
-            <div id="manualTextFitStatus" class="text-fit-panel" aria-live="polite"></div>
-            <div id="manualFieldNotice"></div>
-            </section>
-            <section id="corelDockOutput" class="corel-dock-panel">
-            <div id="studioEvidencePanel" class="studio-evidence-panel"></div>
-            <div id="manualPreflightStatus" class="preflight-panel" hidden></div>
-            <div class="corel-output-sticky">
-              <b>Çıktı Merkezi</b>
-              <button class="btn wide" onclick="runManualPreflight()" type="button">Çıktı Kontrolü</button>
-              <button class="btn primary wide" title="PDF/PNG Oluştur" onclick="renderManual()">PDF/PNG</button>
-              <button class="btn print-primary wide" data-manual-requires-output="true" onclick="requestManualPrint()" type="button">Yazdır</button>
-              <button class="btn gold wide" data-manual-requires-output="true" title="Yazdırma Sırasına Ekle" onclick="renderManualToQueue()">Sıraya Ekle</button>
-              <div id="manualOutputActions" class="manual-output-actions" hidden></div>
-              <p class="safe-note">Yazıcı otomatik çalışmaz. PDF’i kontrol ettikten sonra manuel yazdırın.</p>
-            </div>
-            </section>
-          </aside>
 
-          <aside id="manualProductionSummaryPanel" class="manual-production-summary-panel" aria-label="Manuel Etiket üretim ve kalite özeti">
-            <div class="manual-summary-head">
-              <span>Üretim ve Kalite Özeti</span>
-              <b>Manuel</b>
-            </div>
-            <div class="manual-summary-preview">
-              <strong id="manualSummaryName">Ayşe & Mehmet</strong>
-              <span id="manualSummaryDate">12.05.2026</span>
-              <em id="manualSummaryNote">Söz Hatırası</em>
-            </div>
-            <div id="manualProductionSummaryRows" class="manual-summary-rows"></div>
-            <div id="manualProductionWarnings" class="manual-production-warnings"></div>
-            <div class="manual-summary-actions">
-              <button class="btn primary wide" type="button" onclick="renderManual()">PDF/PNG Hazırla</button>
-              <button class="btn gold wide" data-manual-requires-output="true" type="button" onclick="renderManualToQueue()">Yazdırma Sırasına Gönder</button>
-              <button class="btn wide" data-manual-requires-laser="true" type="button" onclick="prepareManualLaserTransfer()">Lazer Kesime Gönder</button>
-            </div>
-            <p class="safe-note">Yazıcı, lazer ve RDWorks otomatik başlamaz. Bu panel sadece üretim verisini ve güvenli çıktı durumunu gösterir.</p>
-          </aside>
-
-          <section class="corel-bottom-panel">
-            <div class="corel-bottom-card compact-status-card">
-              <b>Studio Durumu</b>
-              <span>Seçili obje, canvas ve çıktı bilgileri alttaki status bar’da izlenir.</span>
-            </div>
-          </section>
-          <div class="corel-statusbar">
-            <span id="corelStatusText">Ctrl + S Kaydet</span>
-            <span>Ctrl + Z Geri Al</span>
-            <span>Ctrl + Y İleri Al</span>
-            <span>Delete Sil</span>
-            <span>Esc Seçimi Kaldır</span>
-            <span id="corelSnapState">Güvenli alan açık</span>
-            <span id="corelCanvasSize">Model boyutu: -</span>
-            <span>Çözünürlük: 300 DPI</span>
-            <span id="corelStatusZoom">Zoom: Ekrana sığdır</span>
-            <span id="corelSelectedObject">Seçili: -</span>
+            <aside class="studio-inspector">
+              <div class="dock-tabs" role="tablist" aria-label="Dock">
+                <button id="corelDockTabLayers" class="active" onclick="selectCorelDockTab('layers')">Alanlar</button>
+                <button id="corelDockTabText" onclick="selectCorelDockTab('text')">Stil</button>
+                <button id="corelDockTabSmart" onclick="selectCorelDockTab('smart')">Yerleşim</button>
+                <button id="corelDockTabOutput" onclick="selectCorelDockTab('output')">Çıktı</button>
+                <button id="corelDockTabColor" onclick="selectCorelDockTab('color')">Ayarlar</button>
+              </div>
+              <div class="dock-body">
+                <h3 style="font-size:14px;margin-bottom:12px">Etikete Yazılacak Alanlar</h3>
+                <div class="field-row"><span class="ico">İ</span><div class="fl"><small>İsim</small><input value="Ayşe & Mehmet" /></div></div>
+                <div class="field-row"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span><div class="fl"><small>Tarih</small><input value="12.05.2026" /></div></div>
+                <div class="field-row"><span class="ico">N</span><div class="fl"><small>Not</small><input value="Söz Hatırası" /></div></div>
+                <div class="field-row"><span class="ico">#</span><div class="fl"><small>Adet</small><input type="number" value="1" /></div></div>
+                <p class="safe-note">Lazer kesim alanına otomatik gönderilir. Çıktıdan önce "Gerçek Render Kontrolü" çalıştırın.</p>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
@@ -2631,38 +2356,28 @@
       </section>
 
       <section id="trendyolOrders" class="page">
-        <div class="page-head trendyol-ref-head">
-          <div class="trendyol-ref-title">
-            <span class="trendyol-ref-icon" aria-hidden="true">▣</span>
-            <div>
-              <h1 class="page-title">Trendyol Siparişleri</h1>
-              <p class="page-subtitle">AI destekli kişiselleştirme alanı inceleme ve üretime aktarım</p>
-            </div>
+        <div class="page-head">
+          <div><h1 class="page-title">Trendyol Siparişleri</h1><p class="page-subtitle">AI destekli kişiselleştirme alanı inceleme ve üretime aktarım.</p></div>
+          <div class="toolbar">
+            <input id="trendyolTopSearch" placeholder="Sipariş, ürün, müşteri ara..." oninput="syncTrendyolTopFilters()" style="min-width:220px" />
+            <select id="trendyolTopStatusFilter" onchange="syncTrendyolTopFilters()" style="width:auto"><option value="">Durum: Tümü</option><option value="verification_pending">Onay bekliyor</option><option value="ready">Üretime hazır</option><option value="review">Kontrol gerekli</option><option value="unmatched">Eşleşmeyen</option><option value="question_context">Soru bağlı</option></select>
+            <select id="trendyolTopDateFilter" onchange="syncTrendyolTopDateFilter()" style="width:auto"><option value="7">Son 7 gün</option><option value="2">Son 48 saat</option></select>
+            <button class="btn" onclick="testTrendyolConnection()">Bağlantıyı Test Et</button>
+            <button class="btn" onclick="syncTrendyolQuestions()">Soruları Oku</button>
+            <button class="btn primary" onclick="syncTrendyolOrders(Number(document.getElementById('trendyolTopDateFilter')?.value||7))">Son 7 Günü Çek</button>
           </div>
-          <div class="toolbar trendyol-ref-toolbar">
-            <input id="trendyolTopSearch" placeholder="Sipariş, ürün, müşteri ara..." oninput="syncTrendyolTopFilters()" />
-            <select id="trendyolTopStatusFilter" onchange="syncTrendyolTopFilters()">
-              <option value="">Durum: Tümü</option>
-              <option value="verification_pending">Durum: Onay bekliyor</option>
-              <option value="ready">Durum: Üretime hazır</option>
-              <option value="review">Durum: Kontrol gerekli</option>
-              <option value="unmatched">Durum: Eşleşmeyen</option>
-              <option value="question_context">Durum: Soru bağlı</option>
-              <option value="marketplace_processable">Durum: Trendyol işlem</option>
-            </select>
-            <select id="trendyolTopDateFilter" onchange="syncTrendyolTopDateFilter()">
-              <option value="7">Tarih: Son 7 gün</option>
-              <option value="2">Tarih: Son 48 saat</option>
-            </select>
-          <button class="btn trendyol-icon-btn" type="button" onclick="syncTrendyolTopFilters()" title="Filtreleri uygula">⌁</button>
-          <button class="btn" onclick="testTrendyolConnection()">Bağlantıyı Test Et</button>
-          <button class="btn" onclick="syncTrendyolQuestions()">Soruları Oku</button>
-          <button class="btn primary" onclick="syncTrendyolOrders(Number(document.getElementById('trendyolTopDateFilter')?.value || 7))">Son 7 Günü Çek</button>
-        </div>
         </div>
         <div id="trendyolStatus" class="status-line" hidden></div>
+        <div class="readonly-banner"><span class="readonly-badge">Read-only mode</span><span>Eksik credential</span><span>Son sync: <b id="trendyolLastSyncAtTop">-</b></span><span>Canlı statü/kargo/fatura tetiklenmez</span></div>
         <div id="trendyolReadonlySyncStrip" class="trendyol-readonly-sync-strip"></div>
-        <div id="trendyolSummary" class="trendyol-summary-grid"></div>
+        <div id="trendyolSummary" class="trendyol-summary-grid">
+          <div class="tysum"><small><span class="dot" style="background:var(--muted)"></span>Toplam</small><b>0</b></div>
+          <div class="tysum"><small><span class="dot" style="background:var(--ok)"></span>Üretime hazır</small><b>0</b></div>
+          <div class="tysum"><small><span class="dot" style="background:var(--warn)"></span>Kontrol gerekli</small><b>0</b></div>
+          <div class="tysum"><small><span class="dot" style="background:var(--danger)"></span>Eşleşmeyen</small><b>0</b></div>
+          <div class="tysum"><small><span class="dot" style="background:var(--info)"></span>Soru bağlı</small><b>0</b></div>
+          <div class="tysum"><small><span class="dot" style="background:var(--accent)"></span>Üretime aktarıldı</small><b>0</b></div>
+        </div>
         <div class="trendyol-tabs" role="tablist" aria-label="Trendyol çalışma alanı">
           <button class="trendyol-tab active" data-trendyol-tab="orders" onclick="showTrendyolTab('orders')">Siparişler</button>
           <button class="trendyol-tab" data-trendyol-tab="worklist" onclick="showTrendyolTab('worklist')">Kontrol Kuyruğu</button>
@@ -2670,150 +2385,91 @@
           <button class="trendyol-tab" data-trendyol-tab="questions" onclick="showTrendyolTab('questions')">Kanıt Eşleştirme</button>
           <button class="trendyol-tab" data-trendyol-tab="history" onclick="showTrendyolTab('history')">Aktarım Geçmişi</button>
         </div>
+
         <div id="trendyolTabOrders" class="trendyol-tab-panel active">
-        <div class="trendyol-layout">
-          <div class="trendyol-main">
-            <article class="card">
-              <div class="card-title">
-                <h3>Üretim Operasyon Listesi</h3>
-                <span id="trendyolSuggestionCount">0 satır</span>
-              </div>
-              <div id="trendyolQuickFilters" class="trendyol-status-tabs"></div>
-              <div class="order-filter-bar">
-                <input id="trendyolSearch" placeholder="Sipariş no, müşteri, ürün, barkod ara..." oninput="scheduleTrendyolOrdersUpdate()" />
-                <select id="trendyolStatusFilter" onchange="updateTrendyolOrders(currentState.trendyol || {})">
-                  <option value="">Tüm durumlar</option>
-                  <option value="ready">Üretime hazır</option>
-                  <option value="review">Kontrol gerekli</option>
-                  <option value="unmatched">Eşleşmeyen ürünler</option>
-                  <option value="low_confidence">Düşük güven</option>
-                  <option value="question_waiting">Kanıt bekliyor</option>
-                  <option value="verification_pending">Onay bekliyor</option>
-                  <option value="question_context">Soru bağlı</option>
-                  <option value="imported">Aktarıldı</option>
-                  <option value="marketplace_processable">Trendyol’da işleme alınabilir</option>
-                </select>
-                <button class="btn small" onclick="clearTrendyolFilters()">Filtreleri Temizle</button>
-                <button class="btn small trendyol-sort-btn" type="button">Sırala: Güncel</button>
-              </div>
-              <div id="trendyolBulkActionBar" class="trendyol-bulk-action-bar" hidden></div>
-              <div id="trendyolSuggestionsList" class="trendyol-suggestion-list"></div>
-            </article>
-          </div>
-          <div class="trendyol-legacy-detail" hidden>
-            <span id="trendyolDetailStatus">Siparişten üretime</span>
-            <div id="trendyolSelectedDetail" class="trendyol-selected-detail"></div>
-          </div>
-        </div>
-        </div>
-        <div id="trendyolTabWorklist" class="trendyol-tab-panel">
           <article class="card">
-            <div class="card-title">
-              <h3>Kontrol Kuyruğu</h3>
-              <span>Kanıt, isim, güven ve medya kontrolleri</span>
+            <div class="card-title"><h3>Üretim Operasyon Listesi</h3><span id="trendyolSuggestionCount">0 satır</span></div>
+            <div id="trendyolQuickFilters" class="trendyol-status-tabs"></div>
+            <div class="order-filter-bar">
+              <input id="trendyolSearch" placeholder="Sipariş no, müşteri, ürün, barkod ara..." oninput="scheduleTrendyolOrdersUpdate()" />
+              <select id="trendyolStatusFilter" onchange="updateTrendyolOrders(currentState.trendyol||{})" style="width:auto"><option value="">Tüm durumlar</option><option value="ready">Üretime hazır</option><option value="review">Kontrol gerekli</option><option value="unmatched">Eşleşmeyen ürünler</option><option value="low_confidence">Düşük güven</option><option value="question_waiting">Kanıt bekliyor</option><option value="verification_pending">Onay bekliyor</option><option value="imported">Aktarıldı</option></select>
+              <button class="btn small ghost" onclick="clearTrendyolFilters()">Filtreleri Temizle</button>
+              <button class="btn small" type="button">Sırala: Güncel</button>
             </div>
-            <div id="trendyolOperatorWorklist" class="trendyol-operator-worklist"></div>
+            <div id="trendyolBulkActionBar" class="trendyol-bulk-action-bar" hidden></div>
+            <div id="trendyolSuggestionsList" class="trendyol-suggestion-list">
+              <div class="ty-empty"><b>Henüz Trendyol siparişi çekilmedi.</b><p>API ayarlarını kaydedip "Son 48 Saati Çek" ile sipariş önerilerini oluşturun. Secret değerleri ekranda gösterilmez.</p></div>
+            </div>
           </article>
         </div>
+
+        <div id="trendyolTabWorklist" class="trendyol-tab-panel">
+          <article class="card"><div class="card-title"><h3>Kontrol Kuyruğu</h3><span>Kanıt, isim, güven ve medya kontrolleri</span></div><div id="trendyolOperatorWorklist" class="trendyol-operator-worklist"></div></article>
+        </div>
+
         <div id="trendyolTabMapping" class="trendyol-tab-panel">
           <div class="trendyol-workspace-grid">
-            <article class="card trendyol-mapping-priority-card">
-              <div class="card-title"><h3>Öncelikli Eşleşmeyen Ürünler</h3><span>En çok siparişi açacak ürünler</span></div>
-              <div id="trendyolMappingPriorityList" class="compact-list"></div>
-            </article>
-            <article class="card trendyol-mapping-card">
+            <article class="card"><div class="card-title"><h3>Öncelikli Eşleşmeyen Ürünler</h3><span>En çok siparişi açacak ürünler</span></div><div id="trendyolMappingPriorityList" class="compact-list"></div></article>
+            <article class="card">
               <div class="card-title"><h3>Ürün Eşleştirme</h3><span>Barkod/SKU öncelikli</span></div>
               <div class="trendyol-mapping-editor">
-                <section class="trendyol-product-focus">
-                  <div id="trendyolMappingImagePreview" class="trendyol-product-preview wide"></div>
-                  <label class="wide">Ürün adı<input id="trendyolMapProductName" /></label>
-                  <div class="trendyol-code-grid">
-                    <label>Barkod<input id="trendyolMapBarcode" /></label>
-                    <label>Merchant SKU<input id="trendyolMapMerchantSku" /></label>
-                    <label>Stock Code<input id="trendyolMapStockCode" /></label>
-                  </div>
-                  <label class="wide">Ürün görseli URL<input id="trendyolMapImageUrl" placeholder="https://..." oninput="updateTrendyolMappingPreview()" /></label>
-                </section>
-                <section class="trendyol-production-decision">
-                  <label>Üretim tipi<select id="trendyolMapProductionType">
-                    <option value="label">Etiket</option>
-                    <option value="name_cut">İsim kesim</option>
-                    <option value="label_and_name_cut">Etiket + isim kesim</option>
-                    <option value="none">Üretim yok</option>
-                    <option value="review">Kontrol gerekli</option>
-                  </select></label>
-                  <label>Etiket modeli<select id="trendyolMapModelPath"></select></label>
-                  <label>İsim kesim stili<input id="trendyolMapNameCutStyle" placeholder="Mochary Personal Use Only" /></label>
-                  <label>İsim genişliği mm<input id="trendyolMapNameCutWidth" type="number" min="20" step="1" placeholder="300" /></label>
-                  <div class="toolbar trend-action-stack">
-                    <button class="btn primary" onclick="saveTrendyolMapping()">Eşleştirmeyi Kaydet</button>
-                    <button class="btn" onclick="saveTrendyolMapping(true)">Kaydet ve Siparişe Dön</button>
-                    <button class="btn gold" onclick="proposeTrendyolMappingsFromCatalog()">Katalogdan Öneri Üret</button>
-                    <button class="btn" onclick="importTrendyolMappings()">Excel/CSV İçe Al</button>
-                    <button class="btn" onclick="exportTrendyolMappings()">Excel Dışa Aktar</button>
-                  </div>
-                </section>
+                <div id="trendyolMappingImagePreview" class="trendyol-product-preview">Ürün görseli</div>
+                <label>Ürün adı<input id="trendyolMapProductName" /></label>
+                <div class="trendyol-code-grid"><label>Barkod<input id="trendyolMapBarcode" /></label><label>Merchant SKU<input id="trendyolMapMerchantSku" /></label><label>Stock Code<input id="trendyolMapStockCode" /></label></div>
+                <label>Ürün görseli URL<input id="trendyolMapImageUrl" placeholder="https://..." oninput="updateTrendyolMappingPreview()" /></label>
+                <label>Üretim tipi<select id="trendyolMapProductionType"><option value="label">Etiket</option><option value="name_cut">İsim kesim</option><option value="label_and_name_cut">Etiket + isim kesim</option><option value="none">Üretim yok</option><option value="review">Kontrol gerekli</option></select></label>
+                <label>Etiket modeli<select id="trendyolMapModelPath"></select></label>
+                <label>İsim kesim stili<input id="trendyolMapNameCutStyle" placeholder="Mochary Personal Use Only" /></label>
+                <label>İsim genişliği mm<input id="trendyolMapNameCutWidth" type="number" min="20" step="1" placeholder="300" /></label>
+                <div class="toolbar trend-action-stack">
+                  <button class="btn primary" onclick="saveTrendyolMapping()">Eşleştirmeyi Kaydet</button>
+                  <button class="btn" onclick="saveTrendyolMapping(true)">Kaydet ve Siparişe Dön</button>
+                  <button class="btn accent" onclick="proposeTrendyolMappingsFromCatalog()">Katalogdan Öneri Üret</button>
+                  <button class="btn" onclick="importTrendyolMappings()">Excel/CSV İçe Al</button>
+                  <button class="btn" onclick="exportTrendyolMappings()">Excel Dışa Aktar</button>
+                </div>
               </div>
             </article>
             <article class="card">
               <div class="card-title"><h3>Katalog Önerileri</h3><span>Kullanıcı onayı gerekir</span></div>
               <div class="order-filter-bar compact">
                 <input id="trendyolMappingSearch" placeholder="Ürün, barkod veya SKU ara..." oninput="renderTrendyolMappingSuggestions(trendYolMappingSuggestions())" />
-                <select id="trendyolMappingTypeFilter" onchange="renderTrendyolMappingSuggestions(trendYolMappingSuggestions())">
-                  <option value="">Tüm üretim tipleri</option>
-                  <option value="label">Etiket</option>
-                  <option value="name_cut">İsim kesim</option>
-                  <option value="label_and_name_cut">Etiket + isim kesim</option>
-                  <option value="review">Kontrol gerekli</option>
-                  <option value="none">Üretim yok</option>
-                </select>
-                <select id="trendyolMappingSuggestionStatusFilter" onchange="renderTrendyolMappingSuggestions(trendYolMappingSuggestions())">
-                  <option value="">Tüm öneriler</option>
-                  <option value="needs_review">Kontrol gereken</option>
-                  <option value="suggested">Güvenli öneri</option>
-                </select>
-                <button class="btn small" onclick="clearTrendyolMappingSuggestionFilters()">Temizle</button>
+                <select id="trendyolMappingTypeFilter" onchange="renderTrendyolMappingSuggestions(trendYolMappingSuggestions())" style="width:auto"><option value="">Tüm üretim tipleri</option><option value="label">Etiket</option><option value="name_cut">İsim kesim</option><option value="review">Kontrol gerekli</option></select>
+                <select id="trendyolMappingSuggestionStatusFilter" onchange="renderTrendyolMappingSuggestions(trendYolMappingSuggestions())" style="width:auto"><option value="">Tüm öneriler</option><option value="needs_review">Kontrol gereken</option><option value="suggested">Güvenli öneri</option></select>
+                <button class="btn small ghost" onclick="clearTrendyolMappingSuggestionFilters()">Temizle</button>
                 <span id="trendyolMappingSuggestionCount" class="muted-count">0 öneri</span>
               </div>
               <div id="trendyolMappingSuggestionsList" class="compact-list"></div>
             </article>
-            <article class="card">
-              <div class="card-title"><h3>Kayıtlı Eşleştirmeler</h3><span>Tekrarlı ürünleri otomatik tanır</span></div>
-              <div id="trendyolMappingsList" class="compact-list"></div>
-            </article>
+            <article class="card"><div class="card-title"><h3>Kayıtlı Eşleştirmeler</h3><span>Tekrarlı ürünleri otomatik tanır</span></div><div id="trendyolMappingsList" class="compact-list"></div></article>
           </div>
         </div>
+
         <div id="trendyolTabQuestions" class="trendyol-tab-panel">
-          <article class="card">
-            <div class="card-title"><h3>Kanıt Eşleştirme</h3><span>Read-only, otomatik cevap yok</span></div>
+          <article class="card"><div class="card-title"><h3>Kanıt Eşleştirme</h3><span>Read-only, otomatik cevap yok</span></div>
             <p class="muted-note">Bağlanmamış veya şüpheli müşteri mesajlarını doğru siparişe bağlayın. AI öneri yapar; kullanıcı onayı olmadan fiziksel üretim başlamaz.</p>
             <div id="trendyolQuestionsList" class="compact-list trendyol-questions-board"></div>
           </article>
         </div>
+
         <div id="trendyolTabHistory" class="trendyol-tab-panel">
-          <article class="card">
-            <div class="card-title"><h3>Aktarım Geçmişi</h3><span>Excel ve sipariş aktarımı</span></div>
-            <div id="trendyolTransferHistory" class="compact-list"></div>
-          </article>
+          <article class="card"><div class="card-title"><h3>Aktarım Geçmişi</h3><span>Excel ve sipariş aktarımı</span></div><div id="trendyolTransferHistory" class="compact-list"></div></article>
         </div>
       </section>
 
       <section id="customerOrders" class="page">
         <div class="page-head">
-          <div>
-            <h1 class="page-title">Müşteri Siparişleri</h1>
-            <p class="page-subtitle">Müşteri bilgilerini kaydedin, doğru modeli seçin ve siparişi güvenli üretim akışına taşıyın.</p>
-          </div>
+          <div><h1 class="page-title">Müşteri Siparişleri</h1><p class="page-subtitle">Müşteri bilgilerini kaydedin, doğru modeli seçin ve siparişi güvenli üretim akışına taşıyın.</p></div>
           <div class="toolbar">
             <button class="btn" onclick="resetCustomerOrderForm()">Formu Temizle</button>
             <button class="btn primary" onclick="createCustomerOrderFromForm()">Siparişi Kaydet</button>
           </div>
         </div>
         <div class="orders-layout">
-          <article class="card order-form-card">
+          <article class="card">
             <div class="card-title"><h3>Yeni Sipariş</h3><span>Teknik detay gösterilmez</span></div>
             <div class="order-form-grid">
-              <label>Müşteri adı<input id="orderCustomerName" placeholder="Ayşe & Mehmet" /></label>
+              <label>Müşteri adı<input id="orderCustomerName" placeholder="Ayşe &amp; Mehmet" /></label>
               <label>Telefon<input id="orderPhone" placeholder="05xx xxx xx xx" /></label>
               <label>Etkinlik tarihi<input id="orderEventDate" type="date" /></label>
               <label>Teslim tarihi<input id="orderDeliveryDate" type="date" /></label>
@@ -2825,139 +2481,141 @@
             </div>
             <div id="customerOrderStatus" class="status-line" hidden></div>
           </article>
-          <article class="card order-list-card">
+          <article class="card">
             <div class="card-title"><h3>Sipariş Listesi</h3><span id="customerOrderCount">0 sipariş</span></div>
             <div class="order-filter-bar">
               <input id="customerOrderSearch" placeholder="Müşteri, telefon veya model ara..." oninput="updateCustomerOrders(currentState.customerOrders || [])" />
-              <select id="customerOrderStatusFilter" onchange="updateCustomerOrders(currentState.customerOrders || [])">
-                <option value="">Tüm durumlar</option>
-                <option>Yeni</option>
-                <option>Hazır</option>
-                <option>Sırada</option>
-                <option>Yazdırıldı</option>
-                <option>Teslim edildi</option>
-                <option>Kontrol gerekli</option>
-              </select>
-              <select id="customerOrderPaymentFilter" onchange="updateCustomerOrders(currentState.customerOrders || [])">
-                <option value="">Tüm ödemeler</option>
-                <option>Belirtilmedi</option>
-                <option>Kapora alındı</option>
-                <option>Ödendi</option>
-                <option>Bekliyor</option>
-              </select>
-              <button class="btn small" onclick="clearCustomerOrderFilters()">Filtreleri Temizle</button>
+              <select id="customerOrderStatusFilter" onchange="updateCustomerOrders(currentState.customerOrders || [])"><option value="">Tüm durumlar</option><option>Yeni</option><option>Hazır</option><option>Sırada</option><option>Yazdırıldı</option><option>Teslim edildi</option><option>Kontrol gerekli</option></select>
+              <select id="customerOrderPaymentFilter" onchange="updateCustomerOrders(currentState.customerOrders || [])"><option value="">Tüm ödemeler</option><option>Belirtilmedi</option><option>Kapora alındı</option><option>Ödendi</option><option>Bekliyor</option></select>
+              <button class="btn small ghost" onclick="clearCustomerOrderFilters()">Filtreleri Temizle</button>
             </div>
-            <div id="customerOrdersList" class="customer-orders-list"></div>
+            <div id="customerOrdersList" class="customer-orders-list">
+              <div class="list-empty"><b>Henüz sipariş yok.</b><p>Müşteri bilgisini kaydedin; ardından siparişten Studio'ya geçip üretimi başlatabilirsiniz.</p></div>
+            </div>
           </article>
         </div>
       </section>
 
       <section id="printQueue" class="page">
-        <div class="page-head print-queue-head">
+        <div class="page-head">
           <div>
             <h1 class="page-title">Yazdırma Sırası</h1>
-            <p class="page-subtitle">Hazırlanan etiket işlerini kontrol edin, PDF’i açın, yazdırın veya sıradan kaldırın. Otomatik yazdırma yoktur. Yazıcı otomatik çalışmaz.</p>
+            <p class="page-subtitle">Hazırlanan etiket işlerini kontrol edin, PDF'i açın, yazdırın veya sıradan kaldırın. Otomatik yazdırma yoktur; yazıcı otomatik çalışmaz.</p>
           </div>
-          <div class="toolbar print-queue-top-actions">
+          <div class="toolbar">
+            <label class="check"><input id="queuePendingOnlyToggle" type="checkbox" onchange="refreshPrintQueueFilters()" /> Sadece Bekleyenler</label>
+            <label class="check"><input id="queueHidePrintedToggle" type="checkbox" onchange="refreshPrintQueueFilters()" /> Yazdırılanları Gizle</label>
             <button class="btn" onclick="refreshState()">Yenile</button>
             <button id="clearQueueButton" class="btn danger-soft" onclick="confirmClearPrintQueue()">Sırayı Temizle</button>
-            <label class="queue-toggle"><input id="queuePendingOnlyToggle" type="checkbox" onchange="refreshPrintQueueFilters()" /> Sadece Bekleyenler</label>
-            <label class="queue-toggle"><input id="queueHidePrintedToggle" type="checkbox" onchange="refreshPrintQueueFilters()" /> Yazdırılanları Gizle</label>
           </div>
         </div>
+
         <div class="print-safety-banner">
-          <span>⚠</span>
+          <svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg>
           <b>Yazıcı otomatik çalışmaz.</b>
-          <p>PDF’i kontrol ettikten sonra manuel olarak yazdırın. Yazdır butonu sadece kullanıcı onaylı PDF açma akışını başlatır.</p>
+          <span>PDF'i kontrol ettikten sonra manuel yazdırın. "Yazdır" yalnızca kullanıcı onaylı PDF açma akışını başlatır.</span>
         </div>
-        <div class="queue-summary premium-queue-summary">
-          <div class="queue-stat next"><small>Sıradaki İş</small><b id="queueNext">-</b><span id="queueNextMeta">Sırada iş yok</span></div>
-          <div class="queue-stat total"><small>Toplam İş</small><b id="queueTotalJobs">0</b><span>Tüm kuyruk</span></div>
-          <div class="queue-stat total"><small>Toplam Adet</small><b id="queueQty">0</b><span>Üretim adedi</span></div>
+
+        <div class="queue-summary">
+          <div class="queue-stat next"><small>Sıradaki İş</small><b id="queueNext">—</b><span id="queueNextMeta">Sırada iş yok</span></div>
+          <div class="queue-stat"><small>Toplam İş</small><b id="queueTotalJobs">0</b><span>Tüm kuyruk</span></div>
+          <div class="queue-stat"><small>Toplam Adet</small><b id="queueQty">0</b><span>Üretim adedi</span></div>
           <div class="queue-stat pending"><small>Bekleyen</small><b id="queuePending">0</b><span>Yazdırılacak</span></div>
           <div class="queue-stat printed"><small>Yazdırıldı</small><b id="queuePrinted">0</b><span>Tamamlanan</span></div>
           <div class="queue-stat review"><small>Kontrol Gerekli</small><b id="queueReview">0</b><span>Dikkat isteyen</span></div>
         </div>
-        <div id="printQueueLayout" class="print-queue-layout">
-          <div class="print-queue-main">
+
+        <div class="queue-layout">
+          <div class="queue-main">
+
+            <!-- DURUM CHIP'LERİ (dropdown yerine görünür) -->
+            <div class="queue-status-chips" role="tablist" aria-label="Durum filtresi">
+              <button class="queue-chip active" data-status="all" onclick="setQueueStatus('all',this)">Tümü</button>
+              <button class="queue-chip" data-status="pending" onclick="setQueueStatus('pending',this)">Yazdırmaya hazır</button>
+              <button class="queue-chip" data-status="waiting_output" onclick="setQueueStatus('waiting_output',this)">Çıktı bekliyor</button>
+              <button class="queue-chip" data-status="output_ready" onclick="setQueueStatus('output_ready',this)">Çıktı hazır</button>
+              <button class="queue-chip" data-status="printed" onclick="setQueueStatus('printed',this)">Yazdırıldı</button>
+              <button class="queue-chip" data-status="review" onclick="setQueueStatus('review',this)">Kontrol gerekli</button>
+              <button class="queue-chip" data-status="blocked" onclick="setQueueStatus('blocked',this)">Üretime Engel</button>
+              <button class="queue-chip" data-status="failed" onclick="setQueueStatus('failed',this)">Hatalı</button>
+              <button class="queue-chip" data-status="cancelled" onclick="setQueueStatus('cancelled',this)">İptal</button>
+            </div>
+            <!-- JS UYUMU: mevcut select DOM'da gizli kalır; chip'ler bunu sürer -->
+            <select id="queueStatusFilter" onchange="refreshPrintQueueFilters()" hidden>
+              <option value="all">Durum: Tümü</option><option value="pending">Yazdırmaya hazır</option>
+              <option value="waiting_output">Çıktı bekliyor</option><option value="output_ready">Çıktı hazır</option>
+              <option value="printed">Yazdırıldı</option><option value="review">Kontrol gerekli</option>
+              <option value="blocked">Üretime Engel</option><option value="failed">Hatalı</option><option value="cancelled">İptal edildi</option>
+            </select>
+
             <div class="queue-filter-bar">
               <input id="queueSearch" type="search" placeholder="Model, isim, dosya adı ara..." oninput="refreshPrintQueueFilters()" />
-                <select id="queueStatusFilter" onchange="refreshPrintQueueFilters()">
-                  <option value="all">Durum: Tümü</option>
-                  <option value="pending">Yazdırmaya hazır</option>
-                  <option value="waiting_output">Çıktı bekliyor</option>
-                  <option value="output_ready">Çıktı hazır</option>
-                  <option value="printed">Yazdırıldı</option>
-                  <option value="review">Kontrol gerekli</option>
-                  <option value="blocked">Üretime Engel</option>
-                  <option value="failed">Hatalı</option>
-                  <option value="cancelled">İptal edildi</option>
-                </select>
               <select id="queueTypeFilter" onchange="refreshPrintQueueFilters()" aria-label="Tip / Kaynak">
-                <option value="all">Tip / Kaynak: Tümü</option>
-                <option value="etiket_studio">Etiket Studio</option>
-                <option value="manual_label">Manuel Etiket</option>
-                <option value="trendyol">Trendyol</option>
-                <option value="bulk_production">Toplu Üretim</option>
-                <option value="laser">Lazer</option>
-                <option value="legacy">Eski kayıt</option>
+                <option value="all">Tip / Kaynak: Tümü</option><option value="etiket_studio">Etiket Studio</option>
+                <option value="manual_label">Manuel Etiket</option><option value="trendyol">Trendyol</option>
+                <option value="bulk_production">Toplu Üretim</option><option value="laser">Lazer</option><option value="legacy">Eski kayıt</option>
               </select>
               <select id="queueDateFilter" onchange="refreshPrintQueueFilters()">
-                <option value="all">Tarih: Tümü</option>
-                <option value="today">Bugün</option>
-                <option value="last7">Son 7 gün</option>
+                <option value="all">Tarih: Tümü</option><option value="today">Bugün</option><option value="last7">Son 7 gün</option>
               </select>
               <select id="queueSortFilter" onchange="refreshPrintQueueFilters()">
-                <option value="created">Sıralama: Sıraya eklenme</option>
-                <option value="model">Model adı</option>
-                <option value="quantity">Adet</option>
-                <option value="status">Durum</option>
+                <option value="created">Sıralama: Sıraya eklenme</option><option value="model">Model adı</option>
+                <option value="quantity">Adet</option><option value="status">Durum</option>
               </select>
-              <button class="btn small" onclick="clearPrintQueueFilters()">Filtreleri Temizle</button>
+              <button class="btn small ghost" onclick="clearPrintQueueFilters()">Filtreleri Temizle</button>
             </div>
-            <div class="queue-bulk-actions">
-              <div class="queue-bulk-select">
-                <label><input id="queueSelectAll" type="checkbox" onchange="toggleAllPrintQueueSelection(this.checked)" /> Tümünü Seç</label>
-                <span id="queueSelectedCount">0 seçili</span>
-                <small id="queueSelectedSummary">Önce en az bir iş seçin.</small>
+
+            <!-- TOPLU EYLEMLER: 3 birincil + "Daha fazla ▾" -->
+            <div class="queue-bulk-bar">
+              <label class="check"><input id="queueSelectAll" type="checkbox" onchange="toggleAllPrintQueueSelection(this.checked)" /> Tümünü Seç</label>
+              <span class="queue-sel-count"><b id="queueSelectedCount">0 seçili</b><small id="queueSelectedSummary">Önce en az bir iş seçin.</small></span>
+              <div class="queue-bulk-actions">
+                <button id="queueBulkOpenPdfs" class="btn small" title="Seçili işlerin PDF dosyalarını sırayla açar." onclick="openSelectedQueuePdfs()">PDF'leri Aç</button>
+                <button id="queueBulkPrint" class="btn small primary" title="Güvenli yazdırma akışını başlatır. Yazıcı otomatik çalışmaz." onclick="printSelectedQueueItems()">Yazdır</button>
+                <button id="queueBulkPrinted" class="btn small success-soft" onclick="markSelectedQueuePrinted()">Yazdırıldı İşaretle</button>
+                <details class="bulk-more">
+                  <summary class="btn small">Daha fazla ▾</summary>
+                  <div class="bulk-more-panel">
+                    <button class="btn small ghost" onclick="selectReadyPrintQueueItems()">Hazır Olanları Seç</button>
+                    <button id="queueBulkDelivered" class="btn small success-soft" onclick="markSelectedQueueDelivered()">Teslim Et</button>
+                    <button class="btn small ghost" onclick="showPrintQueueReviewItems()">Kontrol Gerekenleri Göster</button>
+                    <button class="btn small ghost" onclick="showPrintQueueBlockedItems()">Hatalıları Göster</button>
+                    <button class="btn small ghost" onclick="showPrintQueueBatchFilterNotice()">Batch'e Göre Filtrele</button>
+                    <hr />
+                    <button id="queueBulkRemove" class="btn small danger-soft" onclick="removeSelectedQueueItems()">Seçilenleri Sıradan Kaldır</button>
+                    <label class="check"><input id="queueTestArchiveToggle" type="checkbox" onchange="refreshPrintQueueFilters()" /> Test/QA Arşivi</label>
+                  </div>
+                </details>
               </div>
-              <div class="queue-bulk-action-group">
-                  <button id="queueBulkOpenPdfs" class="btn small" title="Seçili işlerin PDF dosyalarını sırayla açar." onclick="openSelectedQueuePdfs()">PDF’leri Aç</button>
-                  <button id="queueBulkPrint" class="btn small" title="Seçili işler için güvenli yazdırma akışını başlatır. Yazıcı otomatik çalışmaz." onclick="printSelectedQueueItems()">Yazdır</button>
-                  <button class="btn small" onclick="selectReadyPrintQueueItems()">Hazır Olanları Seç</button>
-                  <button class="btn small" onclick="showPrintQueueReviewItems()">Kontrol Gerekenleri Göster</button>
-                  <button class="btn small" onclick="showPrintQueueBlockedItems()">Hatalıları Göster</button>
-                  <button id="queueBulkPrinted" class="btn small success-soft" onclick="markSelectedQueuePrinted()">Yazdırıldı İşaretle</button>
-                  <button id="queueBulkDelivered" class="btn small success-soft" onclick="markSelectedQueueDelivered()">Teslim Et</button>
-                  <button class="btn small" onclick="showPrintQueueBatchFilterNotice()">Batch’e Göre Filtrele</button>
-                </div>
-              <button id="queueBulkRemove" class="btn small danger-soft queue-bulk-danger" onclick="removeSelectedQueueItems()">Seçilenleri Sıradan Kaldır</button>
-              <label class="queue-toggle small"><input id="queueTestArchiveToggle" type="checkbox" onchange="refreshPrintQueueFilters()" /> Test/QA Arşivi</label>
             </div>
+
             <div class="queue-table-head" aria-hidden="true">
-              <span>Sıra</span><span>Önizleme</span><span>İş Bilgileri</span><span>Dosya & Detay</span><span>Durum & Kalite</span><span>Aksiyonlar</span>
+              <span>Sıra</span><span>Önizleme</span><span>İş Bilgileri</span><span>Dosya &amp; Detay</span><span>Durum &amp; Kalite</span><span>Aksiyonlar</span>
             </div>
-            <div id="printQueueList" class="queue-table"></div>
+            <div id="printQueueList" class="queue-table">
+              <!-- ÖNİZLEME boş durumu; gerçekte app.js satırları doldurur -->
+              <div class="queue-empty">
+                <svg viewBox="0 0 24 24"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg>
+                <b>Yazdırma sırasında bekleyen iş yok.</b>
+                <p>Etiket Studio veya Toplu Etiket'ten çıktı oluşturup "Yazdırma Sırasına Ekle" diyebilirsiniz.</p>
+                <div class="toolbar"><button class="btn primary" onclick="showSection('label')">Etiket Studio'ya Git</button><button class="btn" onclick="showSection('bulkLabel')">Toplu Etiket'e Git</button></div>
+              </div>
+            </div>
           </div>
+
           <aside id="queueDetailPanel" class="card queue-detail-panel">
             <div class="card-title">
               <h3>Seçili İş Detayı</h3>
               <div class="queue-detail-title-actions">
-                <span id="queueDetailBadge" class="status-pill muted">Seçim yok</span>
-                <button id="queueDetailToggle" class="btn icon queue-detail-toggle" type="button" onclick="togglePrintQueueDetailPanel()" title="Paneli Gizle" aria-label="Paneli Gizle">‹</button>
+                <span id="queueDetailBadge" class="status-pill">Seçim yok</span>
+                <button id="queueDetailToggle" class="icon-btn" type="button" onclick="togglePrintQueueDetailPanel()" title="Paneli Gizle" aria-label="Paneli Gizle"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
               </div>
             </div>
-            <button id="queueDetailRail" class="queue-detail-rail" type="button" onclick="togglePrintQueueDetailPanel(true)" title="Detayı Göster" aria-label="Detayı Göster">
-              <span>Detay</span>
-              <b id="queueDetailRailBadge">Seçim yok</b>
-            </button>
-            <div id="queueDetailPreview" class="queue-detail-preview empty">
-              <b>Listeden bir iş seçin.</b>
-              <span>PDF/PNG önizlemesi burada görünecek.</span>
-            </div>
-            <div id="queueDetailInfo" class="queue-detail-info"></div>
-            <div id="queueDetailStatus" class="queue-detail-status"></div>
-            <div id="queueDetailActions" class="queue-detail-actions"></div>
+            <button id="queueDetailRail" class="queue-detail-rail" type="button" onclick="togglePrintQueueDetailPanel(true)" title="Detayı Göster"><span>Detay</span><b id="queueDetailRailBadge">Seçim yok</b></button>
+            <div id="queueDetailPreview" class="queue-detail-preview"><b>Listeden bir iş seçin.</b><span>PDF/PNG önizlemesi burada görünecek.</span></div>
+            <div id="queueDetailInfo"></div>
+            <div id="queueDetailStatus"></div>
+            <div id="queueDetailActions"></div>
           </aside>
         </div>
       </section>
@@ -3149,21 +2807,19 @@
       </section>
 
       <section id="reports" class="page">
-        <div class="page-head"><div><h1 class="page-title">Raporlar</h1><p class="page-subtitle">Kritik hata, kontrol gerekenler ve günlük kayıtları sade şekilde görünür.</p></div></div>
-        <div id="kpi-band" class="kpi-band" style="display:none;">
-          <div id="kpi-today" class="kpi-card"></div>
-          <div id="kpi-week" class="kpi-card"></div>
-          <div id="kpi-top3" class="kpi-card"></div>
-          <div id="kpi-preflight" class="kpi-card"></div>
-          <div id="kpi-queue" class="kpi-card"></div>
+        <div class="page-head">
+          <div><h1 class="page-title">Raporlar</h1><p class="page-subtitle">Kritik hata, kontrol gerekenler ve günlük kayıtları sade şekilde görünür.</p></div>
+          <div class="toolbar">
+            <!-- YENİ: Bugün/Hafta/Ay tarih aralığı -->
+            <div class="report-range" role="tablist" aria-label="Tarih aralığı">
+              <button class="rng active" onclick="setReportRange('today',this)">Bugün</button>
+              <button class="rng" onclick="setReportRange('week',this)">Bu Hafta</button>
+              <button class="rng" onclick="setReportRange('month',this)">Bu Ay</button>
+            </div>
+          </div>
         </div>
-        <div id="kpi-band" class="kpi-band" style="display:none;">
-          <div id="kpi-today" class="kpi-card"></div>
-          <div id="kpi-week" class="kpi-card"></div>
-          <div id="kpi-top3" class="kpi-card"></div>
-          <div id="kpi-preflight" class="kpi-card"></div>
-          <div id="kpi-queue" class="kpi-card"></div>
-        </div>
+        <!-- DÜZELTME: eski 3 kopya kpi-band → TEK blok (geçersiz çift ID bug'ı giderildi).
+             display:none mantığı korundu; app.js dolduruyor. -->
         <div id="kpi-band" class="kpi-band" style="display:none;">
           <div id="kpi-today" class="kpi-card"></div>
           <div id="kpi-week" class="kpi-card"></div>
@@ -3172,41 +2828,30 @@
           <div id="kpi-queue" class="kpi-card"></div>
         </div>
         <div id="reportSummaryCards" class="report-summary-cards"></div>
-        <div class="report-tabs">
-          <button class="btn" onclick="selectReport('summary')">Özet</button>
-          <button class="btn" onclick="selectReport('errors')">Kritik Hatalar</button>
-          <button class="btn" onclick="selectReport('review')">Kontrol Gerekenler</button>
-          <button class="btn" onclick="selectReport('labels')">Etiket Çıktıları</button>
-          <button class="btn" onclick="selectReport('release')">Release Dashboard</button>
-          <button class="btn" onclick="selectReport('log')">Günlük</button>
+        <div class="report-tabs" role="tablist" aria-label="Rapor bölümleri">
+          <button class="btn active" onclick="selectReport('summary');setReportTab(this)">Özet</button>
+          <button class="btn" onclick="selectReport('errors');setReportTab(this)">Kritik Hatalar</button>
+          <button class="btn" onclick="selectReport('review');setReportTab(this)">Kontrol Gerekenler</button>
+          <button class="btn" onclick="selectReport('labels');setReportTab(this)">Etiket Çıktıları</button>
+          <button class="btn" onclick="selectReport('release');setReportTab(this)">Release Dashboard</button>
+          <button class="btn" onclick="selectReport('log');setReportTab(this)">Günlük</button>
         </div>
         <div id="reportBox" class="report-box">Rapor yükleniyor.</div>
       </section>
 
       <section id="settings" class="page">
         <div class="page-head">
-          <div>
-            <h1 class="page-title">Ayarlar ve Güvenlik</h1>
-            <p class="page-subtitle">Etiket ölçüsü, rulo yerleşimi, çıktı klasörleri ve güvenli yazdırma ayarları.</p>
-          </div>
-          <div class="toolbar">
-            <button class="btn" onclick="bridge.create_calibration_pdf()">Kalibrasyon PDF Oluştur</button>
-            <button class="btn primary" onclick="saveSettingsFromCenter()">Ayarları Kaydet</button>
-          </div>
+          <div><h1 class="page-title">Ayarlar ve Güvenlik</h1><p class="page-subtitle">Etiket ölçüsü, rulo yerleşimi, çıktı klasörleri ve güvenli yazdırma ayarları.</p></div>
+          <div class="toolbar"><button class="btn" onclick="bridge.create_calibration_pdf()">Kalibrasyon PDF Oluştur</button><button class="btn primary" onclick="saveSettingsFromCenter()">Ayarları Kaydet</button></div>
         </div>
-        <!-- Ayarlar iç navigasyon -->
+        <!-- İÇ NAVİGASYON: tamamlandı (DXF + Entegrasyonlar + Teknik eklendi) + sticky -->
         <nav class="settings-inner-nav" aria-label="Ayarlar bölümleri">
-          <a href="#s-genel">Genel</a>
-          <a href="#s-rulo">Rulo</a>
-          <a href="#s-font">Font</a>
-          <a href="#s-cikti">Çıktı</a>
-          <a href="#s-yedek">Yedekleme</a>
-          <a href="#s-bakimi">Veri Bakımı</a>
-          <a href="#s-guvenlik">Güvenlik</a>
-          <a href="#s-entegrasyon">Entegrasyon</a>
-          <a href="#s-yazici">Yazıcı</a>
+          <a href="#s-genel">Genel</a><a href="#s-rulo">Rulo</a><a href="#s-font">Font</a><a href="#s-cikti">Çıktı</a>
+          <a href="#s-yedek">Yedekleme</a><a href="#s-dxf">DXF Kütüphane</a><a href="#s-guvenlik">Güvenlik</a>
+          <a href="#s-entegrasyon">Entegrasyon</a><a href="#s-yazici">Yazıcı</a><a href="#s-trendyol-api">Trendyol API</a><a href="#s-teknik">Teknik</a>
         </nav>
-        <div id="settingsSafetyStrip" class="settings-safety-strip"></div>
+        <div id="settingsSafetyStrip" class="settings-safety-strip"><span>Güvenli Mod: Aktif</span><span>Direct Print: Kapalı</span><span>Yazıcı otomatik çalışmaz</span><span>Yazdır: kullanıcı onaylı PDF açar</span><span>Lazer otomatik başlamaz</span></div>
+
         <div class="settings-center-layout">
           <article id="s-genel" class="card settings-wide-card" data-settings-panel="general">
             <div class="card-title"><h3>Genel ve Etiket Ölçüleri</h3><span>Studio varsayılanı</span></div>
@@ -3220,91 +2865,58 @@
               <label>Güvenli alan mm<input id="settingsSafeMarginMm" type="number" min="0" step="0.1" /></label>
               <label>Ölçek %<input id="settingsScalePercent" type="number" min="1" step="0.1" /></label>
             </div>
-            <div class="toolbar compact">
-              <button class="btn" onclick="resetSettingsFormToState()">Mevcut Ayarı Yükle</button>
-              <button class="btn ghost" onclick="showSection('label')">Etiket Studio’da Kullan</button>
-            </div>
+            <div class="toolbar compact"><button class="btn" onclick="resetSettingsFormToState()">Mevcut Ayarı Yükle</button><button class="btn ghost" onclick="showSection('label')">Etiket Studio'da Kullan</button></div>
             <div id="settingsSaveStatus" class="settings-save-status"></div>
           </article>
-          <article id="s-rulo" class="card">
-            <div class="card-title"><h3>Rulo Ayarları</h3><span>Yerleşim kontrolü</span></div>
-            <div class="settings-form-grid compact">
-              <label>Rulo genişliği mm<input id="settingsRollWidthMm" type="number" min="1" step="0.1" /></label>
-              <label>Etiket aralığı mm<input id="settingsRollGapMm" type="number" min="0" step="0.1" /></label>
-            </div>
-            <div id="settingsRollSummary" class="settings-roll-preview"></div>
+
+          <article id="s-rulo" class="card"><div class="card-title"><h3>Rulo Ayarları</h3><span>Yerleşim kontrolü</span></div>
+            <div class="settings-form-grid compact"><label>Rulo genişliği mm<input id="settingsRollWidthMm" type="number" min="1" step="0.1" /></label><label>Etiket aralığı mm<input id="settingsRollGapMm" type="number" min="0" step="0.1" /></label></div>
+            <div id="settingsRollSummary"></div>
           </article>
-          <article id="s-font" class="card">
-            <div class="card-title"><h3>Font ve Renk</h3><span>Normal kullanıcı ayarı</span></div>
-            <div id="settingsFontColorInfo" class="settings-check-list"></div>
-          </article>
-          <article id="s-cikti" class="card">
-            <div class="card-title"><h3>Çıktı Klasörleri</h3><span>Güvenli proje içi yollar</span></div>
-            <div id="settingsOutputFolders" class="settings-check-list"></div>
-          </article>
-          <article id="s-yedek" class="card">
-            <div class="card-title"><h3>Yedekleme ve Geri Alma</h3><span>Değişiklik öncesi backup</span></div>
-            <div id="settingsBackupInfo" class="settings-backup-info"></div>
-          </article>
-          <article id="s-bakimi" class="card data-maintenance-card" data-settings-panel="data-maintenance">
-            <div class="card-title"><h3>Veri Bakımı</h3><span>JSON persistence yedekleme / geri yükleme</span></div>
+
+          <article id="s-font" class="card"><div class="card-title"><h3>Font ve Renk</h3><span>Normal kullanıcı ayarı</span></div><div id="settingsFontColorInfo" class="settings-check-list"></div></article>
+
+          <article id="s-cikti" class="card"><div class="card-title"><h3>Çıktı Klasörleri</h3><span>Güvenli proje içi yollar</span></div><div id="settingsOutputFolders" class="settings-check-list"></div></article>
+
+          <!-- BİRLEŞTİRİLDİ: Yedekleme + Veri Bakımı tek kart -->
+          <article id="s-yedek" class="card settings-wide-card" data-settings-panel="data-maintenance">
+            <div class="card-title"><h3>Yedekleme &amp; Veri Bakımı</h3><span>Değişiklik öncesi backup · JSON yedekle/geri yükle</span></div>
             <div id="dataMaintenanceStatus" class="status-line ok" hidden></div>
+            <div id="settingsBackupInfo" class="settings-backup-info"></div>
             <div class="settings-check-list">
-              <div class="settings-check ok"><b>Kapsam</b><span>İsim Kesim kuyruğu/geçmişi, yazdırma kuyruğu, sipariş geçmişi/audit, Trendyol mapping/AI cache/sorular, Corel referans kütüphanesi, yazıcı profilleri, settings.yaml — Trendyol API credential'ları güvenlik için yedeklenmez</span></div>
-              <div class="settings-check ok"><b>Restore güvenliği</b><span>Önce dry-run, sonra otomatik snapshot</span></div>
-              <div class="settings-check ok"><b>Canlı işlem</b><span>Yazıcı, lazer, RDWorks ve Trendyol tetiklenmez</span></div>
+              <div class="settings-check ok"><b>Restore güvenliği</b><span>Önce dry-run, sonra otomatik snapshot.</span></div>
+              <div class="settings-check ok"><b>Canlı işlem</b><span>Yazıcı, lazer, RDWorks ve Trendyol tetiklenmez.</span></div>
             </div>
-            <div class="toolbar compact">
-              <button class="btn primary" onclick="createDataBackup()">Yedek Oluştur</button>
-              <button class="btn" onclick="refreshDataBackups()">Yedekleri Listele</button>
-              <button class="btn" onclick="validateSelectedDataBackup()">Yedek Doğrula</button>
-              <button class="btn" onclick="previewSelectedDataRestore()">Geri Yükleme Önizle</button>
-              <button class="btn danger-soft" onclick="restoreSelectedDataBackup()">Geri Yükle</button>
-            </div>
+            <div class="toolbar compact"><button class="btn primary" onclick="createDataBackup()">Yedek Oluştur</button><button class="btn" onclick="refreshDataBackups()">Yedekleri Listele</button><button class="btn" onclick="validateSelectedDataBackup()">Yedek Doğrula</button><button class="btn" onclick="previewSelectedDataRestore()">Geri Yükleme Önizle</button><button class="btn danger-soft" onclick="restoreSelectedDataBackup()">Geri Yükle</button></div>
             <div id="dataBackupList" class="data-backup-list"></div>
             <div id="dataRestorePreview" class="data-restore-preview"></div>
-            <p class="safe-note">Proje dışından restore engellenir. Bozuk JSON veya checksum hatası restore edilmez. Geri yüklemeden önce otomatik snapshot alınır.</p>
+            <p class="safe-note">Proje dışından restore engellenir. Bozuk JSON / checksum hatası restore edilmez. Geri yüklemeden önce otomatik snapshot alınır.</p>
           </article>
-          <article class="card dxf-library-card" data-settings-panel="dxf-library">
+
+          <article id="s-dxf" class="card settings-wide-card" data-settings-panel="dxf-library">
             <div class="card-title"><h3>DXF Kütüphane</h3><span>Leyla'nın elinden çıkan isim kesim DXF'leri</span></div>
             <div id="dxfLibraryStatus" class="status-line ok" hidden></div>
             <div class="settings-check-list">
               <div class="settings-check ok"><b>Klasör yapısı</b><span><code>assets/dxf_library/70x40/</code> · <code>80x40/</code> · <code>100x40/</code></span></div>
-              <div class="settings-check ok"><b>Dosya adı kuralı</b><span>Yalnızca küçük harf + rakam + alt çizgi. Örnek: <code>mucahit.dxf</code> · <code>ayse_mehmet.dxf</code>. Türkçe karakterli dosya isimleri reddedilir.</span></div>
-              <div class="settings-check ok"><b>Algoritma</b><span>Yok. Sistem sadece arşiv ve eşleştirme yapar. Eski jeneratif algoritmalar default kapalı (geri-alınabilir).</span></div>
-              <div class="settings-check ok"><b>Operatör onayı</b><span>Lookup başarılı olsa bile fiziksel yazdırma/lazer operatör onayı ister (CLAUDE.md).</span></div>
+              <div class="settings-check ok"><b>Dosya adı kuralı</b><span>Yalnızca küçük harf + rakam + alt çizgi. Türkçe karakterli dosya isimleri reddedilir.</span></div>
             </div>
-            <div class="toolbar compact">
-              <button class="btn primary" onclick="refreshDxfLibrary()">Kütüphaneyi Tara</button>
-              <button class="btn" id="dxfLibraryWatcherBtn" onclick="toggleDxfLibraryWatcher()">Otomatik İzlemeyi Başlat</button>
-              <input id="dxfLibrarySearchInput" type="text" placeholder="İsim ara…" oninput="renderDxfLibraryList()" />
-            </div>
+            <div class="toolbar compact"><button class="btn primary" onclick="refreshDxfLibrary()">Kütüphaneyi Tara</button><button class="btn" id="dxfLibraryWatcherBtn" onclick="toggleDxfLibraryWatcher()">Otomatik İzlemeyi Başlat</button><input id="dxfLibrarySearchInput" type="text" placeholder="İsim ara…" oninput="renderDxfLibraryList()" style="max-width:220px" /></div>
             <div id="dxfLibrarySummary" class="dxf-library-summary"></div>
             <div id="dxfLibraryList" class="dxf-library-list"></div>
-            <p class="safe-note">Leyla bir ismi <code>assets/dxf_library/&lt;boyut&gt;/</code> altına atınca otomatik izleme açıksa kütüphane güncellenir. Manuel tarama her zaman çalışır.</p>
           </article>
-          <article id="s-guvenlik" class="card">
-            <div class="card-title"><h3>Güvenlik</h3><span>Koruma aktif</span></div>
-            <div id="settingsSecurityList" class="settings-check-list"></div>
-            <p class="safe-note">Yazıcı otomatik çalışmaz. PDF’i kontrol ettikten sonra manuel yazdırın.</p>
-          </article>
-          <article id="s-entegrasyon" class="card live-integration-security-card" data-settings-panel="other-integrations">
-            <div class="card-title"><h3>Entegrasyon Güvenliği</h3><span>Dry-run guard</span></div>
+
+          <article id="s-guvenlik" class="card"><div class="card-title"><h3>Güvenlik</h3><span>Koruma aktif</span></div><div id="settingsSecurityList" class="settings-check-list"></div><p class="safe-note">Yazıcı otomatik çalışmaz. PDF'i kontrol ettikten sonra manuel yazdırın.</p></article>
+
+          <article id="s-entegrasyon" class="card" data-settings-panel="other-integrations"><div class="card-title"><h3>Entegrasyon Güvenliği</h3><span>Dry-run guard</span></div>
             <div id="liveIntegrationSecurityStatus" class="status-line warn">Canlı entegrasyon bağlı değil. Dry-run modunda.</div>
             <div id="liveIntegrationSecurityGrid" class="settings-check-list"></div>
-            <div class="toolbar compact">
-              <button class="btn primary" onclick="saveLiveIntegrationSecuritySettings()">Güvenli Modu Kaydet</button>
-              <button class="btn" onclick="openIntegrationDryRunModal('trendyol_status_update', { source: 'settings', title: 'Trendyol statü dry-run' })">Trendyol Statü Dry-run</button>
-              <button class="btn" onclick="openIntegrationDryRunModal('direct_print', { source: 'settings', title: 'Direct print dry-run' })">Direct Print Dry-run</button>
-              <button class="btn" onclick="openIntegrationDryRunModal('laser_send', { source: 'settings', title: 'Lazer dry-run' })">Lazer Dry-run</button>
-            </div>
+            <div class="toolbar compact"><button class="btn primary" onclick="saveLiveIntegrationSecuritySettings()">Güvenli Modu Kaydet</button><button class="btn" onclick="openIntegrationDryRunModal('trendyol_status_update',{source:'settings',title:'Trendyol statü dry-run'})">Trendyol Statü Dry-run</button><button class="btn" onclick="openIntegrationDryRunModal('direct_print',{source:'settings',title:'Direct print dry-run'})">Direct Print Dry-run</button><button class="btn" onclick="openIntegrationDryRunModal('laser_send',{source:'settings',title:'Lazer dry-run'})">Lazer Dry-run</button></div>
             <div id="liveIntegrationRiskRegistry" class="integration-risk-registry"></div>
-            <p class="safe-note">Bu fazda canlı Trendyol statü/kargo/fatura, direct print, lazer ve RDWorks kapalıdır. Dry-run yalnızca izin, ayar ve audit kontrolü yapar.</p>
           </article>
-          <article id="s-yazici" class="card printer-profile-card" data-settings-panel="printer-profiles">
-            <div class="card-title"><h3>Yazıcı Profilleri</h3><span>Ayarlar > Yazıcı Profilleri</span></div>
+
+          <article id="s-yazici" class="card settings-wide-card" data-settings-panel="printer-profiles"><div class="card-title"><h3>Yazıcı Profilleri</h3><span>Manuel print hazırlığı</span></div>
             <div id="printerProfileList" class="printer-profile-list"></div>
-            <div class="settings-form-grid compact">
+            <div class="settings-form-grid">
               <label>Profil adı<input id="printerProfileName" placeholder="Rulo Etiket Manuel" /></label>
               <label>Yazıcı adı<input id="printerProfilePrinterName" placeholder="Manuel PDF kontrolü" /></label>
               <label>Kağıt boyutu<input id="printerProfilePaperSize" placeholder="A4 / 100x150 mm" /></label>
@@ -3315,79 +2927,40 @@
               <label>İzinli format<input id="printerProfileFormats" placeholder="PDF,PNG" value="PDF" /></label>
               <label class="check"><input id="printerProfileDefault" type="checkbox" /> Varsayılan profil</label>
             </div>
-            <div class="toolbar compact">
-              <button class="btn primary" onclick="savePrinterProfileFromSettings()">Profili Kaydet</button>
-              <button class="btn" onclick="resetPrinterProfileForm()">Formu Temizle</button>
-              <button class="btn" onclick="testSelectedPrinterProfile()">Test Bağlantısı</button>
-            </div>
+            <div class="toolbar compact"><button class="btn primary" onclick="savePrinterProfileFromSettings()">Profili Kaydet</button><button class="btn" onclick="resetPrinterProfileForm()">Formu Temizle</button><button class="btn" onclick="testSelectedPrinterProfile()">Test Bağlantısı</button></div>
             <p id="printerProfileStatus" class="tiny-status"></p>
-            <p class="safe-note">Test bağlantısı gerçek cihazı tetiklemez. Profil yalnızca manuel print hazırlığı için kullanılır.</p>
+            <p class="safe-note">Test bağlantısı gerçek cihazı tetiklemez.</p>
           </article>
-          <article class="card">
-            <div class="card-title"><h3>Entegrasyonlar</h3><span>Ayarlar > Entegrasyonlar</span></div>
-            <div class="trendyol-api-settings-card" data-settings-panel="trendyol-api">
-              <div class="trendyol-api-head">
-                <div>
-                  <b>Trendyol API</b>
-                  <span id="trendyolConnectionStatus">Bağlantı durumu bekleniyor</span>
-                </div>
-                <span id="trendyolReadonlyBadge" class="readonly-badge">Read-only mode</span>
-              </div>
+
+          <article id="s-trendyol-api" class="card settings-wide-card" data-settings-panel="trendyol-api"><div class="card-title"><h3>Trendyol API</h3><span>Teknik ayar — üretim ekranından ayrı</span></div>
+            <div class="trendyol-api-head"><div><b>Bağlantı durumu</b><br><span id="trendyolConnectionStatus" class="muted">Bağlantı durumu bekleniyor</span></div><span id="trendyolReadonlyBadge" class="readonly-badge">Read-only mode</span></div>
+            <div class="settings-form-grid compact">
+              <label>Supplier ID<input id="trendyolSupplierId" autocomplete="off" placeholder="Satıcı ID" /></label>
+              <label>API Key<input id="trendyolApiKey" type="password" autocomplete="off" placeholder="Kayıtlıysa maskeli görünür" /></label>
+              <label>API Secret<input id="trendyolApiSecret" type="password" autocomplete="off" placeholder="Kayıtlıysa maskeli görünür" /></label>
+              <label>Environment<select id="trendyolEnvironment" onchange="document.getElementById('trendyolStage').checked=this.value==='stage'"><option value="live">Live</option><option value="stage">Stage/Test</option></select></label>
+              <label class="check"><input id="trendyolReadOnlyMode" type="checkbox" checked disabled /> Read-only mode aktif</label>
+              <label class="check" hidden><input id="trendyolStage" type="checkbox" /> Stage/test</label>
+            </div>
+            <div class="trendyol-api-meta"><span>Son sync: <b id="trendyolLastSyncAt">-</b></span><span>Sipariş: <b id="trendyolLastOrderCount">0</b></span><span>Mesaj/Soru: <b id="trendyolLastMessageCount">0</b></span></div>
+            <details class="settings-subblock"><summary><b>AI Çıkarım Ayarları</b><span>Soru/mesajdan isim/tarih/not çıkarımı</span></summary>
               <div class="settings-form-grid compact">
-                <label>Supplier ID<input id="trendyolSupplierId" autocomplete="off" placeholder="Satıcı ID" /></label>
-                <label>API Key<input id="trendyolApiKey" type="password" autocomplete="off" placeholder="Kayıtlıysa maskeli görünür" /></label>
-                <label>API Secret<input id="trendyolApiSecret" type="password" autocomplete="off" placeholder="Kayıtlıysa maskeli görünür" /></label>
-                <label>Environment
-                  <select id="trendyolEnvironment" onchange="document.getElementById('trendyolStage').checked = this.value === 'stage'">
-                    <option value="live">Live</option>
-                    <option value="stage">Stage/Test</option>
-                  </select>
-                </label>
-                <label class="check"><input id="trendyolReadOnlyMode" type="checkbox" checked disabled /> Read-only mode aktif</label>
-                <label class="check" hidden><input id="trendyolStage" type="checkbox" /> Stage/test</label>
+                <label class="check"><input id="trendyolAiAutonomous" type="checkbox" /> AI otonom üretim önerisi aktif</label>
+                <label class="check"><input id="trendyolAiEnabled" type="checkbox" /> Cloud AI çıkarım açık</label>
+                <label>AI Provider<select id="trendyolAiProvider"><option value="openai_compatible">OpenAI uyumlu</option></select></label>
+                <label>AI API Key<input id="trendyolAiApiKey" type="password" autocomplete="off" placeholder="Kayıtlıysa maskeli görünür" /></label>
+                <label>Model<input id="trendyolAiModel" type="text" autocomplete="off" placeholder="gpt-5-nano" /></label>
+                <label>Güven eşiği<input id="trendyolAiConfidenceThreshold" type="number" min="0" max="1" step="0.01" placeholder="0.85" /></label>
+                <label>Timeout (sn)<input id="trendyolAiTimeoutSeconds" type="number" min="1" max="120" step="1" placeholder="20" /></label>
+                <label class="check"><input id="trendyolAiCacheEnabled" type="checkbox" /> AI cache açık</label>
               </div>
-              <div class="trendyol-api-meta">
-                <span>Son sync: <b id="trendyolLastSyncAt">-</b></span>
-                <span>Sipariş: <b id="trendyolLastOrderCount">0</b></span>
-                <span>Mesaj/Soru: <b id="trendyolLastMessageCount">0</b></span>
-              </div>
-              <details class="settings-subblock">
-                <summary><b>AI Çıkarım Ayarları</b><span>Soru/mesajdan isim/tarih/not çıkarımı</span></summary>
-                <div class="settings-form-grid compact">
-                  <label class="check"><input id="trendyolAiAutonomous" type="checkbox" /> AI otonom üretim önerisi aktif</label>
-                  <label class="check"><input id="trendyolAiEnabled" type="checkbox" /> Cloud AI çıkarım açık</label>
-                  <label>AI Provider
-                    <select id="trendyolAiProvider">
-                      <option value="openai_compatible">OpenAI uyumlu</option>
-                    </select>
-                  </label>
-                  <label>AI API Key<input id="trendyolAiApiKey" type="password" autocomplete="off" placeholder="Kayıtlıysa maskeli görünür" /></label>
-                  <label>Model<input id="trendyolAiModel" type="text" autocomplete="off" placeholder="gpt-5-nano" /></label>
-                  <label>Güven eşiği<input id="trendyolAiConfidenceThreshold" type="number" min="0" max="1" step="0.01" placeholder="0.85" /></label>
-                  <label>Timeout (sn)<input id="trendyolAiTimeoutSeconds" type="number" min="1" max="120" step="1" placeholder="20" /></label>
-                  <label class="check"><input id="trendyolAiCacheEnabled" type="checkbox" /> AI cache açık</label>
-                </div>
-                <p class="safe-note">AI önerileri operatör onayı olmadan üretime gitmez. Yüksek güvenli AI eşleşmeleri bile "operatör onayı bekliyor" statüsünde kalır.</p>
-              </details>
-              <p class="safe-note">API secret maskeli tutulur; audit/log içine yazılmaz. Bu bölüm yalnızca sipariş, ürün satırı ve müşteri mesaj/soru verisini okur. Canlı statü/kargo/fatura tetiklenmez.</p>
-              <div class="toolbar compact">
-                <button class="btn primary" onclick="saveTrendyolSettings()">Trendyol API Ayarını Kaydet</button>
-                <button class="btn" onclick="testTrendyolConnection()">Bağlantıyı Test Et</button>
-                <button class="btn" onclick="syncTrendyolOrders(7)">Read-only Sipariş Sync</button>
-                <button class="btn" onclick="syncTrendyolQuestions()">Soruları/Mesajları Oku</button>
-              </div>
-            </div>
-            <div class="settings-check-list">
-              <div class="settings-check ok"><b>Trendyol API</b><span>Üretim ekranından ayrıldı; API key/secret burada teknik ayar olarak yönetilir.</span></div>
-              <div class="settings-check ok"><b>Operasyon ekranı</b><span>Trendyol Siparişleri sayfasında yalnızca sipariş, kanıt ve üretim aksiyonları görünür.</span></div>
-            </div>
-            <button class="btn" onclick="bridge.showSettings()">Gelişmiş Trendyol Penceresini Aç</button>
+              <p class="safe-note">AI önerileri operatör onayı olmadan üretime gitmez.</p>
+            </details>
+            <div class="toolbar compact"><button class="btn primary" onclick="saveTrendyolSettings()">Trendyol API Ayarını Kaydet</button><button class="btn" onclick="testTrendyolConnection()">Bağlantıyı Test Et</button><button class="btn" onclick="syncTrendyolOrders(7)">Read-only Sipariş Sync</button><button class="btn" onclick="syncTrendyolQuestions()">Soruları/Mesajları Oku</button></div>
+            <p class="safe-note">API secret maskeli tutulur; audit/log içine yazılmaz. Yalnızca sipariş, ürün satırı ve müşteri mesaj/soru verisini okur.</p>
           </article>
-          <article class="card settings-technical-card">
-            <div class="card-title"><h3>Teknik Mod</h3><span>Kontrollü erişim</span></div>
-            <p class="muted">Detaylı masaüstü ayar penceresi gerektiğinde açılır. Normal üretim için bu güvenli merkez yeterlidir.</p>
-            <button class="btn" onclick="bridge.showSettings()">Gelişmiş Ayar Penceresini Aç</button>
-          </article>
+
+          <article id="s-teknik" class="card"><div class="card-title"><h3>Teknik Mod</h3><span>Kontrollü erişim</span></div><p class="muted">Detaylı masaüstü ayar penceresi gerektiğinde açılır. Normal üretim için bu güvenli merkez yeterlidir.</p><button class="btn" onclick="bridge.showSettings()">Gelişmiş Ayar Penceresini Aç</button></article>
         </div>
       </section>
 
@@ -3437,7 +3010,8 @@
           <button class="folder-card" onclick="bridge.open_input_folder()">Input</button>
         </div>
       </section>
-    </main>
+      </main>
+    </div>
   </div>
   <div id="newLabelModelModal" class="modal-backdrop" hidden>
     <div class="modal-card wide-modal">
@@ -3897,6 +3471,7 @@
   <!-- Browser mode: load fetch-based adapter before app.js (harmless in desktop mode) -->
   <script src="api_adapter.js"></script>
   <script src="./app.js"></script>
+  <script src="redesign-interactions.js"></script>
   <!-- Browser mode: wire bridge = cyzella after app.js defines refreshState -->
   <script>
     if (!window.qt && window.cyzella) {
