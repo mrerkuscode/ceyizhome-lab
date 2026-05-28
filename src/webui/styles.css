@@ -29635,3 +29635,169 @@ body.label-studio-active #label.studio-mode-simple .corel-statusbar {
     min-width: 620px;
   }
 }
+
+
+/* === Üretim Nabzı KPI Dashboard (feat/visual_reporting) === */
+
+.kpi-band {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+.kpi-card {
+  background: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 200px;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.kpi-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #757575;
+  letter-spacing: 0.05em;
+}
+
+.kpi-today-number {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1565C0;
+  line-height: 1.1;
+}
+
+.kpi-delta-up   { color: #4CAF50; font-size: 13px; margin-top: 4px; }
+.kpi-delta-down { color: #F44336; font-size: 13px; margin-top: 4px; }
+.kpi-delta-neutral { color: #9E9E9E; font-size: 13px; margin-top: 4px; }
+
+.kpi-sparkline {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-top: 8px;
+  overflow: visible;
+}
+
+.kpi-top3-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.kpi-top3-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.kpi-top3-label {
+  min-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi-top3-bar {
+  background: #1565C0;
+  height: 8px;
+  border-radius: 4px;
+  min-width: 4px;
+}
+
+.kpi-top3-qty {
+  margin-left: auto;
+  color: #424242;
+  font-weight: 600;
+}
+
+.kpi-donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.kpi-donut {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+.kpi-donut-legend {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+.kpi-donut-legend li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 3px;
+}
+
+.kpi-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kpi-progress-wrap { margin-top: 8px; }
+
+.kpi-progress {
+  width: 100%;
+  height: 24px;
+  background: #E0E0E0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.kpi-progress-fill {
+  height: 100%;
+  background: #1565C0;
+  border-radius: 12px;
+  transition: width 0.4s ease;
+}
+
+.kpi-progress-label {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #757575;
+}
+
+.kpi-empty {
+  color: #9E9E9E;
+  font-style: italic;
+  padding: 16px;
+  text-align: center;
+}
+
+.kpi-error {
+  color: #F44336;
+  padding: 12px 16px;
+  border: 1px solid #FFCDD2;
+  border-radius: 4px;
+  background: #FFF5F5;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .kpi-band {
+    flex-direction: column;
+  }
+  .kpi-card {
+    min-width: 280px;
+  }
+}
+
+/* === /Üretim Nabzı KPI Dashboard === */
