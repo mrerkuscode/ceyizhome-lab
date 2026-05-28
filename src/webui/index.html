@@ -23,8 +23,8 @@ h﻿<!doctype html>
         <div class="nav-section">
           <div class="nav-label">ANA</div>
           <button class="nav-btn active" data-page="home" onclick="showSection('home')" title="Ana Sayfa"><span class="nav-icon">⌂</span><span class="nav-text">Ana Sayfa</span></button>
-          <button class="nav-btn" data-page="designLab" onclick="showSection('designLab')" title="Design Lab"><span class="nav-icon">◆</span><span class="nav-text">Design Lab</span></button>
-          <button class="nav-btn" data-page="fontTestLab" onclick="showSection('fontTestLab')" title="Font Test Lab"><span class="nav-icon">Aa</span><span class="nav-text">Font Test Lab</span></button>
+          <button class="nav-btn" data-page="designLab" data-dev-module="true" hidden onclick="showSection('designLab')" title="Design Lab"><span class="nav-icon">◆</span><span class="nav-text">Design Lab</span></button>
+          <button class="nav-btn" data-page="fontTestLab" data-dev-module="true" hidden onclick="showSection('fontTestLab')" title="Font Test Lab"><span class="nav-icon">Aa</span><span class="nav-text">Font Test Lab</span></button>
         </div>
         <div class="nav-section">
           <div class="nav-label">ETİKET</div>
@@ -66,7 +66,7 @@ h﻿<!doctype html>
           <button class="nav-btn" data-page="reports" onclick="showSystemNotice('Loglar / Hata Kayıtları')" title="Loglar / Hata Kayıtları"><span class="nav-icon">◇</span><span class="nav-text">Loglar / Hata Kayıtları</span></button>
           <button class="nav-btn" onclick="quitApplication()" title="Çıkış Yap"><span class="nav-icon">↩</span><span class="nav-text">Çıkış Yap</span></button>
         </div>
-        <details class="nav-section technical-nav" hidden>
+        <details class="nav-section technical-nav" id="devModuleDetails" hidden>
           <summary><span>Teknik araçlar</span><small>Normal üretimde gerekmez</small></summary>
           <button class="nav-btn technical" data-page="nativeTools" onclick="showSection('nativeTools')" title="Native AI/CDR Deneme"><span class="nav-icon">◇</span><span class="nav-text">Native AI/CDR Deneme</span><span class="sr-only">CDR / AI Model teknik deneme</span></button>
           <button class="nav-btn technical" data-page="laser" onclick="showSection('laser')" title="Lazer"><span class="nav-icon">⌁</span><span class="nav-text">Lazer</span></button>
@@ -81,6 +81,12 @@ h﻿<!doctype html>
         <div class="system-row"><span>RDWorks / Lazer</span><b>Kapalı</b></div>
       </div>
       <div class="version">v2.1 Studio UI</div>
+      <div style="padding:6px 12px 10px;font-size:.75rem;color:var(--text-muted,#888)">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none">
+          <input type="checkbox" id="devModeToggle" onchange="applyDevMode(this.checked)" style="cursor:pointer">
+          <span>Geliştirici Modu</span>
+        </label>
+      </div>
     </aside>
     <div class="sidebar-backdrop" onclick="closeMobileSidebar()" aria-hidden="true"></div>
 
@@ -3874,6 +3880,24 @@ h﻿<!doctype html>
       bridge = window.cyzella;
       if (typeof refreshState === "function") { refreshState(); }
     }
+  </script>
+  <!-- Geliştirici Modu: gizli menü öğelerini göster/gizle -->
+  <script>
+    function applyDevMode(enabled) {
+      localStorage.setItem("cyz_dev_mode", enabled ? "1" : "0");
+      document.querySelectorAll("[data-dev-module]").forEach(function(el) {
+        el.hidden = !enabled;
+      });
+      var details = document.getElementById("devModuleDetails");
+      if (details) details.hidden = !enabled;
+      var toggle = document.getElementById("devModeToggle");
+      if (toggle) toggle.checked = enabled;
+    }
+    // Sayfa yüklenirken localStorage'dan oku
+    (function() {
+      var saved = localStorage.getItem("cyz_dev_mode") === "1";
+      applyDevMode(saved);
+    })();
   </script>
 </body>
 </html>
