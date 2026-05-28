@@ -19763,6 +19763,11 @@ function toggleAllPrintQueueSelection(checked) {
 function updatePrintQueueSelectionCount() {
   const count = selectedPrintQueueIds.size;
   setText("queueSelectedCount", `${count} seçili`);
+  // Buton metinlerini seçili sayıya göre güncelle
+  const openBtn = byId("queueBulkOpenPdfs");
+  const printBtn = byId("queueBulkPrint");
+  if (openBtn) openBtn.textContent = count > 0 ? `PDF'leri Aç (${count})` : "PDF'leri Aç";
+  if (printBtn) printBtn.textContent = count > 0 ? `Yazdır (${count})` : "Yazdır";
   const rows = selectedQueueRows();
   const pending = rows.filter(item => queueItemStatusKey(item, queueItemHistory(item)) === "pending").length;
   const printed = rows.filter(item => queueItemStatusKey(item, queueItemHistory(item)) === "printed").length;
