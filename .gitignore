@@ -1,0 +1,111 @@
+# ==============================================================
+# CeyizHome Lab v2.0 — .gitignore
+# 2026-05-28
+#
+# KRİTİK GÜVENLİK: bu dosyada listelenen yollar HİÇBİR koşulda
+# GitHub'a gitmemeli. data/trendyol_settings.json gerçek
+# api_key + api_secret + ai_api_key içeriyor.
+#
+# Yeni credential dosyası eklenirse buraya BENZER bir satır
+# eklenmeden git add çalıştırılmamalı.
+# ==============================================================
+
+# --- KESIN HARIÇ: credentials & local secrets -----------------
+data/trendyol_settings.json
+data/openai_settings.json
+data/*_credentials.json
+data/*_secrets.json
+*.env
+.env
+.env.*
+secrets/
+
+# --- KESIN HARIÇ: licensed fonts (commercial) -----------------
+assets/fonts/Mochary.ttf
+assets/fonts/Mochary*.otf
+assets/fonts/Mochary*.ttf
+assets/fonts/Mochary*.ttf.*
+assets/fonts/Mochary*.otf.*
+# Genel kural: assets/fonts/ binary'leri (uzantısı .ttf/.otf/.woff* veya
+# backup suffix) hep dışlanır:
+assets/fonts/**/*.ttf
+assets/fonts/**/*.otf
+assets/fonts/**/*.woff
+assets/fonts/**/*.woff2
+assets/fonts/**/*.ttf.*
+assets/fonts/**/*.otf.*
+
+# --- Python --------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+*.egg
+
+# --- IDE / OS ------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
+
+# --- Node / web ----------------------------------------------
+node_modules/
+package-lock.json
+
+# --- Logs (operatör log'ları gizli) --------------------------
+*.log
+logs/
+
+# --- Local backups (40+ snapshot — büyük; repo şişer) --------
+backups/
+data/backups/
+
+# --- Production artefacts: tüm output/ KAPAT, sonra
+#     sprint klasörlerini AÇ. (sırada tarama klasörü vs.) ----
+output/*
+!output/.gitkeep
+!output/2026-05-28/
+
+# Output altında yine de ölü/büyük klasörler dışlanır:
+output/2026-05-28/full_project_audit/01_menu_details/
+output/**/name_cut/*.dxf
+output/**/namecut_exports/*/plate_*.dxf
+output/**/reference_scan/
+
+# --- Temp / scratch ------------------------------------------
+tmp*/
+.test_tmp/
+*.tmp
+*.bak.old
+*.bak
+*.json.bak
+*.py.bak
+*.html.bak
+*.js.bak
+*.css.bak
+
+# --- Trendyol cached product images (büyük + tekrar üretilebilir) --
+data/trendyol_image_cache/
+
+# --- Pytest cache (Permission denied uyarısı veren klasörler) ----
+pytest-cache-files-*/
+
+# --- Misc ----------------------------------------------------
+input/*.xlsx
+!input/.gitkeep
+release/
+.claude/
+
+# --- Geçici test çıktıları (proofs PNG'leri hariç tutma) -----
+# (PNG kanıtlar repo'da kalabilir; ama büyük render'lar değil)

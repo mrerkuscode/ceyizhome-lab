@@ -1,0 +1,173 @@
+[
+  {
+    "id": "audit-f695e5bd-f926-5f08-ad19-c631dbffcd8f",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-COLLISION",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt export edilemez: Temas riski.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:42",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "BLOCKED",
+        "blockers": [
+          "1 kayÄ±t export edilemez: Temas riski."
+        ],
+        "offset_warnings": [],
+        "quality_summary": {
+          "collision_risk": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "needs_weld": 0,
+          "needs_offset": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "FAILED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "FAILED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  },
+  {
+    "id": "audit-75bd0a45-903b-59e2-a892-074b42dcc11c",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-DETACHED",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt export edilemez: Nokta/işaret kopuk.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:39",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "BLOCKED",
+        "blockers": [
+          "1 kayÄ±t export edilemez: Nokta/iÅŸaret kopuk."
+        ],
+        "offset_warnings": [],
+        "quality_summary": {
+          "detached_marks": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_weld": 0,
+          "needs_offset": 0,
+          "blocked": 0
+        },
+        "single_piece_quality": "FAILED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "FAILED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  },
+  {
+    "id": "audit-1a3040ef-4819-5dae-a5a5-78332d16bf8d",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-NEEDS-WELD",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt export edilemez: Weld gerekli.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:37",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "BLOCKED",
+        "blockers": [
+          "1 kayÄ±t export edilemez: Weld gerekli."
+        ],
+        "offset_warnings": [],
+        "quality_summary": {
+          "needs_weld": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_offset": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "FAILED",
+        "weld_status": "FAILED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  }
+]

@@ -1,0 +1,54 @@
+{
+  "defined_sku_count": 36,
+  "questions_total": 522,
+  "rozet_distribution": {
+    "missing": 449,
+    "defined": 73
+  },
+  "unique_orders": {
+    "defined": 32,
+    "missing": 183,
+    "unknown": 0
+  },
+  "unique_barcodes": {
+    "defined": 2,
+    "missing": 8
+  },
+  "samples": {
+    "defined": [
+      {
+        "order_number": "",
+        "sku": "CYZOHMELKJK612",
+        "product_name": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 A"
+      },
+      {
+        "order_number": "",
+        "sku": "CYZOHMELKJK612",
+        "product_name": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 A"
+      },
+      {
+        "order_number": "",
+        "sku": "CYZOHMELKJK612",
+        "product_name": "Kişiye Özel Sunumluk Beyaz Tül Süslemeli 116 Adet "
+      }
+    ],
+    "missing": [
+      {
+        "order_number": "",
+        "sku": "CYZELLAKJ5K12355123",
+        "product_name": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Ö"
+      },
+      {
+        "order_number": "11251740755",
+        "sku": "CYZELLAKJ5K12355123",
+        "product_name": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Ö"
+      },
+      {
+        "order_number": "",
+        "sku": "CYZELLAKJ5K12355123",
+        "product_name": "Gold 60 Adet Söz Nişan Kız Isteme Çikolatası Ve 41"
+      }
+    ],
+    "unknown": []
+  }
+}

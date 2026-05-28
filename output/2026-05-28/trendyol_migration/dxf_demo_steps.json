@@ -1,0 +1,55 @@
+[
+  {
+    "step": 1,
+    "label": "pre-check: Mücahit kütüphanede yok",
+    "result": "MISSING_DESIGN"
+  },
+  {
+    "step": 2,
+    "label": "scene before: missing-design + readyForCut=False",
+    "object.repair_status": "dxf_library_missing_design",
+    "path.ready_for_cut": false,
+    "path.repair_status": "dxf_library_missing_design"
+  },
+  {
+    "step": 3,
+    "label": "operator dosya yükledi",
+    "file_size": 111071
+  },
+  {
+    "step": 4,
+    "label": "manuel scan",
+    "scanned": 3,
+    "added": 1,
+    "updated": 2
+  },
+  {
+    "step": 5,
+    "label": "post-scan: Mücahit bulundu",
+    "result": "FOUND",
+    "size_group": "80x40",
+    "bbox_mm": [
+      10.907,
+      7.212
+    ]
+  },
+  {
+    "step": 6,
+    "label": "scene after: corel_reference_exact_override + readyForCut=True",
+    "object.repair_status": "corel_reference_exact_override",
+    "object.override_applied": true,
+    "path.ready_for_cut": true,
+    "pathData_length": 12561,
+    "reference_path_tail": [
+      "dxf_library",
+      "80x40",
+      "mucahit.dxf"
+    ]
+  },
+  {
+    "step": 7,
+    "label": "cleanup",
+    "scan_after": 2,
+    "final_status": "MISSING_DESIGN"
+  }
+]

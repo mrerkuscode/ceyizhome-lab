@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "defaultFontId": "mochary_user",
+  "strategy": "mochary_corel_reference_calibrated_path_engine",
+  "notes": [
+    "Font tasarimi dongusu durduruldu; yeni glyph uretimi yapilmayacak.",
+    "Bu registry proje icindeki veya kullanici tarafindan eklenen gercek fontlari kaynak olarak yonetir.",
+    "Corel referans yazilari Mochary ailesiyle hazirlandigi icin ana kalibrasyon kaynagi Mochary User Font olarak secildi.",
+    "Brannboll Connect silinmedi; referans font degil, alternatif/test font olarak tutulur.",
+    "productionApproved ticari lisans dogrulamasi tamamlanana kadar false kalir."
+  ],
+  "fonts": [
+    {
+      "id": "brannboll_connect",
+      "label": "Brannboll Connect",
+      "familyValue": "Brannboll Connect",
+      "path": "production-bot/assets/fonts/BrannbollConnect.ttf",
+      "fallbackPath": "production-bot/assets/fonts/BrannbollConnect.otf",
+      "type": "professional_font_candidate",
+      "enabled": true,
+      "default": false,
+      "supportsTurkish": "verify",
+      "productionCandidate": false,
+      "productionApproved": false,
+      "licenseReviewRequired": true,
+      "defaultOffsetMm": 0.65,
+      "status": "secondary_test_font_license_review_required",
+      "notes": "Alternative/test font. Corel reference corpus is not Brannboll-based, so this is no longer the selected production reference font. Source license file says Personal Use Only; verify commercial license before live production."
+    },
+    {
+      "id": "mochary_tr_connect",
+      "label": "Mochary TR Connect",
+      "familyValue": "MocharyTRConnect-Regular",
+      "path": "production-bot/assets/fonts/MocharyTRConnect-Regular.otf",
+      "type": "project_font",
+      "enabled": true,
+      "default": false,
+      "supportsTurkish": true,
+      "productionCandidate": false,
+      "productionApproved": false,
+      "status": "alternative_test_font",
+      "notes": "Technical path font; visual quality is not final. Kept as an alternative/test font."
+    },
+    {
+      "id": "mochary_tr_connect_visual_refined",
+      "label": "Mochary TR Connect Visual Refined",
+      "familyValue": "MocharyTRConnectVisualRefined-Regular",
+      "path": "production-bot/assets/fonts/MocharyTRConnect-VisualRefined.otf",
+      "type": "project_font",
+      "enabled": true,
+      "default": false,
+      "supportsTurkish": true,
+      "productionCandidate": false,
+      "productionApproved": false,
+      "status": "test_font",
+      "notes": "Visual refinement test font; not approved as production default."
+    },
+    {
+      "id": "mochary_tr_connect_visual_refined_v2",
+      "label": "Mochary TR Connect Visual Refined V2",
+      "familyValue": "MocharyTRConnectVisualRefinedV2-Regular",
+      "path": "production-bot/assets/fonts/MocharyTRConnect-VisualRefinedV2.otf",
+      "type": "project_font",
+      "enabled": true,
+      "default": false,
+      "supportsTurkish": true,
+      "productionCandidate": false,
+      "productionApproved": false,
+      "status": "visual_signoff_required",
+      "notes": "Technical QA passed; production default not approved."
+    },
+    {
+      "id": "mochary_user",
+      "label": "Mochary User Font",
+      "familyValue": "Mochary.ttf",
+      "path": "production-bot/assets/fonts/Mochary.ttf",
+      "type": "user_font",
+      "enabled": true,
+      "default": true,
+      "supportsTurkish": true,
+      "productionCandidate": true,
+      "productionApproved": false,
+      "licenseReviewRequired": true,
+      "defaultOffsetMm": 0.3,
+      "status": "mochary_corel_calibrated_candidate",
+      "notes": "Corel referans yazilari Mochary User/Personal aile referansiyla hazirlandigi icin ana kalibrasyon kaynagi yapildi. Reference mapping varsa Corel geometri override kullanilir; yeni isimlerde Mochary raw outline + gerçek offset/union hattı Corel korpusuna göre kontrol edilir. User supplied/local source font; do not redistribute."
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+"""Cyzella Label Designer MVP."""
+

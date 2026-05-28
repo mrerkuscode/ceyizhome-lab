@@ -1,0 +1,1159 @@
+{
+  "definitions": {
+    "1450567481": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:27:18).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çikolatası, 60 adet , Nişan Çikolatası Isteme Çiçegi , Söz Çiçegi TYC00733192817, one size",
+      "sku": "1450567481",
+      "trendyol_sku": "1450567481"
+    },
+    "156677448994567": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:11).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kian Gümüş Söz Nişan 60 Ve 36 Adet Kız Isteme Çikolatası Ve 41 Adet Isteme Çiçeği Seti KianCikolata66, one size",
+      "sku": "156677448994567",
+      "trendyol_sku": "156677448994567"
+    },
+    "1654198465144": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:59).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Cam Kutu Içerisinde 80 Adet Baskılı Kız Isteme & Söz Çikolatası (KİŞİYE ÖZEL) 152631465416, one size",
+      "sku": "1654198465144",
+      "trendyol_sku": "1654198465144"
+    },
+    "25366372727": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: gh56uy234u2342346\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-16 23:49:23).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
+      "sku": "25366372727",
+      "trendyol_sku": "25366372727"
+    },
+    "2662515151512": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:25:36).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız İsteme Çikolatası Söz Çikolatası Nişan Çikolatası İsteme Çiçeği 52617171771, one size",
+      "sku": "2662515151512",
+      "trendyol_sku": "2662515151512"
+    },
+    "3626627171": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: ht2341263412345\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:13:32).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çikolatası Söz Çikolatası Nişan Çikolatası Isteme Çiçegi 2762616161, one size",
+      "sku": "3626627171",
+      "trendyol_sku": "3626627171"
+    },
+    "7495769245": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: 457920759\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:59).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "80 Adet Gümüş Kız Isteme Çikolatası, Söz, Nişan Çikolatası İncili 78359739475, one size",
+      "sku": "7495769245",
+      "trendyol_sku": "7495769245"
+    },
+    "764587736485": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: 765937648\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:25:36).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "3 Adet Kızisteme Söz Nişan Anne Baldız Gülü 984357934675, one size",
+      "sku": "764587736485",
+      "trendyol_sku": "764587736485"
+    },
+    "87935679345": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: 347957930\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:25:36).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kırmızı Kızİsteme Çiçeği ve 80 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım O8437597345, one size",
+      "sku": "87935679345",
+      "trendyol_sku": "87935679345"
+    },
+    "938388338": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:11).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız isteme Çiçek & Çikolata Seti Preminyum Red 0383838838383, one size",
+      "sku": "938388338",
+      "trendyol_sku": "938388338"
+    },
+    "CYZELKKAJJ1256": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:13:32).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata CYZELKKAJJ1256, one size",
+      "sku": "CYZELKKAJJ1256",
+      "trendyol_sku": "CYZELKKAJJ1256"
+    },
+    "CYZELKLK624455": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:29:46).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çikolatası 100 Adet, Söz Çikolatası, Nişan Çikolatası Isteme Çiçegi , Kahve Yanı Çiçeği CYZELKLK624455, one size",
+      "sku": "CYZELKLK624455",
+      "trendyol_sku": "CYZELKLK624455"
+    },
+    "CYZELKLK62qwe25": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:11).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çikolatası 100 Adet, Söz Çikolatası, Nişan Çikolatası Isteme Çiçegi , Kahve Yanı Çiçeği CYZELKLK62qwe25, one size",
+      "sku": "CYZELKLK62qwe25",
+      "trendyol_sku": "CYZELKLK62qwe25"
+    },
+    "CYZELLAK123JH": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:26:33).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kız İsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası,3 Anne Gülü Premium Set CYZELLAK123JH, one size",
+      "sku": "CYZELLAK123JH",
+      "trendyol_sku": "CYZELLAK123JH"
+    },
+    "CYZELLAK123JH22": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:11).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kız İsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası,3 Anne Gülü Premium Set CYZELLAK123JH22, one size",
+      "sku": "CYZELLAK123JH22",
+      "trendyol_sku": "CYZELLAK123JH22"
+    },
+    "CYZELLAK123JH22s5": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:27:18).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kız İsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası,3 Anne Gülü Premium Set CYZELLAK123JH22s5, one size",
+      "sku": "CYZELLAK123JH22s5",
+      "trendyol_sku": "CYZELLAK123JH22s5"
+    },
+    "CYZELLAKJ5K1235ss": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:27:18).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41 Kadife İsteme Çiçeği Buketi & Kişiye Özel 100 Adet Isimli Söz Nişan Kız Isteme Çikolatası CYZELLAKJ5K1235ss, one size",
+      "sku": "CYZELLAKJ5K1235ss",
+      "trendyol_sku": "CYZELLAKJ5K1235ss"
+    },
+    "CYZELLAKJ6K123ssss2": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:25:36).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası,3 Anne Gülü İsteme Seti CYZELLAKJ6K123ssss2, one size",
+      "sku": "CYZELLAKJ6K123ssss2",
+      "trendyol_sku": "CYZELLAKJ6K123ssss2"
+    },
+    "CYZELLAKJ6K1J2": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:25:36).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet Isimli Söz Nişan Kız Isteme Çikolatas CYZELLAKJ6K1J2, one size",
+      "sku": "CYZELLAKJ6K1J2",
+      "trendyol_sku": "CYZELLAKJ6K1J2"
+    },
+    "CYZELLAKK6J1J23": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:26:33).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 150 Adet Söz Nişan Kız Isteme Çikolatası CYZELLAKK6J1J23, one size",
+      "sku": "CYZELLAKK6J1J23",
+      "trendyol_sku": "CYZELLAKK6J1J23"
+    },
+    "CYZELLANB5K12": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:59).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kişiye Özel Sunumluk Beyaz Tül Süslemeli 116 Adet Kız İsteme Çikolatası,Nişan Çikolatası Draje CYZELLANB5K12, one size",
+      "sku": "CYZELLANB5K12",
+      "trendyol_sku": "CYZELLANB5K12"
+    },
+    "CYZOHMELKJK612": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:26:33).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Gold Çerçeveli Cam Sunumluk Kapaklı Sandık, Çikolata Şeker Ve Takı Kutusu 25x15cm CYZOHMELKJK612, one size",
+      "sku": "CYZOHMELKJK612",
+      "trendyol_sku": "CYZOHMELKJK612"
+    },
+    "CYZSELLAKJ56612": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:29:46).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kişiye Özel İki Katlı Sunumluk Beyaz Tül Şakayık Süslemeli 80 Adet Söz Nişan Kız İsteme Çikolatası CYZSELLAKJ56612, one size",
+      "sku": "CYZSELLAKJ56612",
+      "trendyol_sku": "CYZSELLAKJ56612"
+    },
+    "SKYKFMKSY": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:27:18).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çiçeği Söz, 41 Adetşakayık incili buket, Çikolata 60 Adet ŞAKAYIK, one size",
+      "sku": "SKYKFMKSY",
+      "trendyol_sku": "SKYKFMKSY"
+    },
+    "TSU1042": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: t1y541324y2134\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:59).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Cam Kutuda Söz Nişan Çikolatası – 50 Madlen Ve Draje TSU0042, one size",
+      "sku": "TSU1042",
+      "trendyol_sku": "TSU1042"
+    },
+    "TYB49VPP5GQP1SX780": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:29:46).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kız Isteme Çiçeği Ve Çikolata Kutusu Kişiye Özel Isimli Damat Yaka Çiçeği Hediyeli Glnccg00006, one size",
+      "sku": "TYB49VPP5GQP1SX780",
+      "trendyol_sku": "TYB49VPP5GQP1SX780"
+    },
+    "TYB9QK8O7Q2VD4H143": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:11).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "141 Parçalı 4lü Söz Seti İsteme Seti Yüzük Kurdelesi & Anne Kız Kardeş Gülü Dahildir Büyük Nişan Set DEMETKUTUTEPSİa, one size",
+      "sku": "TYB9QK8O7Q2VD4H143",
+      "trendyol_sku": "TYB9QK8O7Q2VD4H143"
+    },
+    "TYBDH9DAJH6GLWUH29": {
+      "extras": {
+        "production_notes": "Trendyol mapping'den aktarıldı (production_type=name_cut, name_cut_width_mm=300.0, created=2026-05-19 23:04:50).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": false,
+        "default_count": 0,
+        "enabled": false,
+        "max_count": 0,
+        "min_count": 0,
+        "model": ""
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "single"
+      },
+      "product_name": "Kutulu Cam Çikolata Kız İsteme Çikolata Tepsisi ve 41li Lale Buketi Söz Kurdelesi Hediyedir 3 Lale LALEDEMETİTEPSİKUTUb, one size",
+      "sku": "TYBDH9DAJH6GLWUH29",
+      "trendyol_sku": "TYBDH9DAJH6GLWUH29"
+    },
+    "TYBK743A5CKL2Z1D77": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:13:32).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Yuvarlak Beyaz İnci söz nişan tepsi seti, incili damat kahve tepsisi incili söz- Nişan kurdelesi 84659365, one size",
+      "sku": "TYBK743A5CKL2Z1D77",
+      "trendyol_sku": "TYBK743A5CKL2Z1D77"
+    },
+    "TYBO6TB8PRJ2YVA849": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:27:18).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "40 Adet Madlen Çikolata Söz Nişan İsteme Çikolatası Bebek Çikolatası Gold Veya Gümüş MadlenEkCikolata456, one size",
+      "sku": "TYBO6TB8PRJ2YVA849",
+      "trendyol_sku": "TYBO6TB8PRJ2YVA849"
+    },
+    "TYBWREFU95OD088J38": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:26:33).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Gold 60 Adet Söz Nişan Kız Isteme Çikolatası Ve 41 adet isteme Çiçeği (anne gülü hediye) EnzoSozCikolata66, one size",
+      "sku": "TYBWREFU95OD088J38",
+      "trendyol_sku": "TYBWREFU95OD088J38"
+    },
+    "cyzella6612365612": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: tgh123ty123r33445\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:29:46).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 Adet Kız İsteme Çikolatası,Nişan Çikolatası Draje CyzEllastand, one size",
+      "sku": "cyzella6612365612",
+      "trendyol_sku": "cyzella6612365612"
+    },
+    "cyzella670025": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:13:32).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 Adet Kız İsteme Çikolatası,Nişan Çikolatası Draje CyzEllaset66, one size",
+      "sku": "cyzella670025",
+      "trendyol_sku": "cyzella670025"
+    },
+    "cyzella793574937": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: cyzelal8034578037405\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:13:32).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım cyzella92634, one size",
+      "sku": "cyzella793574937",
+      "trendyol_sku": "cyzella793574937"
+    },
+    "cyzella874972": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol merchant_sku: cyzelal847982\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:26:33).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "100 Adet Kişiye Özel Cam Kutuda Çikolata – Söz, Nişan, Kız İsteme Çikolatası cyzella93692, one size",
+      "sku": "cyzella874972",
+      "trendyol_sku": "cyzella874972"
+    },
+    "cyzella9263444222": {
+      "extras": {
+        "production_notes": "Eski etiket model: 01 A Gold Rulo Etiket (01)\nTrendyol mapping'den aktarıldı (production_type=label_and_name_cut, name_cut_width_mm=300.0, created=2026-05-18 23:28:59).\nDEFAULT değerler — Leyla düzenleyebilir.",
+        "special_requests_allowed": true
+      },
+      "label_config": {
+        "adjustable_in_production": true,
+        "default_count": 10,
+        "enabled": true,
+        "max_count": 50,
+        "min_count": 1,
+        "model": "01"
+      },
+      "metadata": {
+        "archived_date": "",
+        "created_date": "2026-05-28T16:24:11",
+        "modified_date": "2026-05-28T16:24:11",
+        "source": "trendyol_mapping_migration_2026-05-28",
+        "status": "active",
+        "usage_count": 0
+      },
+      "name_config": {
+        "compound_format": "joined",
+        "count": 1,
+        "size_group": "auto",
+        "test_name": "",
+        "type": "couple"
+      },
+      "product_name": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım cyzella9263444222, one size",
+      "sku": "cyzella9263444222",
+      "trendyol_sku": "cyzella9263444222"
+    }
+  },
+  "last_updated": "2026-05-28T16:24:11",
+  "total_count": 36,
+  "version": "2.0"
+}

@@ -1,0 +1,21 @@
+{
+  "supplier_id": "1131960",
+  "api_key": "IO***Im",
+  "api_secret": "8f***vA",
+  "stage": false,
+  "environment": "live",
+  "last_sync_at": "2026-05-19 22:40:51",
+  "last_questions_sync_at": "2026-05-19 23:00:04",
+  "last_questions_sync_status": "OK",
+  "last_questions_sync_message": "522 Trendyol soru/mesaj kaydı read-only çekildi. En güncel soru: 2026-05-19 22:27:35.",
+  "ai_autonomous_production_enabled": true,
+  "ai_autonomous_model_threshold": 0.72,
+  "ai_autonomous_field_threshold": 0.65,
+  "ai_enabled": true,
+  "ai_provider": "openai_compatible",
+  "ai_api_key": "sk***UA",
+  "ai_model": "gpt-5-nano",
+  "ai_confidence_threshold": 0.85,
+  "ai_timeout_seconds": 20.0,
+  "ai_cache_enabled": true
+}

@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "test": ".venv\\Scripts\\python.exe scripts\\project_health_audit.py --profile quick",
+    "test:unit": ".venv\\Scripts\\python.exe -m pytest -q",
+    "test:extraction": ".venv\\Scripts\\python.exe scripts\\run_extraction_eval.py",
+    "test:trendyol": ".venv\\Scripts\\python.exe scripts\\project_health_audit.py --profile trendyol",
+    "test:trendyol-live-audit": ".venv\\Scripts\\python.exe scripts\\project_health_audit.py --profile trendyol-live-audit",
+    "test:trendyol-operator-worklist": ".venv\\Scripts\\python.exe scripts\\project_health_audit.py --profile trendyol-operator-worklist",
+    "test:project-audit": ".venv\\Scripts\\python.exe scripts\\project_code_audit.py",
+    "trendyol:apply-top-mappings": ".venv\\Scripts\\python.exe scripts\\apply_trendyol_top_mapping_worklist.py --limit 5",
+    "trendyol:reprocess-extractions": ".venv\\Scripts\\python.exe scripts\\reprocess_trendyol_extractions.py",
+    "test:release": ".venv\\Scripts\\python.exe scripts\\project_health_audit.py --profile release",
+    "test:long": ".venv\\Scripts\\python.exe scripts\\run_test_command_real_user_qa.py --timeout 420"
+  }
+}

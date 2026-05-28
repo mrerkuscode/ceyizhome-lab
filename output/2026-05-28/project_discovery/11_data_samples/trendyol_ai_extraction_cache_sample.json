@@ -1,0 +1,33 @@
+{
+  "09da8a930ee4efd8ab0d3ebca47907a34df4f13fc97d2cfa9e5fffcdc3b9c0d0": {
+    "label_text": "Selin & Hakan",
+    "date_text": "07.06.2026",
+    "note_text": "",
+    "quantity": 1,
+    "name_cut_text": "Selin Hakan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "warnings": [
+      "Kısa uyarı: yalnızca soru/cevap kaynak alınır"
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "label_text": "Selin & Hakan",
+      "name_cut_text": "Selin & Hakan",
+      "date_text": "07.06.2026",
+      "note_text": "empty"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 20:54:32"
+  }
+}

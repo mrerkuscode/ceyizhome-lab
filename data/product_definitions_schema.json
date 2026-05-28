@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProductDefinition",
+  "description": "Single product definition entry in product_definitions.json. Validated on every save.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["sku", "product_name", "name_config", "label_config", "metadata"],
+  "properties": {
+    "sku": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "trendyol_sku": { "type": "string" },
+    "product_name": { "type": "string", "minLength": 1, "maxLength": 256 },
+
+    "name_config": {
+      "type": "object",
+      "required": ["type", "count", "size_group", "compound_format"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["single", "couple", "none"] },
+        "count": { "type": "integer", "minimum": 0, "maximum": 10 },
+        "size_group": { "enum": ["auto", "70x40", "80x40", "100x40"] },
+        "compound_format": { "enum": ["joined", "side_by_side"] },
+        "test_name": { "type": "string", "maxLength": 64 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "type": { "const": "none" } } },
+          "then": { "properties": { "count": { "const": 0 } } }
+        },
+        {
+          "if": { "properties": { "type": { "enum": ["single", "couple"] } } },
+          "then": { "properties": { "count": { "minimum": 1 } } }
+        }
+      ]
+    },
+
+    "label_config": {
+      "type": "object",
+      "required": ["enabled"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "model": { "type": "string" },
+        "default_count": { "type": "integer", "minimum": 0, "maximum": 999 },
+        "adjustable_in_production": { "type": "boolean" },
+        "min_count": { "type": "integer", "minimum": 0, "maximum": 999 },
+        "max_count": { "type": "integer", "minimum": 0, "maximum": 999 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "enabled": { "const": true } } },
+          "then": { "required": ["model", "default_count"] }
+        }
+      ]
+    },
+
+    "extras": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "special_requests_allowed": { "type": "boolean" },
+        "production_notes": { "type": "string", "maxLength": 1024 }
+      }
+    },
+
+    "metadata": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "created_date": { "type": "string" },
+        "modified_date": { "type": "string" },
+        "usage_count": { "type": "integer", "minimum": 0 },
+        "status": { "enum": ["active", "archived"] },
+        "archived_date": { "type": "string" },
+        "source": { "type": "string" }
+      }
+    }
+  }
+}

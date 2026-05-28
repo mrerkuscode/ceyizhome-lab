@@ -1,0 +1,6165 @@
+{
+  "09da8a930ee4efd8ab0d3ebca47907a34df4f13fc97d2cfa9e5fffcdc3b9c0d0": {
+    "label_text": "Selin & Hakan",
+    "date_text": "07.06.2026",
+    "note_text": "",
+    "quantity": 1,
+    "name_cut_text": "Selin Hakan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "warnings": [
+      "Kısa uyarı: yalnızca soru/cevap kaynak alınır"
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "label_text": "Selin & Hakan",
+      "name_cut_text": "Selin & Hakan",
+      "date_text": "07.06.2026",
+      "note_text": "empty"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 20:54:32"
+  },
+  "a1188a2e0c35f904f8d22a8330d25ed5b16322cc16099c247666a943f1b1574a": {
+    "label_text": "Bahar & Yunus",
+    "date_text": "",
+    "note_text": "Gümüş renk olsun; görseldeki gibi tasarım.",
+    "person_names": [
+      "Bahar",
+      "Yunus"
+    ],
+    "custom_text": "",
+    "production_note": "Gümüş renk olsun; görseldeki gibi tasarım.",
+    "quantity": 1,
+    "name_cut_text": "Bahar & Yunus",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Bahar ve Yunus",
+      "label_text": "isimler Bahar ve Yunus",
+      "name_cut_text": "isimler Bahar ve Yunus",
+      "production_note": "Gümüş renk olsun; görseldeki gibi tasarım."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:36:45"
+  },
+  "0272b79e679910a206bac808a3fb2f18740fc9449b43d453d8cb676b44c8ad04": {
+    "label_text": "Büşra Şuayip",
+    "date_text": "02.06.2026",
+    "note_text": "Beyaz tül olsun",
+    "person_names": [
+      "Büşra Şuayip"
+    ],
+    "custom_text": "",
+    "production_note": "Beyaz tül olsun",
+    "quantity": 1,
+    "name_cut_text": "Büşra Şuayip",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 92,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Büşra Şuayip",
+      "label_text": "isimler Büşra Şuayip",
+      "name_cut_text": "isimler Büşra Şuayip",
+      "date_text": "tarih 02.06.2026",
+      "production_note": "Beyaz tül olsun"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:37:02"
+  },
+  "4952d7bc24230fd6cbe4cbb189d756a71e89d63799f4bdf4962c47c4436bab8c": {
+    "label_text": "İkbal & Ali",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "İkbal",
+      "Ali"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "İkbal & Ali",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler İkbal ve Ali",
+      "label_text": "isimler İkbal ve Ali",
+      "name_cut_text": "isimler İkbal ve Ali",
+      "production_note": "Üzerinde İkbal ve Ali isimleri yazılacak"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:37:20"
+  },
+  "b82eeac0d665bb9c180b5c174a56b9a034b4440abf8ed941ace81ad4e8438819": {
+    "label_text": "Özde & Erdem",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Özde",
+      "Erdem"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Özde & Erdem",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 50,
+      "eventDate": 50,
+      "customText": 50,
+      "productionNote": 60,
+      "note": 60,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Özde ve Erdem",
+      "label_text": "isimler Özde ve Erdem",
+      "name_cut_text": "isimler Özde ve Erdem",
+      "date_text": "tarih yok"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:39:04"
+  },
+  "faf1f312f3fc8a56b8ab5a9fd67362c181951b439ca709b307cf4eb52ae50053": {
+    "label_text": "Selin & Hakan",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Selin",
+      "Hakan"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Selin & Hakan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 96,
+      "date": 40,
+      "eventDate": 40,
+      "customText": 40,
+      "productionNote": 60,
+      "note": 60,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Selin & Hakan",
+      "label_text": "isimler Selin & Hakan",
+      "name_cut_text": "isimler Selin & Hakan",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:39:20"
+  },
+  "60431b6a24a1fc7629e314af38d4f6bbc5014cbc42178be106563bd75213d5e5": {
+    "label_text": "Senem & Ozan",
+    "date_text": "",
+    "note_text": "Çikolata ve çiçek üzerindeki yazılar altın renk olsun.",
+    "person_names": [
+      "Senem",
+      "Ozan"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolata ve çiçek üzerindeki yazılar altın renk olsun.",
+    "quantity": 1,
+    "name_cut_text": "Senem & Ozan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Senem ve Ozan",
+      "label_text": "isimler Senem ve Ozan",
+      "name_cut_text": "isimler Senem ve Ozan",
+      "production_note": "Çikolata üzerindeki yazılar ve çiçek üzerindeki yazılar altın renk olsun"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:39:37"
+  },
+  "c8dbf7d4895a9d623f437ba100c945d34e087093feeea86af95a7275954b4d79": {
+    "label_text": "Elvida & Ömer",
+    "date_text": "",
+    "note_text": "Tepsiler gold olacak.",
+    "person_names": [
+      "Elvida",
+      "Ömer"
+    ],
+    "custom_text": "",
+    "production_note": "Tepsiler gold olacak.",
+    "quantity": 1,
+    "name_cut_text": "Elvida & Ömer",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.87,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 60,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Elvida ve Ömer",
+      "label_text": "isimler Elvida ve Ömer",
+      "name_cut_text": "isimler Elvida ve Ömer",
+      "date_text": "tarih yok",
+      "production_note": "tepsileri gold olacak",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:40:30"
+  },
+  "df3f23c812c4f1f4df346ac019f1eb9ce4b438e1ef1d5b839de554ad936a69d8": {
+    "label_text": "Derya & M. Şerif",
+    "date_text": "30.05.2026",
+    "note_text": "Çikolataların üzerine tarih ve 'Nişan hatırası' yazılacak. Teslim etmeden önce ürün fotoğrafı mesaj yoluyla gönderilmeli.",
+    "person_names": [
+      "Derya",
+      "M. Şerif"
+    ],
+    "custom_text": "Nişan hatırası",
+    "production_note": "Çikolataların üzerine tarih ve 'Nişan hatırası' yazılacak. Teslim etmeden önce ürün fotoğrafı mesaj yoluyla gönderilmeli.",
+    "quantity": 1,
+    "name_cut_text": "Derya & M. Şerif",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.93,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 96,
+      "date": 94,
+      "eventDate": 94,
+      "customText": 90,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Derya ve M.Şerif",
+      "label_text": "isimler Derya ve M.Şerif",
+      "name_cut_text": "isimler Derya ve M.Şerif",
+      "date_text": "tarih 30.05.2026",
+      "custom_text": "nişan hatırası",
+      "production_note": "çikolataların üzerine yazılacak / teslim etmeden önce ürünün fotoğrafını mesaj yoluyla bana atar mısınız"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:43:38"
+  },
+  "1eb07bd0e1bebaa8460ffb2bda56da5451a8d17d6b355b39d3984b8db54ac592": {
+    "label_text": "",
+    "date_text": "",
+    "note_text": "Güllerin rengi beyaz olsun; kırmızı veya başka renk olmasın.",
+    "person_names": [],
+    "custom_text": "",
+    "production_note": "Güllerin rengi beyaz olsun; kırmızı veya başka renk olmasın.",
+    "quantity": 2,
+    "name_cut_text": "",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.7,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Müşteri mesajında kişi ismi bulunamadı.",
+      "Mesaj renk/tasarım talimatı içeriyor; isim alanına aktarılmamalı.",
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "empty",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "empty",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "production_note": "Güllerin rengi beyaz olsun; kırmızı veya başka renk olmasın.",
+      "quantity": "sipariş adedi: 6"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-17 22:43:01"
+  },
+  "963f3de67c143067bfe898561f38b31d19ff94ea2377d95599095726774a74a8": {
+    "label_text": "",
+    "date_text": "",
+    "note_text": "6 tane hepsinin rengi BEYAZ olsun istiyorum.",
+    "person_names": [],
+    "custom_text": "",
+    "production_note": "6 tane hepsinin rengi BEYAZ olsun istiyorum.",
+    "quantity": 2,
+    "name_cut_text": "",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.78,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Müşteri mesajında kişi ismi bulunamadı.",
+      "Mesaj renk/tasarım talimatı içeriyor; isim alanına aktarılmamalı.",
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "empty",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "empty",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "production_note": "6 tane hepsinin rengi BEYAZ olsun istiyorum.",
+      "quantity": "customerMessage"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-17 22:43:17"
+  },
+  "2d87a65bb78106922aaa0ed56ebf56884b7a52ad5dc7ec33d1e88b0fe3910f22": {
+    "label_text": "Tuğçe & Murat",
+    "date_text": "29.05.2026",
+    "note_text": "Çiçeklerin üstüne siyah kurdele üzerinde gold yazı; Çikolatanın üstüne Tuğçe & Murat 29.05.2026 gold yazı yazılsın; Tepsi içindeki çikolatalarda da Allahın emri ile kızınızı istemeye geldik gold yazı ile.",
+    "person_names": [
+      "Tuğçe",
+      "Murat"
+    ],
+    "custom_text": "Allahın emri ile kızınızı istemeye geldik",
+    "production_note": "Çiçeklerin üstüne siyah kurdele üzerinde gold yazı; Çikolatanın üstüne Tuğçe & Murat 29.05.2026 gold yazı yazılsın; Tepsi içindeki çikolatalarda da Allahın emri ile kızınızı istemeye geldik gold yazı ile.",
+    "quantity": 1,
+    "name_cut_text": "Tuğçe & Murat",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 88,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Tuğçe ve Murat",
+      "label_text": "Tuğçe & Murat",
+      "name_cut_text": "Tuğçe & Murat",
+      "date_text": "tarih 29.05.2026",
+      "custom_text": "Allahın emri ile kızınızı istemeye geldik",
+      "production_note": "Çiçeklerin üstüne siyah kurdele üzerinde gold yazı; Çikolatanın üstüne Tuğçe & Murat 29.05.2026 gold yazı yazılsın; Tepsi içindeki çikolatalarda da Allahın emri ile kızınızı istemeye geldik gold yazı ile."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:44:17"
+  },
+  "b5a33cc142931273f690515c67b8bccaef95081ba8ea85d2a182d69214aa5841": {
+    "label_text": "Kader & Servet",
+    "date_text": "",
+    "note_text": "Çiçek ve çikolata üzerine Kader & Servet yazılacak.",
+    "person_names": [
+      "Kader",
+      "Servet"
+    ],
+    "custom_text": "",
+    "production_note": "Çiçek ve çikolata üzerine Kader & Servet yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Kader & Servet",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Kader ve Servet",
+      "label_text": "isimler Kader ve Servet",
+      "name_cut_text": "isimler Kader ve Servet",
+      "production_note": "Çiçek ve çikolata üzerine Kader & Servet yazılacak",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:44:36"
+  },
+  "84fa333eb1c5d529b9c2e98530c4238b21c6b496736966eb046f395156ff41c6": {
+    "label_text": "Ali & Ayşenur",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Ali",
+      "Ayşenur"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Ali & Ayşenur",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 98,
+      "date": 50,
+      "eventDate": 50,
+      "customText": 50,
+      "productionNote": 70,
+      "note": 70,
+      "quantity": 95
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ali ve Ayşenur",
+      "label_text": "isimler Ali ve Ayşenur",
+      "name_cut_text": "isimler Ali ve Ayşenur"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:44:50"
+  },
+  "f0fca371b1b623604fe1a6acfa16d5865b4023e15130aa679315c5bbe98ee0de": {
+    "label_text": "Ayşe & Burak",
+    "date_text": "20.06.2026",
+    "note_text": "Tekli tepsideki Allah'ın emri ile kızınızı istemeye geldik yazısı aynı kalacak.",
+    "person_names": [
+      "Ayşe",
+      "Burak"
+    ],
+    "custom_text": "Allah'ın emri ile kızınızı istemeye geldik",
+    "production_note": "Tekli tepsideki Allah'ın emri ile kızınızı istemeye geldik yazısı aynı kalacak.",
+    "quantity": 1,
+    "name_cut_text": "Ayşe & Burak",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.89,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 88,
+      "eventDate": 88,
+      "customText": 86,
+      "productionNote": 86,
+      "note": 86,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ayşe ve Burak",
+      "label_text": "isimler Ayşe ve Burak",
+      "name_cut_text": "isimler Ayşe ve Burak",
+      "date_text": "tarih 20.06.2026",
+      "custom_text": "Allah'ın emri ile kızınızı istemeye geldik",
+      "production_note": "Çikolataların üzerinde Ayşe Burak ve tarih 20.06.2026; çiçek üzerinde de aynı şekilde isimlerimizin yazılacak. Tekli tepsideki Allah'ın emri ile kızınızı istemeye geldik yazısı aynı kalacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:46:22"
+  },
+  "e39a53392f6b87cacee4498f853d89f603b252ca0514ebd488ab4226f63d353a": {
+    "label_text": "Ali & Ayşegül",
+    "date_text": "",
+    "note_text": "Kutu rengi gold olacak; kutuya sadece isimler yazılacak; yazı tipi ve baskı şekli görseldekiyle uyumlu olacak.",
+    "person_names": [
+      "Ali",
+      "Ayşegül"
+    ],
+    "custom_text": "",
+    "production_note": "Kutu rengi gold olacak; kutuya sadece isimler yazılacak; yazı tipi ve baskı şekli görseldekiyle uyumlu olacak.",
+    "quantity": 1,
+    "name_cut_text": "Ali & Ayşegül",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 92,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ali & Ayşegül",
+      "label_text": "isimler Ali & Ayşegül",
+      "name_cut_text": "isimler Ali & Ayşegül",
+      "production_note": "kutunun rengi gold olacak; kutuya sadece isimler yazılacak; yazı tipi ve baskı şekli görseldekiyle uyumlu olacak",
+      "quantity": "sipariş adedi 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:49:02"
+  },
+  "0b9bf8248ceacd7b7d8708f81e0383557c19c7210d0262fc08ff9f38325a615b": {
+    "label_text": "Emine & Mustafa",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Emine",
+      "Mustafa"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Emine & Mustafa",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler EMİNE ve MUSTAFA",
+      "label_text": "isimler EMİNE ve MUSTAFA",
+      "name_cut_text": "isimler EMİNE ve MUSTAFA",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:48:40"
+  },
+  "1cff787116e26adfe8bb4d8158ad79d797f96a2659129bb55e6fe53672a955d7": {
+    "label_text": "Buse & Sezgin",
+    "date_text": "29.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Buse",
+      "Sezgin"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Buse & Sezgin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 94,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Buse ve Sezgin",
+      "label_text": "isimler Buse ve Sezgin",
+      "name_cut_text": "isimler Buse ve Sezgin",
+      "date_text": "tarih 29.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:48:55"
+  },
+  "57413ff48dbd4153dd18b733416993e41865a5237f49ca6a24331acac111e729": {
+    "label_text": "Buse & Sezgin",
+    "date_text": "29.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Buse",
+      "Sezgin"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Buse & Sezgin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Buse ve Sezgin",
+      "label_text": "isimler Buse ve Sezgin",
+      "name_cut_text": "isimler Buse ve Sezgin",
+      "date_text": "tarih 29.05.2026",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:50:01"
+  },
+  "fd9db900eacf9aa644ddc35b327baa8812faa87a5da00ee6ef5936a75b4089c9": {
+    "label_text": "Bahar & Celil",
+    "date_text": "",
+    "note_text": "Kutunun üstüne çikolatalar konulacak ve çiçeklere isim yazılacak; çikolata kaplamaları gümüş yapılacak; ekstra çikolata kutusu talebi.",
+    "person_names": [
+      "Bahar",
+      "Celil"
+    ],
+    "custom_text": "",
+    "production_note": "Kutunun üstüne çikolatalar konulacak ve çiçeklere isim yazılacak; çikolata kaplamaları gümüş yapılacak; ekstra çikolata kutusu talebi.",
+    "quantity": 1,
+    "name_cut_text": "Bahar & Celil",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 40,
+      "eventDate": 40,
+      "customText": 40,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Bahar ve Celil",
+      "label_text": "isimler Bahar ve Celil",
+      "name_cut_text": "isimler Bahar ve Celil",
+      "production_note": "Kutunun üstüne çikolatalar konulacak ve çiçeklere isim yazılacak; çikolata kaplamaları gümüş yapılacak; ekstra çikolata kutusu talebi.",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:49:53"
+  },
+  "2063c4a2861f7fc951fe82871522b233d39682e87bf3663818f51b88d400bccd": {
+    "label_text": "Zeynep & Ömer",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Zeynep",
+      "Ömer"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Zeynep & Ömer",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 60,
+      "productionNote": 70,
+      "note": 70,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Zeynep ve Ömer",
+      "label_text": "isimler Zeynep ve Ömer",
+      "name_cut_text": "isimler Zeynep ve Ömer"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:50:16"
+  },
+  "23fc90d51ede66569c7168e646cc48d2d81b4fbe0a58d9b930c82b2e9072d7e7": {
+    "label_text": "Özge Mert",
+    "date_text": "",
+    "note_text": "Puntosu resimdeki gibi olsun",
+    "person_names": [
+      "Özge Mert"
+    ],
+    "custom_text": "",
+    "production_note": "Puntosu resimdeki gibi olsun",
+    "quantity": 1,
+    "name_cut_text": "Özge & Mert",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.82,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 90,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "İsim Özge Mert",
+      "label_text": "İsim Özge Mert",
+      "name_cut_text": "İsim Özge Mert",
+      "production_note": "puntosu resimdeki gibi olsun",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-17 22:50:33"
+  },
+  "90a916023b569e49bf129114c6cbd02e00e574051b01a357508121e040a8938f": {
+    "label_text": "İlknur & Mert",
+    "date_text": "30.05.2026",
+    "note_text": "Renk: gold olsun.",
+    "person_names": [
+      "İlknur",
+      "Mert"
+    ],
+    "custom_text": "",
+    "production_note": "Renk: gold olsun.",
+    "quantity": 1,
+    "name_cut_text": "İlknur & Mert",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 80,
+      "eventDate": 80,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler İlknur ve Mert",
+      "label_text": "isimler İlknur ve Mert",
+      "name_cut_text": "isimler İlknur ve Mert",
+      "date_text": "tarih 30.05.2026",
+      "production_note": "gold olsun"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:51:17"
+  },
+  "dd217b2d69cd7b0b5241b3bc24527bce9da2723b6503d84ecbd8568832b563d5": {
+    "label_text": "Ferhat & Kardelen",
+    "date_text": "",
+    "note_text": "Tepsi oval olsun; görseldeki gibi renklerde kırmızı ve gold süslemeler; siyah kaplama.",
+    "person_names": [
+      "Ferhat",
+      "Kardelen"
+    ],
+    "custom_text": "",
+    "production_note": "Tepsi oval olsun; görseldeki gibi renklerde kırmızı ve gold süslemeler; siyah kaplama.",
+    "quantity": 1,
+    "name_cut_text": "Ferhat & Kardelen",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 40,
+      "eventDate": 40,
+      "customText": 40,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ferhat & Kardelen",
+      "label_text": "isimler Ferhat & Kardelen",
+      "name_cut_text": "isimler Ferhat & Kardelen",
+      "production_note": "Tepsi oval olsun; görseldeki gibi renklerde kırmızı ve gold süslemeler; siyah kaplama.",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:52:35"
+  },
+  "65ad3d2f727ee534782ef909b82e9a5ff6bf6729e98eb61d71abec8fd2256865": {
+    "label_text": "Aysel & Furkan",
+    "date_text": "04.06.2026",
+    "note_text": "",
+    "person_names": [
+      "Aysel",
+      "Furkan"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Aysel & Furkan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.89,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Aysel ve Furkan",
+      "label_text": "Aysel & Furkan",
+      "name_cut_text": "Aysel & Furkan",
+      "date_text": "tarih 04.06.2026",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:52:06"
+  },
+  "9af937e78fcb96122bc40d3aa813cf5380c28fd86bf4998b05193fe43766ae45": {
+    "label_text": "Burcu & Halit",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Burcu",
+      "Halit"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Burcu & Halit",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 96,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Burcu ve Halit",
+      "label_text": "isimler Burcu ve Halit",
+      "name_cut_text": "isimler Burcu ve Halit"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:52:24"
+  },
+  "f280208583ef8e658d93fee7bad86d49634d0d05f87a49de4208065e7470f72e": {
+    "label_text": "Pervin Umut",
+    "date_text": "",
+    "note_text": "Ürün rengi: kırmızı; Ürün tipi: gül",
+    "person_names": [
+      "Pervin Umut"
+    ],
+    "custom_text": "",
+    "production_note": "Ürün rengi: kırmızı; Ürün tipi: gül",
+    "quantity": 1,
+    "name_cut_text": "Pervin Umut",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 20,
+      "eventDate": 20,
+      "customText": 20,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "Pervin Umut",
+      "label_text": "Pervin Umut",
+      "name_cut_text": "Pervin Umut",
+      "production_note": "Ürün rengi: kırmızı; Ürün tipi: gül"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:52:43"
+  },
+  "22a22936af3dbd90606dcf776d8b2591cb2e3c34688287d52aa4161120a77a94": {
+    "label_text": "Zeliha & Mahmut",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Zeliha",
+      "Mahmut"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Zeliha & Mahmut",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Zeliha ve Mahmut",
+      "label_text": "isimler Zeliha ve Mahmut",
+      "name_cut_text": "isimler Zeliha ve Mahmut"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:53:02"
+  },
+  "3058b478dad2ece9e377fb543948539e93a855ca48def46f63030a1ba2128648": {
+    "label_text": "Esra Nur & Yunus Emre",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Esra Nur",
+      "Yunus Emre"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Esra Nur & Yunus Emre",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Esra Nur & Yunus Emre",
+      "label_text": "isimler Esra Nur & Yunus Emre",
+      "name_cut_text": "isimler Esra Nur & Yunus Emre"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:53:15"
+  },
+  "97e2bad9a09ab213a2dcb740724c8926c280eef7c0a262d349c801ed56617625": {
+    "label_text": "M. Zahid & Senanur",
+    "date_text": "24.05.2026",
+    "note_text": "Çiçeğin dış kaplama lacivert beyaz olabilir; isimler gümüş yazılı olsun; bir adet isteme gülü olsun; çikolataların yazısı gold olsun; çikolatalar E-25 kodlu olsun.",
+    "person_names": [
+      "M. Zahid",
+      "Senanur"
+    ],
+    "custom_text": "",
+    "production_note": "Çiçeğin dış kaplama lacivert beyaz olabilir; isimler gümüş yazılı olsun; bir adet isteme gülü olsun; çikolataların yazısı gold olsun; çikolatalar E-25 kodlu olsun.",
+    "quantity": 1,
+    "name_cut_text": "M. Zahid & Senanur",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 93,
+      "laserName": 93,
+      "personNames": 96,
+      "date": 92,
+      "eventDate": 92,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 92
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler M.ZAHİD&SENANUR olacak.",
+      "label_text": "isimler M.ZAHİD&SENANUR olacak.",
+      "name_cut_text": "isimler M.ZAHİD&SENANUR olacak.",
+      "date_text": "tarih 24.05.2026 olacak.",
+      "production_note": "Çiçeğin dış kaplama lacivert beyaz olabilir; isimler gümüş yazılı olsun; bir adet isteme gülü olsun; çikolataların yazısı gold olsun; çikolatalar E-25 kodlu olsun.",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:54:56"
+  },
+  "20c4acff8bae02c339ffa075d5b0506023d42ed35f320f4ddf9139a90a7617ed": {
+    "label_text": "Gülbahar & Emrah",
+    "date_text": "25.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Gülbahar",
+      "Emrah"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Gülbahar & Emrah",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Gülbahar ve Emrah",
+      "label_text": "isimler Gülbahar ve Emrah",
+      "name_cut_text": "isimler Gülbahar ve Emrah",
+      "date_text": "tarih 25.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:54:49"
+  },
+  "47e9f92226aab56cf9582537022c1dabcbe76fa20aa229449eae095ec3e4d690": {
+    "label_text": "İdil & Adnan",
+    "date_text": "23.05.2026",
+    "note_text": "Çikolataların üzerine İdil & Adnan 23.05.2026 yazılacak.",
+    "person_names": [
+      "İdil",
+      "Adnan"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolataların üzerine İdil & Adnan 23.05.2026 yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "İdil & Adnan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler İdil ve Adnan",
+      "label_text": "isimler İdil ve Adnan",
+      "name_cut_text": "isimler İdil ve Adnan",
+      "date_text": "tarih 23.05.2026",
+      "production_note": "Çikolataların üzerine İdil & Adnan 23.05.2026 yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:55:57"
+  },
+  "9255d81be33124baf9896310abee07f3401e5cbe36260d3fde478a5b2b90b9db": {
+    "label_text": "Rabia & Ali Rıza",
+    "date_text": "30.05.2026",
+    "note_text": "Nişan Hatırası yazısı yazılacak; yazının boyutu ayarlanacak.",
+    "person_names": [
+      "Rabia",
+      "Ali Rıza"
+    ],
+    "custom_text": "Nişan Hatırası",
+    "production_note": "Nişan Hatırası yazısı yazılacak; yazının boyutu ayarlanacak.",
+    "quantity": 1,
+    "name_cut_text": "Rabia & Ali Rıza",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 85,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Rabia ve Ali Rıza",
+      "label_text": "isimler Rabia ve Ali Rıza",
+      "name_cut_text": "isimler Rabia ve Ali Rıza",
+      "date_text": "tarih 30.05.2026",
+      "custom_text": "nişan hatırası",
+      "production_note": "Nişan Hatırası yazısı yazılacak; yazının boyutu ayarlanacak.",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:55:18"
+  },
+  "f5e597fb842e843e5b5f897920facbce198ca05d6c3cbc58d6785f1418f97fef": {
+    "label_text": "İrem & Oktay",
+    "date_text": "",
+    "note_text": "Yazı rengi GOLD olsun.",
+    "person_names": [
+      "İrem",
+      "Oktay"
+    ],
+    "custom_text": "",
+    "production_note": "Yazı rengi GOLD olsun.",
+    "quantity": 1,
+    "name_cut_text": "İrem & Oktay",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler \"İrem\" \"Oktay\"",
+      "label_text": "isimler \"İrem\" \"Oktay\"",
+      "name_cut_text": "isimler \"İrem\" \"Oktay\"",
+      "production_note": "yazı rengi GOLD olsun",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:55:35"
+  },
+  "0f048120952c57c57c14b0356ed37eeb98b5ff4b43245c0122566b6c25dcef7c": {
+    "label_text": "Fikret & Ayşenur Olucak",
+    "date_text": "",
+    "note_text": "Beyaz tül isteniyor; süslemeler için gold renk.",
+    "person_names": [
+      "Fikret",
+      "Ayşenur Olucak"
+    ],
+    "custom_text": "",
+    "production_note": "Beyaz tül isteniyor; süslemeler için gold renk.",
+    "quantity": 1,
+    "name_cut_text": "Fikret & Ayşenur Olucak",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler FİKRET VE AYŞENUR OLUCAK",
+      "label_text": "isimler FİKRET VE AYŞENUR OLUCAK",
+      "name_cut_text": "isimler FİKRET VE AYŞENUR OLUCAK",
+      "production_note": "Beyaz tül isteniyor; süslemeler için gold renk.",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:56:55"
+  },
+  "5b063b9ceb9003fc17e4eee2882074cf383ae02d7520b531edf3de18a290d7d9": {
+    "label_text": "Şevval & Uğur",
+    "date_text": "30.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Şevval",
+      "Uğur"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Şevval & Uğur",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Şevval ve Uğur",
+      "label_text": "isimler Şevval ve Uğur",
+      "name_cut_text": "isimler Şevval ve Uğur",
+      "date_text": "tarih 30.05.2026",
+      "production_note": "İsimler Şevval & Uğur yazılacak; tarih 30.05.2026 yazılacak; renk olarak Gold kullanılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:57:30"
+  },
+  "f33fa1aeda28c2d1ef7fb3c085d3285196c7dbfbcc38599e8f6964185c4a3629": {
+    "label_text": "Nida Aygün",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Nida Aygün"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Nida Aygün",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Nida Aygün",
+      "label_text": "isimler Nida Aygün",
+      "name_cut_text": "isimler Nida Aygün",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:57:46"
+  },
+  "39b303c686bcbf47093273176ff54be28eb18a54530d35fbf6f790e5d9007e0b": {
+    "label_text": "Mert & Arzu",
+    "date_text": "30.05.2026",
+    "note_text": "Çiçeğin kağıt rengi görseldeki gibi olsun; çiçek için görseldeki kağıt rengi ile aynı renk kağıt kullanılacak. Çikolataya 30.05.2026 tarihi yazılacak.",
+    "person_names": [
+      "Mert",
+      "Arzu"
+    ],
+    "custom_text": "",
+    "production_note": "Çiçeğin kağıt rengi görseldeki gibi olsun; çiçek için görseldeki kağıt rengi ile aynı renk kağıt kullanılacak. Çikolataya 30.05.2026 tarihi yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Mert & Arzu",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 94,
+      "laserName": 94,
+      "personNames": 95,
+      "date": 92,
+      "eventDate": 92,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Mert ve Arzu",
+      "label_text": "isimler Mert ve Arzu",
+      "name_cut_text": "isimler Mert ve Arzu",
+      "date_text": "tarih 30.05.2026",
+      "production_note": "Çiçeğin kağıt rengi görseldeki gibi olsun; çiçek için görseldeki kağıt rengi ile aynı renk kağıt kullanılacak. Çikolataya 30.05.2026 tarihi yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:58:04"
+  },
+  "04c169362476a338266b9d6668b5a031d9a6e55d968e696d24462ac47430aaec": {
+    "label_text": "İrem & Harun",
+    "date_text": "",
+    "note_text": "Teslimat talimatı: Bu hafta hızlı kargolansın.",
+    "person_names": [
+      "İrem",
+      "Harun"
+    ],
+    "custom_text": "",
+    "production_note": "Teslimat talimatı: Bu hafta hızlı kargolansın.",
+    "quantity": 1,
+    "name_cut_text": "İrem & Harun",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 40,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 95
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "İsimler: İrem&Harun",
+      "label_text": "İrem & Harun",
+      "name_cut_text": "İrem & Harun",
+      "production_note": "Teslimat talimatı: Bu hafta hızlı kargolansın.",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:58:59"
+  },
+  "5f1df8720935818bcc5db69827df78bed67508918fc418d21ad16a3f457cc3ba": {
+    "label_text": "Mehtap & Ahmet",
+    "date_text": "29.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Mehtap",
+      "Ahmet"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Mehtap & Ahmet",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Mehtap ve Ahmet",
+      "label_text": "isimler Mehtap ve Ahmet",
+      "name_cut_text": "isimler Mehtap ve Ahmet",
+      "date_text": "tarih 29.05.2026",
+      "production_note": "Gümüş renk olacak; isimler Mehtap ve Ahmet yazılacak; 29.05.2026 tarih yazılacak.",
+      "quantity": "sipariş adedi 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:59:15"
+  },
+  "4c2f0fe21154f95f022ba25213d5746bbcd8d7bcd2cf809dc5f481d5513faaf9": {
+    "label_text": "Mehmet Seval",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Mehmet Seval"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Mehmet Seval",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 50,
+      "eventDate": 50,
+      "customText": 40,
+      "productionNote": 60,
+      "note": 60,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Mehmet Seval",
+      "label_text": "isimler Mehmet Seval",
+      "name_cut_text": "isimler Mehmet Seval",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:59:29"
+  },
+  "b5ecf04d347a4693d52287d0a1af19ec5b0cc830dce4eebc36f0c0b93267fe98": {
+    "label_text": "Hozan & Pelşin",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Hozan",
+      "Pelşin"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Hozan & Pelşin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 96,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Hozan Pelşin",
+      "label_text": "isimler Hozan Pelşin",
+      "name_cut_text": "isimler Hozan Pelşin",
+      "production_note": "İsimler yazılacak: Hozan Pelşin"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:59:44"
+  },
+  "d5e10cbe29dd2855469cb9e2bf7a492381bcd6dae92e155ac28e130598f3ef99": {
+    "label_text": "Merve & Burak",
+    "date_text": "29.05.2026",
+    "note_text": "“Nişan Hatırası” yazılacak.",
+    "person_names": [
+      "Merve",
+      "Burak"
+    ],
+    "custom_text": "Nişan Hatırası",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Merve & Burak",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.93,
+    "field_confidence": {
+      "labelName": 93,
+      "laserName": 93,
+      "personNames": 95,
+      "date": 92,
+      "eventDate": 92,
+      "customText": 90,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Merve ve Burak",
+      "label_text": "isimler Merve ve Burak",
+      "name_cut_text": "isimler Merve ve Burak",
+      "date_text": "tarih 29.05.2026",
+      "custom_text": "nişan hatırası"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 22:59:59"
+  },
+  "13ffaf7d05777f04c8f5ad54dd9a1c63cd5198edb30395b1092074fdd9c2fdf6": {
+    "label_text": "Canan & İbrahim",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Canan",
+      "İbrahim"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Canan & İbrahim",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 100
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Canan&İbrahim",
+      "label_text": "isimler Canan & İbrahim",
+      "name_cut_text": "isimler Canan & İbrahim",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:00:33"
+  },
+  "b4bea8017a2bf8dce273553a3b7ece99ddb32edac7dba15e9a0a52d2162eb60c": {
+    "label_text": "Hilal & Mustafa",
+    "date_text": "29.05.2026",
+    "note_text": "Çikolata üzerine Hilal & Mustafa yazısı ve 29.05.2026 tarihi yazılacak; yazı tipi ve punto müşterinin talebine göre belirlenecek.",
+    "person_names": [
+      "Hilal",
+      "Mustafa"
+    ],
+    "custom_text": "Nişan yazısı",
+    "production_note": "Çikolata üzerine Hilal & Mustafa yazısı ve 29.05.2026 tarihi yazılacak; yazı tipi ve punto müşterinin talebine göre belirlenecek.",
+    "quantity": 1,
+    "name_cut_text": "Hilal & Mustafa",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 85,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Hilal ve Mustafa",
+      "label_text": "isimler Hilal ve Mustafa",
+      "name_cut_text": "isimler Hilal ve Mustafa",
+      "date_text": "tarih 29.05.2026",
+      "custom_text": "nişan yazısı",
+      "production_note": "çikolata üzerine yazı tipi ve punto; Hilal & Mustafa yazısı ve 29.05.2026 tarihi talimatı"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:00:52"
+  },
+  "8a4525b5b5a828f7e5af885090ba4cfc83b6ffbd4873d56ead82baef901bd5e8": {
+    "label_text": "Merve & Mustafa",
+    "date_text": "06.06.2026",
+    "note_text": "",
+    "person_names": [
+      "Merve",
+      "Mustafa"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Merve & Mustafa",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 93,
+      "eventDate": 93,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Merve ve Mustafa",
+      "label_text": "isimler Merve ve Mustafa",
+      "name_cut_text": "isimler Merve ve Mustafa",
+      "date_text": "tarih 06.06.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:01:07"
+  },
+  "afd02d6f5fa54ffc38e4be10c17659b86ff49ef2187b2c56c3830f0aa9b8c18b": {
+    "label_text": "Merve & Mustafa",
+    "date_text": "06.06.2026",
+    "note_text": "",
+    "person_names": [
+      "Merve",
+      "Mustafa"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Merve & Mustafa",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Merve ve Mustafa",
+      "label_text": "isimler Merve ve Mustafa",
+      "name_cut_text": "isimler Merve ve Mustafa",
+      "date_text": "tarih 06.06.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:01:21"
+  },
+  "5b6ead9671fde4a80eae280526513a565517249920ae23ef9783092cf7d35f16": {
+    "label_text": "Sena & Burakcan",
+    "date_text": "",
+    "note_text": "Renk gold olarak tüm ürün üzerinde; yazılar da gold olsun.",
+    "person_names": [
+      "Sena",
+      "Burakcan"
+    ],
+    "custom_text": "",
+    "production_note": "Renk gold olarak tüm ürün üzerinde; yazılar da gold olsun.",
+    "quantity": 1,
+    "name_cut_text": "Sena & Burakcan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.86,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 60,
+      "productionNote": 80,
+      "note": 80,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimlerimiz SENA BURAKCAN",
+      "label_text": "isimlerimiz SENA BURAKCAN",
+      "name_cut_text": "isimlerimiz SENA BURAKCAN",
+      "production_note": "Renk gold olarak tüm ürün üzerinde; yazılar gold olsun",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:01:47"
+  },
+  "e621b598ee66e80e7e87aee558dcdd80582fcd1ceaa40e21a0471fb8645866fb": {
+    "label_text": "İclal & Özgür",
+    "date_text": "28.05.2026",
+    "note_text": "Çikolata ve çiçeğinin üstüne isimler yazılacak.",
+    "person_names": [
+      "İclal",
+      "Özgür"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolata ve çiçeğinin üstüne isimler yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "İclal & Özgür",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 93,
+      "laserName": 93,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler İclal ve Özgür",
+      "label_text": "isimler İclal ve Özgür",
+      "name_cut_text": "isimler İclal ve Özgür",
+      "date_text": "tarih 28.05.2026",
+      "production_note": "çikolata ve çiçeğinin üstüne isimler yazılacak",
+      "quantity": "sipariş adedi 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:02:02"
+  },
+  "bfcdf00a538a568ca00c3bda2a3b6749b09129659e35fefe619aece5e98df9d3": {
+    "label_text": "Esmigûl & Muaz",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Esmigûl",
+      "Muaz"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Esmigûl & Muaz",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Esmigûl ve Muaz",
+      "label_text": "isimler Esmigûl ve Muaz",
+      "name_cut_text": "isimler Esmigûl ve Muaz"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:02:15"
+  },
+  "28d3a4408e322fda81491326003db307f43201edf019292c71a9d2b4e8d039f9": {
+    "label_text": "Büşra & Emirhan",
+    "date_text": "",
+    "note_text": "Yazı Gold renk olacak. Siyah kutu. kırmızı gül.",
+    "person_names": [
+      "Büşra",
+      "Emirhan"
+    ],
+    "custom_text": "",
+    "production_note": "Yazı Gold renk olacak. Siyah kutu. kırmızı gül.",
+    "quantity": 1,
+    "name_cut_text": "Büşra & Emirhan",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Büşra ve Emirhan",
+      "label_text": "isimler Büşra ve Emirhan",
+      "name_cut_text": "isimler Büşra ve Emirhan",
+      "production_note": "müşteri mesajı içeriği: 'Yazı Gold renk olucak Siyah kutu kırmızı gül'",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:03:33"
+  },
+  "a8e0154d6fef3afddd0b0cebf288208d5d709cb76b8e772ceaf0b30e7470df63": {
+    "label_text": "Yasemin & Kadir",
+    "date_text": "",
+    "note_text": "Çiçeğin üstüne Yasemin ve Kadir yazılacak.",
+    "person_names": [
+      "Yasemin",
+      "Kadir"
+    ],
+    "custom_text": "",
+    "production_note": "Çiçeğin üstüne Yasemin ve Kadir yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Yasemin & Kadir",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Yasemin ve Kadir",
+      "label_text": "isimler Yasemin ve Kadir",
+      "name_cut_text": "isimler Yasemin ve Kadir",
+      "production_note": "Çiçeğin üstüne Yasemin ve Kadir yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:02:38"
+  },
+  "5e8d17e5fa1c032af22f825106392fadb4dd6fe786daab0e2759091614101580": {
+    "label_text": "Sıla & İsmail",
+    "date_text": "25.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Sıla",
+      "İsmail"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Sıla & İsmail",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 90,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Sıla ve İsmail",
+      "label_text": "isimler Sıla ve İsmail",
+      "name_cut_text": "isimler Sıla ve İsmail",
+      "date_text": "tarih 25.05.2026",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:03:17"
+  },
+  "82d1f9e75492f17d3f1e26e6d0c550394952f9e2c3feac8b28a2239667fb733b": {
+    "label_text": "Ceren & Aykut",
+    "date_text": "23.05.2026",
+    "note_text": "Çikolataların üzerine 23.05.2026 tarihi yazılacak.",
+    "person_names": [
+      "Ceren",
+      "Aykut"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolataların üzerine 23.05.2026 tarihi yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Ceren & Aykut",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ceren Aykut",
+      "label_text": "isimler Ceren & Aykut",
+      "name_cut_text": "isimler Ceren & Aykut",
+      "date_text": "tarih 23.05.2026",
+      "production_note": "çikolataların üzerine yazılacak / 23.05.2026 tarihi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:03:47"
+  },
+  "ee7b385855238315e2b91265a80ebb6b7f2a26e2ddf6f613c29e41a2220ba03f": {
+    "label_text": "Sevgim & Ege",
+    "date_text": "29.05.2026",
+    "note_text": "Ürüne Sevgim & Ege ve 29.05.2026 tarihi yazılacak.",
+    "person_names": [
+      "Sevgim",
+      "Ege"
+    ],
+    "custom_text": "",
+    "production_note": "Ürüne Sevgim & Ege ve 29.05.2026 tarihi yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Sevgim & Ege",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Sevgim ve Ege",
+      "label_text": "isimler Sevgim ve Ege",
+      "name_cut_text": "isimler Sevgim ve Ege",
+      "date_text": "tarih 29.05.2026",
+      "production_note": "Ürün üzerine Sevgim & Ege ve 29.05.2026 tarihi yazılacak"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:04:04"
+  },
+  "d45e72821cf8febf5a6fea9d4286f86eef68cc60bae39ac02cb47ae9e6860a7c": {
+    "label_text": "Sema Nur Hanifi",
+    "date_text": "24.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Sema Nur Hanifi"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Sema Nur Hanifi",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 88,
+      "eventDate": 88,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Sema Nur Hanifi",
+      "label_text": "isimler Sema Nur Hanifi",
+      "name_cut_text": "isimler Sema Nur Hanifi",
+      "date_text": "tarih 24.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:04:13"
+  },
+  "b2c67bd0a2cac99b7613674c0024f580ff021c1eff9d181ce01bab0ef8d165c3": {
+    "label_text": "Açelya & Ömür",
+    "date_text": "06.06.2026",
+    "note_text": "Çikolatalara yazılacak: Açelya ve Ömür 06.06.2026",
+    "person_names": [
+      "Açelya",
+      "Ömür"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolatalara yazılacak: Açelya ve Ömür 06.06.2026",
+    "quantity": 1,
+    "name_cut_text": "Açelya & Ömür",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "Açelya ve Ömür",
+      "label_text": "Açelya ve Ömür",
+      "name_cut_text": "Açelya ve Ömür",
+      "date_text": "tarih 06.06.2026",
+      "production_note": "Çikolatalara yazılacak: Açelya ve Ömür 06.06.2026",
+      "quantity": "sipariş adedi 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:04:29"
+  },
+  "7b1605c1f4e9fb3c4412d06760113b7ad9d5825a3ea1886da2feeb82961cfb2c": {
+    "label_text": "Eylem & Engin",
+    "date_text": "",
+    "note_text": "“Kolay gelsin” yazılacak.",
+    "person_names": [
+      "Eylem",
+      "Engin"
+    ],
+    "custom_text": "Kolay gelsin",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Eylem & Engin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.78,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 50,
+      "eventDate": 50,
+      "customText": 70,
+      "productionNote": 60,
+      "note": 60,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": true,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Eylem-Engin",
+      "label_text": "isimler Eylem-Engin",
+      "name_cut_text": "isimler Eylem-Engin",
+      "custom_text": "kolay gelsin",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-17 23:04:48"
+  },
+  "806717f5f06d29e7bfb58a3a434c23c9c957707d51b4fc8aa6db31dfaf7b2e83": {
+    "label_text": "Berivan & Ömürcan",
+    "date_text": "29.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Berivan",
+      "Ömürcan"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Berivan & Ömürcan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 88,
+      "laserName": 88,
+      "personNames": 90,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler BERİVAN & ÖMÜRCAN",
+      "label_text": "isimler BERİVAN & ÖMÜRCAN",
+      "name_cut_text": "isimler BERİVAN & ÖMÜRCAN",
+      "date_text": "tarih 29.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:05:11"
+  },
+  "75708c347b5238f58f759840a528eca1ea6858b1fa7d885f8f94f59ff8f044bb": {
+    "label_text": "Can & Nisa Gold",
+    "date_text": "",
+    "note_text": "Gül beyaz yerine kırmızı olacak; güzel paketlensin; hasarsız gelsin.",
+    "person_names": [
+      "Can",
+      "Nisa Gold"
+    ],
+    "custom_text": "",
+    "production_note": "Gül beyaz yerine kırmızı olacak; güzel paketlensin; hasarsız gelsin.",
+    "quantity": 1,
+    "name_cut_text": "Can & Nisa Gold",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 92,
+      "note": 92,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler CAN ve NİSA GOLD",
+      "label_text": "isimler CAN ve NİSA GOLD",
+      "name_cut_text": "isimler CAN ve NİSA GOLD",
+      "production_note": "Gül beyaz yerine kırmızı olacak; güzel paketlensin; hasarsız gelsin."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:06:00"
+  },
+  "e018a93595c424f34a90934c31bbec97f315c61afe13abace85e89fea87142ce": {
+    "label_text": "Sevginur & Nurettin",
+    "date_text": "30.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Sevginur",
+      "Nurettin"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Sevginur & Nurettin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "kız ismi: Sevginur; erkek ismi: Nurettin",
+      "label_text": "kız ismi: Sevginur; erkek ismi: Nurettin",
+      "name_cut_text": "kız ismi: Sevginur; erkek ismi: Nurettin",
+      "date_text": "Tarih : 30.05.2026",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:05:47"
+  },
+  "84b6d97e111bfece8d1d970229b4a9314706a722cbed92432f9e54550d78051b": {
+    "label_text": "Elif & Hasan",
+    "date_text": "30.05.2026",
+    "note_text": "“Nişan hatırası” yazılacak.",
+    "person_names": [
+      "Elif",
+      "Hasan"
+    ],
+    "custom_text": "Nişan hatırası",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Elif & Hasan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 85,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Elif ve Hasan",
+      "label_text": "isimler Elif ve Hasan",
+      "name_cut_text": "isimler Elif ve Hasan",
+      "date_text": "tarih 30.05.2026",
+      "custom_text": "nişan hatırası",
+      "production_note": "Çikolataların üzerine 30.05.2026 tarihi ile Elif ve Hasan isimleri ve “Nişan hatırası” yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:06:00"
+  },
+  "05875e57bb808f55230f309db7f315a870a8a4cce07f6f785614df2237d9b2a6": {
+    "label_text": "Yudum & Samet",
+    "date_text": "",
+    "note_text": "Gold olsun",
+    "person_names": [
+      "Yudum",
+      "Samet"
+    ],
+    "custom_text": "",
+    "production_note": "Gold olsun",
+    "quantity": 1,
+    "name_cut_text": "Yudum & Samet",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 94,
+      "laserName": 94,
+      "personNames": 96,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Yudum ve Samet",
+      "label_text": "isimler Yudum ve Samet",
+      "name_cut_text": "isimler Yudum ve Samet",
+      "date_text": "tarih yok",
+      "custom_text": "null",
+      "production_note": "gold olsun",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:06:18"
+  },
+  "6d609c46a77d02f0f1886443a98ede8ae1694570c52c6e90e1d9f86454223640": {
+    "label_text": "Emine Emircan",
+    "date_text": "",
+    "note_text": "Çiçeğin üzerine Emine Emircan yazılacak. Çikolatalara 'Allah'ın emri kızını istemeye geldik' yazısı yazılacak. Teslimattan önce ürün fotoğrafı gönderilmeli.",
+    "person_names": [
+      "Emine Emircan"
+    ],
+    "custom_text": "Allah'ın emri kızını istemeye geldik",
+    "production_note": "Çiçeğin üzerine Emine Emircan yazılacak. Çikolatalara 'Allah'ın emri kızını istemeye geldik' yazısı yazılacak. Teslimattan önce ürün fotoğrafı gönderilmeli.",
+    "quantity": 1,
+    "name_cut_text": "Emine Emircan",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 85,
+      "laserName": 85,
+      "personNames": 90,
+      "date": 50,
+      "eventDate": 50,
+      "customText": 85,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 95
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": true,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Emine Emircan",
+      "label_text": "isimler Emine Emircan",
+      "name_cut_text": "isimler Emine Emircan",
+      "date_text": "tarih yok",
+      "custom_text": "Allah'ın emri kızını istemeye geldik",
+      "production_note": "Çiçeğin üzerine Emine Emircan yazılacak. Çikolatalara 'Allah'ın emri kızını istemeye geldik' yazısı yazılacak. Teslimattan önce ürün fotoğrafı gönderilmeli."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:07:03"
+  },
+  "5cb4565e87f5e8767de930747918602fa5328d1d8452271a1ef32fdea32b78ce": {
+    "label_text": "Damlanur Mercan",
+    "date_text": "",
+    "note_text": "Çikolataların üzerine Damlanur & Derman yazılacak. 40 adet aynı isimler basılabilir mi?",
+    "person_names": [
+      "Damlanur Mercan"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolataların üzerine Damlanur & Derman yazılacak. 40 adet aynı isimler basılabilir mi?",
+    "quantity": 1,
+    "name_cut_text": "Damlanur & Derman",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.75,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 90,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Damlanur Mercan",
+      "label_text": "isimler Damlanur Mercan",
+      "name_cut_text": "isimler Damlanur Mercan",
+      "production_note": "damlanur mercan çikolataların üzerine yazı talimatı",
+      "quantity": "40"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-17 23:07:10"
+  },
+  "f7b71d18d61d0125810f3b025c3f23aa9d9cc62266f8474a7b7ee03d8bac71d4": {
+    "label_text": "Sümeyye & Said",
+    "date_text": "06.06.2026",
+    "note_text": "",
+    "person_names": [
+      "Sümeyye",
+      "Said"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Sümeyye & Said",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 95,
+      "eventDate": 95,
+      "customText": 60,
+      "productionNote": 60,
+      "note": 60,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Sümeyye ve Said",
+      "label_text": "isimler Sümeyye ve Said",
+      "name_cut_text": "isimler Sümeyye ve Said",
+      "date_text": "tarih 06.06.2026",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:08:49"
+  },
+  "eb9e3c92dbd4b873f486d798245565368e1073f46a9e439a4c38a4e748bde7f5": {
+    "label_text": "Damlanur Mercan & Damlanur Derman",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Damlanur Mercan",
+      "Damlanur Derman"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Damlanur Mercan & Damlanur Derman",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.86,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 40,
+      "eventDate": 40,
+      "customText": 40,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler damlanur mercan ve damlanur derman",
+      "label_text": "isimler damlanur mercan ve damlanur derman",
+      "name_cut_text": "isimler damlanur mercan ve damlanur derman",
+      "production_note": "çikolataların üzerine damlanur mercan ve damlanur derman yazılacak; 40 adet aynı isimler basılabilir mi",
+      "quantity": "müşteri mesajında 40 adet"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:08:57"
+  },
+  "ebcb712088654e13da2e11fad41dc7cf244c05acc036459970342fdf771f22ac": {
+    "label_text": "Yusuf & Deniz",
+    "date_text": "",
+    "note_text": "Yusuf Deniz yazılacak",
+    "person_names": [
+      "Yusuf",
+      "Deniz"
+    ],
+    "custom_text": "",
+    "production_note": "Yusuf Deniz yazılacak",
+    "quantity": 1,
+    "name_cut_text": "Yusuf & Deniz",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 60,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Yusuf ve Deniz",
+      "label_text": "isimler Yusuf ve Deniz",
+      "name_cut_text": "isimler Yusuf ve Deniz",
+      "production_note": "Yusuf Deniz yazılacak"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:09:12"
+  },
+  "9ae4fd7cd7a0a1265a895d2bc146eee9561a64cd5cf2bb4fc257062cdb133482": {
+    "label_text": "Eflin & Hafse",
+    "date_text": "",
+    "note_text": "Ürüne yazılacak metin: Hoşgeldin Eflin Hafse",
+    "person_names": [
+      "Eflin",
+      "Hafse"
+    ],
+    "custom_text": "",
+    "production_note": "Ürüne yazılacak metin: Hoşgeldin Eflin Hafse",
+    "quantity": 1,
+    "name_cut_text": "Eflin & Hafse",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Eflin ve Hafse",
+      "label_text": "isimler Eflin ve Hafse",
+      "name_cut_text": "isimler Eflin ve Hafse",
+      "production_note": "Ürüne yazılacak metin: Hoşgeldin Eflin Hafse",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:10:13"
+  },
+  "471be05d844d977c62593dc2f38849d0781f5f9ec60c0f4a206a35f2372bab17": {
+    "label_text": "Suat & Rüya",
+    "date_text": "25.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Suat",
+      "Rüya"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Suat & Rüya",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 96,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Suat ve Rüya",
+      "label_text": "isimler Suat ve Rüya",
+      "name_cut_text": "isimler Suat ve Rüya",
+      "date_text": "tarih 25.05.2026",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:09:56"
+  },
+  "80aff0f4cc74dae8fa0c20003ac87085d4e539f00b333d63203439f5cc150ea1": {
+    "label_text": "Songül & Ufuk",
+    "date_text": "29.05.2026",
+    "note_text": "Tül ve çiçeklerin rengi pembe olacak.",
+    "person_names": [
+      "Songül",
+      "Ufuk"
+    ],
+    "custom_text": "",
+    "production_note": "Tül ve çiçeklerin rengi pembe olacak.",
+    "quantity": 1,
+    "name_cut_text": "Songül & Ufuk",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 88,
+      "note": 88,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Songül ve Ufuk",
+      "label_text": "isimler Songül ve Ufuk",
+      "name_cut_text": "isimler Songül ve Ufuk",
+      "date_text": "tarih 29.05.2026",
+      "production_note": "Tül ve çiçeklerin rengi pembe olacak.",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:10:49"
+  },
+  "a9435ce909bec346ea47073602499f88c9d4555e9acf717278026dfc854a84cd": {
+    "label_text": "Yağmur & Semih",
+    "date_text": "22.05.2026",
+    "note_text": "Gümüş renkli olsun.",
+    "person_names": [
+      "Yağmur",
+      "Semih"
+    ],
+    "custom_text": "",
+    "production_note": "Gümüş renkli olsun.",
+    "quantity": 1,
+    "name_cut_text": "Yağmur & Semih",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.93,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 95,
+      "eventDate": 95,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Yağmur ve Semih",
+      "label_text": "isimler Yağmur ve Semih",
+      "name_cut_text": "isimler Yağmur ve Semih",
+      "date_text": "tarih 22.05.2026",
+      "production_note": "Gümüş renkli olsun."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:10:31"
+  },
+  "9e0f7ffe9b2f161c161d5c73ea876816f63be05b94b0fac2709f18ff58cb9453": {
+    "label_text": "Rabia & Davut",
+    "date_text": "24.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Rabia",
+      "Davut"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Rabia & Davut",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 90,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Rabia ve Davut",
+      "label_text": "isimler Rabia ve Davut",
+      "name_cut_text": "isimler Rabia ve Davut",
+      "date_text": "tarih 24.05.26"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:11:06"
+  },
+  "d69de6dc061339451f287582ab8e4ad0a7dbca41ecd58cbd2b97a4a601cb9515": {
+    "label_text": "Erhan & Latife",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Erhan",
+      "Latife"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Erhan & Latife",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 96,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Erhan ve Latife",
+      "label_text": "isimler Erhan ve Latife",
+      "name_cut_text": "isimler Erhan ve Latife"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:11:03"
+  },
+  "97d7197cd0c3187ba684e5cbe8b6593cc329433917a87c302b63a25a6aa3f904": {
+    "label_text": "Yasin & Berrin",
+    "date_text": "",
+    "note_text": "4x4cm boyutunda olsun.",
+    "person_names": [
+      "Yasin",
+      "Berrin"
+    ],
+    "custom_text": "",
+    "production_note": "4x4cm boyutunda olsun.",
+    "quantity": 1,
+    "name_cut_text": "Yasin & Berrin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 50,
+      "eventDate": 50,
+      "customText": 50,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Yasin ve Berrin",
+      "label_text": "isimler Yasin ve Berrin",
+      "name_cut_text": "isimler Yasin ve Berrin",
+      "production_note": "4x4cm boyutunda olsun."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:11:24"
+  },
+  "c416bfdf543501fa7e1c3783f03f4f10eedbb33211e8d0c028dc6fdb5db45dfc": {
+    "label_text": "Elif & Şahin",
+    "date_text": "31.05.2026",
+    "note_text": "Çikolataların üzerine Elif & Şahin ve 31.05.2026 tarihi yazılacak.",
+    "person_names": [
+      "Elif",
+      "Şahin"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolataların üzerine Elif & Şahin ve 31.05.2026 tarihi yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Elif & Şahin",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Elif ve Şahin",
+      "label_text": "isimler Elif ve Şahin",
+      "name_cut_text": "isimler Elif ve Şahin",
+      "date_text": "tarih 31.05.2026",
+      "production_note": "Çikolataların üzerine Elif & Şahin ve 31.05.2026 tarihi yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-17 23:11:37"
+  },
+  "de2d2f1dc21806fa06e4bfa26d2e745635627e12ace4f3df3ea86c9bdb43ef95": {
+    "label_text": "",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.7,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": []
+    },
+    "_debug_final_before_validation": {
+      "label_text": "",
+      "name_cut_text": "",
+      "date_text": "",
+      "person_names": [],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.7
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Müşteri mesajında kişi ismi bulunamadı.",
+      "Tarih müşteri mesajında bulunamadı.",
+      "Müşteri mesajında isim bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "empty",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "empty",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-18 23:43:34"
+  },
+  "7304cfc572dc9dbe2ae1f2879fa2e3a182a9461d529251b82a46555698153147": {
+    "label_text": "Büşranur Çağrı",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Büşranur Çağrı"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Büşranur Çağrı",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Büşranur Çağrı",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Büşranur Çağrı",
+      "name_cut_text": "Büşranur Çağrı",
+      "date_text": "",
+      "person_names": [
+        "Büşranur Çağrı"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.88
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Büşranur Çağrı",
+      "label_text": "isimler Büşranur Çağrı",
+      "name_cut_text": "isimler Büşranur Çağrı"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-18 23:52:18"
+  },
+  "f83d746cadade30eca6a77b9ca3d4c7d6dd488773aab89e03d0420af16308fd3": {
+    "label_text": "",
+    "date_text": "",
+    "note_text": "Yazılar altın renkli olacak.",
+    "person_names": [],
+    "custom_text": "",
+    "production_note": "Yazılar altın renkli olacak.",
+    "quantity": 1,
+    "name_cut_text": "",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.72,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": null,
+          "colorOrStyle": "gold",
+          "note": "yazılar için renk talimatı: gold"
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "",
+      "name_cut_text": "",
+      "date_text": "",
+      "person_names": [],
+      "custom_text": "",
+      "production_note": "Yazılar altın renkli olacak.",
+      "quantity": 1,
+      "confidence": 0.72
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Müşteri mesajında kişi ismi bulunamadı.",
+      "Mesaj renk/tasarım talimatı içeriyor; isim alanına aktarılmamalı.",
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "empty",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "empty",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "production_note": "Yazılar gold renkte olacak."
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-19 21:18:05"
+  },
+  "cc583d8e5e22e0f885c5017960c5f1920c0aa6c5f08130354be67ef1582febbc": {
+    "label_text": "İrem & Talha",
+    "date_text": "31.05.2026",
+    "note_text": "",
+    "person_names": [
+      "İrem",
+      "Talha"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "İrem & Talha",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "çikolata",
+          "textToWrite": "İrem & Talha",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "İrem & Talha",
+      "name_cut_text": "İrem & Talha",
+      "date_text": "31.05.2026",
+      "person_names": [
+        "İrem",
+        "Talha"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler İrem ve Talha",
+      "label_text": "isimler İrem ve Talha",
+      "name_cut_text": "isimler İrem ve Talha",
+      "date_text": "tarih 31.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:37:19"
+  },
+  "c540c65a52b5530693d8da180b05be5c5ddc5aa418221c6b2670502b9a77729a": {
+    "label_text": "Gülbanu & Yasin",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Gülbanu",
+      "Yasin"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Gülbanu & Yasin",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Gülbanu & Yasin",
+          "colorOrStyle": null,
+          "note": null
+        },
+        {
+          "surface": "lazer",
+          "textToWrite": "Gülbanu & Yasin",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Gülbanu & Yasin",
+      "name_cut_text": "Gülbanu & Yasin",
+      "date_text": "",
+      "person_names": [
+        "Gülbanu",
+        "Yasin"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.9
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "Gülbanu ve Yasin",
+      "label_text": "Gülbanu & Yasin",
+      "name_cut_text": "Gülbanu & Yasin",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:38:57"
+  },
+  "0f84283c9efd8512ef4d1981d6e512571117f7fc5364076c3e13a91ae95b9549": {
+    "label_text": "Oğuzhan & Hamide",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Oğuzhan",
+      "Hamide"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Oğuzhan & Hamide",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Oğuzhan & Hamide",
+          "colorOrStyle": null,
+          "note": null
+        },
+        {
+          "surface": "lazer",
+          "textToWrite": "Oğuzhan & Hamide",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Oğuzhan & Hamide",
+      "name_cut_text": "Oğuzhan & Hamide",
+      "date_text": "",
+      "person_names": [
+        "Oğuzhan",
+        "Hamide"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Oğuzhan ve Hamide",
+      "label_text": "isimler Oğuzhan ve Hamide",
+      "name_cut_text": "isimler Oğuzhan ve Hamide"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:39:57"
+  },
+  "bcd5ab6222a19a5cbe2d72d794f2b6c7c9d4f688246bc5d645a42f4af39b63a6": {
+    "label_text": "Duygu & Yücel",
+    "date_text": "",
+    "note_text": "Üzerine lazer ile Duygu Yücel ismi yazılacak.",
+    "person_names": [
+      "Duygu",
+      "Yücel"
+    ],
+    "custom_text": "",
+    "production_note": "Üzerine lazer ile Duygu Yücel ismi yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Duygu & Yücel",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Duygu Yücel",
+          "colorOrStyle": null,
+          "note": "İsmin lazer ile yazılacak."
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Duygu & Yücel",
+      "name_cut_text": "Duygu Yücel",
+      "date_text": "",
+      "person_names": [
+        "Duygu",
+        "Yücel"
+      ],
+      "custom_text": "",
+      "production_note": "Üzerine lazer ile Duygu Yücel ismi yazılacak.",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [
+      "Final validator label/lazer alanını sadece kişi isimlerinden yeniden kurdu."
+    ],
+    "warnings": [
+      "Final validator label/lazer alanını sadece kişi isimlerinden yeniden kurdu.",
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Duygu Yücel",
+      "label_text": "isimler Duygu Yücel",
+      "name_cut_text": "isimler Duygu Yücel",
+      "production_note": "İsmin lazer ile yazılacak"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-19 21:41:17"
+  },
+  "9a5e4aa4bc740b1b6c5202d58fecd78b09c53585748a9ec2855b1d521f53eefe": {
+    "label_text": "Feyza & Enes",
+    "date_text": "",
+    "note_text": "Acil gönderim talebi.",
+    "person_names": [
+      "Feyza",
+      "Enes"
+    ],
+    "custom_text": "",
+    "production_note": "Acil gönderim talebi.",
+    "quantity": 1,
+    "name_cut_text": "Feyza & Enes",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Feyza & Enes",
+          "colorOrStyle": "default black",
+          "note": "İsimler lazer/etiket üzerinde yazılacak."
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Feyza & Enes",
+      "name_cut_text": "Feyza & Enes",
+      "date_text": "",
+      "person_names": [
+        "Feyza",
+        "Enes"
+      ],
+      "custom_text": "",
+      "production_note": "Acil gönderim talebi.",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Feyza ile Enes olucak",
+      "label_text": "isimler Feyza ile Enes olucak",
+      "name_cut_text": "isimler Feyza ile Enes olucak",
+      "production_note": "Acil gönderim talebi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:42:52"
+  },
+  "047ed4184a2b28f6cc60d228939a6aa822bd7ebb67d86a596f7dfabc54c936eb": {
+    "label_text": "Mustafa & Senanur",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Mustafa",
+      "Senanur"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Mustafa & Senanur",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Mustafa & Senanur",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Mustafa & Senanur",
+      "name_cut_text": "Mustafa & Senanur",
+      "date_text": "",
+      "person_names": [
+        "Mustafa",
+        "Senanur"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Mustafa ve Senanur",
+      "label_text": "isimler Mustafa ve Senanur",
+      "name_cut_text": "isimler Mustafa ve Senanur",
+      "production_note": "lazer üzerinde yazılacak isimler: Mustafa & Senanur",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:48:53"
+  },
+  "d97984901ab94203ff8d5988ee7183aa07387599646bb39a0e63803a9f138522": {
+    "label_text": "Meryem & Selahi",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Meryem",
+      "Selahi"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Meryem & Selahi",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Meryem & Selahi",
+          "colorOrStyle": "default",
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Meryem & Selahi",
+      "name_cut_text": "Meryem & Selahi",
+      "date_text": "",
+      "person_names": [
+        "Meryem",
+        "Selahi"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Meryem ve Selahi",
+      "label_text": "isimler Meryem ve Selahi",
+      "name_cut_text": "isimler Meryem ve Selahi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:52:11"
+  },
+  "62d5daef844d9c99f33d2d74357c288b037c451107509bf167bf36d16c173f2c": {
+    "label_text": "Hatice & Emre",
+    "date_text": "24.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Hatice",
+      "Emre"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Hatice & Emre",
+    "name_cut_width_mm": 300,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Hatice & Emre",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Hatice & Emre",
+      "name_cut_text": "Hatice & Emre",
+      "date_text": "24.05.2026",
+      "person_names": [
+        "Hatice",
+        "Emre"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Hatice ve Emre",
+      "label_text": "isimler Hatice ve Emre",
+      "name_cut_text": "isimler Hatice ve Emre",
+      "date_text": "tarih 24.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:52:31"
+  },
+  "6c86bad59f70204dd26f25bd485cfbe1486d5c1b4ae3f84acd79df7af41d2f96": {
+    "label_text": "",
+    "date_text": "",
+    "note_text": "Gümüş renkli sipariş; isim yazılacak.",
+    "person_names": [],
+    "custom_text": "",
+    "production_note": "Gümüş renkli sipariş; isim yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.75,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": false,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": null,
+          "colorOrStyle": "gümüş",
+          "note": "isim yazılacak"
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "",
+      "name_cut_text": "",
+      "date_text": "",
+      "person_names": [],
+      "custom_text": "",
+      "production_note": "Gümüş renkli sipariş; isim yazılacak.",
+      "quantity": 1,
+      "confidence": 0.75
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Müşteri mesajında kişi ismi bulunamadı.",
+      "Mesaj renk/tasarım talimatı içeriyor; isim alanına aktarılmamalı.",
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "empty",
+      "date_text": "empty",
+      "note_text": "order_line",
+      "name_cut_text": "empty",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "production_note": "Gümüş renkli sipariş; isim yazılacak.",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-19 21:59:09"
+  },
+  "88e980718448a260855349725c2aeca21ddfd6af67aa0ed218f136ddb4e81861": {
+    "label_text": "Büşranur Çağrı",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Büşranur Çağrı"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Büşranur Çağrı",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.88,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 92,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Büşranur Çağrı",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Büşranur Çağrı",
+      "name_cut_text": "Büşranur Çağrı",
+      "date_text": "",
+      "person_names": [
+        "Büşranur Çağrı"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.88
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Büşranur Çağrı",
+      "label_text": "isimler Büşranur Çağrı",
+      "name_cut_text": "isimler Büşranur Çağrı",
+      "quantity": "sipariş adedi"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 21:59:27"
+  },
+  "8bb57c5ae1d5af360549e0b9d8c39f418648f44f5fd1f590e4a05001d7e07f81": {
+    "label_text": "İlayda & Yusuf",
+    "date_text": "30.05.2026",
+    "note_text": "",
+    "person_names": [
+      "İlayda",
+      "Yusuf"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "İlayda & Yusuf",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 96,
+      "date": 92,
+      "eventDate": 92,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "İlayda & Yusuf",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "İlayda & Yusuf",
+      "name_cut_text": "İlayda & Yusuf",
+      "date_text": "30.05.2026",
+      "person_names": [
+        "İlayda",
+        "Yusuf"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.9
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler İlayda ve Yusuf",
+      "label_text": "isimler İlayda ve Yusuf",
+      "name_cut_text": "isimler İlayda ve Yusuf",
+      "date_text": "tarih 30.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:09:08"
+  },
+  "4d1fe2dd1118fac602c3d1e068f79d63d5250b23241198caf0c910fed2e735e9": {
+    "label_text": "Esra & Mehmet",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Esra",
+      "Mehmet"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Esra & Mehmet",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Esra & Mehmet",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Esra & Mehmet",
+      "name_cut_text": "Esra & Mehmet",
+      "date_text": "",
+      "person_names": [
+        "Esra",
+        "Mehmet"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler ESRA ve MEHMET",
+      "label_text": "isimler ESRA ve MEHMET",
+      "name_cut_text": "isimler ESRA ve MEHMET"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:10:48"
+  },
+  "9d554c17e544be17246e1f64fd62295b4eafe632c64561b3e0debcc331af74fd": {
+    "label_text": "Ezgi Altay",
+    "date_text": "31.05.2026",
+    "note_text": "",
+    "person_names": [
+      "Ezgi Altay"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Ezgi Altay",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 92,
+      "eventDate": 92,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Ezgi Altay",
+          "colorOrStyle": null,
+          "note": null
+        },
+        {
+          "surface": "etiket",
+          "textToWrite": "31.05.2026",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Ezgi Altay",
+      "name_cut_text": "Ezgi Altay",
+      "date_text": "31.05.2026",
+      "person_names": [
+        "Ezgi Altay"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ezgi Altay",
+      "label_text": "Ezgi Altay",
+      "name_cut_text": "Ezgi Altay",
+      "date_text": "tarih 31.05.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:12:48"
+  },
+  "66cb04851dffd28752fbe05f2f1cbe547f188d40ed47ad91bef85edf1a3d0f0c": {
+    "label_text": "Cansın & Mehmetcan",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Cansın",
+      "Mehmetcan"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Cansın & Mehmetcan",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 60,
+      "eventDate": 60,
+      "customText": 60,
+      "productionNote": 60,
+      "note": 60,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "çiçek",
+          "textToWrite": "Cansın & Mehmetcan",
+          "colorOrStyle": null,
+          "note": null
+        },
+        {
+          "surface": "çikolata",
+          "textToWrite": "Cansın & Mehmetcan",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Cansın & Mehmetcan",
+      "name_cut_text": "Cansın & Mehmetcan",
+      "date_text": "",
+      "person_names": [
+        "Cansın",
+        "Mehmetcan"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Cansın ve Mehmetcan",
+      "label_text": "isimler Cansın ve Mehmetcan",
+      "name_cut_text": "isimler Cansın ve Mehmetcan"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:15:28"
+  },
+  "4805c10d8e7392cfe846718783f6f2a4d252228f8c69592877dd1980ff312c9c": {
+    "label_text": "Cansın & Mehmetcan",
+    "date_text": "",
+    "note_text": "Çikolataların ve çiçeklerin üzerlerine yazı yazılacak: 'Cansın & Mehmetcan'.",
+    "person_names": [
+      "Cansın",
+      "Mehmetcan"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolataların ve çiçeklerin üzerlerine yazı yazılacak: 'Cansın & Mehmetcan'.",
+    "quantity": 1,
+    "name_cut_text": "Cansın & Mehmetcan",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "çikolata",
+          "textToWrite": "Cansın & Mehmetcan",
+          "colorOrStyle": null,
+          "note": "Çikolataların üzerine yazılacak"
+        },
+        {
+          "surface": "çiçek",
+          "textToWrite": "Cansın & Mehmetcan",
+          "colorOrStyle": null,
+          "note": "Çiçekler üzerine yazılacak"
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Cansın & Mehmetcan",
+      "name_cut_text": "Cansın & Mehmetcan",
+      "date_text": "",
+      "person_names": [
+        "Cansın",
+        "Mehmetcan"
+      ],
+      "custom_text": "",
+      "production_note": "Çikolataların ve çiçeklerin üzerlerine yazı yazılacak: 'Cansın & Mehmetcan'.",
+      "quantity": 1,
+      "confidence": 0.85
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Cansın ve Mehmetcan",
+      "label_text": "isimler Cansın ve Mehmetcan",
+      "name_cut_text": "isimler Cansın ve Mehmetcan",
+      "production_note": "Çikolatalara ve çiçeklere yazı yazılacak; ürün fotoğrafı şartı yok."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:16:04"
+  },
+  "84199ca02a1ea34764ae6dd48bafec6a1e0d22554210525e9a97ee9f77b1e963": {
+    "label_text": "Mevlüde & Rıdvan",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Mevlüde",
+      "Rıdvan"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Mevlüde & Rıdvan",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 80,
+      "eventDate": 80,
+      "customText": 80,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Mevlüde & Rıdvan",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Mevlüde & Rıdvan",
+      "name_cut_text": "Mevlüde & Rıdvan",
+      "date_text": "",
+      "person_names": [
+        "Mevlüde",
+        "Rıdvan"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Mevlüde ve Rıdvan",
+      "label_text": "isimler Mevlüde ve Rıdvan",
+      "name_cut_text": "isimler Mevlüde ve Rıdvan"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:16:23"
+  },
+  "579efe1bd76d449d8ebd5bae6d9fd90c5ef693e2656a6b8d4f225b5ed2d8fb64": {
+    "label_text": "Elif & Ersin",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Elif",
+      "Ersin"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Elif & Ersin",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 70,
+      "eventDate": 70,
+      "customText": 70,
+      "productionNote": 70,
+      "note": 70,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "unknown",
+          "textToWrite": null,
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Elif & Ersin",
+      "name_cut_text": "Elif & Ersin",
+      "date_text": "",
+      "person_names": [
+        "Elif",
+        "Ersin"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Elif ve Ersin",
+      "label_text": "isimler Elif ve Ersin",
+      "name_cut_text": "isimler Elif ve Ersin"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:16:58"
+  },
+  "deab70f4588ac894076fd88b338035800fcf29d71e4d0159649185c2958fe31a": {
+    "label_text": "Ahmet & Selvi",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Ahmet",
+      "Selvi"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Ahmet & Selvi",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Ahmet & Selvi",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Ahmet & Selvi",
+      "name_cut_text": "Ahmet & Selvi",
+      "date_text": "",
+      "person_names": [
+        "Ahmet",
+        "Selvi"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.88
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ahmet ve Selvi",
+      "label_text": "Ahmet & Selvi",
+      "name_cut_text": "Ahmet & Selvi",
+      "quantity": "sipariş adedi: 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:18:38"
+  },
+  "6b1a5c0324c639a52397edb1c114d9b22a922da264bf16241aa0b65b363f5c19": {
+    "label_text": "Tuğba & Mustafa",
+    "date_text": "23.05.2026",
+    "note_text": "Çikolatanın üstüne Tuğba & Mustafa ve 23.05.2026 yazılacak.",
+    "person_names": [
+      "Tuğba",
+      "Mustafa"
+    ],
+    "custom_text": "",
+    "production_note": "Çikolatanın üstüne Tuğba & Mustafa ve 23.05.2026 yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Tuğba & Mustafa",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 85,
+      "eventDate": 85,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "çikolata",
+          "textToWrite": "Tuğba & Mustafa",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Tuğba & Mustafa",
+      "name_cut_text": "Tuğba & Mustafa",
+      "date_text": "23.05.2026",
+      "person_names": [
+        "Tuğba",
+        "Mustafa"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Tuğba ve Mustafa",
+      "label_text": "isimler Tuğba ve Mustafa",
+      "name_cut_text": "isimler Tuğba ve Mustafa",
+      "date_text": "tarih 23.05.2026",
+      "production_note": "Çikolataların üstüne Tuğba & Mustafa isimleri ile 23.05.2026 tarihi yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:19:12"
+  },
+  "f9bfa9c4743b81c3e5a0ab68401f0544ac943ca38e076dc6bb06787c245d3691": {
+    "label_text": "Ali Osman & Sezgi",
+    "date_text": "01.06.2026",
+    "note_text": "",
+    "person_names": [
+      "Ali Osman",
+      "Sezgi"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Ali Osman & Sezgi",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Ali Osman & Sezgi",
+          "colorOrStyle": null,
+          "note": null
+        },
+        {
+          "surface": "etiket",
+          "textToWrite": "01.06.2026",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Ali Osman & Sezgi",
+      "name_cut_text": "Ali Osman & Sezgi",
+      "date_text": "01.06.2026",
+      "person_names": [
+        "Ali Osman",
+        "Sezgi"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.88
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Ali Osman ve Sezgi",
+      "label_text": "isimler Ali Osman ve Sezgi",
+      "name_cut_text": "isimler Ali Osman ve Sezgi",
+      "date_text": "tarih 01.06.2026",
+      "quantity": "sipariş adedi 1"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:21:13"
+  },
+  "023d629a26597be1a65d8890dfafe883ed5fa65f2787b7a353185dbe1387019f": {
+    "label_text": "Merve & Muhammet Emin",
+    "date_text": "06.06.2026",
+    "note_text": "Ürünün gold kısımları gümüş olsun.",
+    "person_names": [
+      "Merve",
+      "Muhammet Emin"
+    ],
+    "custom_text": "",
+    "production_note": "Ürünün gold kısımları gümüş olsun.",
+    "quantity": 1,
+    "name_cut_text": "Merve & Muhammet Emin",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 93,
+      "laserName": 93,
+      "personNames": 95,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 90,
+      "note": 90,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "lazer",
+          "textToWrite": "Merve & Muhammet Emin",
+          "colorOrStyle": null,
+          "note": "Alt alta yazılsın."
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Merve & Muhammet Emin",
+      "name_cut_text": "Merve & Muhammet Emin",
+      "date_text": "06.06.2026",
+      "person_names": [
+        "Merve",
+        "Muhammet Emin"
+      ],
+      "custom_text": "",
+      "production_note": "Ürünün gold kısımları gümüş olsun.",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Merve ve Muhammet Emin",
+      "label_text": "isimler Merve ve Muhammet Emin",
+      "name_cut_text": "isimler Merve ve Muhammet Emin",
+      "date_text": "tarih 06.06.2026",
+      "production_note": "İsimler: Merve & Muhammet Emin -Alt alta yazılsın. Ürünün gold kısımları gümüş olsun."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:27:11"
+  },
+  "f1756348bafbf3fbbc421d9f5852991ac7966c1e8bb6c63020a08a2ecdd1063a": {
+    "label_text": "Damla Ramazan",
+    "date_text": "",
+    "note_text": "İsmi Damla Ramazan çiçeğe yazılacak.",
+    "person_names": [
+      "Damla Ramazan"
+    ],
+    "custom_text": "",
+    "production_note": "İsmi Damla Ramazan çiçeğe yazılacak.",
+    "quantity": 1,
+    "name_cut_text": "Damla Ramazan",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.85,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "çiçek",
+          "textToWrite": "Damla Ramazan",
+          "colorOrStyle": null,
+          "note": "İsim çiçeğe yazılacak."
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Damla Ramazan",
+      "name_cut_text": "Damla Ramazan",
+      "date_text": "",
+      "person_names": [
+        "Damla Ramazan"
+      ],
+      "custom_text": "",
+      "production_note": "İsmi Damla Ramazan çiçeğe yazılacak.",
+      "quantity": 1,
+      "confidence": 0.85
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "question_text",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "Damla Ramazan",
+      "label_text": "Damla Ramazan",
+      "name_cut_text": "Damla Ramazan",
+      "production_note": "Çiçeğe Damla Ramazan ismi yazılacak."
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:29:11"
+  },
+  "2a17766d848e0fbf4bed6f733b4c4277c0c4a27cb8e70c3703af9cd8ceaed9b1": {
+    "label_text": "Gün Hicran & Ömer",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Gün Hicran",
+      "Ömer"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Gün Hicran & Ömer",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.9,
+    "field_confidence": {
+      "labelName": 92,
+      "laserName": 92,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": []
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Gün Hicran & Ömer",
+      "name_cut_text": "Gün Hicran & Ömer",
+      "date_text": "",
+      "person_names": [
+        "Gün Hicran",
+        "Ömer"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.89
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Gün Hicran ve Ömer",
+      "label_text": "isimler Gün Hicran ve Ömer",
+      "name_cut_text": "isimler Gün Hicran ve Ömer"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-19 22:35:29"
+  }
+}

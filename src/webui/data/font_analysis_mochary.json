@@ -1,0 +1,239 @@
+{
+  "status": "OK",
+  "font_path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\fonts\\Mochary.ttf",
+  "names": [
+    "",
+    "Mochary",
+    "☞",
+    "☞Mochary"
+  ],
+  "glyph_count": 417,
+  "coverage": {
+    "uppercase": {
+      "total": 26,
+      "present": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z"
+      ],
+      "missing": [],
+      "coverage_percent": 100.0
+    },
+    "lowercase": {
+      "total": 26,
+      "present": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q",
+        "r",
+        "s",
+        "t",
+        "u",
+        "v",
+        "w",
+        "x",
+        "y",
+        "z"
+      ],
+      "missing": [],
+      "coverage_percent": 100.0
+    },
+    "turkish": {
+      "total": 12,
+      "present": [
+        "Ç",
+        "Ğ",
+        "İ",
+        "Ö",
+        "Ş",
+        "Ü",
+        "ç",
+        "ğ",
+        "ı",
+        "ö",
+        "ş",
+        "ü"
+      ],
+      "missing": [],
+      "coverage_percent": 100.0
+    },
+    "digits": {
+      "total": 10,
+      "present": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "missing": [],
+      "coverage_percent": 100.0
+    },
+    "punctuation": {
+      "total": 17,
+      "present": [
+        ".",
+        ",",
+        ":",
+        ";",
+        "!",
+        "?",
+        "-",
+        "_",
+        "/",
+        "&",
+        "+",
+        "@",
+        "'",
+        "\"",
+        "(",
+        ")"
+      ],
+      "missing": [
+        "₺"
+      ],
+      "coverage_percent": 94.1
+    },
+    "try_symbol": {
+      "total": 1,
+      "present": [],
+      "missing": [
+        "₺"
+      ],
+      "coverage_percent": 0.0
+    }
+  },
+  "features": {
+    "GSUB": [
+      "calt",
+      "fina",
+      "init",
+      "liga",
+      "salt"
+    ],
+    "GPOS": [
+      "kern"
+    ]
+  },
+  "connected_capital_variants": {
+    "A_con": true,
+    "F_con": true,
+    "H_con": true,
+    "X_con": true,
+    "S_con": false,
+    "L_con": false,
+    "M_con": false
+  },
+  "natural_connected_capitals": [
+    "A",
+    "F",
+    "H",
+    "X"
+  ],
+  "manual_bridge_capitals": [
+    "S",
+    "L",
+    "M"
+  ],
+  "alternative_glyphs": [
+    ".notdef",
+    ".null",
+    "A_alt",
+    "A_con",
+    "F_alt",
+    "F_con",
+    "F_l",
+    "H_con",
+    "I_alt",
+    "J_alt",
+    "K_j",
+    "K_y",
+    "L_j",
+    "N_alt",
+    "O_alt",
+    "R_j",
+    "R_y",
+    "T_alt",
+    "T_h",
+    "T_l",
+    "X_con",
+    "b_alt",
+    "b_con",
+    "b_fina",
+    "d_alt",
+    "f_con",
+    "f_f",
+    "f_t",
+    "g_fina",
+    "h_alt",
+    "j_fina",
+    "k_alt",
+    "l_alt",
+    "o_alt",
+    "o_con",
+    "o_fina",
+    "p_fina",
+    "q_fina",
+    "r_con",
+    "r_init",
+    "s_con",
+    "s_fina",
+    "s_init",
+    "t_alt",
+    "v_alt",
+    "v_con",
+    "v_fina",
+    "w_con",
+    "w_fina",
+    "x_con",
+    "x_init",
+    "y_fina",
+    "z_alt",
+    "z_con",
+    "z_fina",
+    "z_init"
+  ],
+  "try_fallback_required": true
+}

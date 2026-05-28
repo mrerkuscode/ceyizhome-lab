@@ -1,0 +1,88 @@
+{
+  "id": "mochary_user_corel_calibrated",
+  "label": "Mochary Corel Production Profile",
+  "font": "Mochary.ttf",
+  "source": "Corel AI golden reference object library",
+  "targetNameWidthMm": 80,
+  "targetNameHeightMm": 40,
+  "plateWidthMm": 800,
+  "plateHeightMm": 600,
+  "minGapMm": 1,
+  "offsetCandidatesMm": [
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.65
+  ],
+  "defaultOffsetMm": 0.3,
+  "styleAggregate": {
+    "pathCount": {
+      "min": 3.0,
+      "max": 28.0,
+      "median": 12.0,
+      "mean": 13.078947
+    },
+    "curveCount": {
+      "min": 264.0,
+      "max": 1111.0,
+      "median": 482.0,
+      "mean": 520.631579
+    },
+    "lineCount": {
+      "min": 42.0,
+      "max": 264.0,
+      "median": 118.5,
+      "mean": 124.513158
+    },
+    "bboxAspect": {
+      "min": 2.1547,
+      "max": 6.0006,
+      "median": 4.491,
+      "mean": 4.395566
+    },
+    "avgCurvesPerPath": {
+      "min": 26.7,
+      "max": 88.0,
+      "median": 40.5,
+      "mean": 41.620191
+    },
+    "closedRatio": {
+      "min": 0.3333,
+      "max": 1.0,
+      "median": 0.5556,
+      "mean": 0.561418
+    },
+    "curveDensity": {
+      "min": 0.005947,
+      "max": 0.018237,
+      "median": 0.011187,
+      "mean": 0.011113
+    },
+    "pathDensity": {
+      "min": 0.000104,
+      "max": 0.000473,
+      "median": 0.000271,
+      "mean": 0.000277
+    },
+    "bboxWidth": {
+      "min": 210.57,
+      "max": 832.396,
+      "median": 453.712,
+      "mean": 454.131993
+    },
+    "bboxHeight": {
+      "min": 76.842,
+      "max": 222.917,
+      "median": 99.5635,
+      "mean": 106.718368
+    }
+  },
+  "rules": {
+    "exactReferenceFirst": true,
+    "styleOnlyReferencesDoNotOverrideText": true,
+    "canvasEqualsExportFinalCutPath": true,
+    "pathOnlyExportRequired": true,
+    "differentNamesNeverWeld": true
+  }
+}

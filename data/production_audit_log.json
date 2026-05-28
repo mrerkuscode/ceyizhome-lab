@@ -1,0 +1,817 @@
+[
+  {
+    "id": "audit-009ccb64-fb8e-5d46-b0fb-9009d033a74a",
+    "event_type": "bulk_validation_completed",
+    "event_label": "Toplu doğrulama tamamlandı",
+    "source": "bulk_production",
+    "source_label": "Toplu Üretim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "WARNING",
+    "severity": "warning",
+    "message": "Excel kolon eşleştirme kontrolü tamamlandı.",
+    "file_path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\input\\siparisler.xlsx",
+    "output_path": "",
+    "created_at": "2026-05-28 16:22:40",
+    "operator": "",
+    "metadata": {
+      "status": "WARNING",
+      "message": "Bazı zorunlu kolonlar eksik.",
+      "columns": [
+        {
+          "source": "order_no",
+          "mapped": "order_no",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "buyer_name",
+          "mapped": "model_no",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "product_name",
+          "mapped": "template_no",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "model_no",
+          "mapped": "model_no",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "template_no",
+          "mapped": "template_no",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "process_type",
+          "mapped": "process_type",
+          "role": "opsiyonel",
+          "status": "mapped"
+        },
+        {
+          "source": "personalization_type",
+          "mapped": "quantity",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "label_variant",
+          "mapped": "label_variant",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "label_text",
+          "mapped": "label_text",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "laser_text",
+          "mapped": "laser_text",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "quantity",
+          "mapped": "quantity",
+          "role": "zorunlu",
+          "status": "mapped"
+        },
+        {
+          "source": "material_type",
+          "mapped": "material_type",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "material_thickness_mm",
+          "mapped": "material_thickness_mm",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "extra_chocolate_qty",
+          "mapped": "extra_chocolate_qty",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "extra_madlen_qty",
+          "mapped": "extra_madlen_qty",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "production_note",
+          "mapped": "production_note",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "needs_review",
+          "mapped": "needs_review",
+          "role": "yardımcı",
+          "status": "mapped"
+        },
+        {
+          "source": "status",
+          "mapped": "status",
+          "role": "yardımcı",
+          "status": "mapped"
+        }
+      ],
+      "missing_required": [
+        "date_text"
+      ]
+    }
+  },
+  {
+    "id": "audit-10148e7f-b249-558d-8bba-065ea1d1bf82",
+    "event_type": "namecut_export_preflight_passed",
+    "event_label": "Namecut Export Preflight Passed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-EXPORT-READY",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "passed",
+    "severity": "success",
+    "message": "İsim Kesim export preflight geçti. RDWorks/lazer başlatılmadı.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:50",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "PASSED",
+        "blockers": [],
+        "offset_warnings": [],
+        "quality_summary": {
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_weld": 0,
+          "needs_offset": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "PASSED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "rdworks_compatibility_qa": {
+        "status": "PASSED",
+        "checks": {
+          "unit_mm": true,
+          "scale_preserved": true,
+          "cut_direction_manifested": true,
+          "min_gap_preserved": true,
+          "safe_margin_preserved": true,
+          "preview_bbox_matches_plate": true,
+          "no_ui_helper_geometry": true,
+          "cut_paths_only": true
+        },
+        "plate_size_mm": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "min_gap_mm": 1,
+        "safe_margin_mm": 15.0
+      }
+    }
+  },
+  {
+    "id": "audit-42e164a5-a29f-53b8-a546-36990106e3c3",
+    "event_type": "namecut_export_manifest_created",
+    "event_label": "Namecut Export Manifest Created",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-EXPORT-READY",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "OK",
+    "severity": "success",
+    "message": "İsim Kesim manifest dosyası oluşturuldu. RDWorks/lazer başlatılmadı.",
+    "file_path": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:50",
+    "operator": "",
+    "metadata": {
+      "manifest_path": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+      "rdworks_compatibility_qa": {
+        "status": "PASSED",
+        "checks": {
+          "unit_mm": true,
+          "scale_preserved": true,
+          "cut_direction_manifested": true,
+          "min_gap_preserved": true,
+          "safe_margin_preserved": true,
+          "preview_bbox_matches_plate": true,
+          "no_ui_helper_geometry": true,
+          "cut_paths_only": true
+        },
+        "plate_size_mm": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "min_gap_mm": 1,
+        "safe_margin_mm": 15.0
+      }
+    }
+  },
+  {
+    "id": "audit-aa8c35f2-adb1-5bee-96bc-4103d06bdf2c",
+    "event_type": "namecut_export_format_skipped",
+    "event_label": "Namecut Export Format Skipped",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-EXPORT-READY",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "skipped",
+    "severity": "warning",
+    "message": "PLT export bu fazda gerçek backend desteğine bağlı değil; sahte çıktı üretilmedi.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:50",
+    "operator": "",
+    "metadata": {
+      "format": "plt"
+    }
+  },
+  {
+    "id": "audit-b0dd7834-81ad-5c25-b58b-5d611f01b4cb",
+    "event_type": "namecut_export_created",
+    "event_label": "İsim Kesim export paketi oluşturuldu",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-EXPORT-READY",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "OK",
+    "severity": "success",
+    "message": "İsim kesim dosyaları RDWorks için hazırlandı. RDWorks ve lazer otomatik açılmadı.",
+    "file_path": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+    "output_path": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.svg",
+    "created_at": "2026-05-24 02:01:50",
+    "operator": "",
+    "metadata": {
+      "export_files": {
+        "svg": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.svg",
+        "dxf": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.dxf",
+        "pdf": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.pdf",
+        "png": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/preview.png",
+        "manifest": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+        "plt": ""
+      },
+      "queue_status_update": {
+        "status": "OK",
+        "updated": 2,
+        "message": "2 Ä°sim Kesim kaydÄ± exported olarak iÅŸaretlendi. Lazer/RDWorks baÅŸlatÄ±lmadÄ±."
+      },
+      "history_entry": {
+        "export_batch_id": "P21-EXPORT-READY",
+        "created_at": "2026-05-24T02:01:50",
+        "operator": "CeyizHome Lab QA",
+        "source": "name_cut_studio",
+        "source_label": "Ä°sim Kesim",
+        "formats": [
+          "svg",
+          "dxf",
+          "pdf",
+          "plt"
+        ],
+        "item_count": 2,
+        "quantity_total": 3,
+        "plate_count": 1,
+        "cut_direction": "Ayna Yatay",
+        "mirror_horizontal": true,
+        "mirror_vertical": false,
+        "quality_summary": {
+          "ready_single_piece": 2,
+          "total": 2
+        },
+        "exported_files": {
+          "svg": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.svg",
+          "dxf": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.dxf",
+          "pdf": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.pdf",
+          "png": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/preview.png",
+          "manifest": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+          "plt": ""
+        },
+        "manifest_path": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+        "status": "OK",
+        "message": "Ä°sim kesim dosyalarÄ± RDWorks iÃ§in hazÄ±rlandÄ±. RDWorks ve lazer otomatik aÃ§Ä±lmadÄ±."
+      },
+      "quality_summary": {
+        "ready_single_piece": 2,
+        "total": 2
+      }
+    }
+  },
+  {
+    "id": "audit-f3949658-4b46-514c-a673-e88df264ed9d",
+    "event_type": "namecut_export_preflight_passed",
+    "event_label": "Namecut Export Preflight Passed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-OFFSET-APPROVED",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "passed",
+    "severity": "success",
+    "message": "İsim Kesim export preflight geçti. RDWorks/lazer başlatılmadı.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:49",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "PASSED",
+        "blockers": [],
+        "offset_warnings": [
+          "1 kayÄ±t iÃ§in offset/kalÄ±nlaÅŸtÄ±rma operatÃ¶r onayÄ± gerektiriyor."
+        ],
+        "quality_summary": {
+          "needs_offset": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_weld": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "PASSED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "rdworks_compatibility_qa": {
+        "status": "PASSED",
+        "checks": {
+          "unit_mm": true,
+          "scale_preserved": true,
+          "cut_direction_manifested": true,
+          "min_gap_preserved": true,
+          "safe_margin_preserved": true,
+          "preview_bbox_matches_plate": true,
+          "no_ui_helper_geometry": true,
+          "cut_paths_only": true
+        },
+        "plate_size_mm": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "min_gap_mm": 1,
+        "safe_margin_mm": 15.0
+      }
+    }
+  },
+  {
+    "id": "audit-8468f550-8e12-5799-baeb-ddc2fc15ea2b",
+    "event_type": "namecut_export_manifest_created",
+    "event_label": "Namecut Export Manifest Created",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-OFFSET-APPROVED",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "OK",
+    "severity": "success",
+    "message": "İsim Kesim manifest dosyası oluşturuldu. RDWorks/lazer başlatılmadı.",
+    "file_path": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:49",
+    "operator": "",
+    "metadata": {
+      "manifest_path": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+      "rdworks_compatibility_qa": {
+        "status": "PASSED",
+        "checks": {
+          "unit_mm": true,
+          "scale_preserved": true,
+          "cut_direction_manifested": true,
+          "min_gap_preserved": true,
+          "safe_margin_preserved": true,
+          "preview_bbox_matches_plate": true,
+          "no_ui_helper_geometry": true,
+          "cut_paths_only": true
+        },
+        "plate_size_mm": {
+          "width": 800.0,
+          "height": 600.0
+        },
+        "min_gap_mm": 1,
+        "safe_margin_mm": 15.0
+      }
+    }
+  },
+  {
+    "id": "audit-20820161-5f1f-55bf-bf4d-aa749df86d28",
+    "event_type": "namecut_export_format_skipped",
+    "event_label": "Namecut Export Format Skipped",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-OFFSET-APPROVED",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "skipped",
+    "severity": "warning",
+    "message": "PLT export bu fazda gerçek backend desteğine bağlı değil; sahte çıktı üretilmedi.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:49",
+    "operator": "",
+    "metadata": {
+      "format": "plt"
+    }
+  },
+  {
+    "id": "audit-ce0484f9-1741-5bae-aad9-074ad643e81e",
+    "event_type": "namecut_export_created",
+    "event_label": "İsim Kesim export paketi oluşturuldu",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-OFFSET-APPROVED",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "OK",
+    "severity": "success",
+    "message": "İsim kesim dosyaları RDWorks için hazırlandı. RDWorks ve lazer otomatik açılmadı.",
+    "file_path": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+    "output_path": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.svg",
+    "created_at": "2026-05-24 02:01:49",
+    "operator": "",
+    "metadata": {
+      "export_files": {
+        "svg": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.svg",
+        "dxf": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.dxf",
+        "pdf": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.pdf",
+        "png": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/preview.png",
+        "manifest": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+        "plt": ""
+      },
+      "queue_status_update": {
+        "status": "OK",
+        "updated": 2,
+        "message": "2 Ä°sim Kesim kaydÄ± exported olarak iÅŸaretlendi. Lazer/RDWorks baÅŸlatÄ±lmadÄ±."
+      },
+      "history_entry": {
+        "export_batch_id": "P21-OFFSET-APPROVED",
+        "created_at": "2026-05-24T02:01:49",
+        "operator": "CeyizHome Lab QA",
+        "source": "name_cut_studio",
+        "source_label": "Ä°sim Kesim",
+        "formats": [
+          "svg",
+          "dxf",
+          "pdf",
+          "plt"
+        ],
+        "item_count": 2,
+        "quantity_total": 3,
+        "plate_count": 1,
+        "cut_direction": "Ayna Yatay",
+        "mirror_horizontal": true,
+        "mirror_vertical": false,
+        "quality_summary": {
+          "needs_offset": 1,
+          "ready_single_piece": 1,
+          "total": 2
+        },
+        "exported_files": {
+          "svg": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.svg",
+          "dxf": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.dxf",
+          "pdf": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.pdf",
+          "png": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/preview.png",
+          "manifest": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+          "plt": ""
+        },
+        "manifest_path": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+        "status": "OK",
+        "message": "Ä°sim kesim dosyalarÄ± RDWorks iÃ§in hazÄ±rlandÄ±. RDWorks ve lazer otomatik aÃ§Ä±lmadÄ±."
+      },
+      "quality_summary": {
+        "needs_offset": 1,
+        "ready_single_piece": 1,
+        "total": 2
+      }
+    }
+  },
+  {
+    "id": "audit-976aec05-243e-5a5d-9fb0-9efc712e4bd6",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-OFFSET-BLOCK",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt için offset/kalınlaştırma operatör onayı gerektiriyor.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:45",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "NEEDS_OFFSET_APPROVAL",
+        "blockers": [],
+        "offset_warnings": [
+          "1 kayÄ±t iÃ§in offset/kalÄ±nlaÅŸtÄ±rma operatÃ¶r onayÄ± gerektiriyor."
+        ],
+        "quality_summary": {
+          "needs_offset": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_weld": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "PASSED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  },
+  {
+    "id": "audit-f695e5bd-f926-5f08-ad19-c631dbffcd8f",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-COLLISION",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt export edilemez: Temas riski.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:42",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "BLOCKED",
+        "blockers": [
+          "1 kayÄ±t export edilemez: Temas riski."
+        ],
+        "offset_warnings": [],
+        "quality_summary": {
+          "collision_risk": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "needs_weld": 0,
+          "needs_offset": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "FAILED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "FAILED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  },
+  {
+    "id": "audit-75bd0a45-903b-59e2-a892-074b42dcc11c",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-DETACHED",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt export edilemez: Nokta/işaret kopuk.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:39",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "BLOCKED",
+        "blockers": [
+          "1 kayÄ±t export edilemez: Nokta/iÅŸaret kopuk."
+        ],
+        "offset_warnings": [],
+        "quality_summary": {
+          "detached_marks": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_weld": 0,
+          "needs_offset": 0,
+          "blocked": 0
+        },
+        "single_piece_quality": "FAILED",
+        "weld_status": "PASSED",
+        "detached_marks_status": "FAILED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  },
+  {
+    "id": "audit-1a3040ef-4819-5dae-a5a5-78332d16bf8d",
+    "event_type": "namecut_export_preflight_failed",
+    "event_label": "Namecut Export Preflight Failed",
+    "source": "name_cut",
+    "source_label": "İsim Kesim",
+    "origin_source": "",
+    "origin_source_label": "",
+    "source_item_id": "",
+    "batch_id": "",
+    "transfer_batch_id": "",
+    "export_batch_id": "P21-NEEDS-WELD",
+    "queue_item_id": "",
+    "customer_name": "",
+    "order_no": "",
+    "title": "",
+    "status": "blocked",
+    "severity": "blocked",
+    "message": "Ä°sim Kesim export engellendi: 1 kayıt export edilemez: Weld gerekli.",
+    "file_path": "",
+    "output_path": "",
+    "created_at": "2026-05-24 02:01:37",
+    "operator": "",
+    "metadata": {
+      "export_preflight": {
+        "status": "BLOCKED",
+        "blockers": [
+          "1 kayÄ±t export edilemez: Weld gerekli."
+        ],
+        "offset_warnings": [],
+        "quality_summary": {
+          "needs_weld": 1,
+          "ready_single_piece": 2,
+          "total": 2,
+          "collision_risk": 0,
+          "needs_offset": 0,
+          "blocked": 0,
+          "detached_marks": 0
+        },
+        "single_piece_quality": "FAILED",
+        "weld_status": "FAILED",
+        "detached_marks_status": "PASSED",
+        "collision_check": "PASSED",
+        "real_formats": [
+          "svg",
+          "dxf",
+          "pdf"
+        ],
+        "skipped_formats": [
+          "plt"
+        ]
+      },
+      "skipped_formats": [
+        "plt"
+      ]
+    }
+  }
+]

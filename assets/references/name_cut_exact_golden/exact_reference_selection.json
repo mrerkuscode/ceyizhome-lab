@@ -1,0 +1,104 @@
+{
+  "note": "Exact match olmayan kayitlar style-golden Corel uretim referansi olarak kullanilir; strict isim eslesmesi sayilmaz.",
+  "references": {
+    "sumeyye": {
+      "name": "Sümeyye",
+      "objectId": "03-021-30-mart-gold-02",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\sumeyye.svg",
+      "sourceFile": "30 mart gold 02.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Songül Samet objesi S akisi, ü noktasi davranisi ve uzun script baglanti stili nedeniyle Sümeyye icin en yakin Corel stil referansi olarak secildi."
+    },
+    "batu": {
+      "name": "Batu",
+      "objectId": "07-032-4-mays-gold-03",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\batu.svg",
+      "sourceFile": "4 mayıs gold 03.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Güllü Batuhan objesi Batu harf grubunu ve buyuk B akisini icerdigi icin Batu icin style-golden referans olarak secildi."
+    },
+    "mucahit": {
+      "name": "Mücahit",
+      "objectId": "08-026-02-gold-cyzella",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\mucahit.svg",
+      "sourceFile": "02 gold cyzella.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Fırdevs Ümit objesi ü/M-i-t benzeri karakter davranisini ve temiz Corel konturunu verdigi icin Mücahit icin en yakin stil referansi olarak secildi."
+    },
+    "ayse": {
+      "name": "Ayşe",
+      "objectId": "02-007-30-mart-gold-01",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\ayse.svg",
+      "sourceFile": "30 mart gold 01.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Ayşegül Emrecan / Elif Numan objesi Ayşe kokunu ve ş isareti davranisini icerdigi icin Ayşe icin en uygun referans secildi."
+    },
+    "yagmur": {
+      "name": "Yağmur",
+      "objectId": "07-015-4-mays-gold-03",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\yagmur.svg",
+      "sourceFile": "4 mayıs gold 03.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Yasemin Emrah objesi buyuk Y akisi ve orta-uzun isim silueti nedeniyle Yağmur icin Corel stil referansi olarak secildi; birebir ğ referansi degildir."
+    },
+    "cagr": {
+      "name": "Çağrı",
+      "objectId": "01-002-4-mays-gumus-isimler",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\cagr.svg",
+      "sourceFile": "4. mayıs gümüş isimler.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Şule Zahit objesi kisa iki isim kompozisyonu ve Turkce isaretli buyuk harf davranisi nedeniyle Çağrı icin stil referansi olarak secildi; birebir ç/ğ/ı referansi degildir."
+    },
+    "sukran": {
+      "name": "Şükran",
+      "objectId": "08-001-02-gold-cyzella",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\sukran.svg",
+      "sourceFile": "02 gold cyzella.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "?ule Volkan objesi ? harfi, ?st i?aret/ak?? ve temiz Corel kontur davran??? nedeniyle ??kran i?in style-golden referans olarak se?ildi; birebir ??kran de?ildir."
+    },
+    "gokce": {
+      "name": "Gökçe",
+      "objectId": "07-009-4-mays-gold-03",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\gokce.svg",
+      "sourceFile": "4 mayıs gold 03.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "G?rkem Selnay objesi G?/k/e ak???n? ve orta uzunlukta temiz script formunu verdi?i i?in G?k?e i?in style-golden referans olarak se?ildi; birebir ? referans? de?ildir."
+    },
+    "ozge": {
+      "name": "Özge",
+      "objectId": "02-001-30-mart-gold-01",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\ozge.svg",
+      "sourceFile": "30 mart gold 01.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "?zge Berkay objesi ?zge k?k?n? i?erdi?i i?in en g??l? ?zge stil referans? olarak se?ildi; obje tekil olmad??? i?in styleReferenceOnly kal?r."
+    },
+    "umit": {
+      "name": "Ümit",
+      "objectId": "08-026-02-gold-cyzella",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\umit.svg",
+      "sourceFile": "02 gold cyzella.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "Firdevs ?mit objesi ?mit harf grubunu ve ? nokta davran???n? i?erdi?i i?in ?mit i?in style-golden referans olarak se?ildi; obje tekil de?ildir."
+    },
+    "irem": {
+      "name": "İrem",
+      "objectId": "08-028-02-gold-cyzella",
+      "target": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\irem.svg",
+      "sourceFile": "02 gold cyzella.ai",
+      "exactNameMatch": false,
+      "styleReferenceOnly": true,
+      "selectionReason": "?rem/Hatice benzeri k???k isim grubu i?eren 08-028 objesi ? nokta davran??? ve k?sa isim ak??? i?in en yak?n style-golden referans olarak se?ildi; tekil exact e?le?me de?ildir."
+    }
+  }
+}

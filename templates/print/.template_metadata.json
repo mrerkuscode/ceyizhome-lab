@@ -1,0 +1,11 @@
+{
+  "templates/print/02 gold cyzella.ai": {
+    "model_no": "02",
+    "template_no": "A",
+    "label_variant": "GOLD",
+    "active": true,
+    "status": "AKTİF",
+    "notes": "Etiket Model Kütüphanesi üzerinden eklendi.",
+    "updated_at": "2026-04-29 01:07:39"
+  }
+}

@@ -1,0 +1,391 @@
+{
+  "children": [
+    {
+      "label": "Ayşegül",
+      "nameKey": "aysegul",
+      "fileKey": "aysegul",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\aysegul.svg",
+      "sourceFile": "ayse.svg",
+      "pathCount": 5,
+      "bbox": {
+        "x": 20.0,
+        "y": 177.811,
+        "width": 189.477,
+        "height": 254.423
+      },
+      "actualPathWidthMm": 189.477,
+      "actualPathHeightMm": 254.423
+    },
+    {
+      "label": "Emrecan",
+      "nameKey": "emrecan",
+      "fileKey": "emrecan",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\emrecan.svg",
+      "sourceFile": "ayse.svg",
+      "pathCount": 8,
+      "bbox": {
+        "x": 33.402,
+        "y": 164.696,
+        "width": 404.445,
+        "height": 286.364
+      },
+      "actualPathWidthMm": 404.445,
+      "actualPathHeightMm": 286.364
+    },
+    {
+      "label": "Elif",
+      "nameKey": "elif",
+      "fileKey": "elif",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\elif.svg",
+      "sourceFile": "ayse.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 257.515,
+        "y": 148.94,
+        "width": 266.759,
+        "height": 275.018
+      },
+      "actualPathWidthMm": 266.759,
+      "actualPathHeightMm": 275.018
+    },
+    {
+      "label": "Numan",
+      "nameKey": "numan",
+      "fileKey": "numan",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\numan.svg",
+      "sourceFile": "ayse.svg",
+      "pathCount": 5,
+      "bbox": {
+        "x": 401.166,
+        "y": 190.285,
+        "width": 378.834,
+        "height": 234.435
+      },
+      "actualPathWidthMm": 378.834,
+      "actualPathHeightMm": 234.435
+    },
+    {
+      "label": "Güllü",
+      "nameKey": "gullu",
+      "fileKey": "gullu",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\gullu.svg",
+      "sourceFile": "batu.svg",
+      "pathCount": 12,
+      "bbox": {
+        "x": 20.0,
+        "y": 211.134,
+        "width": 285.71,
+        "height": 177.732
+      },
+      "actualPathWidthMm": 285.71,
+      "actualPathHeightMm": 177.732
+    },
+    {
+      "label": "Batuhan",
+      "nameKey": "batuhan",
+      "fileKey": "batuhan",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\batuhan.svg",
+      "sourceFile": "batu.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 318.326,
+        "y": 217.826,
+        "width": 461.674,
+        "height": 169.856
+      },
+      "actualPathWidthMm": 461.674,
+      "actualPathHeightMm": 169.856
+    },
+    {
+      "label": "Şule",
+      "nameKey": "sule",
+      "fileKey": "sule",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\sule.svg",
+      "sourceFile": "cagr.svg",
+      "pathCount": 4,
+      "bbox": {
+        "x": 20.0,
+        "y": 224.825,
+        "width": 331.564,
+        "height": 170.294
+      },
+      "actualPathWidthMm": 331.564,
+      "actualPathHeightMm": 170.294
+    },
+    {
+      "label": "Zahit",
+      "nameKey": "zahit",
+      "fileKey": "zahit",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\zahit.svg",
+      "sourceFile": "cagr.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 398.328,
+        "y": 204.881,
+        "width": 381.672,
+        "height": 163.329
+      },
+      "actualPathWidthMm": 381.672,
+      "actualPathHeightMm": 163.329
+    },
+    {
+      "label": "Görkem",
+      "nameKey": "gorkem",
+      "fileKey": "gorkem",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\gorkem.svg",
+      "sourceFile": "gokce.svg",
+      "pathCount": 10,
+      "bbox": {
+        "x": 20.0,
+        "y": 215.398,
+        "width": 372.305,
+        "height": 149.407
+      },
+      "actualPathWidthMm": 372.305,
+      "actualPathHeightMm": 149.407
+    },
+    {
+      "label": "Selnay",
+      "nameKey": "selnay",
+      "fileKey": "selnay",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\selnay.svg",
+      "sourceFile": "gokce.svg",
+      "pathCount": 8,
+      "bbox": {
+        "x": 400.718,
+        "y": 217.644,
+        "width": 379.282,
+        "height": 166.958
+      },
+      "actualPathWidthMm": 379.282,
+      "actualPathHeightMm": 166.958
+    },
+    {
+      "label": "İrem",
+      "nameKey": "irem",
+      "fileKey": "irem",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\irem.svg",
+      "sourceFile": "irem.svg",
+      "pathCount": 15,
+      "bbox": {
+        "x": 20.0,
+        "y": 218.351,
+        "width": 414.42,
+        "height": 91.034
+      },
+      "actualPathWidthMm": 414.42,
+      "actualPathHeightMm": 91.034
+    },
+    {
+      "label": "Hatice",
+      "nameKey": "hatice",
+      "fileKey": "hatice",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\hatice.svg",
+      "sourceFile": "irem.svg",
+      "pathCount": 8,
+      "bbox": {
+        "x": 443.392,
+        "y": 303.859,
+        "width": 336.608,
+        "height": 77.79
+      },
+      "actualPathWidthMm": 336.608,
+      "actualPathHeightMm": 77.79
+    },
+    {
+      "label": "Firdevs",
+      "nameKey": "firdevs",
+      "fileKey": "firdevs",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\firdevs.svg",
+      "sourceFile": "mucahit.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 20.0,
+        "y": 223.133,
+        "width": 443.96,
+        "height": 164.608
+      },
+      "actualPathWidthMm": 443.96,
+      "actualPathHeightMm": 164.608
+    },
+    {
+      "label": "Ümit",
+      "nameKey": "umit",
+      "fileKey": "umit",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\umit.svg",
+      "sourceFile": "mucahit.svg",
+      "pathCount": 2,
+      "bbox": {
+        "x": 456.509,
+        "y": 212.259,
+        "width": 323.491,
+        "height": 165.108
+      },
+      "actualPathWidthMm": 323.491,
+      "actualPathHeightMm": 165.108
+    },
+    {
+      "label": "Özge",
+      "nameKey": "ozge",
+      "fileKey": "ozge",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\ozge.svg",
+      "sourceFile": "ozge.svg",
+      "pathCount": 12,
+      "bbox": {
+        "x": 20.0,
+        "y": 210.443,
+        "width": 315.277,
+        "height": 179.114
+      },
+      "actualPathWidthMm": 315.277,
+      "actualPathHeightMm": 179.114
+    },
+    {
+      "label": "Berkay",
+      "nameKey": "berkay",
+      "fileKey": "berkay",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\berkay.svg",
+      "sourceFile": "ozge.svg",
+      "pathCount": 8,
+      "bbox": {
+        "x": 341.886,
+        "y": 218.871,
+        "width": 438.114,
+        "height": 165.164
+      },
+      "actualPathWidthMm": 438.114,
+      "actualPathHeightMm": 165.164
+    },
+    {
+      "label": "Şule",
+      "nameKey": "sule",
+      "fileKey": "sule_sukran",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\sule_sukran.svg",
+      "sourceFile": "sukran.svg",
+      "pathCount": 4,
+      "bbox": {
+        "x": 20.0,
+        "y": 215.738,
+        "width": 306.126,
+        "height": 179.52
+      },
+      "actualPathWidthMm": 306.126,
+      "actualPathHeightMm": 179.52,
+      "duplicateNameKey": true
+    },
+    {
+      "label": "Volkan",
+      "nameKey": "volkan",
+      "fileKey": "volkan",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\volkan.svg",
+      "sourceFile": "sukran.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 320.102,
+        "y": 204.742,
+        "width": 459.898,
+        "height": 158.002
+      },
+      "actualPathWidthMm": 459.898,
+      "actualPathHeightMm": 158.002
+    },
+    {
+      "label": "Songül",
+      "nameKey": "songul",
+      "fileKey": "songul",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\songul.svg",
+      "sourceFile": "sumeyye.svg",
+      "pathCount": 8,
+      "bbox": {
+        "x": 20.0,
+        "y": 215.2,
+        "width": 423.643,
+        "height": 169.6
+      },
+      "actualPathWidthMm": 423.643,
+      "actualPathHeightMm": 169.6
+    },
+    {
+      "label": "Samet",
+      "nameKey": "samet",
+      "fileKey": "samet",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\samet.svg",
+      "sourceFile": "sumeyye.svg",
+      "pathCount": 5,
+      "bbox": {
+        "x": 390.464,
+        "y": 220.124,
+        "width": 389.536,
+        "height": 141.798
+      },
+      "actualPathWidthMm": 389.536,
+      "actualPathHeightMm": 141.798
+    },
+    {
+      "label": "Firdevs",
+      "nameKey": "firdevs",
+      "fileKey": "firdevs_umit",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\firdevs_umit.svg",
+      "sourceFile": "umit.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 20.0,
+        "y": 223.133,
+        "width": 443.96,
+        "height": 164.608
+      },
+      "actualPathWidthMm": 443.96,
+      "actualPathHeightMm": 164.608,
+      "duplicateNameKey": true
+    },
+    {
+      "label": "Ümit",
+      "nameKey": "umit",
+      "fileKey": "umit_umit",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\umit_umit.svg",
+      "sourceFile": "umit.svg",
+      "pathCount": 2,
+      "bbox": {
+        "x": 456.509,
+        "y": 212.259,
+        "width": 323.491,
+        "height": 165.108
+      },
+      "actualPathWidthMm": 323.491,
+      "actualPathHeightMm": 165.108,
+      "duplicateNameKey": true
+    },
+    {
+      "label": "Yasemin",
+      "nameKey": "yasemin",
+      "fileKey": "yasemin",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\yasemin.svg",
+      "sourceFile": "yagmur.svg",
+      "pathCount": 6,
+      "bbox": {
+        "x": 20.0,
+        "y": 222.91,
+        "width": 408.011,
+        "height": 161.654
+      },
+      "actualPathWidthMm": 408.011,
+      "actualPathHeightMm": 161.654
+    },
+    {
+      "label": "Emrah",
+      "nameKey": "emrah",
+      "fileKey": "emrah",
+      "path": "C:\\Users\\Pc\\Documents\\New project\\production-bot\\assets\\references\\name_cut_exact_golden\\split\\emrah.svg",
+      "sourceFile": "yagmur.svg",
+      "pathCount": 4,
+      "bbox": {
+        "x": 439.955,
+        "y": 215.436,
+        "width": 340.045,
+        "height": 161.371
+      },
+      "actualPathWidthMm": 340.045,
+      "actualPathHeightMm": 161.371
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "entries": {
+    "ayse": {
+      "added_date": "2026-05-28T14:29:45",
+      "ascii_name": "ayse",
+      "bbox_mm": [
+        70.0,
+        40.0
+      ],
+      "bbox_warning": "",
+      "closed_paths": 7,
+      "entity_count": 7,
+      "entity_types": [
+        "SPLINE"
+      ],
+      "file_path": "assets/dxf_library/70x40/ayse.dxf",
+      "has_spline": true,
+      "insunits_code": 4,
+      "is_compound": false,
+      "letter_count": 4,
+      "mm_per_unit": 1.0,
+      "modified_date": "2026-05-28T15:47:47",
+      "name": "Ayşe",
+      "read_error": "",
+      "readable": true,
+      "size_group": "70x40",
+      "source": "leyla_corel_manual",
+      "status": "active"
+    },
+    "umit": {
+      "added_date": "2026-05-28T14:29:45",
+      "ascii_name": "umit",
+      "bbox_mm": [
+        10.907,
+        7.212
+      ],
+      "bbox_warning": "Bbox 10.9×7.2mm '70x40' grup aralığına uymuyor",
+      "closed_paths": 1,
+      "entity_count": 1,
+      "entity_types": [
+        "SPLINE"
+      ],
+      "file_path": "assets/dxf_library/70x40/umit.dxf",
+      "has_spline": true,
+      "insunits_code": 5,
+      "is_compound": false,
+      "letter_count": 4,
+      "mm_per_unit": 10.0,
+      "modified_date": "2026-05-28T15:47:47",
+      "name": "Ümit",
+      "read_error": "",
+      "readable": true,
+      "size_group": "70x40",
+      "source": "leyla_corel_manual",
+      "status": "active"
+    }
+  },
+  "updated_at": "2026-05-28T15:47:47",
+  "version": 1
+}

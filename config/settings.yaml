@@ -1,0 +1,55 @@
+app:
+  output_date_format: '%Y-%m-%d'
+  language: tr
+excel:
+  mode: clean_production_excel
+  input_file: input/siparisler.xlsx
+templates:
+  print_folder: templates/print
+  laser_folder: templates/laser
+print:
+  mode: label_designer
+  generate_print_data_csv: true
+  auto_print_enabled: false
+  allow_direct_print: false
+  require_print_confirmation: true
+  default_printer: ''
+  use_default_label_settings: true
+label_defaults:
+  media_type: ROLL
+  label_width_mm: 40
+  label_height_mm: 40
+  roll_gap_mm: 3
+  printer_dpi: 300
+  default_copies: 1
+  horizontal_offset_mm: 0.0
+  vertical_offset_mm: 0.0
+  scale_percent: 100
+  safe_margin_mm: 1.5
+  background_enabled: true
+  show_cut_boundary: false
+  show_order_number_on_label: false
+  roll_width_mm: 40
+laser:
+  auto_start_laser: false
+  output_format: svg
+  plate_width_mm: 600
+  plate_height_mm: 400
+  margin_mm: 5
+  gap_x_mm: 3
+  gap_y_mm: 3
+  include_order_number_guide: true
+laser_text:
+  laser_font_path: assets/fonts/connected_script.ttf
+  default_font_size_mm: 28
+  min_font_size_mm: 18
+  max_font_size_mm: 36
+  force_connected_letters: true
+  convert_text_to_paths: true
+  warn_if_disconnected_shapes: true
+  add_bridges_for_dots_and_accents: false
+reports:
+  generate_errors_report: true
+  generate_summary_report: true
+  generate_layout_report: true
+  generate_template_matching_report: true

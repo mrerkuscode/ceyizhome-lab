@@ -1,0 +1,71 @@
+[
+  {
+    "export_batch_id": "P21-OFFSET-APPROVED",
+    "created_at": "2026-05-24T02:01:49",
+    "operator": "CeyizHome Lab QA",
+    "source": "name_cut_studio",
+    "source_label": "Ä°sim Kesim",
+    "formats": [
+      "svg",
+      "dxf",
+      "pdf",
+      "plt"
+    ],
+    "item_count": 2,
+    "quantity_total": 3,
+    "plate_count": 1,
+    "cut_direction": "Ayna Yatay",
+    "mirror_horizontal": true,
+    "mirror_vertical": false,
+    "quality_summary": {
+      "needs_offset": 1,
+      "ready_single_piece": 1,
+      "total": 2
+    },
+    "exported_files": {
+      "svg": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.svg",
+      "dxf": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.dxf",
+      "pdf": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/plate_1.pdf",
+      "png": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/preview.png",
+      "manifest": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+      "plt": ""
+    },
+    "manifest_path": "output/2026-05-24/namecut_exports/P21-OFFSET-APPROVED/manifest.json",
+    "status": "OK",
+    "message": "Ä°sim kesim dosyalarÄ± RDWorks iÃ§in hazÄ±rlandÄ±. RDWorks ve lazer otomatik aÃ§Ä±lmadÄ±."
+  },
+  {
+    "export_batch_id": "P21-EXPORT-READY",
+    "created_at": "2026-05-24T02:01:50",
+    "operator": "CeyizHome Lab QA",
+    "source": "name_cut_studio",
+    "source_label": "Ä°sim Kesim",
+    "formats": [
+      "svg",
+      "dxf",
+      "pdf",
+      "plt"
+    ],
+    "item_count": 2,
+    "quantity_total": 3,
+    "plate_count": 1,
+    "cut_direction": "Ayna Yatay",
+    "mirror_horizontal": true,
+    "mirror_vertical": false,
+    "quality_summary": {
+      "ready_single_piece": 2,
+      "total": 2
+    },
+    "exported_files": {
+      "svg": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.svg",
+      "dxf": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.dxf",
+      "pdf": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/plate_1.pdf",
+      "png": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/preview.png",
+      "manifest": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+      "plt": ""
+    },
+    "manifest_path": "output/2026-05-24/namecut_exports/P21-EXPORT-READY/manifest.json",
+    "status": "OK",
+    "message": "Ä°sim kesim dosyalarÄ± RDWorks iÃ§in hazÄ±rlandÄ±. RDWorks ve lazer otomatik aÃ§Ä±lmadÄ±."
+  }
+]

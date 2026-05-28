@@ -1,0 +1,1275 @@
+{
+  "count": 185,
+  "slots": [
+    {
+      "name": "get_status",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "quitApplication",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "initialState",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryList",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibrarySearch",
+      "signature": "str, result=str",
+      "params": "query: str = \"\"",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryFind",
+      "signature": "str, result=str",
+      "params": "name: str",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryRefresh",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryResolveForOrder",
+      "signature": "str, result=str",
+      "params": "requested_name: str",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryStartWatcher",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryStopWatcher",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "dxfLibraryWatcherStatus",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionsList",
+      "signature": "bool, result=str",
+      "params": "include_archived: bool = False",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionGet",
+      "signature": "str, result=str",
+      "params": "sku: str",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionsSearch",
+      "signature": "str, result=str",
+      "params": "query: str = \"\"",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionSave",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionArchive",
+      "signature": "str, result=str",
+      "params": "sku: str",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionRestore",
+      "signature": "str, result=str",
+      "params": "sku: str",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionsImportExcel",
+      "signature": "str, bool, result=str",
+      "params": "file_path: str, dry_run: bool = False",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionResolveSizeGroup",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "productDefinitionIncrementUsage",
+      "signature": "str, result=str",
+      "params": "sku: str",
+      "returns": "str"
+    },
+    {
+      "name": "select_excel",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "chooseExcel",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "set_selected_excel",
+      "signature": "str",
+      "params": "path: str",
+      "returns": "None"
+    },
+    {
+      "name": "run_dry_run",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "runDry",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "run_production",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "runProduction",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "render_labels",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "renderLabels",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "bulk_generate_and_add_to_queue",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "bulk_generate_selected_and_add_to_queue",
+      "signature": "str, result=str",
+      "params": "row_numbers_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "bulk_generate_gallery_items_and_add_to_queue",
+      "signature": "str, result=str",
+      "params": "items_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "prepare_name_cut_files",
+      "signature": "str, result=str",
+      "params": "items_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "preview_name_cut_paths",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "build_name_cut_production_scene",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "listCorelReferences",
+      "signature": "str, result=str",
+      "params": "filters_json: str = \"{}\"",
+      "returns": "str"
+    },
+    {
+      "name": "getCorelReference",
+      "signature": "str, result=str",
+      "params": "reference_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "updateCorelReferenceLabel",
+      "signature": "str, str, bool, result=str",
+      "params": "reference_id: str, manual_name_label: str, approve_exact: bool = False",
+      "returns": "str"
+    },
+    {
+      "name": "approveCorelExactReference",
+      "signature": "str, result=str",
+      "params": "reference_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "unapproveCorelReference",
+      "signature": "str, result=str",
+      "params": "reference_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "markCorelReferenceStyleOnly",
+      "signature": "str, result=str",
+      "params": "reference_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "rejectCorelReferenceCandidate",
+      "signature": "str, result=str",
+      "params": "reference_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "saveOperatorGeneratedCorelReference",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "rebuildCorelReferenceIndex",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "searchCorelReferences",
+      "signature": "str, result=str",
+      "params": "query: str = \"\"",
+      "returns": "str"
+    },
+    {
+      "name": "splitCorelReference",
+      "signature": "str, result=str",
+      "params": "reference_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "createCorelReferenceBackup",
+      "signature": "str, result=str",
+      "params": "reason: str = \"manual\"",
+      "returns": "str"
+    },
+    {
+      "name": "listCorelReferenceBackups",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "restoreCorelReferenceBackup",
+      "signature": "str, result=str",
+      "params": "backup_path: str = \"\"",
+      "returns": "str"
+    },
+    {
+      "name": "migrateCorelReferenceLibrary",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "validateCorelReferenceLibrary",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "corelReferenceDataSecurityStatus",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "resolveExactReferenceByName",
+      "signature": "str, result=str",
+      "params": "input_name: str",
+      "returns": "str"
+    },
+    {
+      "name": "resolveNameCutPath",
+      "signature": "str, result=str",
+      "params": "input_name: str",
+      "returns": "str"
+    },
+    {
+      "name": "save_name_cut_queue_items",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_name_cut_queue_items",
+      "signature": "str, result=str",
+      "params": "filters_json: str = \"{}\"",
+      "returns": "str"
+    },
+    {
+      "name": "get_name_cut_queue_item",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "update_name_cut_queue_item_status",
+      "signature": "str, str, result=str",
+      "params": "item_id: str, status: str",
+      "returns": "str"
+    },
+    {
+      "name": "mark_name_cut_queue_item_prepared",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "check_name_cut_queue_duplicate",
+      "signature": "str, result=str",
+      "params": "duplicate_key: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_name_cut_transfer_history",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_name_cut_export_history",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "append_production_audit_event",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_production_audit_events",
+      "signature": "str, result=str",
+      "params": "filters_json: str = \"{}\"",
+      "returns": "str"
+    },
+    {
+      "name": "get_production_audit_event",
+      "signature": "str, result=str",
+      "params": "event_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_production_audit_summary",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "rebuild_production_audit_from_existing_sources",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "export_production_audit_events",
+      "signature": "str, result=str",
+      "params": "payload_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_live_integration_registry",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "live_integration_security_settings",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "save_live_integration_security_settings",
+      "signature": "str, result=str",
+      "params": "payload_json: str = \"{}\"",
+      "returns": "str"
+    },
+    {
+      "name": "create_backup",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_backups",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "validate_backup",
+      "signature": "str, result=str",
+      "params": "backup_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "restore_backup",
+      "signature": "str, bool, result=str",
+      "params": "backup_path: str, dry_run: bool = True",
+      "returns": "str"
+    },
+    {
+      "name": "export_backup_manifest",
+      "signature": "str, result=str",
+      "params": "backup_path: str = \"\"",
+      "returns": "str"
+    },
+    {
+      "name": "reveal_file_in_folder",
+      "signature": "str, result=str",
+      "params": "path: str",
+      "returns": "str"
+    },
+    {
+      "name": "open_file_safe",
+      "signature": "str, result=str",
+      "params": "path: str",
+      "returns": "str"
+    },
+    {
+      "name": "create_customer_order",
+      "signature": "str, result=str",
+      "params": "payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "update_customer_order_status",
+      "signature": "str, str, result=str",
+      "params": "order_id: str, status: str",
+      "returns": "str"
+    },
+    {
+      "name": "create_customer_order_summary_pdf",
+      "signature": "str, result=str",
+      "params": "order_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "save_trendyol_settings",
+      "signature": "str, result=str",
+      "params": "payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "test_trendyol_connection",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "sync_trendyol_recent_orders",
+      "signature": "int, result=str",
+      "params": "days: int",
+      "returns": "str"
+    },
+    {
+      "name": "sync_trendyol_questions",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "upsert_trendyol_mapping",
+      "signature": "str, result=str",
+      "params": "payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "export_trendyol_mappings",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "import_trendyol_mappings",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "propose_trendyol_mappings_from_catalog",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "approve_trendyol_mapping_suggestion",
+      "signature": "str, str, result=str",
+      "params": "suggestion_id: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "cache_trendyol_product_image",
+      "signature": "str, result=str",
+      "params": "image_url: str",
+      "returns": "str"
+    },
+    {
+      "name": "import_trendyol_suggestion_to_customer_order",
+      "signature": "str, result=str",
+      "params": "suggestion_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "export_trendyol_ready_to_excel",
+      "signature": "str, result=str",
+      "params": "suggestion_ids_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "import_trendyol_to_bulk_production",
+      "signature": "str, result=str",
+      "params": "suggestion_ids_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "save_trendyol_operator_correction",
+      "signature": "str, str, result=str",
+      "params": "suggestion_id: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "verify_trendyol_suggestion",
+      "signature": "str, str, result=str",
+      "params": "suggestion_id: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "apply_trendyol_question_to_suggestion",
+      "signature": "str, str, result=str",
+      "params": "suggestion_id: str, question_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "ignore_trendyol_question_for_suggestion",
+      "signature": "str, str, result=str",
+      "params": "suggestion_id: str, question_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "prepare_selected_bulk_excel",
+      "signature": "str, result=str",
+      "params": "row_numbers_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "render_bulk_preview_samples",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "render_selected_bulk_preview_samples",
+      "signature": "str, result=str",
+      "params": "row_numbers_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "render_manual_label",
+      "signature": "str, str, int",
+      "params": "template_path: str, label_text: str, quantity: int",
+      "returns": "None"
+    },
+    {
+      "name": "render_manual_label_fields",
+      "signature": "str, str, int, result=str",
+      "params": "template_path: str, payload: str, quantity: int",
+      "returns": "str"
+    },
+    {
+      "name": "preview_manual_label_fields",
+      "signature": "str, str, result=str",
+      "params": "template_path: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "preflight_manual_label_fields",
+      "signature": "str, str, int, result=str",
+      "params": "template_path: str, payload: str, quantity: int",
+      "returns": "str"
+    },
+    {
+      "name": "validate_manual_label_output",
+      "signature": "str, str, result=str",
+      "params": "render_result: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "render_manual_label_fields_to_queue",
+      "signature": "str, str, int, result=str",
+      "params": "template_path: str, payload: str, quantity: int",
+      "returns": "str"
+    },
+    {
+      "name": "create_calibration_pdf",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "save_label_defaults_json",
+      "signature": "str, result=str",
+      "params": "payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "open_output_folder",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openOutput",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "open_reports_folder",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openReports",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "open_print_folder",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openPrint",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "open_print_templates_folder",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openPrintTemplates",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "open_laser_folder",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openLaser",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "open_input_folder",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openInput",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "import_template_pack",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "importTemplatePack",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "create_label_model_from_source",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "choose_new_label_model_design_visual",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "create_label_model_from_wizard",
+      "signature": "str, result=str",
+      "params": "payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "clone_label_model_variant",
+      "signature": "str, str, result=str",
+      "params": "template_path: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "create_template",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "createTemplate",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "create_demo",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "createDemo",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "convert_legacy_excel",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "convertLegacyExcel",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "load_reports",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_svg_files",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "open_svg",
+      "signature": "str",
+      "params": "path: str",
+      "returns": "None"
+    },
+    {
+      "name": "open_project_file",
+      "signature": "str",
+      "params": "relative_path: str",
+      "returns": "None"
+    },
+    {
+      "name": "list_label_templates",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_label_model_gallery",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_label_model_backups",
+      "signature": "str, result=str",
+      "params": "template_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "compare_label_model_backup",
+      "signature": "str, str, result=str",
+      "params": "template_path: str, backup_relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "set_label_model_backup_note",
+      "signature": "str, str, str, result=str",
+      "params": "template_path: str, backup_relative_path: str, note: str",
+      "returns": "str"
+    },
+    {
+      "name": "compare_label_model_backup_pair",
+      "signature": "str, str, str, result=str",
+      "params": "template_path: str, first_backup_relative_path: str, second_backup_relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "restore_label_model_backup",
+      "signature": "str, str, result=str",
+      "params": "template_path: str, backup_relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "choose_label_model_preview",
+      "signature": "str, result=str",
+      "params": "template_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "validate_label_model_preview",
+      "signature": "str, result=str",
+      "params": "template_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "save_label_model_field",
+      "signature": "str, int, str, result=str",
+      "params": "template_path: str, index: int, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "add_label_model_field",
+      "signature": "str, str, result=str",
+      "params": "template_path: str, field_type: str",
+      "returns": "str"
+    },
+    {
+      "name": "remove_label_model_field",
+      "signature": "str, int, result=str",
+      "params": "template_path: str, index: int",
+      "returns": "str"
+    },
+    {
+      "name": "cleanup_duplicate_label_text_fields",
+      "signature": "str, result=str",
+      "params": "template_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "cleanup_duplicate_note_fields",
+      "signature": "str, result=str",
+      "params": "template_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "normalize_label_model_preview",
+      "signature": "str, result=str",
+      "params": "template_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "import_label_font",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "run_native_edit_poc",
+      "signature": "str, bool, result=str",
+      "params": "template_path: str, edit: bool",
+      "returns": "str"
+    },
+    {
+      "name": "native_edit_diagnostics",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "open_native_edit_report",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_print_templates",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "get_print_template_detail",
+      "signature": "str, result=str",
+      "params": "relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "save_print_template_metadata",
+      "signature": "str, str, result=str",
+      "params": "relative_path: str, payload: str",
+      "returns": "str"
+    },
+    {
+      "name": "create_linked_label_design",
+      "signature": "str, result=str",
+      "params": "relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_label_outputs",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_archived_label_outputs",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "archive_label_outputs",
+      "signature": "str, result=str",
+      "params": "relative_paths_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "restore_label_outputs",
+      "signature": "str, result=str",
+      "params": "relative_paths_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "cancel_running_job",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "get_pdf_preview_payload",
+      "signature": "str, result=str",
+      "params": "relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "list_laser_outputs",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "list_print_queue",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "add_label_outputs_to_print_queue",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "add_pdf_output_to_print_queue",
+      "signature": "str, result=str",
+      "params": "relative_path: str",
+      "returns": "str"
+    },
+    {
+      "name": "remove_from_print_queue",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "mark_queue_item_printed",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "mark_queue_item_pending",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "mark_queue_item_delivered",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "clear_print_queue",
+      "signature": "result=str",
+      "params": "",
+      "returns": "str"
+    },
+    {
+      "name": "print_queue_item_safe",
+      "signature": "str, result=str",
+      "params": "item_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "save_printer_profile",
+      "signature": "str, result=str",
+      "params": "profile_json: str",
+      "returns": "str"
+    },
+    {
+      "name": "delete_printer_profile",
+      "signature": "str, result=str",
+      "params": "profile_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "set_default_printer_profile",
+      "signature": "str, result=str",
+      "params": "profile_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "test_printer_profile",
+      "signature": "str, result=str",
+      "params": "profile_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "prepare_manual_print",
+      "signature": "str, str, result=str",
+      "params": "item_id: str, profile_id: str",
+      "returns": "str"
+    },
+    {
+      "name": "editTemplate",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "showHelp",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "showSettings",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    },
+    {
+      "name": "openErrors",
+      "signature": "",
+      "params": "",
+      "returns": "None"
+    }
+  ],
+  "groups": {
+    "add_label_model_field": 1,
+    "add_label_outputs_to_print_queue": 1,
+    "add_pdf_output_to_print_queue": 1,
+    "append_production_audit_event": 1,
+    "apply_trendyol_question_to_suggestion": 1,
+    "approve": 1,
+    "approve_trendyol_mapping_suggestion": 1,
+    "archive_label_outputs": 1,
+    "build_name_cut_production_scene": 1,
+    "bulk_generate_and_add_to_queue": 1,
+    "bulk_generate_gallery_items_and_add_to_queue": 1,
+    "bulk_generate_selected_and_add_to_queue": 1,
+    "cache_trendyol_product_image": 1,
+    "cancel_running_job": 1,
+    "check_name_cut_queue_duplicate": 1,
+    "choose": 1,
+    "choose_label_model_preview": 1,
+    "choose_new_label_model_design_visual": 1,
+    "cleanup_duplicate_label_text_fields": 1,
+    "cleanup_duplicate_note_fields": 1,
+    "clear_print_queue": 1,
+    "clone_label_model_variant": 1,
+    "compare_label_model_backup": 1,
+    "compare_label_model_backup_pair": 1,
+    "convert": 1,
+    "convert_legacy_excel": 1,
+    "corel": 1,
+    "create": 3,
+    "create_backup": 1,
+    "create_calibration_pdf": 1,
+    "create_customer_order": 1,
+    "create_customer_order_summary_pdf": 1,
+    "create_demo": 1,
+    "create_label_model_from_source": 1,
+    "create_label_model_from_wizard": 1,
+    "create_linked_label_design": 1,
+    "create_template": 1,
+    "delete_printer_profile": 1,
+    "dxf": 8,
+    "edit": 1,
+    "export_backup_manifest": 1,
+    "export_production_audit_events": 1,
+    "export_trendyol_mappings": 1,
+    "export_trendyol_ready_to_excel": 1,
+    "get": 1,
+    "get_name_cut_queue_item": 1,
+    "get_pdf_preview_payload": 1,
+    "get_print_template_detail": 1,
+    "get_production_audit_event": 1,
+    "get_status": 1,
+    "ignore_trendyol_question_for_suggestion": 1,
+    "import": 1,
+    "import_label_font": 1,
+    "import_template_pack": 1,
+    "import_trendyol_mappings": 1,
+    "import_trendyol_suggestion_to_customer_order": 1,
+    "import_trendyol_to_bulk_production": 1,
+    "initial": 1,
+    "list": 2,
+    "list_archived_label_outputs": 1,
+    "list_backups": 1,
+    "list_label_model_backups": 1,
+    "list_label_model_gallery": 1,
+    "list_label_outputs": 1,
+    "list_label_templates": 1,
+    "list_laser_outputs": 1,
+    "list_live_integration_registry": 1,
+    "list_name_cut_export_history": 1,
+    "list_name_cut_queue_items": 1,
+    "list_name_cut_transfer_history": 1,
+    "list_print_queue": 1,
+    "list_print_templates": 1,
+    "list_production_audit_events": 1,
+    "list_production_audit_summary": 1,
+    "list_svg_files": 1,
+    "live_integration_security_settings": 1,
+    "load_reports": 1,
+    "mark": 1,
+    "mark_name_cut_queue_item_prepared": 1,
+    "mark_queue_item_delivered": 1,
+    "mark_queue_item_pending": 1,
+    "mark_queue_item_printed": 1,
+    "migrate": 1,
+    "native_edit_diagnostics": 1,
+    "normalize_label_model_preview": 1,
+    "open": 7,
+    "open_file_safe": 1,
+    "open_input_folder": 1,
+    "open_laser_folder": 1,
+    "open_native_edit_report": 1,
+    "open_output_folder": 1,
+    "open_print_folder": 1,
+    "open_print_templates_folder": 1,
+    "open_project_file": 1,
+    "open_reports_folder": 1,
+    "open_svg": 1,
+    "preflight_manual_label_fields": 1,
+    "prepare_manual_print": 1,
+    "prepare_name_cut_files": 1,
+    "prepare_selected_bulk_excel": 1,
+    "preview_manual_label_fields": 1,
+    "preview_name_cut_paths": 1,
+    "print_queue_item_safe": 1,
+    "product": 9,
+    "propose_trendyol_mappings_from_catalog": 1,
+    "quit": 1,
+    "rebuild": 1,
+    "rebuild_production_audit_from_existing_sources": 1,
+    "reject": 1,
+    "remove_from_print_queue": 1,
+    "remove_label_model_field": 1,
+    "render": 1,
+    "render_bulk_preview_samples": 1,
+    "render_labels": 1,
+    "render_manual_label": 1,
+    "render_manual_label_fields": 1,
+    "render_manual_label_fields_to_queue": 1,
+    "render_selected_bulk_preview_samples": 1,
+    "resolve": 2,
+    "restore": 1,
+    "restore_backup": 1,
+    "restore_label_model_backup": 1,
+    "restore_label_outputs": 1,
+    "reveal_file_in_folder": 1,
+    "run": 2,
+    "run_dry_run": 1,
+    "run_native_edit_poc": 1,
+    "run_production": 1,
+    "save": 1,
+    "save_label_defaults_json": 1,
+    "save_label_model_field": 1,
+    "save_live_integration_security_settings": 1,
+    "save_name_cut_queue_items": 1,
+    "save_print_template_metadata": 1,
+    "save_printer_profile": 1,
+    "save_trendyol_operator_correction": 1,
+    "save_trendyol_settings": 1,
+    "search": 1,
+    "select_excel": 1,
+    "set_default_printer_profile": 1,
+    "set_label_model_backup_note": 1,
+    "set_selected_excel": 1,
+    "show": 2,
+    "split": 1,
+    "sync_trendyol_questions": 1,
+    "sync_trendyol_recent_orders": 1,
+    "test_printer_profile": 1,
+    "test_trendyol_connection": 1,
+    "unapprove": 1,
+    "update": 1,
+    "update_customer_order_status": 1,
+    "update_name_cut_queue_item_status": 1,
+    "upsert_trendyol_mapping": 1,
+    "validate": 1,
+    "validate_backup": 1,
+    "validate_label_model_preview": 1,
+    "validate_manual_label_output": 1,
+    "verify_trendyol_suggestion": 1
+  }
+}

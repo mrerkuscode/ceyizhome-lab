@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CeyizHome Lab</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="qrc:///qtwebchannel/qwebchannel.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">C</div>
+        <div>
+          <div class="brand-title">CEYIZHOME LAB</div>
+          <div class="brand-subtitle">Production & Label Studio</div>
+        </div>
+      </div>
+
+      <div class="side-block">
+        <div class="side-title">ANA MENÜ</div>
+        <button class="nav active"><span>⌂</span><b>Genel Bakış</b><small>Tüm süreç özeti</small></button>
+      </div>
+
+      <div class="side-block">
+        <div class="side-title">SÜREÇ ADIMLARI</div>
+        <button class="nav"><span class="circle green">1</span><b>Excel</b><small id="sideExcel">Veri Tamamlandı</small></button>
+        <button class="nav"><span class="circle red">2</span><b>Kontrol</b><small id="sideControl">Beklemede</small></button>
+        <button class="nav"><span class="circle red">3</span><b>Etiket</b><small id="sideLabel">Beklemede</small></button>
+        <button class="nav"><span class="circle red">4</span><b>Lazer</b><small id="sideLaser">Beklemede</small></button>
+        <button class="nav"><span class="circle muted">5</span><b>Raporlar</b><small>Aktif</small></button>
+      </div>
+
+      <div class="side-block">
+        <div class="side-title">ARAÇLAR</div>
+        <button class="side-action" onclick="bridge.editTemplate()">Etiket Şablonları</button>
+        <button class="side-action" onclick="bridge.importTemplatePack()">Şablon Paketi Yükle</button>
+        <button class="side-action" onclick="bridge.openOutput()">Çıktı Klasörünü Aç</button>
+        <button class="side-action" onclick="bridge.openReports()">Raporlar Klasörünü Aç</button>
+        <button class="side-action" onclick="bridge.openLaser()">Lazer Klasörünü Aç</button>
+        <button class="side-action" onclick="bridge.showSettings()">Ayarlar</button>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div>☼ Gündüz Modu</div>
+        <label class="switch"><input id="themeCheck" type="checkbox"><span></span></label>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <section class="excel-card">
+          <div class="excel-icon">X</div>
+          <div class="excel-text">
+            <small>Seçili Excel Dosyası</small>
+            <strong id="excelName">siparisler.xlsx</strong>
+          </div>
+          <button onclick="bridge.chooseExcel()">Değiştir</button>
+        </section>
+
+        <section class="status-card success">
+          <div class="status-icon">⌾</div>
+          <div><strong>GÜVENLİ MOD AKTİF</strong><small>Sistem korumalı çalışıyor</small></div>
+        </section>
+
+        <section id="fontCard" class="status-card danger">
+          <div class="status-icon">!</div>
+          <div><strong id="fontTitle">LAZER FONTU EKSİK</strong><small id="fontText">Font yüklenmedi</small></div>
+        </section>
+
+        <section class="header-actions">
+          <button id="dayBtn" class="selected">☼ Gündüz</button>
+          <button id="nightBtn">☾ Gece</button>
+          <button onclick="bridge.showHelp()"> Nasıl Kullanırım</button>
+          <button onclick="bridge.showSettings()">⚙ Ayarlar</button>
+        </section>
+      </header>
+
+      <div class="page-grid">
+        <section class="content">
+          <div class="page-title">
+            <h1>Genel Bakış</h1>
+            <p>Üretim dosyalarını güvenli şekilde kontrol edin ve hazırlayın.</p>
+          </div>
+
+          <div class="steps">
+            <div id="step1" class="step done"><span>1</span><b>Excel</b><small>Veri Tamamlandı</small></div>
+            <div id="step2" class="step blocked"><span>2</span><b>Kontrol</b><small>Bloke</small></div>
+            <div id="step3" class="step blocked"><span>3</span><b>Etiket</b><small>Bloke</small></div>
+            <div id="step4" class="step blocked"><span>4</span><b>Lazer</b><small>Bloke</small></div>
+            <div id="step5" class="step"><span>5</span><b>Raporlar</b><small>Aktif</small></div>
+          </div>
+
+          <section id="banner" class="banner blocked">
+            <div class="banner-icon">!</div>
+            <div>
+              <h2 id="bannerTitle">ÜRETİM BLOKE</h2>
+              <p id="bannerText">Kritik hatalar düzeltilmeden üretim dosyası oluşturulamaz.</p>
+            </div>
+            <button onclick="bridge.openErrors()">Hatalar Sayfasına Git</button>
+          </section>
+
+          <section class="panel">
+            <h3>ÖZET BİLGİLER</h3>
+            <div class="kpis">
+              <article class="kpi green"><span>▣</span><small>GEÇERLİ SİPARİŞ</small><strong id="validCount">0</strong><em>Sipariş</em></article>
+              <article class="kpi red"><span>△</span><small>KRİTİK HATA</small><strong id="errorCount">0</strong><em>Sipariş</em></article>
+              <article class="kpi amber"><span>♙</span><small>KONTROL GEREKLİ</small><strong id="reviewCount">0</strong><em>Sipariş</em></article>
+              <article class="kpi violet"><span>◇</span><small>ETİKET İŞLERİ</small><strong id="labelCount">0</strong><em>İş</em></article>
+              <article class="kpi blue"><span>▤</span><small>BASKI İŞLERİ</small><strong id="printCount">0</strong><em>İş</em></article>
+              <article class="kpi purple"><span>✳</span><small>LAZER İŞLERİ</small><strong id="laserCount">0</strong><em>İş</em></article>
+            </div>
+          </section>
+
+          <section class="panel actions">
+            <h3>YAPILACAK İŞLEMLER</h3>
+            <div class="action-grid">
+              <button onclick="bridge.chooseExcel()"><b>Excel Dosyası Seç</b><small>Yeni dosya yükleyin</small></button>
+              <button class="gold" onclick="bridge.runDry()"><b>Kontrolü Tekrar Çalıştır</b><small>Dry-run kontrolü yapın</small></button>
+              <button onclick="bridge.renderLabels()"><b>Etiket PDF Oluştur</b><small>Etiket dosyalarını oluşturun</small></button>
+              <button onclick="bridge.openOutput()"><b>Çıktı Klasörünü Aç</b><small>Üretim çıktısını görüntüleyin</small></button>
+              <button onclick="bridge.openReports()"><b>Raporlar Klasörünü Aç</b><small>Raporları görüntüleyin</small></button>
+              <button onclick="bridge.openLaser()"><b>Lazer Klasörünü Aç</b><small>Lazer dosyalarını görüntüleyin</small></button>
+            </div>
+          </section>
+
+          <section class="panel activity">
+            <h3>SON İŞLEMLER</h3>
+            <table>
+              <thead><tr><th>Zaman</th><th>İşlem</th><th>Durum</th><th>Detay</th></tr></thead>
+              <tbody id="activityRows"></tbody>
+            </table>
+          </section>
+        </section>
+
+        <aside class="right">
+          <section class="help-card">
+            <h3>💡 NASIL KULLANIRIM</h3>
+            <ol>
+              <li>Excel dosyanızı seçin.</li>
+              <li>Kontrolü çalıştırın (Dry-run)</li>
+              <li>Hataları düzeltin</li>
+              <li>Tekrar kontrol edin</li>
+              <li>Üretim dosyalarını oluşturun</li>
+            </ol>
+            <button onclick="bridge.showHelp()">Detaylı Rehberi Aç</button>
+          </section>
+
+          <section class="help-card errors">
+            <h3>İLK KRİTİK HATALAR</h3>
+            <div id="errorList"></div>
+            <button onclick="bridge.openErrors()">Tüm Hataları Görüntüle</button>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <span>Sürüm: 1.0.0</span>
+    <span>Güvenli Mod: Aktif</span>
+    <span id="lastOutput">Çıktı: output/</span>
+    <span>Kullanıcı: Admin</span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

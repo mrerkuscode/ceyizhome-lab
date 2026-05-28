@@ -1,0 +1,39 @@
+{
+  "profileId": "MocharyGoldenProductionProfile",
+  "source": "golden_delta_calibration",
+  "generatedAt": "2026-05-26",
+  "targetStrokeThicknessMm": 0.55,
+  "corelLikeOffsetMm": 0.36,
+  "letterSpacingScale": 1.75,
+  "kerningAdjustment": 0.193,
+  "targetWidthHeightRatio": 4.2761,
+  "baselineCorrectionMm": 0.0,
+  "slantCorrection": 0.0,
+  "markBridgeWidthMm": 0.22,
+  "markBridgeMaxLengthMm": 3.5,
+  "initialLetterConnectionRules": {
+    "keepOwnerGlyphMarks": true,
+    "avoidUpperLoopBridge": true,
+    "preferLowerMidFlow": true
+  },
+  "turkishMarkRules": {
+    "ownerGlyphOnly": true,
+    "dotBridgeMm": [
+      0.18,
+      0.24
+    ],
+    "breveBridgeMm": [
+      0.2,
+      0.25
+    ],
+    "cedillaBridgeMm": [
+      0.25,
+      0.3
+    ],
+    "maxBridgeLengthMm": 3.5
+  },
+  "calibrationNotes": [
+    "Profile is analytical only until wired into runtime engine.",
+    "Golden references remain the visual ground truth."
+  ]
+}

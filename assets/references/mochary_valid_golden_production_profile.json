@@ -1,0 +1,432 @@
+{
+  "profileId": "MocharyValidGoldenProductionProfile",
+  "source": "valid_golden_calibration_rerun",
+  "generatedAt": "2026-05-26",
+  "dataScope": "limited_valid_single_name_references_only",
+  "validReferences": [
+    "Özge",
+    "Ümit"
+  ],
+  "notFinalUntilMainGoldenExists": [
+    "Mücahit",
+    "Sümeyye",
+    "Çağrı"
+  ],
+  "targetStrokeThicknessMm": 0.55,
+  "corelLikeOffsetMm": 0.2,
+  "letterSpacingScale": 1.26,
+  "kerningAdjustment": 0.0,
+  "targetWidthHeightRatio": 1.8598,
+  "baselineCorrectionMm": 0.0,
+  "slantCorrection": 0.0,
+  "markBridgeWidthMm": 0.22,
+  "markBridgeMaxLengthMm": 3.5,
+  "turkishMarkRules": {
+    "ownerGlyphOnly": true,
+    "dotBridgeMm": [
+      0.18,
+      0.24
+    ],
+    "breveBridgeMm": [
+      0.2,
+      0.25
+    ],
+    "cedillaBridgeMm": [
+      0.25,
+      0.3
+    ],
+    "maxBridgeLengthMm": 3.5
+  },
+  "calibrationNotes": [
+    "Profile values are now wired into the internal engine input path generation.",
+    "This remains a limited Özge/Ümit calibration and must not be treated as final production default until Mücahit, Sümeyye and Çağrı golden references exist."
+  ],
+  "profileApplicationWired": true,
+  "widthScale": 1.15,
+  "heightScale": 1.15,
+  "bestCandidates": {
+    "Özge": {
+      "bestOffsetMm": 0.2,
+      "bestLetterSpacingScale": 1.26,
+      "bestWidthScale": 1.15,
+      "bestHeightScale": 1.15,
+      "bestScore": 21.334,
+      "bboxIoU": 0.234,
+      "silhouetteIoU": 0.2187,
+      "strokeThicknessDelta": 0.1722
+    },
+    "Ümit": {
+      "bestOffsetMm": 0.2,
+      "bestLetterSpacingScale": 1.26,
+      "bestWidthScale": 1.15,
+      "bestHeightScale": 1.15,
+      "bestScore": 22.446,
+      "bboxIoU": 0.2475,
+      "silhouetteIoU": 0.2305,
+      "strokeThicknessDelta": 0.1924
+    }
+  },
+  "glyphFormCalibrationWired": true,
+  "glyphFormCalibrationGeneratedAt": "2026-05-26",
+  "glyphFormCalibrationScope": [
+    "Özge",
+    "Ümit"
+  ],
+  "pairKerningMap": {},
+  "glyphScaleRules": {
+    "Ö": {
+      "widthScale": 1.1,
+      "heightScale": 1.0,
+      "slantCorrection": 0.08
+    },
+    "z": {
+      "widthScale": 1.0,
+      "heightScale": 1.0,
+      "slantCorrection": 0.08
+    },
+    "g": {
+      "widthScale": 1.1,
+      "heightScale": 1.0,
+      "slantCorrection": 0.08
+    },
+    "e": {
+      "widthScale": 1.1,
+      "heightScale": 1.1,
+      "slantCorrection": 0.08
+    },
+    "Ü": {
+      "widthScale": 0.9,
+      "heightScale": 0.9,
+      "slantCorrection": 0.08
+    },
+    "m": {
+      "widthScale": 1.1,
+      "heightScale": 1.1,
+      "slantCorrection": 0.08
+    },
+    "i": {
+      "widthScale": 0.9,
+      "heightScale": 1.1,
+      "slantCorrection": 0.08
+    },
+    "t": {
+      "widthScale": 0.9,
+      "heightScale": 1.1,
+      "slantCorrection": -0.08
+    }
+  },
+  "pairRules": {},
+  "glyphRules": {
+    "Ö": {
+      "widthScale": 1.1,
+      "heightScale": 1.0,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "z": {
+      "widthScale": 1.0,
+      "heightScale": 1.0,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "g": {
+      "widthScale": 1.1,
+      "heightScale": 1.0,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "e": {
+      "widthScale": 1.1,
+      "heightScale": 1.1,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "Ü": {
+      "widthScale": 0.9,
+      "heightScale": 0.9,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "m": {
+      "widthScale": 1.1,
+      "heightScale": 1.1,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "i": {
+      "widthScale": 0.9,
+      "heightScale": 1.1,
+      "slantCorrection": 0.08,
+      "scope": "limited_valid_golden"
+    },
+    "t": {
+      "widthScale": 0.9,
+      "heightScale": 1.1,
+      "slantCorrection": -0.08,
+      "scope": "limited_valid_golden"
+    }
+  },
+  "glyphFormBestCandidates": {
+    "Özge": {
+      "bestScore": 23.181,
+      "bboxIoU": 0.2426,
+      "silhouetteIoU": 0.2344,
+      "pathHash": "50b4ae2e50f4f887",
+      "pairKerningMap": {},
+      "glyphScaleRules": {
+        "Ö": {
+          "widthScale": 1.1,
+          "heightScale": 1.0,
+          "slantCorrection": 0.08
+        },
+        "z": {
+          "widthScale": 1.0,
+          "heightScale": 1.0,
+          "slantCorrection": 0.08
+        },
+        "g": {
+          "widthScale": 1.1,
+          "heightScale": 1.0,
+          "slantCorrection": 0.08
+        },
+        "e": {
+          "widthScale": 1.1,
+          "heightScale": 1.1,
+          "slantCorrection": 0.08
+        }
+      },
+      "status": "GLYPH_CALIBRATION_REVIEW_REQUIRED"
+    },
+    "Ümit": {
+      "bestScore": 26.185,
+      "bboxIoU": 0.2629,
+      "silhouetteIoU": 0.2621,
+      "pathHash": "ae992d14f12e64a6",
+      "pairKerningMap": {},
+      "glyphScaleRules": {
+        "Ü": {
+          "widthScale": 0.9,
+          "heightScale": 0.9,
+          "slantCorrection": 0.08
+        },
+        "m": {
+          "widthScale": 1.1,
+          "heightScale": 1.1,
+          "slantCorrection": 0.08
+        },
+        "i": {
+          "widthScale": 0.9,
+          "heightScale": 1.1,
+          "slantCorrection": 0.08
+        },
+        "t": {
+          "widthScale": 0.9,
+          "heightScale": 1.1,
+          "slantCorrection": -0.08
+        }
+      },
+      "status": "GLYPH_CALIBRATION_REVIEW_REQUIRED"
+    }
+  },
+  "glyphFormCalibrationNotes": [
+    "Glyph/pair rules are limited to Özge and Ümit valid single-name golden references.",
+    "This is not a final production profile until Mücahit, Sümeyye and Çağrı single-name golden references exist."
+  ],
+  "glyphOverrideDefaultEnabled": false,
+  "manualApprovedGlyphOverrideOnly": true,
+  "autoExtractedGlyphsProductionForbidden": true,
+  "goldenStyleRuleLearner": {
+    "source": "golden_style_rule_learner_valid_single_name_only",
+    "generatedAt": "2026-05-26",
+    "glyphShapeOverrideDefaultEnabled": false,
+    "manualApprovedGlyphOverrideOnly": true,
+    "autoExtractedGlyphsProductionForbidden": true,
+    "styleMetrics": {
+      "sourceNames": [
+        "Özge",
+        "Ümit"
+      ],
+      "targetWidthHeightRatioMedian": 1.8598,
+      "fillRatioMedian": 0.6793,
+      "strokeThicknessProxyMedianMm": 1.6983,
+      "pathCountMedian": 7.0,
+      "curveCountMedian": 202.0,
+      "lineCountMedian": 42.5,
+      "rows": [
+        {
+          "name": "Özge",
+          "bboxAspect": 1.7602,
+          "bboxWidth": 315.277,
+          "bboxHeight": 179.114,
+          "pathCount": 12,
+          "curveCount": 230,
+          "lineCount": 32,
+          "fillRatioProxy": 0.65764,
+          "strokeThicknessProxyMm": 1.6441
+        },
+        {
+          "name": "Ümit",
+          "bboxAspect": 1.9593,
+          "bboxWidth": 323.491,
+          "bboxHeight": 165.108,
+          "pathCount": 2,
+          "curveCount": 174,
+          "lineCount": 53,
+          "fillRatioProxy": 0.70101,
+          "strokeThicknessProxyMm": 1.7525
+        }
+      ]
+    },
+    "pairRules": {
+      "Ö:z": {
+        "sourceName": "Özge",
+        "ruleType": "connection_style_rule_not_glyph_override",
+        "pairKerningMm": 0.0,
+        "connectionDirection": "baseline_script_flow",
+        "forbiddenZones": [
+          "inside_counter",
+          "wrong_glyph_mark_area",
+          "upper_decorative_loop"
+        ],
+        "ownerGlyphMarkRule": true,
+        "confidence": "limited_valid_golden"
+      },
+      "z:g": {
+        "sourceName": "Özge",
+        "ruleType": "connection_style_rule_not_glyph_override",
+        "pairKerningMm": 0.0,
+        "connectionDirection": "baseline_script_flow",
+        "forbiddenZones": [
+          "inside_counter",
+          "wrong_glyph_mark_area",
+          "upper_decorative_loop"
+        ],
+        "ownerGlyphMarkRule": true,
+        "confidence": "limited_valid_golden"
+      },
+      "g:e": {
+        "sourceName": "Özge",
+        "ruleType": "connection_style_rule_not_glyph_override",
+        "pairKerningMm": 0.0,
+        "connectionDirection": "baseline_script_flow",
+        "forbiddenZones": [
+          "inside_counter",
+          "wrong_glyph_mark_area",
+          "upper_decorative_loop"
+        ],
+        "ownerGlyphMarkRule": true,
+        "confidence": "limited_valid_golden"
+      },
+      "Ü:m": {
+        "sourceName": "Ümit",
+        "ruleType": "connection_style_rule_not_glyph_override",
+        "pairKerningMm": 0.0,
+        "connectionDirection": "baseline_script_flow",
+        "forbiddenZones": [
+          "inside_counter",
+          "wrong_glyph_mark_area",
+          "upper_decorative_loop"
+        ],
+        "ownerGlyphMarkRule": true,
+        "confidence": "limited_valid_golden"
+      },
+      "m:i": {
+        "sourceName": "Ümit",
+        "ruleType": "connection_style_rule_not_glyph_override",
+        "pairKerningMm": 0.0,
+        "connectionDirection": "baseline_script_flow",
+        "forbiddenZones": [
+          "inside_counter",
+          "wrong_glyph_mark_area",
+          "upper_decorative_loop"
+        ],
+        "ownerGlyphMarkRule": true,
+        "confidence": "limited_valid_golden"
+      },
+      "i:t": {
+        "sourceName": "Ümit",
+        "ruleType": "connection_style_rule_not_glyph_override",
+        "pairKerningMm": 0.0,
+        "connectionDirection": "baseline_script_flow",
+        "forbiddenZones": [
+          "inside_counter",
+          "wrong_glyph_mark_area",
+          "upper_decorative_loop"
+        ],
+        "ownerGlyphMarkRule": true,
+        "confidence": "limited_valid_golden"
+      }
+    },
+    "glyphStyleAdjustmentRules": {
+      "Ö": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 1.1,
+        "heightScale": 1.0,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "z": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 1.0,
+        "heightScale": 1.0,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "g": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 1.1,
+        "heightScale": 1.0,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "e": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 1.1,
+        "heightScale": 1.1,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "Ü": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 0.9,
+        "heightScale": 0.9,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "m": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 1.1,
+        "heightScale": 1.1,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "i": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 0.9,
+        "heightScale": 1.1,
+        "slantCorrection": 0.08,
+        "confidence": "limited_valid_golden"
+      },
+      "t": {
+        "sourceRule": "valid_golden_profile_glyph_transform",
+        "ruleType": "style_adjustment_not_path_override",
+        "widthScale": 0.9,
+        "heightScale": 1.1,
+        "slantCorrection": -0.08,
+        "confidence": "limited_valid_golden"
+      }
+    },
+    "notes": [
+      "Golden kelimeden otomatik glyph shape extraction production için kullanılmaz.",
+      "Bu profil harf şekli override değil; font glyph + designer connection akışına style/pair kuralı sağlar.",
+      "Mücahit, Sümeyye ve Çağrı için doğru single-name golden hâlâ eksik."
+    ]
+  }
+}
