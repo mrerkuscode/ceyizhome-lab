@@ -39,11 +39,14 @@
         </div>
         <div class="nav-section nav-group open" data-nav-group="trendyol">
           <div class="nav-label">TRENDYOL ENTEGRASYONU</div>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sidebar-tab="orders" onclick="openTrendyolSidebarTab('orders')" title="Trendyol Siparişleri"><span class="nav-icon">T</span><span class="nav-text">Siparişler</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sidebar-tab="worklist" onclick="openTrendyolSidebarTab('worklist')" title="Kontrol Kuyruğu"><span class="nav-icon">!</span><span class="nav-text">Kontrol Kuyruğu</span><span id="sidebarBadgeReview" class="nav-badge">0</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sidebar-tab="mapping" onclick="openTrendyolSidebarTab('mapping')" title="Ürün Eşleştirme"><span class="nav-icon">↔</span><span class="nav-text">Ürün Eşleştirme</span><span id="sidebarBadgeMapping" class="nav-badge">0</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sidebar-tab="questions" onclick="openTrendyolSidebarTab('questions')" title="Kanıt Eşleştirme"><span class="nav-icon">⌕</span><span class="nav-text">Kanıt Eşleştirme</span><span id="sidebarBadgeEvidence" class="nav-badge">0</span></button>
-          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sidebar-tab="history" onclick="openTrendyolSidebarTab('history')" title="Aktarım Geçmişi"><span class="nav-icon">↺</span><span class="nav-text">Aktarım Geçmişi</span><span id="sidebarBadgeHistory" class="nav-badge subtle">0</span></button>
+          <!-- Ana Trendyol butonu — her zaman görünür -->
+          <button class="nav-btn" data-page="trendyolOrders" onclick="showSection('trendyolOrders')" title="Trendyol Sipariş Merkezi"><span class="nav-icon">T</span><span class="nav-text">Trendyol Merkezi</span></button>
+          <!-- Alt sekmeler — Trendyol sayfasının üst tablarında zaten var; sadece dev-mode'da göster -->
+          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="orders" onclick="openTrendyolSidebarTab('orders')" title="Trendyol Siparişleri"><span class="nav-icon">T</span><span class="nav-text">Siparişler</span></button>
+          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="worklist" onclick="openTrendyolSidebarTab('worklist')" title="Kontrol Kuyruğu"><span class="nav-icon">!</span><span class="nav-text">Kontrol Kuyruğu</span><span id="sidebarBadgeReview" class="nav-badge">0</span></button>
+          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="mapping" onclick="openTrendyolSidebarTab('mapping')" title="Ürün Eşleştirme"><span class="nav-icon">↔</span><span class="nav-text">Ürün Eşleştirme</span><span id="sidebarBadgeMapping" class="nav-badge">0</span></button>
+          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="questions" onclick="openTrendyolSidebarTab('questions')" title="Kanıt Eşleştirme"><span class="nav-icon">⌕</span><span class="nav-text">Kanıt Eşleştirme</span><span id="sidebarBadgeEvidence" class="nav-badge">0</span></button>
+          <button class="nav-btn nav-sublink" data-page="trendyolOrders" data-trendyol-sublink="true" data-trendyol-sidebar-tab="history" onclick="openTrendyolSidebarTab('history')" title="Aktarım Geçmişi"><span class="nav-icon">↺</span><span class="nav-text">Aktarım Geçmişi</span><span id="sidebarBadgeHistory" class="nav-badge subtle">0</span></button>
         </div>
         <div class="nav-section nav-group" data-nav-group="settings">
           <div class="nav-label">AYARLAR</div>

@@ -29809,3 +29809,9 @@ body.label-studio-active #label.studio-mode-simple .corel-statusbar {
 body.dev-mode [data-dev-module] { display: flex !important; }
 #devModuleDetails { display: none !important; }
 body.dev-mode #devModuleDetails { display: block !important; }
+
+/* ── Trendyol sidebar alt sekme gizleme ─────────────────────────────────────
+   Trendyol sayfasının üst tablarında zaten aynı sekmeler var.
+   Normal modda sadece "Trendyol Merkezi" ana butonu görünür.       */
+[data-trendyol-sublink] { display: none !important; }
+body.dev-mode [data-trendyol-sublink] { display: flex !important; }
