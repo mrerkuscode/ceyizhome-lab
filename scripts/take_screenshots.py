@@ -10,7 +10,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 BASE_URL = "http://localhost:8000"
-OUTPUT_DIR = Path("output/2026-05-28/ui_screenshots")
+OUTPUT_DIR = Path("output/2026-05-28/ui_screenshots/after")
 VIEWPORT_WIDTH = 1920
 VIEWPORT_HEIGHT = 1080
 
