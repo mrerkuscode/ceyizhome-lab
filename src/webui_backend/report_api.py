@@ -134,8 +134,15 @@ def metrics_payload(date_range_json: str, project_root: "Path | None" = None) ->
             return None
 
     def safe_qty(row: dict) -> int:
+        """Bozuk quantity (None, str, negatif) → 0. Sadece geçerli pozitif int sayılır."""
+        raw = row.get("quantity")
+        if raw is None:
+            return 0
         try:
-            return int(row.get("quantity", 1) or 1)
+            qty = int(raw)
+            if qty < 0:
+                return 0
+            return qty
         except (ValueError, TypeError):
             return 0
 
