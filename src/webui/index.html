@@ -107,10 +107,18 @@
           <h1 class="home-title">Hoş geldiniz, CeyizHome Lab</h1>
           <p class="home-subtitle">Etiket, Trendyol, toplu üretim ve lazer isim kesim operasyon merkezi.</p>
           <div class="home-status-row" aria-label="Üretim güvenliği durumu">
-            <span onclick="openSettingsSubpage('general')" style="cursor:pointer" title="Ayarlar > Güvenlik"><b>Güvenli Mod:</b> <span id="homeSafetyModeStatus">Aktif</span></span>
-            <span onclick="openSettingsSubpage('general')" style="cursor:pointer" title="Ayarlar > Genel"><b>Direct Print:</b> <span id="homeDirectPrintStatus">Kapalı</span></span>
-            <span onclick="showSection('reports')" style="cursor:pointer" title="Raporlara Git"><b>Son kalite kontrol:</b> <span id="homeQualityStatusInline">—</span></span>
-            <span onclick="openSettingsSubpage('printer-profiles')" style="cursor:pointer" title="Ayarlar > Yazıcı Profilleri"><b>Yazıcı:</b> <span id="homePrinterAutoStatus">Otomatik çalışmaz</span></span>
+            <button class="home-status-pill home-status-pill-success" onclick="openSettingsSubpage('general')" title="Ayarlar > Güvenlik">
+              <span class="hsp-icon">✓</span><b>Güvenli Mod</b><span id="homeSafetyModeStatus">Aktif</span>
+            </button>
+            <button class="home-status-pill home-status-pill-neutral" onclick="openSettingsSubpage('general')" title="Ayarlar > Genel">
+              <span class="hsp-icon">⊘</span><b>Direct Print</b><span id="homeDirectPrintStatus">Kapalı</span>
+            </button>
+            <button class="home-status-pill home-status-pill-warning" onclick="showSection('reports')" title="Raporlara Git">
+              <span class="hsp-icon">◌</span><b>Son Kontrol</b><span id="homeQualityStatusInline">—</span>
+            </button>
+            <button class="home-status-pill home-status-pill-neutral" onclick="openSettingsSubpage('printer-profiles')" title="Ayarlar > Yazıcı Profilleri">
+              <span class="hsp-icon">⚠</span><b>Yazıcı</b><span id="homePrinterAutoStatus">Otomatik çalışmaz</span>
+            </button>
           </div>
           <div class="grid-3">
             <article class="workflow-card">
