@@ -984,3 +984,23 @@ class WebBridge(QObject):
     @Slot()
     def openErrors(self) -> None:
         self.controller.open_reports()
+
+
+
+    # --- Üretim Nabzı KPI Bridge Slot (feat/visual_reporting) ---
+
+    @Slot(str, result=str)
+    def metrics_payload(self, date_range_json: str) -> str:
+        """KPI metriklerini döndürür. data/production_history.json kaynak."""
+        try:
+            from webui_backend import report_api
+            result = report_api.metrics_payload(
+                date_range_json=date_range_json,
+                project_root=self.controller.project_root,
+            )
+            return json.dumps(result, ensure_ascii=False)
+        except Exception as exc:  # noqa: BLE001
+            return json.dumps(
+                {"status": "ERROR", "message": f"KPI verisi alınamadı: {exc}"},
+                ensure_ascii=False,
+            )
