@@ -323,3 +323,5 @@ Bu soruların cevabı teknik kararları doğrudan etkiliyor:
 - SoftwareSuggest: BarTender $495 one-time başlangıç
 - Arbisoft: Qt vs Electron performans karşılaştırması (Ekim 2025)
 - Konica Minolta TR: Küresel etiket pazarı 46,5B USD (2024)
+
+<!-- research: stratejik yol haritasi ve pazar arastirmasi -->
