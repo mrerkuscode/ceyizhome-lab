@@ -12164,8 +12164,20 @@ textarea,
 }
 
 #printQueue .queue-stat.next b { color: #2563eb; }
+#printQueue .queue-stat.pending {
+  background: linear-gradient(180deg, #e6f1fb, #dbeafe);
+  border-color: #bfdbfe;
+}
 #printQueue .queue-stat.pending b { color: #0369a1; }
+#printQueue .queue-stat.printed {
+  background: linear-gradient(180deg, #e1f5ee, #d1fae5);
+  border-color: #6ee7b7;
+}
 #printQueue .queue-stat.printed b { color: #047857; }
+#printQueue .queue-stat.review {
+  background: linear-gradient(180deg, #faeeda, #fef3c7);
+  border-color: #fcd34d;
+}
 #printQueue .queue-stat.review b { color: #b45309; }
 
 #printQueue .print-queue-layout {
