@@ -3128,7 +3128,8 @@ function showTrendyolTab(tab = "orders", shouldRender = true) {
     worklist: "trendyolTabWorklist",
     mapping: "trendyolTabMapping",
     questions: "trendyolTabQuestions",
-    history: "trendyolTabHistory"
+    history: "trendyolTabHistory",
+    nameverify: "trendyolTabNameVerify"
   };
   document.querySelectorAll(".trendyol-tab").forEach(button => {
     button.classList.toggle("active", button.dataset.trendyolTab === activeTrendyolTab);
@@ -3147,6 +3148,7 @@ function showTrendyolTab(tab = "orders", shouldRender = true) {
   if (activeTrendyolTab === "worklist") renderTrendyolOperatorWorklist(trendYolSuggestions());
   if (activeTrendyolTab === "questions") renderTrendyolQuestions(currentState.trendyol?.questions || [], currentState.trendyol?.settings || {});
   if (activeTrendyolTab === "history") renderTrendyolTransferHistory(trendYolSuggestions());
+  if (activeTrendyolTab === "nameverify") tyVerifyInit();
 }
 
 function updateSidebarTrendyolBadges(suggestions = [], questions = []) {
@@ -21760,3 +21762,361 @@ function toggleNameCutFullBoard(btn) {
 // ============================================================
 // /Uretim Nabzi KPI Dashboard
 // ============================================================
+
+// ============================================================
+// TRENDYOL — İSİM DOĞRULAMA (tyVerify*)
+// Doğrulama kapısı: operatör onayı olmadan hiçbir isim üretime gitmiyor.
+// ============================================================
+(function () {
+  /* ── Durum ── */
+  let tyItems = [];       // doğrulama kuyruğu
+  let tyCur = 0;          // seçili index
+  let tyActive = false;   // sekme açık mı (klavye kısayolu guard)
+
+  /* ── Sözlük: öğrenilen düzeltmeler {ham → düzeltilmiş} ── */
+  const tyDict = (() => {
+    try { return JSON.parse(localStorage.getItem("cyz_tyv_dict") || "{}"); } catch { return {}; }
+  })();
+  function tySaveDict() {
+    try { localStorage.setItem("cyz_tyv_dict", JSON.stringify(tyDict)); } catch {}
+  }
+  function tyApplyDict(raw) {
+    return Object.keys(tyDict).reduce((s, k) => s.replace(new RegExp(k, "gi"), tyDict[k]), raw || "");
+  }
+
+  /* ── Güven rengi ── */
+  function tyCm(c) {
+    return c >= 85 ? ["Yüksek", "ok"] : c >= 55 ? ["Orta", "warn"] : ["Düşük", "danger"];
+  }
+
+  /* ── SVG yardımcısı ── */
+  const IC = {
+    check: '<path d="M3.5 8.5l3 3 6-7"/>',
+    alert: '<path d="M8 2.2l6 11.3H2z"/><path d="M8 6.5v3.2"/><path d="M8 11.8h.01"/>',
+    history: '<path d="M2.5 8a5.5 5.5 0 1 1 1.7 4"/><path d="M2.2 12.4l.4-2.4 2.4.4"/><path d="M8 5.5V8l1.8 1.1"/>',
+    flame: '<path d="M8 1.5c2.6 2.6 3.8 4.6 3.8 7.2a3.8 3.8 0 0 1-7.6 0c0-1.4.5-2.4 1.4-3.4C7 5.4 8 4 8 1.5z"/>',
+    bag: '<path d="M3 5h10l-.8 9H3.8z"/><path d="M6 5a2 2 0 0 1 4 0"/>',
+    truck: '<rect x="1" y="4" width="9" height="7" rx="1"/><path d="M10 6h3l2 2.5V11h-5z"/><circle cx="4" cy="12.5" r="1.3"/><circle cx="12" cy="12.5" r="1.3"/>',
+    pin: '<path d="M8 14s5-4.5 5-8a5 5 0 0 0-10 0c0 3.5 5 8 5 8z"/><circle cx="8" cy="6" r="1.6"/>',
+    send: '<path d="M14 2L7 9"/><path d="M14 2l-4.5 12-2.5-5-5-2.5z"/>'
+  };
+  function tySvg(n, s) {
+    s = s || 16;
+    return `<svg class="ico" width="${s}" height="${s}" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[n] || ""}</svg>`;
+  }
+  function tyEsc(s) { return (s || "").replace(/[&<>]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m])); }
+  function tyHl(m) { return tyEsc(m).replace(/##(.+?)##/g, "<mark>$1</mark>"); }
+
+  /* ── Gerçek Trendyol verisinden öğe oluştur ── */
+  function tyBuildItemsFromState() {
+    const rows = trendYolSuggestions ? trendYolSuggestions() : [];
+    const questions = currentState?.trendyol?.questions || [];
+    const settings = currentState?.trendyol?.settings || {};
+    const threshold = Number(settings.ai_confidence_threshold || 0.85) * 100;
+    const aiEnabled = settings.ai_enabled !== false;
+
+    // Mevcut doğrulanmış öğeleri koru (verification_pending veya yeni olanları al)
+    const existing = new Map(tyItems.map(x => [x._rowId, x]));
+
+    const newItems = [];
+
+    // Trendyol sipariş satırlarından: isim içeren kişiselleştirme alanları
+    for (const row of rows) {
+      if (row.import_status === "imported") continue;
+      const hasPersonalization = row.personalization_text || row.extracted_name || row.ai_name;
+      if (!hasPersonalization) continue;
+
+      const rowId = String(row.order_number || row.id || Math.random());
+      if (existing.has(rowId)) { newItems.push(existing.get(rowId)); continue; }
+
+      const conf = Math.round(Number(row.confidence || 0) * 100);
+      const name = row.ai_name || row.extracted_name || "";
+      const date = row.ai_date || row.extracted_date || "";
+      const ibare = row.ai_ibare || row.personalization_text || "";
+      const src = { name: row.ai_name ? "AI çıkarım" : "sipariş alanından", date: row.ai_date ? "AI çıkarım" : "—", ibare: "sipariş alanından" };
+
+      newItems.push({
+        _rowId: rowId,
+        init: (row.customer_name || "?").substring(0, 2).toUpperCase(),
+        cust: row.customer_name || "Bilinmeyen",
+        order: row.order_number || "",
+        bought: !!row.order_number,
+        addr: row.shipping_address || "—",
+        cargo: row.cargo_tracking || "",
+        thread: row.question_contexts?.map(q => ({ t: q.date || "—", m: q.text || "" })) || [],
+        f: { name: tyApplyDict(name), date, ibare },
+        src,
+        conf,
+        corr: "",
+        warns: [
+          conf < threshold ? { t: `Güven %${conf} eşiğin (${threshold}) altında — lütfen kontrol et`, ok: false } : { t: `Güven %${conf} · eşiğin üzerinde`, ok: true },
+          !date ? { t: "Tarih belirtilmemiş — gerekiyorsa müşteriye sor", ok: false } : { t: `Tarih: ${date}`, ok: true }
+        ],
+        verified: false,
+        _auditWritten: false
+      });
+    }
+
+    // Soru/mesaj kuyruğundan: satın alma olmayan ama mesaj gönderen müşteriler
+    for (const q of questions) {
+      if (!q.text) continue;
+      const rowId = "q:" + (q.id || q.date || Math.random());
+      if (existing.has(rowId) || newItems.find(x => x._rowId === rowId)) continue;
+
+      const name = tyApplyDict(q.extracted_name || "");
+      const conf = Math.round(Number(q.confidence || 0) * 100);
+      newItems.push({
+        _rowId: rowId,
+        init: (q.customer_name || "?").substring(0, 2).toUpperCase(),
+        cust: q.customer_name || "Soru gönderen",
+        order: "",
+        bought: false,
+        addr: "—",
+        cargo: "",
+        thread: [{ t: q.date || "—", m: q.text }],
+        f: { name, date: q.extracted_date || "", ibare: q.extracted_ibare || "" },
+        src: { name: "mesajdan", date: "mesajdan", ibare: "mesajdan" },
+        conf,
+        corr: "",
+        warns: [{ t: "Henüz satın alma yok — sipariş bağlanamadı", ok: false }],
+        verified: false,
+        _auditWritten: false
+      });
+    }
+
+    return newItems.length > 0 ? newItems : tyItems;
+  }
+
+  /* ── Kuyruğu render et ── */
+  function tyVerifyRenderQueue() {
+    const el = document.getElementById("tyVerifyQueue");
+    if (!el) return;
+    if (!tyItems.length) {
+      el.innerHTML = '<div class="ty-empty"><b>Kuyruk boş.</b><p>Trendyol siparişleri veya soruları okunduğunda isim içerenler burada görünür.</p></div>';
+      return;
+    }
+    el.innerHTML = tyItems.map((x, i) => {
+      const [, cc] = tyCm(x.conf);
+      return `<button class="tyv-qitem${i === tyCur ? " active" : ""}" onclick="window.tyVerifySelect(${i})">
+        <span class="tyv-qtop"><span class="tyv-dot bg-${cc}"></span>
+        <span class="tyv-qname">${tyEsc(x.cust)}</span>
+        ${x.verified ? `<span class="c-ok" style="margin-left:auto">${tySvg("check", 16)}</span>` : `<span class="tyv-qconf c-${cc}">%${x.conf}</span>`}
+        </span>
+        <span class="tyv-qmeta">${x.bought ? tySvg("bag", 12) + " " + tyEsc(x.order) : '<span class="c-danger">satın alma yok</span>'}</span>
+      </button>`;
+    }).join("");
+  }
+
+  /* ── Detay panelini render et ── */
+  function tyVerifyRenderPanel() {
+    const el = document.getElementById("tyVerifyPanel");
+    if (!el || !tyItems.length) return;
+    const x = tyItems[tyCur];
+    const [ct, cc] = tyCm(x.conf);
+
+    const ctx = x.bought
+      ? `<div class="tyv-ctx">${tySvg("pin", 14)}<span>${tyEsc(x.addr)}</span>${tySvg("truck", 14)}<span>${tyEsc(x.cargo)}</span>
+         <button class="btn" style="margin-left:auto;padding:5px 11px" onclick="window.tyVerifyOpenDhl(${JSON.stringify(x.cargo)})">DHL'de aç</button></div>`
+      : "";
+
+    const corr = x.corr ? `<div class="tyv-corr">${tySvg("history", 15)}<span>${tyEsc(x.corr)}</span></div>` : "";
+
+    const thread = (x.thread || []).map((t, j) => {
+      const last = j === x.thread.length - 1;
+      return `<div class="tyv-msg${last ? " latest" : ""}"><span class="tyv-time">${tyEsc(t.t)}${last ? " · en güncel" : ""}</span><br>${tyHl(t.m)}</div>`;
+    }).join("");
+
+    const warns = (x.warns || []).map(w =>
+      `<div class="tyv-warn c-${w.ok ? "ok" : "warn"}">${tySvg(w.ok ? "check" : "alert", 15)}<span>${tyEsc(w.t)}</span></div>`
+    ).join("");
+
+    const actions = (x.verified
+      ? `<span class="tyv-verified">${tySvg("check", 18)}Doğrulandı — üretime hazır</span>`
+      : `<button class="btn tyv-go" onclick="window.tyVerifyConfirm()">${tySvg("check", 16)} Doğrula</button>`)
+      + `<button class="btn" onclick="window.tyVerifyDraftReply()">Müşteriye taslak cevap</button>`
+      + `<button class="btn" style="margin-left:auto" onclick="window.tyVerifySendToProduction()"${x.verified ? "" : " disabled"}>Üretime gönder ${tySvg("send", 15)}</button>`;
+
+    el.innerHTML =
+      `<div class="tyv-cust"><div class="tyv-ava">${tyEsc(x.init)}</div>
+       <div style="min-width:0"><div class="tyv-cname">${tyEsc(x.cust)}</div>
+       <div class="tyv-corder">${x.bought ? "Sipariş " + tyEsc(x.order) : '<span class="c-danger">Satın alma yok</span>'}</div></div>
+       <span class="tyv-conf conf-${cc}">Güven %${x.conf}</span></div>`
+      + ctx
+      + `<div class="tyv-lbl">Mesaj geçmişi</div><div class="tyv-thread">${thread || '<span class="muted">Mesaj yok</span>'}</div>`
+      + corr
+      + `<div class="tyv-lbl">Etikete yazılacak alanlar</div>`
+      + `<div class="tyv-field"><div class="tyv-srcrow"><label class="tyv-time">İsim</label><span class="tyv-chip">${tyEsc(x.src.name)}</span></div>
+         <input value="${tyEsc(x.f.name)}" oninput="window.tyVerifySetField('name',this.value)" placeholder="İsmi yazın / düzeltin" style="font-weight:600"></div>`
+      + `<div class="tyv-grid2">
+           <div class="tyv-field"><div class="tyv-srcrow"><label class="tyv-time">Özel gün tarihi</label><span class="tyv-chip">${tyEsc(x.src.date)}</span></div>
+             <input value="${tyEsc(x.f.date)}" oninput="window.tyVerifySetField('date',this.value)" placeholder="gg.aa.yyyy"></div>
+           <div class="tyv-field"><div class="tyv-srcrow"><label class="tyv-time">İbare / not</label><span class="tyv-chip">${tyEsc(x.src.ibare)}</span></div>
+             <input value="${tyEsc(x.f.ibare)}" oninput="window.tyVerifySetField('ibare',this.value)" placeholder="Söz Hatırası vb."></div>
+         </div>`
+      + `<div class="tyv-warns">${warns}</div>`
+      + `<div class="tyv-lbl">Üretilecek hâli (birebir) — <span class="tyv-cc" id="tyvCc">${(x.f.name || "").length} karakter</span></div>`
+      + `<div class="tyv-preview">
+           <div class="tyv-pv"><div class="tyv-pv-cap">Etiket</div>
+             <div class="tyv-pv-ibare" id="tyvPvIbare">${tyEsc(x.f.ibare)}</div>
+             <div class="tyv-pv-name" id="tyvPvName">${tyEsc(x.f.name) || "—"}</div>
+             <div class="tyv-pv-date" id="tyvPvDate">${tyEsc(x.f.date)}</div></div>
+           <div class="tyv-pv laser"><div class="tyv-pv-cap">${tySvg("flame", 13)} Lazer ismi</div>
+             <div class="tyv-pv-laser" id="tyvPvLaser">${tyEsc(x.f.name) || "—"}</div></div>
+         </div>`
+      + `<div class="tyv-actions">${actions}</div>`;
+  }
+
+  function tyVerifyUpdatePreview() {
+    const f = tyItems[tyCur]?.f || {};
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set("tyvPvIbare", f.ibare || "");
+    set("tyvPvName", f.name || "—");
+    set("tyvPvDate", f.date || "");
+    set("tyvPvLaser", f.name || "—");
+    set("tyvCc", (f.name || "").length + " karakter");
+  }
+
+  /* ── Audit log yaz ── */
+  function tyWriteAudit(item, action) {
+    if (!bridge?.append_production_audit_event) return;
+    const payload = {
+      event_type: "trendyol_name_verification",
+      action,
+      customer: item.cust,
+      order_number: item.order,
+      verified_name: item.f.name,
+      verified_date: item.f.date,
+      verified_ibare: item.f.ibare,
+      confidence: item.conf,
+      source: item.src.name,
+      timestamp: new Date().toISOString()
+    };
+    try {
+      bridge.append_production_audit_event(JSON.stringify(payload), () => {});
+    } catch {}
+  }
+
+  /* ── Public API ── */
+  window.tyVerifyInit = function () {
+    tyActive = true;
+    const fresh = tyBuildItemsFromState();
+    if (fresh.length) tyItems = fresh;
+    if (tyCur >= tyItems.length) tyCur = 0;
+    tyVerifyRenderQueue();
+    tyVerifyRenderPanel();
+  };
+
+  window.tyVerifySelect = function (i) {
+    tyCur = i;
+    tyVerifyRenderQueue();
+    tyVerifyRenderPanel();
+  };
+
+  window.tyVerifySetField = function (k, v) {
+    if (!tyItems[tyCur]) return;
+    tyItems[tyCur].f[k] = v;
+    tyVerifyUpdatePreview();
+  };
+
+  window.tyVerifyConfirm = function () {
+    const x = tyItems[tyCur];
+    if (!x || !x.f.name.trim()) {
+      showTrendyolStatus("İsim alanı boş — doğrulanamaz.", "warn");
+      return;
+    }
+    // Sözlüğe öğren: orijinal ham thread metni vs. son onaylanan isim
+    const rawThread = (x.thread[x.thread.length - 1]?.m || "").toLowerCase().trim();
+    if (rawThread && x.f.name.trim()) {
+      const words = rawThread.split(/\s+/);
+      words.forEach(w => {
+        if (w.length > 2 && w !== x.f.name.toLowerCase()) tyDict[w] = x.f.name.trim();
+      });
+      tySaveDict();
+    }
+    x.verified = true;
+    if (!x._auditWritten) { tyWriteAudit(x, "verified"); x._auditWritten = true; }
+    tyVerifyRenderQueue();
+    tyVerifyRenderPanel();
+    // Bir sonraki doğrulanmamışa atla
+    const next = tyItems.findIndex((item, i) => i > tyCur && !item.verified);
+    if (next >= 0) { tyCur = next; tyVerifyRenderQueue(); tyVerifyRenderPanel(); }
+  };
+
+  window.tyVerifyConfirmAllHighConf = function () {
+    const settings = currentState?.trendyol?.settings || {};
+    const threshold = Number(settings.ai_confidence_threshold || 0.85) * 100;
+    let count = 0;
+    tyItems.forEach(x => {
+      if (x.conf >= threshold && x.f.name.trim() && !x.verified) {
+        x.verified = true;
+        if (!x._auditWritten) { tyWriteAudit(x, "bulk_verified"); x._auditWritten = true; }
+        count++;
+      }
+    });
+    tyVerifyRenderQueue();
+    tyVerifyRenderPanel();
+    showTrendyolStatus(`${count} yüksek güvenli öğe doğrulandı.`, count > 0 ? "ok" : "");
+  };
+
+  window.tyVerifySendToProduction = function () {
+    const x = tyItems[tyCur];
+    if (!x) return;
+    if (!x.verified) {
+      showTrendyolStatus("Bu öğe doğrulanmamış — önce 'Doğrula' basın.", "warn");
+      return;
+    }
+    // Gerçek üretim bağlantısı: ilgili Trendyol satırını bul ve güncelle
+    const rows = trendYolSuggestions ? trendYolSuggestions() : [];
+    const row = rows.find(r => String(r.order_number || r.id) === x._rowId.replace("q:", ""));
+    if (row && typeof updateTrendyolOrderField === "function") {
+      updateTrendyolOrderField(row, "ai_name", x.f.name);
+      updateTrendyolOrderField(row, "ai_date", x.f.date);
+      updateTrendyolOrderField(row, "ai_ibare", x.f.ibare);
+      updateTrendyolOrderField(row, "verification_status", "uretime_hazir");
+      updateTrendyolOrderField(row, "user_verified", true);
+    }
+    tyWriteAudit(x, "sent_to_production");
+    showTrendyolStatus(`"${x.f.name}" üretime gönderildi — lazer/yazıcı başlatılmaz, manuel onay gerekir.`, "ok");
+  };
+
+  window.tyVerifyOpenDhl = function (no) {
+    const clean = (no || "").replace(/\D/g, "");
+    if (!clean) return;
+    try { window.open("https://www.dhl.com/tr-tr/home/takip.html?tracking-id=" + encodeURIComponent(clean), "_blank"); } catch {}
+  };
+
+  window.tyVerifyDraftReply = function () {
+    const x = tyItems[tyCur];
+    if (!x) return;
+    const name = x.f.name.trim();
+    const draft = name
+      ? `Merhaba, siparişiniz için "${name}" ismini kullanacağız. Tarih: ${x.f.date || "(belirtilmedi)"}. ${x.f.ibare ? "Not: " + x.f.ibare + "." : ""} Onaylıyor musunuz?`
+      : `Merhaba, siparişiniz için lütfen yazdırmamızı istediğiniz ismi belirtir misiniz?`;
+    // Kopyala panoye (otomatik gönderme yok — operatör onaylar)
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(draft).then(() => showTrendyolStatus("Taslak cevap panoya kopyalandı — gönder/düzenle.", "ok")).catch(() => {});
+    } else {
+      showTrendyolStatus("Taslak: " + draft, "");
+    }
+  };
+
+  /* ── Klavye kısayolları (j/k/Enter/e) ── */
+  document.addEventListener("keydown", function (e) {
+    if (!tyActive || activeTrendyolTab !== "nameverify") return;
+    const tag = (e.target.tagName || "").toLowerCase();
+    if ((tag === "input" || tag === "textarea") && e.key !== "Enter") return;
+    if (e.key === "j") { tyCur = Math.min(tyItems.length - 1, tyCur + 1); tyVerifyRenderQueue(); tyVerifyRenderPanel(); }
+    else if (e.key === "k") { tyCur = Math.max(0, tyCur - 1); tyVerifyRenderQueue(); tyVerifyRenderPanel(); }
+    else if (e.key === "Enter" && !(tag === "input" || tag === "textarea")) { window.tyVerifyConfirm(); }
+    else if (e.key === "e") {
+      const inp = document.querySelector("#tyVerifyPanel input");
+      if (inp) { inp.focus(); e.preventDefault(); }
+    }
+  });
+
+  /* Sekme değişince klavyeyi devre dışı bırak */
+  document.addEventListener("click", function (e) {
+    const tab = e.target.closest?.("[data-trendyol-tab]");
+    if (tab) tyActive = (tab.dataset.trendyolTab === "nameverify");
+  });
+})();
