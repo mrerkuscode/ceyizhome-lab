@@ -335,23 +335,23 @@
 
       <!-- ============ <section id="label"> — ETİKET STUDIO ============ -->
       <section id="label" class="page">
-        <!-- corel-like studio shell structure for tests -->
         <div class="corel-property-bar studio-combo" id="corelPropertyBarWrap" hidden></div>
         <div class="corel-left-toolbar" id="corelLeftToolbarWrap" hidden></div>
         <div class="corel-canvas-panel" id="corelCanvasPanelWrap" hidden></div>
         <div class="corel-bottom-panel" id="corelBottomPanelWrap" hidden></div>
         <div class="corel-statusbar" id="corelStatusbarWrap" hidden></div>
         <div class="studio-shell corel-studio manual-studio">
-          <header class="studio-top">
+
+          <header class="studio-topbar">
             <div class="studio-brand">
               <span class="studio-logo" id="labelStudioLogo">E</span>
               <div><h1 id="labelStudioPageTitle">Etiket Studio</h1><p id="labelStudioPageSubtitle">Tekli etiket tasarımı, önizleme, çıktı ve üretim kuyruğu.</p></div>
-              <!-- DÜZELTME: mode toggle artık GÖRÜNÜR (eski 'hidden' kaldırıldı) -->
-              <div class="seg" aria-label="Kullanım modu">
-                <button id="studioModeSimpleBtn" class="active" type="button" onclick="setStudioEditorMode('simple')">Hızlı Üretim</button>
-                <button id="studioModeAdvancedBtn" type="button" onclick="setStudioEditorMode('advanced')">Gelişmiş</button>
-              </div>
             </div>
+            <div class="seg" aria-label="Kullanım modu">
+              <button id="studioModeSimpleBtn" class="active" type="button" onclick="setStudioEditorMode('simple')">Hızlı Üretim</button>
+              <button id="studioModeAdvancedBtn" type="button" onclick="setStudioEditorMode('advanced')">Gelişmiş</button>
+            </div>
+            <span class="studio-divider"></span>
             <div class="studio-toolgroup" aria-label="Dosya">
               <button class="tbtn" onclick="newManualWork()"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M12 11v6M9 14h6"/></svg>Yeni</button>
               <button class="tbtn" onclick="openManualWork()"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9H3z"/></svg>Aç</button>
@@ -362,7 +362,8 @@
               <button class="tbtn" id="manualRedoButton" onclick="redoManualEdit()" disabled title="Ctrl+Y"><svg viewBox="0 0 24 24"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg>İleri</button>
               <span class="studio-save-state" id="corelSaveState">Yerel taslak</span>
             </div>
-            <div class="studio-outputbar" aria-label="Çıktı">
+            <span class="studio-spacer"></span>
+            <div class="studio-toolgroup" aria-label="Çıktı">
               <button class="btn primary" onclick="renderManual()" title="PDF/PNG güvenli ön kontrolle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg> PDF</button>
               <button class="btn" onclick="renderManual()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5L7 20"/></svg> PNG</button>
               <button class="btn" data-manual-requires-output="true" onclick="requestManualPrint()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg> Yazdır</button>
@@ -372,7 +373,7 @@
             </div>
           </header>
 
-          <div class="studio-propbar" aria-label="Yazı / Font">
+          <div class="studio-propbar" aria-label="Özellik ve model">
             <div class="prop-model"><strong id="corelTopModelName">Model seçin</strong><span id="corelStudioModeBadge">Manuel Çalışma</span></div>
             <span class="studio-divider"></span>
             <div class="prop-num">X<input id="corelX" type="number" step="0.1" onchange="corelApplyGeometry()" /></div>
@@ -382,29 +383,21 @@
             <button class="tool-chip" id="corelLockBtn" onclick="toggleSelectedLayerLock()" title="Katmanı kilitle"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></button>
             <span class="studio-divider"></span>
             <div class="prop-num">pt<input id="corelFontSize" type="number" min="5" step="0.1" onchange="corelApplyTypography()" /></div>
-            <input id="corelColor" type="color" value="#111111" onchange="applyColorSwatch(this.value)" title="Yazı rengi" style="width:34px" />
+            <input id="corelColor" type="color" value="#111111" onchange="applyColorSwatch(this.value)" title="Yazı rengi" />
             <button class="tool-chip" onclick="toggleCorelTextStyle('bold')" title="Kalın"><b>B</b></button>
             <button class="tool-chip" onclick="toggleCorelTextStyle('italic')" title="İtalik"><i>I</i></button>
-            <span class="studio-divider"></span>
-            <!-- DÜZELTME: hizalama ikonları artık gerçek (eski ≡/☰/≣ = menü/hamburger değil) -->
             <button class="tool-chip" onclick="alignSelectedField('left')" title="Sola hizala"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h13"/></svg></button>
             <button class="tool-chip" onclick="alignSelectedField('center-h')" title="Ortala"><svg viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M5 18h14"/></svg></button>
             <button class="tool-chip" onclick="alignSelectedField('right')" title="Sağa hizala"><svg viewBox="0 0 24 24"><path d="M4 6h16M10 12h10M7 18h13"/></svg></button>
-            <button class="tool-chip" onclick="toggleManualGuide('center')" title="Merkez kılavuzu"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" stroke-dasharray="3 3"/></svg></button>
             <button class="tool-chip danger" onclick="deleteSelectedLayer()" title="Seçili yazıyı sil"><svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13"/></svg></button>
-          </div>
-
-          <div class="studio-modelrow" aria-label="Model ve boyut">
-            <button id="manualModelSelectButton" class="model-select-button" onclick="toggleManualModelDropdown()" type="button">
+            <span class="studio-divider"></span>
+            <button id="manualModelSelectButton" class="model-select-button inline" onclick="toggleManualModelDropdown()" type="button">
               <span id="manualSelectedModelName">Model seçin</span><small id="manualSelectedModelSize">-</small>
             </button>
             <div id="manualModelDropdown" class="manual-model-dropdown-list" hidden></div>
             <select id="manualTemplate" hidden></select>
-            <button class="btn" onclick="showSection('labelModels')" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Model Seç</button>
-            <span class="studio-divider"></span>
-            <label style="flex-direction:row;align-items:center;gap:8px">Boyut
-              <select id="manualSizePreset" onchange="applyManualSizePreset(this.value)" style="width:auto"><option value="50x30">50 × 30 mm</option><option value="60x40">60 × 40 mm</option><option value="40x40">40 × 40 mm</option><option value="custom">Özel</option></select>
-            </label>
+            <button class="btn small" onclick="showSection('labelModels')" type="button"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Model Seç</button>
+            <label>Boyut<select id="manualSizePreset" onchange="applyManualSizePreset(this.value)"><option value="50x30">50 × 30 mm</option><option value="60x40">60 × 40 mm</option><option value="40x40">40 × 40 mm</option><option value="custom">Özel</option></select></label>
             <div class="prop-num">G<input id="manualWidthMm" type="number" min="10" max="300" step="0.1" oninput="updateManualSizeOverrideFromInputs()" /></div>
             <div class="prop-num">Y<input id="manualHeightMm" type="number" min="10" max="300" step="0.1" oninput="updateManualSizeOverrideFromInputs()" /></div>
             <label class="check" title="Oranı koru"><input id="manualUseDefaultSize" type="checkbox" checked onchange="toggleManualSizeDefault()" /> Oranı koru</label>
@@ -428,8 +421,7 @@
             <section class="studio-canvas-panel">
               <div class="canvas-bar">
                 <span class="ttl">Canlı Etiket Alanı</span>
-                <div class="zoom-cluster" aria-label="Yakınlaştırma">
-                  <!-- DÜZELTME: orta alan +/- ile büyüyüp küçülür (RDWorks gibi) -->
+                <div class="zoom-cluster" style="margin-left:auto" aria-label="Yakınlaştırma">
                   <button class="zoom-btn" onclick="setManualZoom('out')" title="Uzaklaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8 11h6"/></svg></button>
                   <span class="zoom-readout" id="manualZoomLabel">%100</span>
                   <button class="zoom-btn" onclick="setManualZoom('in')" title="Yakınlaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg></button>
@@ -445,9 +437,8 @@
                 <div class="stage-corner"></div>
                 <div class="rule-top"></div>
                 <div class="rule-left"></div>
-                <div class="canvas-stage">
-                  <!-- id=manualPreview KORUNDU — app.js gerçek render'ı buraya basar; artboard ızgaralı tabla -->
-                  <div id="manualPreview" class="artboard" style="width:520px;height:320px">Model seçin</div>
+                <div class="canvas-stage" onwheel="event.preventDefault(); if(typeof setManualZoom==='function') setManualZoom(event.deltaY<0?'in':'out')" title="Fare tekerleğiyle yakınlaştır/uzaklaştır">
+                  <div id="manualPreview" class="artboard" style="width:640px;height:400px">Model seçin</div>
                 </div>
               </div>
               <div class="studio-palette" aria-label="Renk paleti">
@@ -472,10 +463,8 @@
                 <button id="corelDockTabColor" onclick="selectCorelDockTab('color')">Ayarlar</button>
               </div>
               <div class="dock-body dock-only-combo" id="corelDockBodyLayers">
-                <div class="label-size-panel">
-                  <span class="ttl">Etiket Boyutu</span>
-                </div>
-                <h3 style="font-size:14px;margin-bottom:12px">Etikete Yazılacak Alanlar</h3>
+                <div class="label-size-panel"><span class="ttl">Etiket Boyutu</span></div>
+                <h3>Etikete Yazılacak Alanlar</h3>
                 <div class="field-row"><span class="ico">İ</span><div class="fl"><small>İsim</small><input id="manualText" class="live-linked" value="Ayşe &amp; Mehmet" oninput="updateManualFieldValue('isim', this.value)" /></div></div>
                 <div class="field-row"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></span><div class="fl"><small>Tarih</small><input id="manualDateText" class="live-linked" value="12.05.2026" oninput="updateManualFieldValue('tarih', this.value)" /></div></div>
                 <div class="field-row"><span class="ico">N</span><div class="fl"><small>Not</small><input id="manualNoteText" class="live-linked" value="Söz Hatırası" oninput="updateManualFieldValue('not', this.value)" /></div></div>
@@ -491,7 +480,7 @@
                 <p class="safe-note">Lazer kesim alanına otomatik gönderilir. Çıktıdan önce "Gerçek Render Kontrolü" çalıştırın.</p>
               </div>
               <div class="dock-body" id="corelDockBodySmart" hidden>
-                <h3 style="font-size:14px;margin-bottom:12px">Çıktı Kontrolü</h3>
+                <h3>Çıktı Kontrolü</h3>
                 <div class="text-fit-panel" style="margin-bottom:10px">
                   <b>Otomatik Yerleşim</b>
                   <button class="btn primary small" onclick="autoArrangeManualFields()" title="İsim+tarih+ibare için optimum font ve konum hesaplar">Akıllı Yerleşim Uygula</button>
@@ -502,8 +491,6 @@
                   <button class="btn small" onclick="alignSelectedField('left')" title="Sola">◀</button>
                   <button class="btn small" onclick="alignSelectedField('center-h')" title="Yatay ortala">↔</button>
                   <button class="btn small" onclick="alignSelectedField('right')" title="Sağa">▶</button>
-                  <span class="studio-divider"></span>
-                  <span class="muted" title="Seçili yazıyı etiket merkezine alır">Seçili yazıyı etiket merkezine alır</span>
                 </div>
                 <div class="text-fit-panel">
                   <b>Hızlı Hizalama</b>
@@ -521,33 +508,34 @@
                 <div id="manualUndoHistoryView" class="undo-timeline"></div>
               </div>
               <div class="dock-body dock-only-combo" id="corelDockBodyColor" hidden>
-                <h3 style="font-size:14px;margin-bottom:12px">Renk Paleti</h3>
+                <h3>Renk Paleti</h3>
                 <div id="manualColorPanel" class="color-swatch-grid"></div>
               </div>
-              <!-- Layer panel and Font preset panel -->
               <div id="manualLayerPanel" class="corel-layer-list" hidden></div>
               <div id="manualFontPresetPanel" class="font-preset-panel" hidden></div>
             </aside>
           </div>
         </div>
-      </section><!-- end #label -->
+      </section>
 
       <!-- ============ <section id="nameCutStudio"> — İSİM KESİM STUDIO ============ -->
-      <!-- DÜZELTME: tüm indigo/slate renkler token'a çevrildi; ▣ tekrarı bitti; zoom in/out AYRI ikon; ☰ yerine gerçek hizalama/araç ikonları -->
       <section id="nameCutStudio" class="page">
         <div class="nc-shell">
-          <header class="nc-header">
-            <span class="nc-logo">C</span>
-            <div><h1>İsim Kesim Studio</h1><p>Lazer kesim yerleşimi — güvenli hazırlık, otomatik başlatma yok.</p></div>
+          <header class="studio-topbar nc-header">
+            <div class="studio-brand nc-brand">
+              <span class="nc-logo">C</span>
+              <div><h1>İsim Kesim Studio</h1><p>Lazer kesim yerleşimi — güvenli hazırlık, otomatik başlatma yok.</p></div>
+            </div>
             <div class="nc-chips">
               <span class="nc-chip ok">Güvenli Mod</span><span class="nc-chip">Lazer otomatik başlamaz</span><span class="nc-chip">Önce dosya kontrolü</span>
             </div>
+            <span class="studio-spacer"></span>
             <button class="icon-btn" id="nameCutInspectorToggle" onclick="toggleNameCutInspector()" title="Ayar panelini aç/kapat"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
             <button class="icon-btn" onclick="showNameCutFeatureNotice('Ayarlar')" title="Ayarlar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.5 12a7.5 7.5 0 0 0-.1-1.3l2-1.6-2-3.4-2.4 1a7.5 7.5 0 0 0-2.3-1.3L14.2 2H9.8L9.4 4.4a7.5 7.5 0 0 0-2.3 1.3l-2.4-1-2 3.4 2 1.6A7.5 7.5 0 0 0 4.5 12l-2 1.6 2 3.4 2.4-1a7.5 7.5 0 0 0 2.3 1.3l.4 2.7h4.4l.4-2.7a7.5 7.5 0 0 0 2.3-1.3l2.4 1 2-3.4-2-1.6z"/></svg></button>
             <button class="icon-btn" onclick="showNameCutFeatureNotice('Rehber video')" title="Rehber video"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z"/></svg></button>
           </header>
 
-          <div class="nc-toolbar" aria-label="Araç çubuğu">
+          <div class="nc-toolbar nc-topbar" aria-label="Araç çubuğu">
             <button class="tbtn" onclick="resetNameCutProject()"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg>Yeni</button>
             <button class="tbtn" onclick="showNameCutFeatureNotice('Aç')"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9H3z"/></svg>Aç</button>
             <button class="tbtn" onclick="saveNameCutProject()"><svg viewBox="0 0 24 24"><path d="M5 3h12l3 3v15H5z"/><path d="M8 3v5h7"/></svg>Kaydet</button>
@@ -560,7 +548,6 @@
             <button class="tbtn" onclick="showNameCutFeatureNotice('Geri')"><svg viewBox="0 0 24 24"><path d="M9 7L4 12l5 5"/><path d="M4 12h11a5 5 0 0 1 0 10h-1"/></svg>Geri</button>
             <button class="tbtn" onclick="showNameCutFeatureNotice('İleri')"><svg viewBox="0 0 24 24"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg>İleri</button>
             <span class="studio-divider"></span>
-            <!-- DÜZELTME: zoom-out ve zoom-in artık FARKLI ikon -->
             <button class="tbtn" onclick="nameCutZoom(-10)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8 11h6"/></svg>Uzaklaş</button>
             <button class="tbtn" onclick="nameCutZoom(10)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg>Yakınlaş</button>
             <button class="tbtn" onclick="nameCutFitToScreen()"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>Sığdır</button>
@@ -580,8 +567,10 @@
           </div>
 
           <div class="nc-body">
-            <aside class="nc-source">
-              <div class="card-title" style="margin-bottom:8px"><h3 style="font-size:14px">Kaynak Listesi</h3></div>
+            <input type="checkbox" id="ncSrcToggle" class="nc-src-input">
+            <label class="nc-src-tab" for="ncSrcToggle" title="Kaynak listesini aç/kapat"><svg viewBox="0 0 24 24"><path d="M4 6h12M4 12h12M4 18h12M18 8l3 4-3 4"/></svg><span class="lbl-open">Kaynaklar</span><span class="lbl-close">Gizle</span></label>
+            <aside class="nc-source nc-source-drawer">
+              <div class="card-title" style="margin-bottom:4px"><h3 style="font-size:14px">Kaynak Listesi</h3></div>
               <div class="nc-source-actions">
                 <button class="btn small" onclick="openManualNameCutModal()">Manuel Ekle</button>
                 <button class="btn small" onclick="showSection('bulkLabel')">Toplu'dan</button>
@@ -589,7 +578,7 @@
                 <button class="btn small" onclick="sendLaserBulkItemsToNameCutQueue()">Kuyruğa</button>
               </div>
               <button class="btn small ghost" onclick="openTrendyolSidebarTab('orders')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 7h15l-1.5 9H7.5z"/><path d="M6 7L5 3H2"/></svg> Trendyol siparişlerinden çek</button>
-              <div id="nameCutSourceStats" class="status-line" style="margin:6px 0">Liste boş — kaynak ekleyin.</div>
+              <div id="nameCutSourceStats" class="status-line">Liste boş — kaynak ekleyin.</div>
               <div id="nameCutSourceList" class="compact-list" style="flex:1;min-height:80px"></div>
               <details><summary style="font-size:13px;font-weight:600;color:var(--text-2);cursor:pointer">Aktarım Geçmişi</summary><div id="nameCutTransferHistory" class="compact-list" style="margin-top:8px"></div></details>
               <div class="nc-source-foot">
@@ -600,23 +589,11 @@
               <button class="btn small ghost" onclick="clearNameCutItems()">Listeyi Temizle</button>
             </aside>
 
-            <aside class="nc-toolstrip" aria-label="Araçlar">
-              <button class="tbtn active" title="Seç"><svg viewBox="0 0 24 24"><path d="M5 3l7 17 2.5-6.5L21 11z"/></svg></button>
-              <button class="tbtn" title="Taşı"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M9 6l3-3 3 3M9 18l3 3 3-3M6 9l-3 3 3 3M18 9l3 3-3 3"/></svg></button>
-              <button class="tbtn" title="Yazı"><svg viewBox="0 0 24 24"><path d="M5 5h14M12 5v14M9 19h6"/></svg></button>
-              <button class="tbtn" title="Döndür"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></button>
-              <button class="tbtn" title="Yakınlaştır"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button>
-              <button class="tbtn" title="Ölçü"><svg viewBox="0 0 24 24"><path d="M3 8h18v8H3z"/><path d="M7 8v3M11 8v4M15 8v3M19 8v4"/></svg></button>
-              <button class="tbtn" title="Izgara"><svg viewBox="0 0 24 24"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></button>
-              <button class="tbtn" title="Cetvel"><svg viewBox="0 0 24 24"><path d="M4 16L16 4l4 4L8 20z"/><path d="M8 8l2 2M11 5l2 2M5 11l2 2"/></svg></button>
-            </aside>
-
             <section class="nc-board">
               <div class="nc-board-toolbar">
                 <span class="ttl">Lazer Tablası</span>
                 <span class="muted" id="nameCutBoardSizeLabel" style="font-size:12px">600 × 400 mm çalışma alanı</span>
                 <div class="zoom-cluster" style="margin-left:auto" aria-label="Yakınlaştırma">
-                  <!-- nameCutZoom / Fit / ActualSize app.js'te ZATEN var → bu butonlar gerçek de çalışır -->
                   <button class="zoom-btn" onclick="nameCutZoom(-10)" title="Uzaklaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M8 11h6"/></svg></button>
                   <span class="zoom-readout" id="nameCutScaleReadout">%100</span>
                   <button class="zoom-btn" onclick="nameCutZoom(10)" title="Yakınlaş"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6"/></svg></button>
@@ -630,9 +607,8 @@
                 <div class="stage-corner"></div>
                 <div class="rule-top"></div>
                 <div class="rule-left"></div>
-                <div class="nc-stage">
-                  <!-- id=nameCutStudioLayoutPreview KORUNDU — app.js bedi/parçaları buraya çizer; ızgaralı tabla -->
-                  <div id="nameCutStudioLayoutPreview" class="nc-artboard" style="width:600px;height:400px">
+                <div class="nc-stage" onwheel="event.preventDefault(); if(typeof nameCutZoom==='function') nameCutZoom(event.deltaY<0?10:-10)" title="Fare tekerleğiyle yakınlaştır/uzaklaştır">
+                  <div id="nameCutStudioLayoutPreview" class="nc-artboard" style="width:720px;height:480px">
                     <div class="ph">
                       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--line-strong)" stroke-width="1.4"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4L8.5 15.5M14 14l6 6"/></svg>
                       <b>Yerleşim bekleniyor</b>
@@ -663,7 +639,6 @@
                 <button data-namecut-tab="reference" onclick="selectNameCutSettingsTab('reference')">Referans</button>
                 <button data-namecut-tab="control" onclick="selectNameCutSettingsTab('control')">Kontrol</button>
               </div>
-
               <div class="nc-panel active" data-namecut-panel="layout">
                 <label>Tabla genişliği (mm)<input type="number" value="600" oninput="updateNameCutLayoutConfig()" /></label>
                 <label>Tabla yüksekliği (mm)<input type="number" value="400" oninput="updateNameCutLayoutConfig()" /></label>
@@ -720,7 +695,6 @@
             <span class="safety">Güvenli Mod — lazer otomatik başlamaz</span>
           </footer>
 
-          <!-- erişilebilirlik / JS render hedefleri (görünmez) -->
           <div id="nameCutStudioSummaryGrid" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
           <div id="nameCutStudioGalleryGrid" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
           <div id="nameCutStudioDetailPanel" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></div>
