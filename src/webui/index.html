@@ -705,6 +705,40 @@
 
       <!-- modals and hidden elements -->
       <div id="cloneLabelModelModal" hidden></div>
+      <div id="nameCutEditModal" class="modal" hidden>
+        <div class="modal-inner">
+          <div class="card-title"><h3 id="nameCutEditTitle">İsim Kesim Düzenle</h3></div>
+          <div class="settings-form-grid">
+            <label>İsim metni<input id="nameCutEditName" placeholder="Sedef Sefer" oninput="updateNameCutDraftField('name_text', this.value)" /></label>
+            <label>Yazı tipi<select id="nameCutEditStyle" onchange="updateNameCutDraftField('style', this.value)"></select></label>
+            <label>Dizim<select id="nameCutEditComposition" onchange="updateNameCutDraftField('composition_mode', this.value)">
+              <option value="Tek Satır Yan Yana">Tek Satır Yan Yana</option>
+              <option value="Otomatik Böl">Otomatik Böl</option>
+              <option value="Ayrı İsimler">Ayrı İsimler</option>
+              <option value="Alt Alta Koru">Alt Alta Koru</option>
+            </select></label>
+            <label>Genişlik (mm)<input id="nameCutEditWidth" type="number" min="1" step="1" oninput="updateNameCutDraftField('width_mm', this.value)" /></label>
+            <label>Yükseklik (mm)<input id="nameCutEditHeight" type="number" min="1" step="1" oninput="updateNameCutDraftField('height_mm', this.value)" /></label>
+            <label>Adet<input id="nameCutEditQty" type="number" min="1" step="1" oninput="updateNameCutDraftField('quantity', this.value)" /></label>
+            <label>Kalınlaştırma<select id="nameCutEditThickening" onchange="updateNameCutDraftField('thickening_mode', this.value)">
+              <option value="Yok">Yok</option>
+              <option value="Hafif">Hafif</option>
+              <option value="Orta">Orta</option>
+              <option value="Kalın">Kalın</option>
+              <option value="Özel offset">Özel offset</option>
+            </select></label>
+            <label>Offset (mm)<input id="nameCutEditOffset" type="number" min="0" max="5" step="0.1" oninput="updateNameCutDraftField('offset_mm', this.value)" /></label>
+            <label class="checkbox-row"><input id="nameCutEditSupport" type="checkbox" onchange="updateNameCutDraftField('support_line', this.checked)" /> Destek çizgisi</label>
+            <label class="checkbox-row"><input id="nameCutEditPlate" type="checkbox" onchange="updateNameCutDraftField('back_plate', this.checked)" /> Arka plaka</label>
+          </div>
+          <div id="nameCutEditPreview" class="name-cut-edit-preview"></div>
+          <div id="nameCutEditStatus" class="name-cut-edit-status"></div>
+          <div class="toolbar">
+            <button class="btn primary" onclick="saveNameCutDraft()">Kaydet</button>
+            <button class="btn" onclick="closeNameCutEditor()">İptal</button>
+          </div>
+        </div>
+      </div>
       <div id="pdfPreviewModal" class="modal" hidden>
         <div class="modal-inner">
           <div class="card-title"><h3>PDF Önizleme</h3></div>
