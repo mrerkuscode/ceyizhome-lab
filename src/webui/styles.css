@@ -5797,3 +5797,18 @@ input[type="checkbox"] { accent-color: var(--blue); }
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .btn-run-render-check{padding:4px 10px;font-size:11px;background:#f59e0b;color:#fff;border:none;border-radius:4px;font-weight:500;cursor:pointer;white-space:nowrap}
 .btn-run-render-check:hover{background:#d97706}
+
+/* === Fix 4: Toolbar 3-column layout === */
+.studio-toolbar-3col{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:nowrap;padding:8px 14px}
+.toolbar-left,.toolbar-middle,.toolbar-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.toolbar-left .studio-brand{display:flex;align-items:center;gap:8px}
+.toolbar-left .studio-brand h1{font-size:15px;margin:0;font-weight:500}
+.toolbar-left .studio-brand p{display:none}
+.btn-primary.btn-export-pdf{background:#1f2937;color:#fff;font-weight:500;padding:6px 14px;border:none;border-radius:5px;cursor:pointer;font-size:13px}
+.btn-primary.btn-export-pdf:hover{background:#374151}
+.btn-secondary{background:transparent;border:1px solid #d1d5db;padding:6px 12px;border-radius:5px;cursor:pointer;font-size:13px}
+.btn-secondary:hover{background:#f9fafb}
+.btn-more{padding:4px 8px;font-size:16px;cursor:pointer;border:1px solid #d1d5db;border-radius:5px;background:transparent}
+.studio-more-menu{position:absolute;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #e5e5e5;border-radius:6px;padding:4px 0;z-index:50;min-width:160px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.studio-more-menu button{display:block;width:100%;text-align:left;padding:7px 14px;font-size:12px;background:transparent;border:none;cursor:pointer}
+.studio-more-menu button:hover{background:#f9fafb}

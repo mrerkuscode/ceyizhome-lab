@@ -342,34 +342,45 @@
         <div class="corel-statusbar" id="corelStatusbarWrap" hidden></div>
         <div class="studio-shell corel-studio manual-studio">
 
-          <header class="studio-topbar">
-            <div class="studio-brand">
-              <span class="studio-logo" id="labelStudioLogo">E</span>
-              <div><h1 id="labelStudioPageTitle">Etiket Studio</h1><p id="labelStudioPageSubtitle">Tekli etiket tasarımı, önizleme, çıktı ve üretim kuyruğu.</p></div>
-            </div>
-            <div class="seg" aria-label="Kullanım modu">
-              <button id="studioModeSimpleBtn" class="active" type="button" onclick="setStudioEditorMode('simple')">Hızlı Üretim</button>
-              <button id="studioModeAdvancedBtn" type="button" onclick="setStudioEditorMode('advanced')">Gelişmiş</button>
-            </div>
-            <span class="studio-divider"></span>
-            <div class="studio-toolgroup" aria-label="Dosya">
-              <button class="tbtn" onclick="newManualWork()"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M12 11v6M9 14h6"/></svg>Yeni</button>
-              <button class="tbtn" onclick="openManualWork()"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9H3z"/></svg>Aç</button>
-              <button class="tbtn" onclick="saveManualWork()" title="Ctrl+S"><svg viewBox="0 0 24 24"><path d="M5 3h12l3 3v15H5z"/><path d="M8 3v5h7M8 21v-7h8v7"/></svg>Kaydet</button>
-              <button class="tbtn" onclick="saveManualWorkAs()" title="Ctrl+Shift+S"><svg viewBox="0 0 24 24"><path d="M5 3h10l3 3v8M5 21V3"/><path d="M18 17v6M15 20h6"/></svg>Farklı</button>
-              <span class="studio-divider"></span>
-              <button class="tbtn" id="manualUndoButton" onclick="undoManualEdit()" disabled title="Ctrl+Z"><svg viewBox="0 0 24 24"><path d="M9 7L4 12l5 5"/><path d="M4 12h11a5 5 0 0 1 0 10h-1"/></svg>Geri</button>
-              <button class="tbtn" id="manualRedoButton" onclick="redoManualEdit()" disabled title="Ctrl+Y"><svg viewBox="0 0 24 24"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg>İleri</button>
+          <header class="studio-topbar studio-toolbar-3col">
+            <!-- Sol: Marka + mod toggle -->
+            <div class="toolbar-left">
+              <div class="studio-brand">
+                <span class="studio-logo" id="labelStudioLogo">E</span>
+                <div><h1 id="labelStudioPageTitle">Etiket Studio</h1></div>
+              </div>
+              <div class="seg" aria-label="Kullanım modu">
+                <button id="studioModeSimpleBtn" class="active" type="button" onclick="setStudioEditorMode('simple')">Hızlı</button>
+                <button id="studioModeAdvancedBtn" type="button" onclick="setStudioEditorMode('advanced')">Gelişmiş</button>
+              </div>
               <span class="studio-save-state" id="corelSaveState">Yerel taslak</span>
             </div>
-            <span class="studio-spacer"></span>
-            <div class="studio-toolgroup" aria-label="Çıktı">
-              <button class="btn primary" onclick="renderManual()" title="PDF/PNG güvenli ön kontrolle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg> PDF</button>
-              <button class="btn" onclick="renderManual()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5L7 20"/></svg> PNG</button>
-              <button class="btn" data-manual-requires-output="true" onclick="requestManualPrint()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="2"/><path d="M7 17v4h10v-4"/></svg> Yazdır</button>
-              <button class="btn accent" data-manual-requires-output="true" onclick="renderManualToQueue()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg> Sıraya Ekle</button>
-              <button class="btn" data-manual-requires-laser="true" onclick="prepareManualLaserTransfer()" title="Lazer/RDWorks başlatmaz; veriyi kontrol eder"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v6M12 16v6M2 12h6M16 12h6"/><circle cx="12" cy="12" r="3"/></svg> Lazer'e Gönder</button>
-              <button class="icon-btn" onclick="toggleStudioMoreMenu()" title="Daha fazla"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg></button>
+            <!-- Orta: Dosya işlemleri -->
+            <div class="toolbar-middle">
+              <button class="tbtn" onclick="newManualWork()" title="Yeni"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M12 11v6M9 14h6"/></svg>Yeni</button>
+              <button class="tbtn" onclick="openManualWork()" title="Aç"><svg viewBox="0 0 24 24"><path d="M3 7h6l2 2h10v9H3z"/></svg>Aç</button>
+              <button class="tbtn" onclick="saveManualWork()" title="Kaydet (Ctrl+S)"><svg viewBox="0 0 24 24"><path d="M5 3h12l3 3v15H5z"/><path d="M8 3v5h7M8 21v-7h8v7"/></svg>Kaydet</button>
+              <span class="studio-divider"></span>
+              <button class="tbtn" id="manualUndoButton" onclick="undoManualEdit()" disabled title="Geri al (Ctrl+Z)"><svg viewBox="0 0 24 24"><path d="M9 7L4 12l5 5"/><path d="M4 12h11a5 5 0 0 1 0 10h-1"/></svg></button>
+              <button class="tbtn" id="manualRedoButton" onclick="redoManualEdit()" disabled title="İleri al (Ctrl+Y)"><svg viewBox="0 0 24 24"><path d="M15 7l5 5-5 5"/><path d="M20 12H9a5 5 0 0 0 0 10h1"/></svg></button>
+            </div>
+            <!-- Sağ: Birincil eylemler -->
+            <div class="toolbar-right">
+              <button class="btn btn-secondary" onclick="exportPNG()" title="PNG olarak çıkart">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5L7 20"/></svg> PNG
+              </button>
+              <button class="btn btn-primary btn-export-pdf" onclick="exportPDF()" title="PDF üret ve indir">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12M8 11l4 4 4-4"/><path d="M5 21h14"/></svg> PDF üret &rarr;
+              </button>
+              <div class="toolbar-more-wrap" style="position:relative">
+                <button class="tbtn btn-more" onclick="toggleStudioMoreMenu()" title="Daha fazla işlem">&#8942;</button>
+                <div class="studio-more-menu" id="studioMoreMenuTb" hidden>
+                  <button onclick="saveManualWorkAs()">Farklı kaydet</button>
+                  <button onclick="renderManualToQueue()">Sıraya ekle</button>
+                  <button onclick="requestManualPrint()">Yazdır (yerel)</button>
+                  <button onclick="prepareManualLaserTransfer()" data-manual-requires-laser="true">Lazer kesime gönder</button>
+                </div>
+              </div>
             </div>
           </header>
 

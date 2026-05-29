@@ -6792,6 +6792,21 @@ function checkStudioStatus() {
   });
 }
 
+async function exportPDF() {
+  const overflowEl = byId('canvas-overflow-warning');
+  if (overflowEl && !overflowEl.classList.contains('hidden')) {
+    const proceed = confirm(
+      'Yazı kutuya sığmıyor olabilir.\n\nYine de PDF üretmek istiyor musunuz?\n\nİPTAL → Önce düzeltin\nTAMAM → Yine de üret'
+    );
+    if (!proceed) return;
+  }
+  renderManual({ format: 'pdf' });
+}
+
+function exportPNG() {
+  renderManual({ format: 'png' });
+}
+
 function applyStudioFontStyle() {
   const field = selectedManualField?.();
   if (!field) return;
@@ -8800,8 +8815,21 @@ function newManualWork() {
 }
 
 function toggleStudioMoreMenu() {
+  const menu = byId('studioMoreMenuTb');
+  if (menu) {
+    menu.hidden = !menu.hidden;
+    if (!menu.hidden) {
+      const closeOnOutside = (e) => {
+        if (!e.target.closest?.('.toolbar-more-wrap')) {
+          menu.hidden = true;
+          document.removeEventListener('click', closeOnOutside);
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeOnOutside), 0);
+    }
+    return;
+  }
   if (typeof selectCorelDockTab === "function") selectCorelDockTab("output");
-  showStudioToolNotice("Ek aksiyonlar Çıktı Merkezi ve sağ panelden yönetilir. Bağlı olmayan işlemler bu ekranda aktif gösterilmez.", "info");
 }
 
 function showLabelStudioPassiveNotice(message = "Bu işlem henüz production backend'e bağlı değil.") {
