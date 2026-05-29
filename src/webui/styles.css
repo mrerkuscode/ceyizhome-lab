@@ -5427,6 +5427,7 @@ body.label-studio-active #manualPreview .preview-label.editor-live {
 /* label/corel studio */
 .corel-property-bar { display: flex; align-items: center; gap: var(--s-2); padding: 4px 8px; }
 .corel-left-toolbar { display: flex; flex-direction: column; gap: 4px; padding: 4px; }
+#label .corel-studio { display: grid; grid-template-columns: 76px minmax(0, 1fr) minmax(340px, 390px); }
 .corel-inspector { display: flex; flex-direction: column; gap: var(--s-3); }
 .corel-bottom-panel { display: flex; align-items: center; gap: var(--s-2); padding: 4px 8px; border-top: 1px solid var(--line); }
 .corel-canvas-panel { flex: 1; position: relative; }
@@ -5651,6 +5652,8 @@ input[type="checkbox"] { accent-color: var(--blue, #2563eb); }
   #label .manual-studio { grid-template-columns: 1fr; }
 }
 
+/* manual-studio responsive grid */
+#label .manual-studio { display: grid; grid-template-columns: 76px minmax(0, 1fr) clamp(330px, 25vw, 390px); }
 /* additional grid overrides */
 #labelModels .detail-panel > .button-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
