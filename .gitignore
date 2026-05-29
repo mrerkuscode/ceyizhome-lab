@@ -75,6 +75,7 @@ data/backups/
 #     sprint klasörlerini AÇ. (sırada tarama klasörü vs.) ----
 output/*
 !output/.gitkeep
+!output/2026-05-07/
 !output/2026-05-28/
 
 # Output altında yine de ölü/büyük klasörler dışlanır:
