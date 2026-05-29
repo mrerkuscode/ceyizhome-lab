@@ -494,15 +494,6 @@ function nameCutOffsetModeStatusHtml() {
   `;
 }
 
-function parseBridgeResult(raw) {
-  if (typeof raw !== "string") return raw || {};
-  try {
-    return JSON.parse(raw || "{}");
-  } catch (error) {
-    return { status: "ERROR", message: String(error?.message || error || "Bridge JSON okunamadı.") };
-  }
-}
-
 function loadNameCutCorelReferences(options = {}) {
   corelReferenceLibraryState = {
     ...corelReferenceLibraryState,
@@ -2527,12 +2518,6 @@ function outputModelLabel(item) {
   const history = historyForOutputPath(outputPath(item));
   const meta = outputMetadata(item, history);
   return String(meta.modelName || item?.model_no || fileName(item?.name || item?.file_name || item?.relative_path || "Model")).trim();
-}
-
-function labelOutputCreatedDate(item) {
-  const raw = String(item?.created_at || item?.relative_path || item?.path || item?.name || "");
-  const match = raw.match(/20\d{2}-\d{2}-\d{2}/);
-  return match ? match[0] : "";
 }
 
 function outputQueueState(path, history = null) {
