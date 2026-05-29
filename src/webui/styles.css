@@ -5805,3 +5805,36 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .modal .name-cut-edit-status {
   font-size: var(--fs-2, 13px);
 }
+
+/* Corel tarzi tabla ici isim duzenleme katmani */
+.name-cut-edit-preview .name-cut-preview { position: relative; }
+.name-cut-board-edit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 40%;
+  max-width: 90%;
+  text-align: center;
+  font-family: var(--name-cut-script-font, 'Mochary TR Connect', 'Brannboll Connect', 'Segoe Script', cursive);
+  font-size: clamp(18px, 6vw, 42px);
+  line-height: 1.05;
+  color: #0f172a;
+  background: transparent;
+  border: 1px dashed transparent;
+  border-radius: 6px;
+  padding: 2px 8px;
+  outline: none;
+  cursor: text;
+  white-space: pre-wrap;
+  word-break: break-word;
+  caret-color: var(--accent, #2563eb);
+  z-index: 3;
+}
+.name-cut-board-edit:hover { border-color: rgba(148,163,184,.5); }
+.name-cut-board-edit:focus {
+  border-color: var(--accent, #2563eb);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 0 0 2px rgba(37,99,235,.18);
+}
+.name-cut-edit-preview .name-cut-preview .name-cut-computed-text { opacity: .18; }
