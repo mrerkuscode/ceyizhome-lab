@@ -17,7 +17,7 @@ ON KOSUL:
 """
 
 import pytest
-from playwright.sync_api import sync_playwright
+sync_playwright = pytest.importorskip("playwright.sync_api").sync_playwright
 
 BASE_URL = "http://localhost:8000"
 
