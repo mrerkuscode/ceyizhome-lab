@@ -419,6 +419,23 @@
             </aside>
 
             <section class="studio-canvas-panel">
+              <div class="studio-output-status" id="studioOutputStatus">
+                <div class="status-indicators">
+                  <span class="status-item" data-status="data">
+                    <span class="status-dot dot-neutral"></span>
+                    <span class="status-label">Veri hazır</span>
+                  </span>
+                  <span class="status-item" data-status="preview">
+                    <span class="status-dot dot-neutral"></span>
+                    <span class="status-label">Önizleme eksik</span>
+                  </span>
+                  <span class="status-item" data-status="render">
+                    <span class="status-dot dot-neutral"></span>
+                    <span class="status-label">Render kontrolü</span>
+                  </span>
+                </div>
+                <button class="btn-run-render-check" onclick="runRenderCheck()">Render kontrolü çalıştır</button>
+              </div>
               <div class="canvas-bar">
                 <span class="ttl">Canlı Etiket Alanı</span>
                 <div class="zoom-cluster" style="margin-left:auto" aria-label="Yakınlaştırma">

@@ -5784,3 +5784,16 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .canvas-bg-placeholder{color:#9ca3af;font-size:12px;font-style:italic}
 .canvas-bg-error-content{text-align:center;padding:16px}
 .canvas-bg-error-content .error-icon{font-size:24px;color:#f59e0b}
+
+/* === Fix 3: Output status card === */
+.studio-output-status{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#fef3c7;border:1px solid #fcd34d;border-radius:6px;margin-bottom:6px;flex-shrink:0}
+.status-indicators{display:flex;gap:14px}
+.status-item{display:flex;align-items:center;gap:5px;font-size:11px}
+.status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-success{background:#10b981}
+.dot-warning{background:#f59e0b}
+.dot-danger{background:#ef4444}
+.dot-neutral{background:#e5e7eb;border:1px solid #d1d5db}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-run-render-check{padding:4px 10px;font-size:11px;background:#f59e0b;color:#fff;border:none;border-radius:4px;font-weight:500;cursor:pointer;white-space:nowrap}
+.btn-run-render-check:hover{background:#d97706}

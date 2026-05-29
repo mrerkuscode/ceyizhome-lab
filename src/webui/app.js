@@ -6749,6 +6749,49 @@ function reattachModelImage() {
   reloadCanvasBackground();
 }
 
+function updateOutputStatus(statuses) {
+  Object.entries(statuses).forEach(([key, val]) => {
+    const dotEl = document.querySelector(`#studioOutputStatus .status-item[data-status="${key}"] .status-dot`);
+    const labelEl = document.querySelector(`#studioOutputStatus .status-item[data-status="${key}"] .status-label`);
+    if (!dotEl) return;
+    dotEl.className = 'status-dot';
+    const labelMap = {
+      data: { ok: 'Veri hazır', warn: 'Veri eksik', fail: 'Veri hatası', pending: 'Kontrol ediliyor...' },
+      preview: { ok: 'Önizleme tamam', warn: 'Önizleme eksik', fail: 'Önizleme hatası', pending: 'Kontrol ediliyor...' },
+      render: { ok: 'Render tamam', warn: 'Render uyarısı', fail: 'Render hatası', pending: 'Render kontrol ediliyor...', neutral: 'Render kontrolü' }
+    };
+    if (val === 'ok') dotEl.classList.add('dot-success');
+    else if (val === 'warn') dotEl.classList.add('dot-warning');
+    else if (val === 'fail') dotEl.classList.add('dot-danger');
+    else if (val === 'pending') { dotEl.classList.add('dot-neutral'); dotEl.style.animation = 'pulse 1s infinite'; }
+    else dotEl.classList.add('dot-neutral');
+    if (val !== 'pending') dotEl.style.animation = '';
+    if (labelEl && labelMap[key]?.[val]) labelEl.textContent = labelMap[key][val];
+  });
+}
+
+async function runRenderCheck() {
+  updateOutputStatus({ render: 'pending' });
+  try {
+    const result = await fetch('/api/preflight/check', { method: 'POST' });
+    const data = await result.json();
+    updateOutputStatus({ render: data.ok ? 'ok' : 'fail' });
+  } catch {
+    updateOutputStatus({ render: 'fail' });
+  }
+}
+
+function checkStudioStatus() {
+  const fieldIds = ['manualText', 'manualDateText', 'manualNoteText'];
+  const allFilled = fieldIds.some(id => byId(id)?.value?.trim());
+  const previewImg = document.querySelector('#manualPreview .label-design-underlay');
+  const previewOk = previewImg && previewImg.style.display !== 'none' && !previewImg.closest('.canvas-bg-error');
+  updateOutputStatus({
+    data: allFilled ? 'ok' : 'warn',
+    preview: previewOk ? 'ok' : 'warn'
+  });
+}
+
 function applyStudioFontStyle() {
   const field = selectedManualField?.();
   if (!field) return;
@@ -10999,6 +11042,7 @@ function updateManualFieldValue(column, next) {
   markManualWorkDirty();
   renderStudioOrderPanels();
   updateManualOutputControlPanel();
+  if (typeof checkStudioStatus === 'function') checkStudioStatus();
 }
 
 function missingBasicManualFields(model) {
