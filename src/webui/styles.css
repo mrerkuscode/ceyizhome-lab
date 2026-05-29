@@ -5664,3 +5664,7 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .field-box .resize-handle { width: 16px; height: 16px; }
 /* home metrics grid */
 .home-metrics { grid-template-columns: minmax(240px, 1.2fr) repeat(3, minmax(170px, .85fr)); display: grid; }
+
+/* === ORTA TABLA YÜKSEKLİK DÜZELTMESİ (İsim Kesim + Etiket Studio) === */
+.studio-body, .nc-body { grid-template-rows: minmax(0, 1fr); }
+.studio-canvas-panel, .nc-board { min-height: 0; }
