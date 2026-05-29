@@ -6577,7 +6577,7 @@ function fieldOverlayHtml(model, useManualText = false) {
       ${manualGuideState.safe ? `<span class="safe-area-guide"></span>` : ""}
     </div>
   ` : "";
-  return `${model.preview_image ? `<img class="label-design-underlay" src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" />` : ""}
+  return `${model.preview_image ? `<img class="label-design-underlay" src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" onerror="handleCanvasBgError(this)" />` : ""}
   <div class="field-overlay-wrap" data-label-width="${esc(dims.width)}" data-label-height="${esc(dims.height)}"${previewStyle}>
     ${model.preview_image ? `<div class="field-design-bg" style="background-image:url(&quot;${esc(cssUrl(model.preview_image))}&quot;)" aria-hidden="true"></div>` : ""}
     ${model.preview_image ? `<img src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" onload="syncFieldOverlay(this.closest('.field-overlay-wrap'))" />` : ""}
@@ -6695,6 +6695,58 @@ function initStudioInspectorTabs() {
       panels.forEach(p => { p.hidden = p.dataset.panel !== tabName; });
     });
   });
+}
+
+function setCanvasBackground(imageSrc) {
+  const bgEl = document.querySelector('.studio-canvas-bg');
+  if (!bgEl) return;
+  if (!imageSrc) {
+    bgEl.classList.add('canvas-bg-empty');
+    bgEl.innerHTML = '<span class="canvas-bg-placeholder">Model görseli bağlı değil</span>';
+    return;
+  }
+  const img = new Image();
+  img.onload = () => {
+    bgEl.classList.remove('canvas-bg-empty', 'canvas-bg-error');
+    bgEl.style.backgroundImage = `url("${imageSrc}")`;
+    bgEl.innerHTML = '';
+  };
+  img.onerror = () => {
+    bgEl.classList.remove('canvas-bg-empty');
+    bgEl.classList.add('canvas-bg-error');
+    bgEl.innerHTML = `<div class="canvas-bg-error-content"><span class="error-icon">⚠</span><p>Model g\xf6rseli y\xfcklenemedi</p><button onclick="reattachModelImage()">G\xf6rseli yeniden bağla</button></div>`;
+  };
+  img.src = imageSrc;
+}
+
+function handleCanvasBgError(imgEl) {
+  if (!imgEl) return;
+  imgEl.style.display = 'none';
+  const artboard = imgEl.closest('.artboard');
+  if (!artboard) return;
+  let errBanner = artboard.querySelector('.canvas-bg-load-error');
+  if (!errBanner) {
+    errBanner = document.createElement('div');
+    errBanner.className = 'canvas-bg-load-error';
+    errBanner.innerHTML = `<span>⚠</span> Model g\xf6rseli y\xfcklenemedi &mdash; <button onclick="reloadCanvasBackground()">Yeniden bağla</button>`;
+    artboard.insertBefore(errBanner, artboard.firstChild);
+  }
+}
+
+function reloadCanvasBackground() {
+  const model = selectedLabelModel;
+  if (!model || !model.preview_image) return;
+  const errBanner = document.querySelector('#manualPreview .canvas-bg-load-error');
+  if (errBanner) errBanner.remove();
+  const img = document.querySelector('#manualPreview .label-design-underlay');
+  if (img) {
+    img.style.display = '';
+    img.src = model.preview_image + '?t=' + Date.now();
+  }
+}
+
+function reattachModelImage() {
+  reloadCanvasBackground();
 }
 
 function applyStudioFontStyle() {
