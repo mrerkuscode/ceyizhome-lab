@@ -1061,21 +1061,9 @@ function previewSource(item) {
   return item?.preview_url || item?.preview_uri || "";
 }
 
-function missingPreviewHtml() {
-  return `<div><b>Önizleme bulunamadı</b><small>PDF’i harici açarak kontrol edin.</small></div>`;
-}
-
 function hasRunControl() {
   const readiness = currentState.readiness || "NO_CHECK";
   return readiness !== "NO_CHECK";
-}
-
-function callBridge(name, ...args) {
-  if (!bridge || typeof bridge[name] !== "function") {
-    alert("Bu işlem şu anda hazır değil.");
-    return;
-  }
-  bridge[name](...args);
 }
 
 function showLabelModelStatus(message, type = "ok") {
@@ -2268,12 +2256,6 @@ function rememberQueueSourceForPath(path, source = queueSourceForCurrentLabelEnt
   } catch (_) {
     // Non-critical UI metadata; queue persistence remains backend-owned.
   }
-}
-
-function queueSourceLabelForPath(path, fallback = "") {
-  const normalized = normalizeOutputRef(path);
-  const map = queueSourceOverrideMap();
-  return map[normalized] || map[String(path || "")] || fallback || "";
 }
 
 function normalizeQueueSourceKey(value) {
@@ -4861,21 +4843,6 @@ function renderTrendyolSelectedDetail(rows = []) {
   if (box) box.innerHTML = "";
 }
 
-function renderTrendyolSelectedQuestionCandidates(row, potentialQuestions = []) {
-  const box = byId("trendyolQuestionCandidates");
-  if (!box) return;
-  if (trendyolQuestionContexts(row).length || !potentialQuestions.length) {
-    box.innerHTML = "";
-    return;
-  }
-  box.innerHTML = `
-    <div class="trendyol-question-candidates">
-      <b>Bu siparişe benzeyen müşteri soruları</b>
-      ${potentialQuestions.map((item, index) => trendyolEvidenceQuestionCard(row, item, index, "candidate")).join("")}
-    </div>
-  `;
-}
-
 function toggleTrendyolOrderSelection(id, checked) {
   if (!id) return;
   if (checked) selectedTrendyolOrderIds.add(id);
@@ -5625,25 +5592,6 @@ function openTrendyolMarketplaceAction(id, action = "detail") {
   }
   showTrendyolStatus(`${labels[action] || labels.detail} için Trendyol tarafında operatör işlemi gerekir. Bu ekran canlı sipariş durumunu otomatik değiştirmez.`, "warn");
   if (url) window.open(url, "_blank", "noopener,noreferrer");
-}
-
-function exportTrendyolReadyToExcel() {
-  if (!bridge?.export_trendyol_ready_to_excel) {
-    showTrendyolStatus("Trendyol Excel aktarım köprüsü bu oturumda hazır değil.", "warn");
-    return;
-  }
-  const id = selectedTrendyolSuggestionId || "";
-  const selected = id ? trendYolSuggestions().find(row => row.id === id) : null;
-  const ids = selected && trendyolVerifiedReady(selected) && selected.import_status !== "imported" ? [id] : [];
-  showTrendyolStatus(ids.length ? "Seçili Trendyol satırı üretim Excel’ine aktarılıyor..." : "Tüm hazır Trendyol satırları üretim Excel’ine aktarılıyor...", "warn");
-  bridge.export_trendyol_ready_to_excel(JSON.stringify(ids), raw => {
-    const result = parseBridgeResult(raw);
-    showTrendyolStatus(result.message || "Trendyol üretim Excel’i hazırlandı.", result.status === "OK" ? "ok" : "bad");
-    if (result.status === "OK") {
-      setTimeout(() => showSection("bulkLabel"), 350);
-    }
-    refreshState();
-  });
 }
 
 function mergeTrendyolBulkItems(items = []) {
@@ -7758,10 +7706,6 @@ function openPendingWizardModelInStudio() {
   }
 }
 
-function startNewLabelModelWizardSourceSelect() {
-  chooseNewLabelModelDesignVisual();
-}
-
 function syncNewModelSizeInputs() {
   const useDefault = byId("newModelUseDefaultSize")?.checked ?? true;
   ["newModelWidthMm", "newModelHeightMm"].forEach(id => {
@@ -7967,10 +7911,6 @@ function openAdvancedTemplateEditor() {
   bridge.editTemplate();
 }
 
-function openNativeModelEditor() {
-  openAdvancedTemplateEditor();
-}
-
 function toggleLabelTechnicalMode() {
   syncLabelTechnicalMode();
 }
@@ -8026,22 +7966,6 @@ function loadSelectedModelPreviewDiagnostic() {
       <small>Görsel: ${esc(fileName(result.preview_path) || "-")} · Arka plan: ${result.background_enabled ? "açık" : "kapalı"} · ${esc(ratio)}</small>
       ${warnings.length ? `<div class="preview-required-note">${warnings.map(esc).join("<br>")}${normalizeAction}</div>` : `<div class="success-note">Yazı alanlarını gerçek tasarım üzerinde kontrol edebilirsiniz.</div>`}
     `;
-  });
-}
-
-function cleanupDuplicateNameFields() {
-  if (!selectedLabelModel) {
-    showLabelModelStatus("Önce bir model seçin.", "warn");
-    return;
-  }
-  if (!bridge.cleanup_duplicate_label_text_fields) {
-    showLabelModelStatus("Tekrar isim alanı temizleme servisi hazır değil.", "bad");
-    return;
-  }
-  bridge.cleanup_duplicate_label_text_fields(selectedLabelModel.path, raw => {
-    const result = JSON.parse(raw || "{}");
-    showLabelModelStatus(result.message || "İsim alanları kontrol edildi.", result.status === "OK" ? "ok" : "warn");
-    refreshState();
   });
 }
 
@@ -8174,15 +8098,6 @@ function checkFieldsAfterPreview() {
   closePreviewBindingWizard();
   showSection("labelModels");
   renderSelectedModelDetail();
-}
-
-function testSelectedModelPreview() {
-  if (!selectedLabelModel) {
-    showLabelModelStatus("Önce bir model seçin.", "warn");
-    return;
-  }
-  useSelectedModelForManual();
-  showSection("label");
 }
 
 function previewSelectedModelOnly() {
@@ -10043,27 +9958,6 @@ function clamp_field_inside_label(field, label_size) {
   };
 }
 
-function center_field_horizontally(field, label_size) {
-  const size = label_size || { width: 50, height: 30 };
-  const next = numericField(field);
-  return clamp_field_inside_label({ ...next, x_mm: (size.width - next.width_mm) / 2 }, size);
-}
-
-function distribute_fields_vertically(fields, label_size) {
-  const size = label_size || { width: 50, height: 30 };
-  const active = fields.filter(field => isManualRenderableColumn(field.excel_column));
-  if (!active.length) return fields;
-  const bandTop = size.height * 0.34;
-  const bandBottom = size.height * 0.82;
-  const step = active.length === 1 ? 0 : (bandBottom - bandTop) / Math.max(1, active.length - 1);
-  return fields.map(field => {
-    const order = active.indexOf(field);
-    if (order < 0) return field;
-    const next = numericField(field);
-    return clamp_field_inside_label({ ...next, y_mm: bandTop + step * order - next.height_mm / 2 }, size);
-  });
-}
-
 function apply_safe_area(fields, label_size) {
   const size = label_size || { width: 50, height: 30 };
   const pad = Math.max(1.5, Math.min(size.width, size.height) * 0.05);
@@ -10772,10 +10666,6 @@ function suggestLearningLayout(state) {
   return { fields: afterFields, qualityBefore: before, qualityAfter: after, summary: [...new Set(summary)], smartLayout: smart };
 }
 
-function auto_layout_label(state) {
-  return suggestLearningLayout(state).fields;
-}
-
 function commitSmartFields(nextFields, message) {
   if (!selectedLabelModel) return;
   selectedLabelModel.fields_summary = nextFields.map(field => ({
@@ -10864,24 +10754,6 @@ function prepareManualForProduction() {
   fitAllManualText();
   moveAllFieldsIntoSafeArea();
   runManualPreflight();
-}
-
-function openManualPdfPreview() {
-  const pdf = lastManualOutput?.batch_pdf_path || lastManualOutput?.pdf_path || "";
-  if (!pdf) return showStudioToolNotice("Önce PDF/PNG oluşturun.", "warn");
-  openPdfPreview(pdf);
-}
-
-function previewManualPng() {
-  const png = lastManualOutput?.png_path || "";
-  if (!png) return showStudioToolNotice("Önce PDF/PNG oluşturun.", "warn");
-  selectManualPngPreview(png);
-}
-
-function addLastManualPdfToQueue() {
-  const pdf = lastManualOutput?.batch_pdf_path || lastManualOutput?.pdf_path || "";
-  if (!pdf) return showStudioToolNotice("Önce PDF/PNG oluşturun.", "warn");
-  addPdfToQueue(pdf);
 }
 
 function toggleStudioShortcutHelp() {
@@ -12253,12 +12125,6 @@ function setBulkGalleryFilter(filter) {
   renderBulkGallery();
 }
 
-function setBulkGallerySearch(value) {
-  bulkGallerySearch = value || "";
-  resetBulkGalleryVisibleLimit();
-  renderBulkGallery();
-}
-
 function scheduleBulkGallerySearch(value) {
   bulkGallerySearch = value || "";
   resetBulkGalleryVisibleLimit();
@@ -13229,13 +13095,6 @@ function renderBulkSelectedDetail() {
   `;
 }
 
-function showBulkGalleryProblemDetail(index) {
-  const item = bulkGalleryItems[index];
-  if (!item) return;
-  const text = bulkGalleryProblemText(item);
-  alert(`Satır ${item.row_number || "-"} kontrol notu:\n${text}`);
-}
-
 function requestBulkGallerySafePrint() {
   const outputs = currentState.labelOutputs || [];
   const batch = outputs.find(row => /roll_batch|batch|bulk/i.test(String(row.relative_path || row.file_name || "")) && String(row.relative_path || "").toLowerCase().endsWith(".pdf"))
@@ -13456,12 +13315,6 @@ function isExplicitNameCutSingleLineMode(composition = "") {
 
 function splitNameWords(text = "") {
   return String(text || "").trim().split(/\s+/).filter(Boolean);
-}
-
-function estimateJoinedNameWidth(word = "", height = 60, maxWidth = 300) {
-  const letters = Math.max(3, String(word || "").length);
-  const width = Math.max(42, Math.min(Number(maxWidth || 300), Number(height || 60) * Math.max(1.15, letters * 0.34)));
-  return Number(width.toFixed(2));
 }
 
 function normalizeNameCutConfig(cfg = nameCutLayoutConfig) {
@@ -14245,45 +14098,6 @@ function nameCutPathPreviewPayload(layout = {}) {
       operator_size_locked: true,
     })),
   };
-}
-
-function requestNameCutPathPreview(layout = {}) {
-  if (!bridge || typeof bridge.preview_name_cut_paths !== "function") return;
-  const signature = nameCutPathPreviewSignature(layout);
-  if (!signature || nameCutPathPreviewCache.signature === signature || nameCutPathPreviewCache.pendingSignature === signature) return;
-  nameCutPathPreviewCache.pendingSignature = signature;
-  try {
-    bridge.preview_name_cut_paths(JSON.stringify(nameCutPathPreviewPayload(layout)), raw => {
-      const result = parseBridgeResult(raw);
-      if (nameCutPathPreviewCache.pendingSignature !== signature) return;
-      const pathsByKey = {};
-      (result.paths || []).forEach(pathItem => {
-        pathsByKey[nameCutPathPreviewKey(pathItem)] = pathItem;
-      });
-      nameCutPathPreviewCache = {
-        signature,
-        pendingSignature: "",
-        pathsByKey,
-        status: result.path_preview_status || result.status || "UNKNOWN",
-        message: result.message || "",
-      };
-      renderLaserLayoutPreview(layout);
-    });
-  } catch (error) {
-    nameCutPathPreviewCache = {
-      signature,
-      pendingSignature: "",
-      pathsByKey: {},
-      status: "ERROR",
-      message: error?.message || "Path önizleme alınamadı.",
-    };
-  }
-}
-
-function nameCutPathPreviewForItem(item = {}, layout = {}) {
-  const signature = nameCutPathPreviewSignature(layout);
-  if (nameCutPathPreviewCache.signature !== signature) return null;
-  return nameCutPathPreviewCache.pathsByKey[nameCutPathPreviewKey(item)] || null;
 }
 
 function nameCutProductionSceneSignature(items = nameCutLiveItems(), cfg = nameCutLayoutConfig) {
@@ -15565,11 +15379,6 @@ function formatNameCutName(value = "") {
   }).join(" ");
 }
 
-function nameCutPreviewText(item = {}) {
-  const layoutResult = nameCutLayoutResultForItem(item, { context: "preview" });
-  return (layoutResult.previewLines || []).join("\n") || layoutResult.formattedText || formatNameCutName(item.name_text || "");
-}
-
 function hasTurkishDiacriticForCutting(value = "") {
   return /[iİıöÖüÜşŞçÇğĞ]/.test(String(value || ""));
 }
@@ -15584,11 +15393,6 @@ function turkishDiacriticBridgeMarkup(word = "") {
     const double = /[öÖüÜ]/.test(ch) ? " double" : "";
     return `<i class="diacritic-cut-bridge${lower}${double}" style="left:${left.toFixed(2)}%" aria-hidden="true"></i>`;
   }).join("");
-}
-
-function renderNameCutPreviewWord(word = "") {
-  const text = formatNameCutName(word);
-  return `<b>${esc(text)}${turkishDiacriticBridgeMarkup(text)}</b>`;
 }
 
 function nameCutPreview(item = {}, large = false) {
@@ -16611,16 +16415,6 @@ function updateNameCutDraftField(field, value) {
     refreshNameCutEditorFeedback();
     return;
   }
-  renderNameCutEditor();
-}
-
-function fixNameCutDraftToTargetSize() {
-  if (!nameCutDraft) return;
-  nameCutDraft.width_mm = nameCutLayoutConfig.target_name_width_mm || 80;
-  nameCutDraft.height_mm = nameCutLayoutConfig.target_name_height_mm || 40;
-  nameCutDraft.operator_size_locked = false;
-  nameCutDraft.custom_size = false;
-  nameCutDraft.is_edited = true;
   renderNameCutEditor();
 }
 
@@ -20511,11 +20305,6 @@ function selectReport(name) {
   }
 }
 
-function formatRows(rows, empty) {
-  if (!rows.length) return empty;
-  return rows.map(row => Object.entries(row).map(([key, value]) => `${key}: ${value}`).join("\n")).join("\n\n");
-}
-
 function renderReportSummaryCards() {
   const box = byId("reportSummaryCards");
   if (!box) return;
@@ -21053,17 +20842,6 @@ function toggleDxfLibraryWatcher() {
       if (dxfLibraryState.watcherRunning) loadDxfLibraryList();
     });
   }
-}
-
-function dxfLibraryLookupForName(name, cb) {
-  if (!bridge?.dxfLibraryResolveForOrder) {
-    cb({ status: "MISSING_DESIGN", message: "Bridge yok.", ascii_name: name });
-    return;
-  }
-  bridge.dxfLibraryResolveForOrder(name || "", raw => {
-    const result = parseBridgeResult(raw);
-    cb(result.lookup || { status: "MISSING_DESIGN", message: "Yanıt boş.", ascii_name: name });
-  });
 }
 
 function refreshDataBackups() {
