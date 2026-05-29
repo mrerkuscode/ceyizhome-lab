@@ -814,8 +814,8 @@
           </div>
           <div class="toolbar page-actions">
             <button class="btn ghost" onclick="downloadBulkSampleExcel()" type="button">Örnek Excel İndir</button>
-            <button class="btn ghost" onclick="showBulkFeatureNotConnected('Rehber video')" type="button" title="Bu özellik sonraki fazda bağlanacak.">Rehber Video</button>
-            <button class="btn ghost" onclick="showBulkFeatureNotConnected('Geçmiş işlemler')" type="button" title="Bu özellik sonraki fazda bağlanacak.">Geçmiş İşlemler</button>
+            <button class="btn ghost" onclick="openHelpCenter('tour')" type="button" title="Yardım merkezi ve kullanım kılavuzu">Rehber</button>
+            <button class="btn ghost" onclick="openProductionHistoryView()" type="button" title="Geçmiş üretim kayıtlarını göster">Geçmiş İşlemler</button>
             <button class="btn" onclick="refreshState()" type="button">Yenile</button>
             <button class="btn primary" onclick="setBulkProductionStep(6)" type="button">Üretime Al</button>
             <span class="bulk-last-action" id="bulkLastActionText">Son işlem: bekleniyor</span>
@@ -879,8 +879,8 @@
                   </div>
                   <div class="toolbar">
                     <button class="btn" onclick="event.stopPropagation(); openBulkManualEntry()" type="button">Manuel Ekle</button>
-                    <button class="btn ghost planned" onclick="event.stopPropagation(); showBulkFeatureNotConnected('Çoklu manuel giriş')" type="button" title="Bu özellik henüz bağlanmadı.">Çoklu giriş</button>
-                    <button class="btn ghost planned" onclick="event.stopPropagation(); showBulkFeatureNotConnected('Kopyala/yapıştır liste ekleme')" type="button" title="Bu özellik henüz bağlanmadı.">Kopyala/Yapıştır</button>
+                    <button class="btn ghost" onclick="event.stopPropagation(); openMultiManualEntry()" type="button" title="Birden fazla ismi tek seferde gir">Çoklu giriş</button>
+                    <button class="btn ghost" onclick="event.stopPropagation(); openMultiManualEntry()" type="button" title="İsim listesini yapıştır">Kopyala/Yapıştır</button>
                   </div>
                 </article>
               </div>
@@ -1049,7 +1049,7 @@
                     <button class="btn" onclick="generateReadyBulkGalleryItems()" type="button">Yazdırma Sırasına Ekle</button>
                     <button class="btn" onclick="sendLaserBulkItemsToNameCutQueue()" type="button">İsim Kesim Kuyruğuna Gönder</button>
                     <button class="btn" onclick="showSection('printQueue')" type="button">Yazdırma Sırasını Aç</button>
-                    <button class="btn" onclick="showBulkFeatureNotConnected('Rulo yerleşimi oluşturma')" type="button">Rulo Yerleşimi Oluştur</button>
+                    <button class="btn" onclick="updateRollLayoutPreview(currentState); document.getElementById('rollLayoutPreview')?.scrollIntoView({behavior:'smooth'})" type="button" title="Rulo yerleşimini hesapla ve göster">Rulo Yerleşimini Güncelle</button>
                   </div>
                 </article>
                 <article class="card"><div class="card-title"><h3>Yazdırma Sırası</h3><span id="queueMiniCount">0 iş</span></div><div id="bulkPrintQueueMini" class="compact-list"></div><button class="btn wide" onclick="showSection('printQueue')">Sırayı Aç</button></article>
@@ -1103,7 +1103,7 @@
               <button class="btn primary wide" onclick="setBulkProductionStep(Math.min(6, bulkProductionStep + 1))" type="button">Sonraki Adıma Geç</button>
               <button class="btn wide" onclick="renderBulkRealMiniPreviews()" type="button">Tümünü Önizle</button>
               <button class="btn wide" onclick="setBulkProductionStep(5); setBulkGalleryFilter('error')" type="button">Hatalı Kayıtları Göster</button>
-              <button class="btn wide" onclick="showBulkFeatureNotConnected('Rapor indirme')" type="button">Raporu İndir</button>
+              <button class="btn wide" onclick="downloadBulkReport()" type="button" title="Toplu üretim verilerini CSV olarak indir">Raporu İndir</button>
             </div>
           </aside>
         </div>

@@ -11601,7 +11601,122 @@ function setBulkProductionSource(source = "excel") {
 }
 
 function showBulkFeatureNotConnected(feature = "Bu özellik") {
-  alert(`${feature} henüz production servisine bağlı değil. Bu ekranda sahte başarı gösterilmez; ilgili entegrasyon sonraki fazda eklenecek.`);
+  // Hiçbir zaman sessiz no-op bırakma: özellik henüz bağlanmadıysa açıkça bildir.
+  alert(`${feature} bu sürümde henüz üretime bağlı değil. Sessiz sahte başarı gösterilmez.`);
+}
+
+// ── Raporu İndir: toplu üretim verilerini CSV olarak dışa aktar ──────────────
+function downloadBulkReport() {
+  const rows = bulkGalleryItems || currentState?.bulkGalleryItems || [];
+  if (!rows.length) {
+    alert("İndirilecek veri yok. Önce Excel'den satır yükleyin.");
+    return;
+  }
+  const cols = ["row_number", "label_text", "date_text", "note_text", "quantity", "status", "model_name", "warnings"];
+  const header = cols.join(",");
+  const body = rows.map(row => cols.map(col => {
+    const val = col === "warnings" ? (row.warnings || []).join("; ") : (row[col] ?? "");
+    return `"${String(val).replace(/"/g, '""')}"`;
+  }).join(",")).join("\n");
+  const csv = `﻿${header}\n${body}`;
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = `toplu_uretim_raporu_${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ── Geçmiş İşlemler: üretim geçmişi bölümünü aç ─────────────────────────────
+function openProductionHistoryView() {
+  showSection("reports");
+  setTimeout(() => {
+    const btn = document.querySelector('#reports .report-tab[data-report="log"], #reports button[onclick*="log"]');
+    if (btn) btn.click();
+  }, 80);
+}
+
+// ── Lazer Kesim'de Aç: öğeyi İsim Kesim Studio'ya aktar ─────────────────────
+function openBulkItemInLaserStudio(itemId) {
+  const row = (bulkGalleryItems || []).find(r => String(r.item_id || r.id) === String(itemId));
+  if (!row) { showSection("nameCutStudio"); return; }
+  showSection("nameCutStudio");
+  setTimeout(() => {
+    const name = String(row.label_text || row.name_cut_text || "").trim();
+    const nameInput = byId("nameCutNameInput");
+    if (nameInput && name) {
+      nameInput.value = name;
+      nameInput.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+    setText("nameCutStatus", `"${name}" lazer studio'ya aktarıldı.`);
+  }, 150);
+}
+
+// ── Bulk satır durum güncelleme ───────────────────────────────────────────────
+function setBulkItemStatus(itemId, status) {
+  bulkGalleryItems = (bulkGalleryItems || []).map(row => {
+    if (String(row.item_id || row.id) !== String(itemId)) return row;
+    const msgs = {
+      approved: "Operatör tarafından onaylandı.",
+      error: "Hatalı olarak işaretlendi.",
+      skipped: "Sonra kontrol edilecek olarak işaretlendi.",
+      fixed: "Düzeltildi olarak işaretlendi."
+    };
+    return { ...row, status: status === "approved" ? "APPROVED" : status === "error" ? "ERROR" : "WARNING", operator_note: msgs[status] || status };
+  });
+  currentState.bulkGalleryItems = bulkGalleryItems;
+  syncBulkGallery(bulkGalleryItems);
+}
+
+// ── Çoklu manuel isim girişi (yapıştırma tabanlı) ─────────────────────────────
+function openMultiManualEntry() {
+  const existing = byId("multiManualEntryModal");
+  if (existing) { existing.hidden = false; return; }
+  const modal = document.createElement("div");
+  modal.id = "multiManualEntryModal";
+  modal.className = "modal-overlay";
+  modal.innerHTML = `
+    <div class="modal-box" style="max-width:480px">
+      <h2>Çoklu İsim Girişi</h2>
+      <p class="muted">Her satıra bir isim girin (veya yapıştırın). Tarih ve not için <code>|</code> ile ayırın: <code>Ayşe|12.05.2026|Söz</code></p>
+      <textarea id="multiEntryText" rows="10" style="width:100%;font-size:13px" placeholder="Ayşe &amp; Mehmet|12.05.2026|Söz Hatırası
+Fatma
+Ali|15.06.2026"></textarea>
+      <div class="toolbar" style="margin-top:8px">
+        <button class="btn primary" onclick="applyMultiManualEntry()">Satırlara Ekle</button>
+        <button class="btn" onclick="byId('multiManualEntryModal').hidden=true">İptal</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+}
+
+function applyMultiManualEntry() {
+  const text = (byId("multiEntryText")?.value || "").trim();
+  if (!text) { alert("İsim girilmedi."); return; }
+  const lines = text.split(/\n/).map(l => l.trim()).filter(Boolean);
+  setBulkProductionSource("manual");
+  lines.forEach(line => {
+    const parts = line.split("|").map(p => p.trim());
+    const item = {
+      item_id: `manual-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+      row_number: (bulkGalleryItems || []).length + 1,
+      source_type: "manual",
+      model_name: selectedLabelModel?.title || selectedLabelModel?.model_name || "Model seçilmedi",
+      model_path: selectedLabelModel?.path || "",
+      model_status: selectedLabelModel ? "FOUND" : "MISSING",
+      label_text: parts[0] || "",
+      date_text: parts[1] || "",
+      note_text: parts[2] || "",
+      quantity: 1,
+      status: selectedLabelModel ? "OK" : "ERROR",
+      warnings: selectedLabelModel ? [] : ["Model seçilmedi."],
+    };
+    bulkGalleryItems = [item, ...bulkGalleryItems];
+  });
+  currentState.bulkGalleryItems = bulkGalleryItems;
+  syncBulkGallery(bulkGalleryItems);
+  const modal = byId("multiManualEntryModal");
+  if (modal) modal.hidden = true;
+  showLabelStatus?.(`${lines.length} satır eklendi.`, "ok");
 }
 
 function openBulkSampleExcel() {
@@ -12503,7 +12618,7 @@ function bulkErrorActionButton(issue = {}, index = -1) {
     return `<button class="btn small" type="button" onclick="showSection('labelModels')">Model Seç</button>`;
   }
   if (/lazer/i.test(action)) {
-    return `<button class="btn small" type="button" onclick="showBulkFeatureNotConnected('Lazer Kesim’de açma')">Lazer Kesim’de Aç</button>`;
+    return `<button class="btn small" type="button" onclick="openBulkItemInLaserStudio(bulkGalleryItems[${index}]?.item_id)" title="İsim Kesim Studio’ya aktar">Lazer Kesim’de Aç</button>`;
   }
   if (/önizleme|onizleme/i.test(action)) {
     return `<button class="btn small" type="button" onclick="renderBulkRealMiniPreviews()">Önizleme Oluştur</button>`;
@@ -12597,8 +12712,8 @@ function renderBulkErrorPanel() {
           <button class="btn small danger-soft" type="button" onclick="openBulkPreviewModal(${index}, 'errors', 'errors')">Hata Detayı</button>
           ${bulkErrorActionButton(primary, index)}
           <button class="btn small" type="button" onclick="openBulkItemInLabelStudio(${index})">Studio’da Aç</button>
-          <button class="btn small" type="button" onclick="showBulkFeatureNotConnected('Yok say / sonra kontrol et')">Yok say / sonra kontrol et</button>
-          <button class="btn small" type="button" onclick="showBulkFeatureNotConnected('Düzeltildi olarak işaretleme')">Düzeltildi olarak işaretle</button>
+          <button class="btn small" type="button" onclick="setBulkItemStatus(${JSON.stringify(item.item_id || "")}, 'skipped')" title="Bu satırı atla, sonra kontrol et">Yok say / sonra</button>
+          <button class="btn small" type="button" onclick="setBulkItemStatus(${JSON.stringify(item.item_id || "")}, 'fixed')" title="Düzeltildi olarak işaretle">Düzeltildi</button>
         </div>
       </article>
     `;
@@ -12733,12 +12848,12 @@ function renderBulkPreviewModal() {
   }
   if (actions) {
     actions.innerHTML = `
-      <button class="btn" type="button" title="Onaylama state'i sonraki fazda bağlanacak." onclick="showBulkFeatureNotConnected('Kart onaylama')">Onayla</button>
+      <button class="btn" type="button" onclick="setBulkItemStatus(${JSON.stringify(item?.item_id || "")}, ‘approved’)" title="Bu satırı operatör onaylı olarak işaretle">Onayla</button>
       <button class="btn" type="button" onclick="openBulkItemInLabelStudio(${index})">Studio’da Aç</button>
-      <button class="btn" type="button" onclick="showBulkFeatureNotConnected('Lazer Kesim’de açma')">Lazer Kesim’de Aç</button>
+      <button class="btn" type="button" onclick="openBulkItemInLaserStudio(${JSON.stringify(item?.item_id || "")})" title="İsim Kesim Studio’ya aktar">Lazer Kesim’de Aç</button>
       <button class="btn" type="button" onclick="bulkGalleryItems[${index}] = smartArrangeBulkGalleryItem(bulkGalleryItems[${index}]); renderBulkGallery(); renderBulkPreviewModal();">Akıllı Düzenle</button>
       <button class="btn" type="button" onclick="openBulkGalleryEditor(${index})">Düzenle</button>
-      <button class="btn danger-soft" type="button" onclick="showBulkFeatureNotConnected('Hatalı olarak işaretleme')">Hatalı İşaretle</button>
+      <button class="btn danger-soft" type="button" onclick="setBulkItemStatus(${JSON.stringify(item?.item_id || "")}, ‘error’)">Hatalı İşaretle</button>
     `;
   }
 }
@@ -13088,9 +13203,9 @@ function renderBulkGallery() {
           ${isBulkTrendyolItem(item) ? `<button class="btn small primary" type="button" onclick="event.stopPropagation(); openBulkTrendyolEvidenceDrawer(${originalIndex})">Kanıtı Gör</button>` : ""}
           <button class="btn small" type="button" onclick="event.stopPropagation(); openBulkGalleryEditor(${originalIndex})">Düzenle</button>
           <button class="btn small" type="button" onclick="event.stopPropagation(); openBulkItemInLabelStudio(${originalIndex})">Studio’da Aç</button>
-          <button class="btn small" type="button" onclick="event.stopPropagation(); showBulkFeatureNotConnected('Lazer Kesim’de açma')">Lazer Kesim’de Aç</button>
+          <button class="btn small" type="button" onclick="event.stopPropagation(); openBulkItemInLaserStudio(${JSON.stringify(item?.item_id || "")})" title="İsim Kesim Studio’ya aktar">Lazer Kesim’de Aç</button>
           <button class="btn small" type="button" onclick="event.stopPropagation(); bulkGalleryItems[${originalIndex}] = smartArrangeBulkGalleryItem(bulkGalleryItems[${originalIndex}]); renderBulkGallery();">Akıllı Düzenle</button>
-          <button class="btn small" type="button" onclick="event.stopPropagation(); showBulkFeatureNotConnected('Kart onaylama')">Onayla</button>
+          <button class="btn small" type="button" onclick="event.stopPropagation(); setBulkItemStatus(${JSON.stringify(item?.item_id || "")}, ‘approved’)">Onayla</button>
           <button class="btn small danger-soft" type="button" onclick="event.stopPropagation(); openBulkPreviewModal(${originalIndex}, 'errors', 'errors')">Hata Detayı</button>
         </div>
       </article>
