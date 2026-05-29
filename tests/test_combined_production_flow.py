@@ -217,6 +217,22 @@ def test_name_formatting_uses_turkish_corrections() -> None:
     assert combined_production_api.format_name_for_cutting("SEDEF SEFER") == "Sedef Sefer"
     assert combined_production_api.format_name_for_cutting("ali ayse fatma leyla mucahit") == "Ali Ayşe Fatma Leyla Mücahit"
     assert combined_production_api.format_name_for_cutting("irem oguz ilker") == "İrem Oğuz İlker"
+    # Turkish diacritic round-trip: already-correct Turkish chars must survive lowercasing.
+    assert combined_production_api.format_name_for_cutting("İlknur") == "İlknur"
+    assert combined_production_api.format_name_for_cutting("ilknur") == "İlknur"
+    assert combined_production_api.format_name_for_cutting("ILKNUR") == "İlknur"
+    assert combined_production_api.format_name_for_cutting("Şeyma") == "Şeyma"
+    assert combined_production_api.format_name_for_cutting("ŞEYMA") == "Şeyma"
+    assert combined_production_api.format_name_for_cutting("Çağla") == "Çağla"
+    assert combined_production_api.format_name_for_cutting("ÇAĞLA") == "Çağla"
+    assert combined_production_api.format_name_for_cutting("Oğuz") == "Oğuz"
+    assert combined_production_api.format_name_for_cutting("OĞUZ") == "Oğuz"
+    assert combined_production_api.format_name_for_cutting("Gül") == "Gül"
+    assert combined_production_api.format_name_for_cutting("GÜL") == "Gül"
+    assert combined_production_api.format_name_for_cutting("ŞÜKRÜ") == "Şükrü"
+    # & separator preserved in paired names.
+    assert combined_production_api.format_name_for_cutting("Ayşe & Mehmet") == "Ayşe & Mehmet"
+    assert combined_production_api.format_name_for_cutting("ayse & mehmet") == "Ayşe & Mehmet"
 
 
 def test_joined_names_mode_splits_space_separated_names_without_merging(tmp_path: Path) -> None:

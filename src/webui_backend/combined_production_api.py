@@ -1905,11 +1905,48 @@ def format_name_for_cutting(value: object) -> str:
     words = re.split(r"\s+", str(value or "").strip())
     fixed: list[str] = []
     for word in words:
+        # Preserve the paired-name separator (&) as-is.
+        if word == "&":
+            fixed.append("&")
+            continue
         token = _normalize_token(word)
         if not token:
             continue
-        fixed.append(TURKISH_NAME_FIXES.get(token, _turkish_title_token(token)))
+        if token in TURKISH_NAME_FIXES:
+            fixed.append(TURKISH_NAME_FIXES[token])
+        else:
+            # If the original word already contains Turkish diacritics, title-case
+            # the original directly so \u015f/\u011f/\u00fc/\u00f6/\u00e7 are preserved.  Otherwise fall
+            # back to _turkish_title_token which handles i\u2192\u0130 on the ASCII token.
+            if any(ch in "\u015f\u015e\u011f\u011e\u00fc\u00dc\u00f6\u00d6\u00e7\u00c7\u0131\u0130" for ch in word):
+                fixed.append(_turkish_title_word(word))
+            else:
+                fixed.append(_turkish_title_token(token))
     return " ".join(fixed)
+
+
+def _turkish_title_word(word: str) -> str:
+    """Title-case a word that already contains Turkish diacritics."""
+    if not word:
+        return ""
+    first = word[0]
+    if first == "i":
+        first = "\u0130"          # i \u2192 \u0130
+    elif first == "\u0131":
+        first = "I"               # \u0131 \u2192 I (dotless)
+    else:
+        first = first.upper()
+    # .lower() handles \u015f/\u011f/\u00fc/\u00f6/\u00e7 correctly; fix I\u2192\u0131 and \u0130\u2192i in rest.
+    rest = ""
+    for ch in word[1:]:
+        if ch == "\u0130":        # \u0130 in the middle \u2192 i
+            rest += "i"
+        elif ch == "I":
+            # Treat capital I as dotless-I (\u0131) when word has Turkish diacritics.
+            rest += "\u0131"
+        else:
+            rest += ch.lower()
+    return first + rest
 
 
 def _turkish_title_token(token: str) -> str:
