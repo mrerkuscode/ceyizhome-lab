@@ -16218,11 +16218,36 @@ function nameCutZoom(delta = 0) {
   const next = clampNumber(Number(nameCutLayoutConfig.preview_zoom || 100) + Number(delta || 0), 50, 320);
   nameCutLayoutConfig.preview_zoom = next;
   renderLaserLayoutPreview(currentNameCutLayout());
+  const _ro = byId('nameCutScaleReadout');
+  if (_ro) _ro.textContent = '%' + Math.round(next);
+  const _olcek = next / 100;
+  const _ncSt = document.querySelector('#nameCutStudio .nc-stage');
+  if (_ncSt) _ncSt.style.backgroundSize = (24*_olcek).toFixed(1)+'px '+(24*_olcek).toFixed(1)+'px';
 }
 
 function nameCutFitToScreen() {
-  nameCutLayoutConfig.preview_zoom = 100;
-  renderLaserLayoutPreview(currentNameCutLayout());
+  const _stage = document.querySelector('#nameCutStudio .nc-stage');
+  const _board = document.querySelector('#nameCutStudioLayoutPreview');
+  if (_stage && _board) {
+    const _avW = _stage.clientWidth - 12;
+    const _avH = _stage.clientHeight - 12;
+    const _bW = parseInt(_board.style.width) || 720;
+    const _bH = parseInt(_board.style.height) || 480;
+    setTimeout(() => {
+      const _scale = Math.min(_avW / _bW, _avH / _bH) * 0.98;
+      const _newZ  = clampNumber(Math.round(100 * _scale), 10, 500);
+      if (Math.abs(_newZ - 100) > 3) {
+        nameCutLayoutConfig.preview_zoom = _newZ;
+        renderLaserLayoutPreview(currentNameCutLayout());
+      }
+      const _ncOlcek = nameCutLayoutConfig.preview_zoom / 100;
+      const _ncSt = document.querySelector('#nameCutStudio .nc-stage');
+      if (_ncSt) _ncSt.style.backgroundSize = (24*_ncOlcek).toFixed(1)+'px '+(24*_ncOlcek).toFixed(1)+'px';
+    }, 80);
+  } else {
+    nameCutLayoutConfig.preview_zoom = 100;
+    renderLaserLayoutPreview(currentNameCutLayout());
+  }
 }
 
 function nameCutSetActualSize() {
