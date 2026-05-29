@@ -16224,10 +16224,29 @@ function nameCutFitToScreen() {
     const _avW = _stage.clientWidth  - _pad * 2;
     const _avH = _stage.clientHeight - _pad * 2;
     if (_avW <= 60 || _avH <= 60) return;
-    const _bW = _board.offsetWidth;
-    const _bH = _board.offsetHeight;
+    // Yerleşen isimlerin birleşik sınır kutusu (içeriğe sığdır — isimler büyük görünür)
+    const _names = _board.querySelectorAll('.rdworks-name-outline-svg');
+    let _bW, _bH;
+    if (_names.length > 0) {
+      let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
+      _names.forEach(_el => {
+        const _r = _el.getBoundingClientRect();
+        if (_r.width === 0 && _r.height === 0) return;
+        if (_r.left   < minL) minL = _r.left;
+        if (_r.top    < minT) minT = _r.top;
+        if (_r.right  > maxR) maxR = _r.right;
+        if (_r.bottom > maxB) maxB = _r.bottom;
+      });
+      _bW = maxR - minL;
+      _bH = maxB - minT;
+      if (!isFinite(_bW) || !isFinite(_bH) || _bW <= 0 || _bH <= 0) {
+        _bW = _board.offsetWidth;  _bH = _board.offsetHeight;   // güvenli geri dönüş
+      }
+    } else {
+      _bW = _board.offsetWidth;  _bH = _board.offsetHeight;     // hiç isim yoksa eski davranış
+    }
     if (_bW <= 0 || _bH <= 0) return;
-    const _scale = Math.min(_avW / _bW, _avH / _bH) * 0.98;
+    const _scale = Math.min(_avW / _bW, _avH / _bH) * 0.9;
     const _newZ  = clampNumber(Math.round(100 * _scale), 10, 500);
     if (Math.abs(_newZ - 100) > 3) {
       nameCutLayoutConfig.preview_zoom = _newZ;
@@ -16236,6 +16255,14 @@ function nameCutFitToScreen() {
     const _ncOlcek = nameCutLayoutConfig.preview_zoom / 100;
     const _ncStage = document.querySelector('#nameCutStudio .nc-stage');
     if (_ncStage) _ncStage.style.backgroundSize = (24*_ncOlcek).toFixed(1)+'px '+(24*_ncOlcek).toFixed(1)+'px';
+    // Görünümü yerleşen isimlere ortala
+    requestAnimationFrame(() => {
+      const _st = document.querySelector('#nameCutStudio .nc-stage');
+      if (_st) {
+        _st.scrollLeft = Math.max(0, (_st.scrollWidth  - _st.clientWidth)  / 2);
+        _st.scrollTop  = Math.max(0, (_st.scrollHeight - _st.clientHeight) / 2);
+      }
+    });
   }, 80);
 }
 
