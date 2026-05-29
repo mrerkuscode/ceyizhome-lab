@@ -9492,6 +9492,28 @@ function textFitPreflightHtml() {
   `;
 }
 
+function showTextOverflowWarning(fieldName, message) {
+  let warningEl = byId('canvas-overflow-warning');
+  if (!warningEl) {
+    warningEl = document.createElement('div');
+    warningEl.id = 'canvas-overflow-warning';
+    warningEl.className = 'canvas-warning hidden';
+    document.querySelector('#manualPreview')?.appendChild(warningEl);
+  }
+  warningEl.innerHTML = `&#9651; ${esc(message)}`;
+  warningEl.classList.remove('hidden');
+  const pdfBtn = document.querySelector('.btn-export-pdf');
+  if (pdfBtn) {
+    pdfBtn.classList.add('btn-warning-mode');
+    pdfBtn.title = message + ' — Yine de üretmek için tıklayın';
+  }
+}
+
+function clearTextOverflowWarning() {
+  byId('canvas-overflow-warning')?.classList.add('hidden');
+  document.querySelector('.btn-export-pdf')?.classList.remove('btn-warning-mode');
+}
+
 function updateSelectedTextFitStatus() {
   const panel = byId("manualTextFitStatus");
   if (!panel) return;
@@ -9499,6 +9521,7 @@ function updateSelectedTextFitStatus() {
   if (!result) {
     panel.hidden = true;
     panel.innerHTML = "";
+    clearTextOverflowWarning();
     return;
   }
   panel.hidden = false;
@@ -9510,6 +9533,11 @@ function updateSelectedTextFitStatus() {
     ? "Öneri: Önce Fontu Küçült, çok uzunsa Alanı Genişlet veya Satıra Böl."
     : "Karar: Yazı kutuya sığıyor; çıktı öncesi ek işlem gerekmiyor.";
   panel.innerHTML = `<b>Yazı Sığdırma Durumu</b><span>${esc(result.message)}</span><small>${esc(result.detail)}</small><small class="text-fit-decision">${esc(decision)}</small>${actions}`;
+  if (result.status === "warn") {
+    showTextOverflowWarning(result.label, result.message);
+  } else {
+    clearTextOverflowWarning();
+  }
 }
 
 function scheduleSelectedTextFitStatus() {
