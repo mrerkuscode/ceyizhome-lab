@@ -16215,53 +16215,62 @@ function nameCutZoom(delta = 0) {
 function nameCutFitToScreen() {
   nameCutLayoutConfig.preview_zoom = 100;
   renderLaserLayoutPreview(currentNameCutLayout());
-  // Render sonrası gerçek board boyutunu ölç ve stage'e sığdıracak zoom'u hesapla
   setTimeout(() => {
     const _stage = document.querySelector('#nameCutStudio .nc-stage');
     const _board = (_stage && (_stage.querySelector('[data-namecut-board]') || byId('nameCutStudioLayoutPreview')));
     if (!_stage || !_board) return;
-    const _pad = 18;
+    const _pad = 24;
     const _avW = _stage.clientWidth  - _pad * 2;
     const _avH = _stage.clientHeight - _pad * 2;
     if (_avW <= 60 || _avH <= 60) return;
-    // Yerleşen isimlerin birleşik sınır kutusu (içeriğe sığdır — isimler büyük görünür)
-    const _names = _board.querySelectorAll('.rdworks-name-outline-svg');
-    let _bW, _bH;
-    if (_names.length > 0) {
-      let minL = Infinity, minT = Infinity, maxR = -Infinity, maxB = -Infinity;
-      _names.forEach(_el => {
-        const _r = _el.getBoundingClientRect();
-        if (_r.width === 0 && _r.height === 0) return;
-        if (_r.left   < minL) minL = _r.left;
-        if (_r.top    < minT) minT = _r.top;
-        if (_r.right  > maxR) maxR = _r.right;
-        if (_r.bottom > maxB) maxB = _r.bottom;
+
+    // İçerik (yerleşen isimler) sınır kutusunu mm cinsinden hesapla — DOM ölçümünden güvenilir
+    const _layout = currentNameCutLayout();
+    const _items  = (_layout && _layout.items) || [];
+    const _cfg    = (_layout && _layout.config) || {};
+    const _cfgW   = Number(_cfg.width_mm  || nameCutLayoutConfig.width_mm  || 800);
+    const _cfgH   = Number(_cfg.height_mm || nameCutLayoutConfig.height_mm || 600);
+    const _boardPxW = _board.offsetWidth;   // %100 zoom'da board genişliği (px)
+    const _boardPxH = _board.offsetHeight;
+
+    let _bW, _bH, _cxMm = _cfgW / 2, _cyMm = _cfgH / 2;
+    if (_items.length > 0 && _boardPxW > 0 && _boardPxH > 0) {
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      _items.forEach(it => {
+        const x = Number(it.x_mm || 0), y = Number(it.y_mm || 0);
+        const w = Number(it.width_mm || 0), h = Number(it.height_mm || 0);
+        if (x < minX) minX = x;
+        if (y < minY) minY = y;
+        if (x + w > maxX) maxX = x + w;
+        if (y + h > maxY) maxY = y + h;
       });
-      _bW = maxR - minL;
-      _bH = maxB - minT;
-      if (!isFinite(_bW) || !isFinite(_bH) || _bW <= 0 || _bH <= 0) {
-        _bW = _board.offsetWidth;  _bH = _board.offsetHeight;   // güvenli geri dönüş
-      }
-    } else {
-      _bW = _board.offsetWidth;  _bH = _board.offsetHeight;     // hiç isim yoksa eski davranış
-    }
+      const _cWmm = maxX - minX, _cHmm = maxY - minY;
+      if (isFinite(_cWmm) && isFinite(_cHmm) && _cWmm > 0 && _cHmm > 0) {
+        _bW = (_cWmm / _cfgW) * _boardPxW;   // içerik px @100%
+        _bH = (_cHmm / _cfgH) * _boardPxH;
+        _cxMm = (minX + maxX) / 2;           // içerik merkezi (mm)
+        _cyMm = (minY + maxY) / 2;
+      } else { _bW = _boardPxW; _bH = _boardPxH; }
+    } else { _bW = _boardPxW; _bH = _boardPxH; }
     if (_bW <= 0 || _bH <= 0) return;
+
     const _scale = Math.min(_avW / _bW, _avH / _bH) * 0.9;
-    const _newZ  = clampNumber(Math.round(100 * _scale), 10, 500);
+    const _newZ  = clampNumber(Math.round(100 * _scale), 10, 800);  // küçük içeriği büyütebilmek için 800'e kadar
     if (Math.abs(_newZ - 100) > 3) {
       nameCutLayoutConfig.preview_zoom = _newZ;
       renderLaserLayoutPreview(currentNameCutLayout());
     }
     const _ncOlcek = nameCutLayoutConfig.preview_zoom / 100;
-    const _ncStage = document.querySelector('#nameCutStudio .nc-stage');
-    if (_ncStage) _ncStage.style.backgroundSize = (24*_ncOlcek).toFixed(1)+'px '+(24*_ncOlcek).toFixed(1)+'px';
-    // Görünümü yerleşen isimlere ortala
+    _stage.style.backgroundSize = (24*_ncOlcek).toFixed(1)+'px '+(24*_ncOlcek).toFixed(1)+'px';
+
+    // Görünümü içerik merkezine ortala (yeni zoom'daki board px'ine göre)
     requestAnimationFrame(() => {
       const _st = document.querySelector('#nameCutStudio .nc-stage');
-      if (_st) {
-        _st.scrollLeft = Math.max(0, (_st.scrollWidth  - _st.clientWidth)  / 2);
-        _st.scrollTop  = Math.max(0, (_st.scrollHeight - _st.clientHeight) / 2);
-      }
+      const _bd = _st && (_st.querySelector('[data-namecut-board]') || byId('nameCutStudioLayoutPreview'));
+      if (!_st || !_bd) return;
+      const _pxW = _bd.offsetWidth, _pxH = _bd.offsetHeight;
+      _st.scrollLeft = Math.max(0, (_cxMm / _cfgW) * _pxW - _st.clientWidth  / 2);
+      _st.scrollTop  = Math.max(0, (_cyMm / _cfgH) * _pxH - _st.clientHeight / 2);
     });
   }, 80);
 }
