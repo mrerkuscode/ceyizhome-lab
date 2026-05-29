@@ -5753,3 +5753,12 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .nc-shell.show-parts #nameCutBottomDetails{display:block}
 .studio-body,.nc-body{grid-template-rows:minmax(0,1fr)}
 .studio-canvas-panel,.nc-board{min-height:0}
+
+/* === ETİKET STUDIO SHELL FIX — eski corel/manual 3-sütun ızgarayı ez === */
+#label .studio-shell.manual-studio,
+#label .studio-shell.corel-studio,
+#label .studio-shell{
+  display:flex !important;
+  flex-direction:column !important;
+  grid-template-columns:none !important;
+}
