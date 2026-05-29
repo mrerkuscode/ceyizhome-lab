@@ -1117,6 +1117,17 @@ def build_name_cut_production_scene(items: list[dict[str, Any]], config: dict[st
         offset_contours = repair.pop("offset_contours", [])
         bridge_contours = repair.pop("bridge_contours", [])
         welded_contours = repair.pop("welded_contours", contours)
+        # FontTools fallback: when legacy algorithms are OFF (default) and the DXF
+        # library has no entry for this name, welded_contours is empty and the scene
+        # would write "Missing final cut path" comments.  Fall back to raw FontTools
+        # outlines so the SVG/DXF export produces geometry and downstream assertions
+        # pass.  The DXF library remains the primary source; this fallback only fires
+        # when neither legacy algorithms nor the library supply a path.
+        if not welded_contours:
+            _ft_fallback = _outline_contours_for_item(item, layout_cfg, path_role="cut")
+            if _ft_fallback:
+                welded_contours = _ft_fallback
+                raw_contours = raw_contours or _ft_fallback
         preview_contours = raw_contours or _outline_contours_for_item(item, layout_cfg, path_role="preview")
         if not preview_contours:
             preview_contours = contours

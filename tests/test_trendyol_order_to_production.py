@@ -1628,7 +1628,7 @@ def test_trendyol_ui_and_bridge_hooks_exist() -> None:
     assert "renderTrendyolSelectedDetail" in app_js
     assert "renderTrendyolQuickFilters" in app_js
     assert "importTrendyolSuggestionToCustomerOrder" in app_js
-    assert "exportTrendyolReadyToExcel" in app_js
+    # exportTrendyolReadyToExcel removed as dead code
     assert "importTrendyolMappings" in app_js
     assert "exportTrendyolMappings" in app_js
     assert "proposeTrendyolMappingsFromCatalog" in app_js

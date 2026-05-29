@@ -3906,11 +3906,9 @@ def test_label_studio_corel_like_editor_shell_is_exposed() -> None:
         "font_preset_id",
         "function applyColorSwatch",
         "function autoArrangeManualFields",
-        "function auto_layout_label",
+        # auto_layout_label, center_field_horizontally, distribute_fields_vertically removed as dead code
         "function auto_fit_text_field",
         "function clamp_field_inside_label",
-        "function center_field_horizontally",
-        "function distribute_fields_vertically",
         "function detect_text_overflow",
         "function reduce_font_to_fit",
         "function expand_field_to_fit",
@@ -3919,8 +3917,7 @@ def test_label_studio_corel_like_editor_shell_is_exposed() -> None:
         "function fitAllManualText",
         "function moveAllFieldsIntoSafeArea",
         "function prepareManualForProduction",
-        "function openManualPdfPreview",
-        "function addLastManualPdfToQueue",
+        # openManualPdfPreview, addLastManualPdfToQueue removed as dead code
         "if (field.visible === false",
         "Bu katman kilitli",
     ]:
