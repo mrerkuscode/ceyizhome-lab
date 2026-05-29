@@ -10997,6 +10997,55 @@ function setupManualLiveBindings() {
   }
 }
 
+// ── Etiket Otomatik Yerleşim: API katmanı ──────────────────────────────────────
+// labelAutoLayout(box, fields, opts): referans motor API'si.
+// box  = { width, height } (mm cinsinden etiket boyutu)
+// fields = [{ column, text, role }]
+// opts = { zone, values } (isteğe bağlı)
+// Dönen değer: suggestLearningLayout(...) çıktısı
+function labelAutoLayout(box, fields, opts = {}) {
+  if (!selectedLabelModel) return null;
+  const labelSize = box || effectiveManualSize(selectedLabelModel);
+  const values = opts.values || getCurrentFieldValues();
+  const modelFields = fields || (selectedLabelModel.fields_summary || []);
+  return suggestLearningLayout({ model: selectedLabelModel, label_size: labelSize, values, fields: modelFields });
+}
+
+// Çift isim (Ayşe & Mehmet) için tek satır vs iki satır kıyaslaması.
+// Her iki düzeni dener, daha büyük font boyutunu veren layout'u döner.
+function labelAutoLayoutChooseDualNameLines(nameText) {
+  if (!selectedLabelModel || !String(nameText || "").includes(" & ")) return null;
+  const size = effectiveManualSize(selectedLabelModel);
+  const [partA, partB] = String(nameText).split(" & ", 2);
+  const singleLine = suggestLearningLayout({ model: selectedLabelModel, label_size: size, values: { ...getCurrentFieldValues(), label_text: nameText } });
+  const twoLine = suggestLearningLayout({ model: selectedLabelModel, label_size: size, values: { ...getCurrentFieldValues(), label_text: `${partA}\n& ${partB}` } });
+  const singleSize = Number((singleLine.fields || []).find(f => f.excel_column === "label_text")?.font_size || 0);
+  const twoLineSize = Number((twoLine.fields || []).find(f => f.excel_column === "label_text")?.font_size || 0);
+  return twoLineSize > singleSize * 1.08 ? { layout: twoLine, chosen: "two-line", gain: twoLineSize - singleSize } : { layout: singleLine, chosen: "single-line", gain: 0 };
+}
+
+// Model ilk açıldığında alanlar konumlanmamışsa (tümü 0,0'da) sessizce yerleştir.
+function _applyAutoLayoutIfUnpositioned() {
+  if (!selectedLabelModel) return;
+  const fields = (selectedLabelModel.fields_summary || []).filter(f => isManualRenderableColumn(f.excel_column));
+  if (!fields.length) return;
+  const allDefault = fields.every(f => {
+    const x = parseFloat(f.x_mm || "0"); const y = parseFloat(f.y_mm || "0");
+    return x < 0.5 && y < 0.5;
+  });
+  if (!allDefault) return;
+  // Sessiz uygulama: confirm diyaloğu olmadan
+  const size = effectiveManualSize(selectedLabelModel);
+  const suggestion = suggestLearningLayout({ fields: selectedLabelModel.fields_summary || [], label_size: size, values: getCurrentFieldValues() });
+  commitSmartFields(suggestion.fields, "İlk açılışta otomatik yerleşim uygulandı.");
+  recordLabelAutoLayoutAudit("label_auto_layout_on_open", {
+    status: "applied",
+    severity: "info",
+    message: "Alan konumları sıfır — model ilk açılışta akıllı yerleşim uygulandı.",
+    metadata: { model_id: selectedLabelModel.path || "" }
+  });
+}
+
 function showManualPreviewPlaceholder() {
   const template = byId("manualTemplate");
   const templateValue = template?.value || "";
@@ -11052,6 +11101,8 @@ function showManualPreviewPlaceholder() {
   scrollSelectedFieldIntoCanvasView();
   renderStudioOrderPanels();
   updateManualOutputControlPanel();
+  // İlk açılışta konumlanmamış alanlar varsa otomatik yerleşim uygula.
+  setTimeout(_applyAutoLayoutIfUnpositioned, 120);
 }
 
 document.addEventListener("contextmenu", event => {
