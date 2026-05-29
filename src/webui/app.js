@@ -6660,19 +6660,67 @@ function selectField(index) {
   }
 }
 
+const _corelTabToPanel = { layers: "fields", text: "style", smart: "layout", output: "output", color: "color" };
+
 function selectCorelDockTab(tab, options = {}) {
   const allowed = ["layers", "text", "color", "smart", "output"];
   const target = allowed.includes(tab) ? tab : "layers";
   currentCorelDockTab = target;
   const suffix = target.charAt(0).toUpperCase() + target.slice(1);
+  const inspector = byId("corelInspector");
   allowed.forEach(item => {
     const itemSuffix = item.charAt(0).toUpperCase() + item.slice(1);
     byId(`corelDockTab${itemSuffix}`)?.classList.toggle("active", item === target);
-    byId(`corelDock${itemSuffix}`)?.classList.toggle("active", item === target);
+    const panelName = _corelTabToPanel[item] || item;
+    const panel = inspector?.querySelector(`[data-panel="${panelName}"]`)
+      || byId(`corelDockBody${itemSuffix}`);
+    if (panel) panel.hidden = (item !== target);
   });
   if (!options.silent) scheduleCorelEditorStateSync();
-  const selectedPanel = byId(`corelDock${suffix}`);
+  const selPanelName = _corelTabToPanel[target] || target;
+  const selectedPanel = inspector?.querySelector(`[data-panel="${selPanelName}"]`)
+    || byId(`corelDockBody${suffix}`);
   if (selectedPanel && !options.silent) selectedPanel.scrollTop = 0;
+}
+
+function initStudioInspectorTabs() {
+  const tabsContainer = document.querySelector('.studio-inspector .inspector-tabs');
+  if (!tabsContainer) return;
+  const tabs = tabsContainer.querySelectorAll('button[data-tab]');
+  const panels = document.querySelectorAll('.studio-inspector .inspector-panel[data-panel]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabName = tab.dataset.tab;
+      tabs.forEach(t => t.classList.toggle('active', t === tab));
+      panels.forEach(p => { p.hidden = p.dataset.panel !== tabName; });
+    });
+  });
+}
+
+function applyStudioFontStyle() {
+  const field = selectedManualField?.();
+  if (!field) return;
+  const family = byId('studio-font-family')?.value;
+  const size = parseFloat(byId('studio-font-size')?.value) || field.font_size;
+  const color = byId('studio-font-color')?.value;
+  if (family) field.font_family = family;
+  if (size) field.font_size = String(size);
+  if (color) field.font_color = color;
+  if (typeof renderManualPreviewAsync === 'function') renderManualPreviewAsync();
+}
+
+function toggleStudioFontStyle(style) {
+  const field = selectedManualField?.();
+  if (!field) return;
+  if (style === 'bold') field.font_weight = field.font_weight === 'bold' ? 'normal' : 'bold';
+  if (style === 'italic') field.font_style = field.font_style === 'italic' ? 'normal' : 'italic';
+  if (style === 'underline') field.text_decoration = field.text_decoration === 'underline' ? 'none' : 'underline';
+  document.querySelector(`.font-style-buttons [data-style="${style}"]`)?.classList.toggle('active',
+    style === 'bold' ? field.font_weight === 'bold' :
+    style === 'italic' ? field.font_style === 'italic' :
+    field.text_decoration === 'underline'
+  );
+  if (typeof renderManualPreviewAsync === 'function') renderManualPreviewAsync();
 }
 
 function markSelectedFieldBoxes(index) {
@@ -21533,6 +21581,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLabelStudioScrollContainment();
   setupStudioCombos();
   applyStudioEditorMode();
+  initStudioInspectorTabs();
   document.addEventListener("click", event => {
     if (!event.target.closest?.(".studio-combo")) closeStudioCombos();
   });

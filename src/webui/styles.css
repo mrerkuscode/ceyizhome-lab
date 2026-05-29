@@ -5762,3 +5762,15 @@ input[type="checkbox"] { accent-color: var(--blue); }
   flex-direction:column !important;
   grid-template-columns:none !important;
 }
+
+/* === Fix 1: Inspector tabs active switching === */
+.studio-inspector .inspector-tabs{display:flex;border-bottom:1px solid var(--line,#e5e5e5)}
+.studio-inspector .inspector-tabs button{flex:1;padding:9px 3px;font-size:11px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text-secondary,#666);cursor:pointer;transition:color .15s,border-color .15s}
+.studio-inspector .inspector-tabs button.active{border-bottom-color:var(--primary,#4F46E5);color:var(--primary,#4F46E5);font-weight:500}
+.studio-inspector .inspector-tabs button:hover:not(.active){color:var(--text,#222)}
+.inspector-panel[hidden]{display:none}
+.inspector-panel h4{margin:0 0 10px;font-size:13px;font-weight:500}
+.inspector-panel label{display:block;font-size:11px;color:var(--text-secondary,#666);margin:10px 0 4px}
+.font-style-buttons{display:flex;gap:6px;margin:6px 0}
+.font-style-buttons button{width:32px;height:32px;border:1px solid var(--line,#e5e5e5);border-radius:4px;background:transparent;cursor:pointer;font-size:13px}
+.font-style-buttons button.active{background:var(--primary,#4F46E5);color:#fff;border-color:var(--primary,#4F46E5)}
