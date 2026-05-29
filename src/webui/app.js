@@ -22096,3 +22096,56 @@ function toggleNameCutFullBoard(btn) {
     if (tab) tyActive = (tab.dataset.trendyolTab === "nameverify");
   });
 })();
+
+
+// --- showToast: global bildirim yardimcisi (eksik tanim hatasi giderildi) ---
+// Cesitli butonlar (Isim Kesim dahil) showToast(message, type) cagiriyordu ama
+// fonksiyon hicbir yerde tanimli degildi -> "showToast is not defined" ReferenceError.
+// Mevcut label-studio-toast host/stil yapisini ekran-bagimsiz olarak yeniden kullanir.
+(function () {
+  if (typeof window.showToast === "function") return;
+  window.showToast = function showToast(message, type, timeout) {
+    try {
+      var msg = message == null ? "" : String(message);
+      var kind = type || "info";
+      var ms = typeof timeout === "number" ? timeout : 3000;
+      var host = document.getElementById("appToastHost");
+      if (!host) {
+        host = document.createElement("div");
+        host.id = "appToastHost";
+        host.className = "label-studio-toast-host";
+        host.setAttribute("aria-live", "polite");
+        host.style.position = "fixed";
+        host.style.right = "16px";
+        host.style.bottom = "16px";
+        host.style.zIndex = "99999";
+        host.style.display = "flex";
+        host.style.flexDirection = "column";
+        host.style.gap = "8px";
+        host.style.pointerEvents = "none";
+        document.body.appendChild(host);
+      }
+      var toast = document.createElement("div");
+      toast.className = "label-studio-toast " + kind;
+      toast.textContent = msg;
+      toast.style.background = "#222";
+      toast.style.color = "#fff";
+      toast.style.padding = "10px 14px";
+      toast.style.borderRadius = "8px";
+      toast.style.fontSize = "13px";
+      toast.style.boxShadow = "0 4px 14px rgba(0,0,0,.25)";
+      toast.style.maxWidth = "320px";
+      if (kind === "success") toast.style.background = "#1b7f4b";
+      else if (kind === "error" || kind === "danger") toast.style.background = "#b3261e";
+      else if (kind === "warning" || kind === "warn") toast.style.background = "#9a6700";
+      host.appendChild(toast);
+      window.setTimeout(function () {
+        toast.style.transition = "opacity .25s ease";
+        toast.style.opacity = "0";
+        window.setTimeout(function () { toast.remove(); }, 300);
+      }, ms);
+    } catch (e) {
+      try { console.log("[toast]", type || "info", message); } catch (_) {}
+    }
+  };
+})();
