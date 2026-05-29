@@ -584,6 +584,7 @@ input[type=range]{accent-color:var(--accent)}
 .nc-footer{display:flex;flex-wrap:wrap;gap:18px;align-items:center;padding:8px 16px;border-top:1px solid var(--line);background:var(--surface-2);font-size:12px;color:var(--text-2)}.nc-footer .safety{margin-left:auto;color:var(--ok);font-weight:600}
 @media (max-width:1100px){.studio-body{grid-template-columns:48px 1fr}.studio-inspector{display:none}.nc-body{grid-template-columns:44px 1fr}.nc-source,.nc-settings{display:none}}
 
+
 /* ===================================================================== */
 /* === TOPLU ÜRETİM STUDIO (bulkLabel) — sıcak stil ==================== */
 /* ===================================================================== */
@@ -5424,7 +5425,6 @@ body.label-studio-active #manualPreview .preview-label.editor-live {
 .field-box:not(.selected) .resize-handle { opacity: 0; pointer-events: none; }
 
 /* label/corel studio */
-#label .corel-studio { display: grid; grid-template-columns: 76px minmax(0, 1fr) minmax(340px, 390px); }
 .corel-property-bar { display: flex; align-items: center; gap: var(--s-2); padding: 4px 8px; }
 .corel-left-toolbar { display: flex; flex-direction: column; gap: 4px; padding: 4px; }
 .corel-inspector { display: flex; flex-direction: column; gap: var(--s-3); }
@@ -5442,7 +5442,6 @@ body.label-studio-active #manualPreview .preview-label.editor-live {
 #label .resize-handle { position: absolute; }
 
 /* manual label */
-#label .manual-studio { display: grid; grid-template-columns: 76px minmax(0, 1fr) minmax(340px, 390px); }
 .manual-studio .model-picker { display: none; }
 .manual-model-dropdown-list { display: none; position: absolute; z-index: 100; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-md); }
 .label-size-panel { display: flex; gap: var(--s-2); align-items: center; }
@@ -5631,7 +5630,6 @@ body:not(.label-technical-mode) #selectedModelTechnicalWrap { display: none; }
 
 /* Cross-page UI density polish */
 #labelModels .model-preview { height: clamp(145px, 14vw, 178px); object-fit: contain; }
-#label .manual-studio { display: grid; grid-template-columns: 76px minmax(0, 1fr) clamp(330px, 25vw, 390px); }
 #settings .settings-layout .card { padding: var(--s-4); }
 
 /* Premium production UI polish */
