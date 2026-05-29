@@ -22211,3 +22211,77 @@ function toggleNameCutFullBoard(btn) {
   } catch (e) {}
   window.nameCutEnhanceBoard = enhanceBoard;
 })();
+
+/* ============================================================
+   Eksik output aksiyon handler'lari (B2.4)
+   index.html'de cagrilan ama tanimsiz olan 4 fonksiyon:
+   openSelectedOutput / previewSelectedOutput / addSelectedOutputToQueue
+   / openCurrentPdfForPrint. Mevcut fonksiyonlara guvenli delege eder.
+   ============================================================ */
+(function () {
+  "use strict";
+
+  function selPath() {
+    try { return (typeof selectedLabelOutputPath === "string") ? selectedLabelOutputPath : ""; }
+    catch (e) { return ""; }
+  }
+  function notify(msg, kind) {
+    try { if (typeof showToast === "function") showToast(msg, kind || "info"); else alert(msg); }
+    catch (e) { try { alert(msg); } catch (_) {} }
+  }
+
+  window.openSelectedOutput = function () {
+    var p = selPath();
+    if (!p) { notify("Once listeden bir cikti secin.", "warn"); return; }
+    try { if (typeof openPdfPreview === "function") { openPdfPreview(p); return; } } catch (e) {}
+    notify("PDF onizleme bu oturumda hazir degil.", "warn");
+  };
+
+  window.previewSelectedOutput = function () {
+    var p = selPath();
+    if (!p) { notify("Once listeden bir cikti secin.", "warn"); return; }
+    try {
+      if (typeof selectManualPngPreview === "function") {
+        var png = String(p).replace(/\.pdf$/i, ".png");
+        selectManualPngPreview(png);
+        return;
+      }
+    } catch (e) {}
+    try { if (typeof openPdfPreview === "function") { openPdfPreview(p); return; } } catch (e2) {}
+    notify("Onizleme bu oturumda hazir degil.", "warn");
+  };
+
+  window.addSelectedOutputToQueue = function () {
+    var p = selPath();
+    if (!p) { notify("Once listeden bir cikti secin.", "warn"); return; }
+    try { if (typeof addPdfToQueue === "function") { addPdfToQueue(p); return; } } catch (e) {}
+    notify("Siraya ekleme bu oturumda hazir degil.", "warn");
+  };
+
+  window.openCurrentPdfForPrint = function () {
+    var p = "";
+    try { p = (window.__lastPdfPreviewPath || ""); } catch (e) {}
+    if (!p) {
+      try {
+        if (pdfPreviewState && pdfPreviewState.payload) {
+          p = pdfPreviewState.payload.relative_path || pdfPreviewState.payload.path || pdfPreviewState.payload.pdf_path || "";
+        }
+      } catch (e2) {}
+    }
+    if (!p) p = selPath();
+    if (!p) { notify("Yazdirilacak PDF bulunamadi.", "warn"); return; }
+    try { if (typeof requestPdfPrint === "function") { requestPdfPrint(p); return; } } catch (e3) {}
+    try { if (typeof openPdfPreview === "function") { openPdfPreview(p); return; } } catch (e4) {}
+    notify("Yazdirma bu oturumda hazir degil.", "warn");
+  };
+
+  try {
+    if (typeof window.openPdfPreview === "function") {
+      var __origOpen = window.openPdfPreview;
+      window.openPdfPreview = function (relativePath) {
+        try { window.__lastPdfPreviewPath = relativePath || window.__lastPdfPreviewPath; } catch (e) {}
+        return __origOpen.apply(this, arguments);
+      };
+    }
+  } catch (e) {}
+})();
