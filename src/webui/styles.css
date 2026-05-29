@@ -5742,3 +5742,14 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .nc-chip.ok{color:var(--ok);background:#eaf4ee;border-color:#cfe6d8}
 .nc-footer{flex:none;display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:7px 14px;border-top:1px solid var(--line);background:var(--surface-2);font-size:12px;color:var(--text-2)}
 .nc-footer .safety{margin-left:auto;color:var(--ok);font-weight:600}
+
+/* === STUDIO FINAL OVERRIDES (Etiket Studio + İsim Kesim) === */
+.canvas-stage{background:#ffffff !important;background-image:none !important}
+.nc-stage{background:#ffffff !important;background-image:none !important}
+.artboard{border:0 !important;box-shadow:none !important}
+.nc-artboard{border:0 !important}
+.laser-layout-meta,.rdworks-ruler{display:none !important}
+#nameCutBottomDetails{display:none}
+.nc-shell.show-parts #nameCutBottomDetails{display:block}
+.studio-body,.nc-body{grid-template-rows:minmax(0,1fr)}
+.studio-canvas-panel,.nc-board{min-height:0}
