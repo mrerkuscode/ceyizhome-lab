@@ -90,6 +90,21 @@ def _product_definitions_api():
 
 # ── Public functions called by routes.py ────────────────────────────────────
 
+def _get_trendyol_state(root: Path) -> dict:
+    """Return locally-cached Trendyol data (no live API calls)."""
+    try:
+        ta = _trendyol_api()
+        return {
+            "suggestions": ta.list_suggestions(root),
+            "questions":   ta.list_questions(root),
+            "summary":     ta.summary(root),
+            "settings":    ta.get_settings(root),
+            "mappings":    [],
+        }
+    except Exception:
+        return {"suggestions": [], "questions": [], "summary": {}, "settings": {}, "mappings": []}
+
+
 def get_state() -> dict:
     """Simplified state object covering the fields app.js needs to render."""
     root = _root()
@@ -122,7 +137,7 @@ def get_state() -> dict:
         "laserOutputs": la.list_laser_outputs(root),
         "printQueue": pqa.list_print_queue(root),
         "customerOrders": [],
-        "trendyol": {"status": "BROWSER_MODE"},
+        "trendyol": _get_trendyol_state(root),
         "bulkLabelUsage": {},
         "bulkPreviewSamples": [],
         "bulkColumnMapping": {},

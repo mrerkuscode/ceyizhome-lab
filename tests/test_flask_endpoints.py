@@ -309,7 +309,62 @@ def test_restore_backup(client):
     assert r.is_json
 
 
-# GRUP 8 — Trendyol
+# GRUP 8 — Trendyol (3 new browser-parity routes)
+
+_TA = "webui_backend.trendyol_api"
+_CRED_ERR = {"status": "ERROR", "error": "Credential eksik", "message": "Credential eksik"}
+
+
+def test_test_trendyol_connection_post_returns_200(client):
+    """POST /api/test_trendyol_connection must return HTTP 200, not 405."""
+    with patch(f"{_TA}.test_connection", return_value=_CRED_ERR):
+        r = client.post("/api/test_trendyol_connection", json={})
+    assert r.status_code == 200, f"Beklenen 200 (405 değil), alınan {r.status_code}"
+    assert r.is_json
+    assert r.get_json()["status"] in ("OK", "ERROR")
+
+
+def test_sync_trendyol_recent_orders_post_returns_200(client):
+    """POST /api/sync_trendyol_recent_orders must return HTTP 200, not 405."""
+    with patch(f"{_TA}.sync_recent_orders", return_value=_CRED_ERR):
+        r = client.post("/api/sync_trendyol_recent_orders", json={"days": 7})
+    assert r.status_code == 200, f"Beklenen 200 (405 değil), alınan {r.status_code}"
+    assert r.is_json
+
+
+def test_read_trendyol_questions_post_returns_200(client):
+    """POST /api/read_trendyol_questions must return HTTP 200, not 405."""
+    with patch(f"{_TA}.sync_questions", return_value=_CRED_ERR):
+        r = client.post("/api/read_trendyol_questions", json={})
+    assert r.status_code == 200, f"Beklenen 200 (405 değil), alınan {r.status_code}"
+    assert r.is_json
+
+
+def test_trendyol_new_routes_post_only(client):
+    """3 new Trendyol routes must NOT return 200 on GET (POST-only semantics)."""
+    for path in (
+        "/api/test_trendyol_connection",
+        "/api/sync_trendyol_recent_orders",
+        "/api/read_trendyol_questions",
+    ):
+        r = client.get(path)
+        # Flask catch-all serves static files → 404; pure POST-only routes return 405.
+        # Either is acceptable — the important constraint is NOT 200 on GET.
+        assert r.status_code != 200, f"GET {path}: 200 döndü, POST-only olmalı"
+
+
+def test_sync_trendyol_days_clamped(client):
+    """days param must be clamped to 1–14 before calling sync_recent_orders."""
+    captured = {}
+
+    def _mock(root, days=2, **_kw):
+        captured["days"] = days
+        return _CRED_ERR
+
+    with patch(f"{_TA}.sync_recent_orders", side_effect=_mock):
+        client.post("/api/sync_trendyol_recent_orders", json={"days": 999})
+    assert captured.get("days", 999) <= 14
+
 
 def test_upsert_trendyol_mapping(client):
     with patch(f"{_PROXY}.upsert_trendyol_mapping", return_value=_OK):

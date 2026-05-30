@@ -34,8 +34,28 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body || {})
     })
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r.ok) {
+          // HTTP error (405, 500, …) — parse body for detail, never swallow
+          return r.text().then(function (text) {
+            var msg = "HTTP " + r.status + " " + r.statusText;
+            var data;
+            try { data = JSON.parse(text); } catch (_) { data = null; }
+            return {
+              status: "ERROR",
+              message: (data && (data.message || data.error)) || msg,
+              error:   (data && data.error) || msg,
+              http_status: r.status
+            };
+          });
+        }
+        return r.json();
+      })
       .then(function (data) {
+        // Normalize: backend uses "error" key; app.js reads "message" → copy it
+        if (data && data.status === "ERROR" && data.error && !data.message) {
+          data = Object.assign({}, data, { message: data.error });
+        }
         if (typeof callback === "function") {
           callback(JSON.stringify(data));
         }
@@ -43,7 +63,7 @@
       .catch(function (err) {
         console.error("[api_adapter] POST error:", url, err);
         if (typeof callback === "function") {
-          callback(JSON.stringify({ status: "ERROR", error: String(err) }));
+          callback(JSON.stringify({ status: "ERROR", message: String(err), error: String(err) }));
         }
       });
   }
@@ -197,6 +217,18 @@
     },
 
     // GRUP 8 — Trendyol
+    test_trendyol_connection: function (callback) {
+      postJson("/api/test_trendyol_connection", {}, callback);
+    },
+
+    sync_trendyol_recent_orders: function (days, callback) {
+      postJson("/api/sync_trendyol_recent_orders", { days: Number(days) || 2 }, callback);
+    },
+
+    sync_trendyol_questions: function (callback) {
+      postJson("/api/read_trendyol_questions", {}, callback);
+    },
+
     upsert_trendyol_mapping: function (payload, callback) {
       var body = (typeof payload === "string") ? JSON.parse(payload) : payload;
       postJson("/api/upsert_trendyol_mapping", body, callback);
@@ -328,7 +360,6 @@
     "choose_new_label_model_design_visual", "choose_label_model_preview",
     "import_template_pack", "importTemplatePack", "import_label_font",
     "validate_backup",
-    "test_trendyol_connection", "sync_trendyol_recent_orders",
     "export_production_audit_events",
     "guard_live_integration_action",
     "open_output_folder", "openOutput", "open_reports_folder", "openReports",
@@ -358,6 +389,6 @@
   cyzella.logChanged   = { connect: function () {} };
 
   window.cyzella = cyzella;
-  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job endpoints)");
+  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job + Sprint 4: 3 Trendyol endpoints)");
 
 }());

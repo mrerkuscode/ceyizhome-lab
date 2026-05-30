@@ -397,6 +397,35 @@ def restore_backup():
 
 # GRUP 8 — Trendyol
 
+@api_bp.route("/test_trendyol_connection", methods=["POST"])
+def test_trendyol_connection():
+    try:
+        from webui_backend import trendyol_api as _ta
+        return _ok(_ta.test_connection(_PROJECT_ROOT))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/sync_trendyol_recent_orders", methods=["POST"])
+def sync_trendyol_recent_orders():
+    try:
+        from webui_backend import trendyol_api as _ta
+        payload = request.get_json() or {}
+        days = max(1, min(int(payload.get("days", 2)), 14))
+        return _ok(_ta.sync_recent_orders(_PROJECT_ROOT, days=days))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/read_trendyol_questions", methods=["POST"])
+def read_trendyol_questions():
+    try:
+        from webui_backend import trendyol_api as _ta
+        return _ok(_ta.sync_questions(_PROJECT_ROOT))
+    except Exception as exc:
+        return _err(exc)
+
+
 @api_bp.route("/upsert_trendyol_mapping", methods=["POST"])
 def upsert_trendyol_mapping():
     try:
