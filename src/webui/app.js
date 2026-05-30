@@ -4809,31 +4809,62 @@ function tscCard(row) {
   const selCls    = isSel  ? " selected"    : "";
   const lcCls     = lowConf ? " low-confidence" : "";
 
-  // DARALTILMIS
+  // DARALTILMIS — zengin satır (Faz 3 + 3.5)
   if (!expanded) {
+    const orderDate = trendyolDateTimeShort(trendyolOrderDate(row));
+    const pkgNo     = trendyolPackageNo(row);
+    const dlvNo     = trendyolDeliveryNo(row);
+    const slaRaw    = trendyolRemainingTime(row);
+    const sla       = (slaRaw && slaRaw !== "Süre bilgisi yok") ? slaRaw : "";
+    const sku       = trendyolMeaningfulSku(row.merchant_sku || row.stock_code);
+    const psize     = row.product_size || "";
+    const orderNum  = row.order_number || "-";
     return `
       <article class="trendyol-suggestion-card tsc-card ${accent}${selCls}${lcCls}"
                data-trendyol-suggestion-id="${esc(row.id||"")}"
-               onclick="selectTrendyolSuggestion(${jsArg(row.id)})">
-        <div class="tsc-row">
-          <span class="tsc-chev">&#9658;</span>
-          <div class="tsc-mini-thumb">${_tscThumbInline(row, "mini")}</div>
-          <div class="tsc-who">
-            <b>${esc(row.customer_name||"Müşteri")}</b>
-            <span>#${esc(row.order_number||"-")}</span>
+               onclick="selectTrendyolSuggestion(${jsArg(row.id)})"
+               style="cursor:pointer">
+        <div class="tsc-rich-row">
+          <div class="tsc-lb">
+            <div class="tsc-lb-header">
+              <span class="tsc-chev">&#9658;</span>
+              <span class="tsc-order-num">#${esc(orderNum)}</span>
+              <button class="tsc-copy-btn" type="button"
+                      onclick="event.stopPropagation();navigator.clipboard.writeText(${jsArg(orderNum)}).catch(()=>{})"
+                      title="Sipariş no kopyala">⧉</button>
+            </div>
+            <div class="tsc-kv-list">
+              <div class="tsc-kv-row"><span class="tsc-kv-k">Sipariş Tarihi:</span><b class="tsc-kv-v">${esc(orderDate||"-")}</b></div>
+              ${pkgNo ? `<div class="tsc-kv-row"><span class="tsc-kv-k">Paket No:</span><b class="tsc-kv-v">${esc(pkgNo)}</b></div>` : ""}
+              ${dlvNo ? `<div class="tsc-kv-row"><span class="tsc-kv-k">Teslimat No:</span><b class="tsc-kv-v">${esc(dlvNo)}</b></div>` : ""}
+              ${sla   ? `<div class="tsc-kv-row tsc-sla-row"><span class="tsc-kv-k">Kalan Süre:</span><b class="tsc-kv-v tsc-sla-v">${esc(sla)}</b></div>` : ""}
+            </div>
+            <div class="tsc-customer-name"><b>${esc(row.customer_name||"Müşteri")}</b></div>
+            <div class="tsc-product-line">
+              <div class="tsc-mini-thumb">${_tscThumbInline(row, "mini")}</div>
+              <div class="tsc-product-details">
+                <span class="tsc-product-name">${esc(row.product_name||"Ürün adı yok")}</span>
+                ${sku           ? `<span class="tsc-pd-meta">Stok Kodu: <b>${esc(sku)}</b></span>` : ""}
+                ${row.barcode   ? `<span class="tsc-pd-meta">Barkod: <b>${esc(row.barcode)}</b></span>` : ""}
+                ${psize         ? `<span class="tsc-pd-meta">Beden: <b>${esc(psize)}</b></span>` : ""}
+              </div>
+            </div>
           </div>
-          <div class="tsc-result">
-            <span class="tsc-result-k">isim</span>&nbsp;${
-              labelText
-                ? `<span class="tsc-result-v">${esc(labelText)}</span>`
-                : `<span class="tsc-result-v tsc-missing">Bulunamadı</span>`
-            }${dateText ? `<span class="tsc-result-date">&nbsp;·&nbsp;${esc(dateText)}</span>` : ""}
+          <div class="tsc-rb">
+            <div class="tsc-result">
+              <span class="tsc-result-k">İSİM</span>&nbsp;${
+                labelText
+                  ? `<span class="tsc-result-v">${esc(labelText)}</span>`
+                  : `<span class="tsc-result-v tsc-missing">Bulunamadı</span>`
+              }${dateText ? `<span class="tsc-result-date">&nbsp;·&nbsp;${esc(dateText)}</span>` : ""}
+            </div>
+            <span class="tsc-conf"><span class="tsc-dot" style="background:${dotColor}"></span>${confPct}%</span>
+            <span class="tsc-badge ${badgeCls}">${esc(badgeLabel)}</span>
+            <button class="tsc-btn tsc-ghost tsc-sm tsc-analyze-btn" type="button"
+                    onclick="event.stopPropagation();analyzeSingleTrendyolSuggestion(${jsArg(row.id)},this)"
+                    title="Sadece bu siparişi yeniden analiz et">Analiz Et</button>
+            ${canImport ? `<button class="tsc-btn tsc-primary tsc-sm" type="button" onclick="event.stopPropagation();importTrendyolSuggestionToCustomerOrder(${jsArg(row.id)})">Üretime aktar</button>` : ""}
           </div>
-          <span class="tsc-conf"><span class="tsc-dot" style="background:${dotColor}"></span>${confPct}%</span>
-          <span class="tsc-badge ${badgeCls}">${esc(badgeLabel)}</span>
-          ${canImport
-            ? `<button class="tsc-btn tsc-primary tsc-sm" type="button" onclick="event.stopPropagation();importTrendyolSuggestionToCustomerOrder(${jsArg(row.id)})">Üretime aktar</button>`
-            : `<button class="tsc-btn tsc-ghost tsc-sm"   type="button" onclick="event.stopPropagation();selectTrendyolSuggestion(${jsArg(row.id)})">İncele</button>`}
         </div>
       </article>`;
   }
@@ -5221,6 +5252,39 @@ function reanalyzeTrendyolNameEdit() {
     }
     const ok = String(result.status || "").toUpperCase() === "OK";
     _setTrendyolNameEditStatus(result.message || "AI analiz tamamlandı.", ok ? "ok" : "warn");
+  });
+}
+
+function analyzeSingleTrendyolSuggestion(id, btn) {
+  if (!bridge?.reanalyze_trendyol_suggestion) {
+    showTrendyolStatus("Tek satır analiz bu oturumda bağlı değil.", "warn");
+    return;
+  }
+  const origLabel = btn ? btn.textContent : "";
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="tsc-spin">⟳</span> Analiz…'; }
+
+  bridge.reanalyze_trendyol_suggestion(id, raw => {
+    const result = parseBridgeResult(raw);
+    if (btn) { btn.disabled = false; btn.textContent = origLabel || "Analiz Et"; }
+
+    if (Array.isArray(result.suggestions)) {
+      currentState.trendyol = { ...(currentState.trendyol || {}), suggestions: result.suggestions };
+    }
+    const updated = result.suggestion ||
+      (Array.isArray(result.suggestions) ? result.suggestions.find(s => s.id === id) : null);
+    if (updated) {
+      const sel = '[data-trendyol-suggestion-id="' + String(id || "").replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"]';
+      const card = document.querySelector(sel);
+      if (card) {
+        const tmp = document.createElement("div");
+        tmp.innerHTML = tscCard(updated);
+        const newCard = tmp.firstElementChild;
+        if (newCard) card.replaceWith(newCard);
+      }
+    }
+
+    const ok = String(result.status || "").toUpperCase() === "OK";
+    showTrendyolStatus(result.message || "Analiz tamamlandı.", ok ? "ok" : "warn");
   });
 }
 
