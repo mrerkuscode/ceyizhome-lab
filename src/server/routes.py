@@ -644,6 +644,26 @@ def delete_font(font_id: str):
         return _err(exc)
 
 
+@api_bp.route("/font_file/<font_id>")
+def serve_font_file(font_id: str):
+    """Serve a font file from the library for @font-face preview."""
+    try:
+        from webui_backend import font_library_api as _fla
+        from flask import send_file
+        manifest = _fla.list_fonts(_PROJECT_ROOT)
+        all_fonts = manifest.get("label_fonts", []) + manifest.get("laser_fonts", [])
+        entry = next((f for f in all_fonts if f.get("id") == font_id), None)
+        if not entry or not entry.get("file"):
+            return jsonify({"status": "ERROR", "error": "Font bulunamadı"}), 404
+        font_path = _fla.library_dir(_PROJECT_ROOT) / entry["file"]
+        if not font_path.exists():
+            return jsonify({"status": "ERROR", "error": "Font dosyası bulunamadı"}), 404
+        mime = "font/otf" if str(font_path).endswith(".otf") else "font/ttf"
+        return send_file(str(font_path), mimetype=mime)
+    except Exception as exc:
+        return _err(exc)
+
+
 # ── PART B — Trendyol Ürün Katalog Sync ─────────────────────────────────────
 
 @api_bp.route("/sync_trendyol_products", methods=["POST"])
@@ -682,7 +702,10 @@ def save_recipe():
         payload = request.get_json() or {}
         barkod = payload.get("barkod", "")
         slots = payload.get("slots", [])
-        return _ok(_ra.save_recipe(_PROJECT_ROOT, barkod, slots))
+        result = _ra.save_recipe(_PROJECT_ROOT, barkod, slots)
+        if result.get("status") == "ERROR":
+            return jsonify(result), 400
+        return _ok(result)
     except Exception as exc:
         return _err(exc)
 
@@ -696,6 +719,9 @@ def bulk_apply_recipe():
         payload = request.get_json() or {}
         barkodlar = payload.get("barkodlar", [])
         ayarlar = payload.get("ayarlar", {})
-        return _ok(_ra.bulk_apply_recipe(_PROJECT_ROOT, barkodlar, ayarlar))
+        result = _ra.bulk_apply_recipe(_PROJECT_ROOT, barkodlar, ayarlar)
+        if result.get("status") == "ERROR":
+            return jsonify(result), 400
+        return _ok(result)
     except Exception as exc:
         return _err(exc)

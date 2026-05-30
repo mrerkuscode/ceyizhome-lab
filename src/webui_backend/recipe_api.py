@@ -153,6 +153,14 @@ def bulk_apply_recipe(
     if not isinstance(ayarlar, dict):
         return {"status": "ERROR", "error": "ayarlar dict olmalı"}
 
+    # Lazer font güvenlik ön-kontrolü
+    lazer_font_id = ayarlar.get("lazer_font_id")
+    if lazer_font_id and not _check_laser_font_safe(project_root, lazer_font_id):
+        return {
+            "status": "ERROR",
+            "error": f"Toplu uygulama: Lazer slotunda lazer-güvenli olmayan font kullanılamaz. Font ID: {lazer_font_id}",
+        }
+
     recipes = _load_recipes(project_root)
     updated: list[str] = []
     now = _now()
