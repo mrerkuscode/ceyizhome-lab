@@ -1,9 +1,121 @@
 from __future__ import annotations
 
+import json
 import re
+import threading
+from datetime import date, timedelta
+from pathlib import Path
 from typing import Any
 
 from intelligence.text_cleanup import clean_spaces, repair_text, title_turkish_name
+
+# ── Gazetteer + olay anahtar kelime yükleyicileri ────────────────────────────
+_DATA_DIR = Path(__file__).resolve().parents[2] / "data"
+_gaz_cache: frozenset[str] | None = None
+_gaz_lock = threading.Lock()
+_occ_cache: dict[str, Any] | None = None
+_occ_lock = threading.Lock()
+
+
+def _load_gazetteer() -> frozenset[str]:
+    global _gaz_cache  # noqa: PLW0603
+    with _gaz_lock:
+        if _gaz_cache is None:
+            try:
+                data = json.loads((_DATA_DIR / "turkish_names.json").read_text(encoding="utf-8"))
+                names = data.get("names", []) if isinstance(data, dict) else data
+                _gaz_cache = frozenset(_word_key(n) for n in names if n)
+            except Exception:  # noqa: BLE001
+                _gaz_cache = frozenset()
+        return _gaz_cache
+
+
+def _load_occasion_keys() -> tuple[frozenset[str], dict[str, str]]:
+    global _occ_cache  # noqa: PLW0603
+    with _occ_lock:
+        if _occ_cache is None:
+            try:
+                data = json.loads((_DATA_DIR / "occasion_keywords.json").read_text(encoding="utf-8"))
+                kw = frozenset(_word_key(k) for k in data.get("keywords", []) if k)
+                labels = {_word_key(k): v for k, v in data.get("occasion_labels", {}).items()}
+                _occ_cache = {"keys": kw, "labels": labels}
+            except Exception:  # noqa: BLE001
+                _occ_cache = {"keys": frozenset(), "labels": {}}
+        return _occ_cache["keys"], _occ_cache["labels"]
+
+
+def _is_gazetteer_name(token: str) -> bool:
+    return bool(token) and _word_key(token) in _load_gazetteer()
+
+
+def _detect_occasion(text: str) -> str:
+    """Mesajda olay anahtarı bul; olay etiketini döndür (yoksa '')."""
+    occ_keys, occ_labels = _load_occasion_keys()
+    repaired = repair_text(text).lower()
+    # Çok-kelimeli etiketler önce
+    for raw, label in occ_labels.items():
+        if _word_key(raw) in occ_keys and raw in repaired:
+            return label
+    # Tek kelime
+    for token in re.split(r"\W+", repaired):
+        k = _word_key(token)
+        if k and k in occ_keys:
+            return occ_labels.get(k, "")
+    return ""
+
+
+# ── Genişletilmiş tarih parser ────────────────────────────────────────────────
+_MONTH_NUM: dict[str, int] = {
+    "ocak": 1, "subat": 2, "mart": 3, "nisan": 4, "mayis": 5, "haziran": 6,
+    "temmuz": 7, "agustos": 8, "eylul": 9, "ekim": 10, "kasim": 11, "aralik": 12,
+}
+_DAY_NUM: dict[str, int] = {
+    "pazartesi": 0, "sali": 1, "carsamba": 2, "persembe": 3,
+    "cuma": 4, "cumartesi": 5, "pazar": 6,
+}
+_RELATIVE_DATE_RE = re.compile(
+    r"\b(?P<rel>yarin|yar[ıi]n|haftaya|gelecek\s+hafta|"
+    r"ayin\s*(?P<dom>\d{1,2})['']?[ıi]?|"
+    r"bu\s+(?P<dow1>pazartesi|sal[ıi]|çarşamba|carsamba|perşembe|persembe|cuma|cumartesi|pazar)|"
+    r"gelecek\s+(?P<dow2>pazartesi|sal[ıi]|çarşamba|carsamba|perşembe|persembe|cuma|cumartesi|pazar))\b",
+    re.IGNORECASE,
+)
+
+
+def _extract_relative_date(text: str, today: date | None = None) -> tuple[str, str]:
+    """Göreli tarif ('yarın', 'haftaya', 'ayın 25'i') → DD.MM.YYYY döndür."""
+    today = today or date.today()
+    m = _RELATIVE_DATE_RE.search(repair_text(text))
+    if not m:
+        return "", ""
+    rel = _word_key(m.group("rel") or "")
+    if "yarin" in rel:
+        d = today + timedelta(days=1)
+        return d.strftime("%d.%m.%Y"), m.group(0)
+    if "haftaya" in rel or "gelecek" in rel and "hafta" in rel:
+        d = today + timedelta(days=7)
+        return d.strftime("%d.%m.%Y"), m.group(0)
+    dom = m.group("dom")
+    if dom:
+        day = int(dom)
+        target = today.replace(day=day) if day >= today.day else (
+            today.replace(day=day, month=today.month + 1) if today.month < 12
+            else today.replace(day=day, month=1, year=today.year + 1)
+        )
+        return target.strftime("%d.%m.%Y"), m.group(0)
+    for group in ("dow1", "dow2"):
+        dow_str = m.group(group) if m.group(group) else ""
+        if dow_str:
+            target_dow = _DAY_NUM.get(_word_key(dow_str), -1)
+            if target_dow >= 0:
+                days_ahead = (target_dow - today.weekday()) % 7
+                if days_ahead == 0 and "gelecek" in _word_key(m.group("rel") or ""):
+                    days_ahead = 7
+                elif days_ahead == 0:
+                    days_ahead = 7
+                d = today + timedelta(days=days_ahead)
+                return d.strftime("%d.%m.%Y"), m.group(0)
+    return "", ""
 
 
 TR_CHARS = "A-Za-z\u00c7\u011e\u0130\u00d6\u015e\u00dc\u00e7\u011f\u0131i\u00f6\u015f\u00fc"
@@ -77,11 +189,13 @@ _INTENT_KEY_DET_RE = re.compile(
 )
 
 
-def extract_production_fields(source: dict[str, Any], mapping: dict[str, Any] | None = None) -> dict[str, Any]:
+def extract_production_fields(
+    source: dict[str, Any],
+    mapping: dict[str, Any] | None = None,
+    *,
+    today: date | None = None,
+) -> dict[str, Any]:
     mapping = mapping or {}
-    text = _source_text(source)
-    customer = title_turkish_name(source.get("customer_name") or source.get("customerName") or "")
-    product_name = repair_text(source.get("product_name") or source.get("productName") or source.get("name") or "")
     evidence: list[str] = []
     warnings: list[str] = []
 
@@ -91,6 +205,7 @@ def extract_production_fields(source: dict[str, Any], mapping: dict[str, Any] | 
     label_source = ""
     evidence_spans: dict[str, str] = {}
 
+    # \u2500\u2500 \u0130sim \u00e7\u0131kar\u0131m\u0131 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     label_text, label_span = _extract_name_with_span(question_text) if question_text else ("", "")
     if label_text:
         label_source = "question_text"
@@ -105,8 +220,30 @@ def extract_production_fields(source: dict[str, Any], mapping: dict[str, Any] | 
     else:
         warnings.append("\u0130sim/etiket yaz\u0131s\u0131 net bulunamad\u0131.")
 
+    # \u2500\u2500 Gazetteer kontrol\u00fc \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+    gazetteer = _load_gazetteer()
+    has_clear_anchor = bool(_INTENT_KEY_DET_RE.search(question_text or "") or
+                            _INTENT_KEY_DET_RE.search(answer_text or ""))
+    gaz_confirmed = False
+    if label_text:
+        name_tokens = [
+            t for t in re.split(r"\s*&\s*|\s+", label_text)
+            if t and t != INFINITY_TOKEN and len(t) >= 2
+        ]
+        gaz_confirmed = bool(name_tokens) and all(_word_key(t) in gazetteer for t in name_tokens)
+        if gaz_confirmed:
+            evidence.append("gazetteer_confirmed")
+        if has_clear_anchor:
+            evidence.append("explicit_name_pattern")
+
+    # \u2500\u2500 Tarih \u00e7\u0131kar\u0131m\u0131 (say\u0131sal + yaz\u0131l\u0131 + g\u00f6reli) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     date_text, date_span = _extract_date_with_span(question_or_answer) if question_or_answer else ("", "")
-    date_source = "question_text" if date_text and question_text else ("answer_text" if date_text and answer_text else "")
+    if not date_text and question_or_answer:
+        date_text, date_span = _extract_relative_date(question_or_answer, today)
+    date_source = (
+        "question_text" if date_text and question_text
+        else ("answer_text" if date_text and answer_text else "")
+    )
     if not date_text:
         date_text = repair_text(mapping.get("default_date_text") or "")
         date_source = "mapping_default_date" if date_text else date_source
@@ -117,6 +254,10 @@ def extract_production_fields(source: dict[str, Any], mapping: dict[str, Any] | 
     elif question_or_answer:
         warnings.append("Tarih m\u00fc\u015fteri mesaj\u0131nda bulunamad\u0131.")
 
+    # \u2500\u2500 Olay tespiti \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+    occasion = _detect_occasion(question_or_answer) if question_or_answer else ""
+
+    # \u2500\u2500 Not \u00e7\u0131kar\u0131m\u0131 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
     note_text, note_span = _extract_note_with_span(question_or_answer) if question_or_answer else ("", "")
     note_source = "question_text" if note_text and question_text else ("answer_text" if note_text and answer_text else "")
     if not note_text:
@@ -141,31 +282,59 @@ def extract_production_fields(source: dict[str, Any], mapping: dict[str, Any] | 
     name_cut_source = label_source if name_cut_text else ""
     if name_cut_text and evidence_spans.get("label_text"):
         evidence_spans["name_cut_text"] = evidence_spans["label_text"]
-    confidence = 0.5
+
+    # \u2500\u2500 D\u00fcr\u00fcst g\u00fcven kalibrasyonu \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+    # G\u00fcven KANITA dayal\u0131; "isim var m\u0131?" de\u011fil "isim ne kadar g\u00fcvenilir?" sorusu.
+    confidence = 0.42  # taban: herhangi bir kan\u0131t yoksa her zaman kontrol gerekli
     if mapping:
         confidence += 0.02
         evidence.append("barcode_match")
     if label_text:
-        confidence += 0.3
+        if gaz_confirmed and has_clear_anchor:
+            confidence += 0.45   # \u2192 ~0.87 \u2014 oto-onay aday\u0131
+        elif gaz_confirmed:
+            confidence += 0.30   # \u2192 ~0.72 \u2014 anchor zay\u0131f, kontrol
+        elif has_clear_anchor:
+            confidence += 0.20   # \u2192 ~0.62 \u2014 gazetteer'siz, kontrol
+        else:
+            confidence += 0.10   # \u2192 ~0.52 \u2014 zay\u0131f \u00e7\u0131kar\u0131m, kontrol
     if date_text:
         confidence += 0.03
     if note_text:
-        confidence += 0.06
+        confidence += 0.04
     if question_or_answer:
         confidence += 0.02
-    confidence = min(0.98, round(confidence, 2))
+    confidence = min(0.95, round(confidence, 2))
     if confidence < 0.7:
-        warnings.append("AI alan ay\u0131klama g\u00fcveni d\u00fc\u015f\u00fck; kullan\u0131c\u0131 kontrol\u00fc gerekli.")
+        warnings.append("Alan ay\u0131klama g\u00fcveni d\u00fc\u015f\u00fck; kullan\u0131c\u0131 kontrol\u00fc gerekli.")
+
+    # \u2500\u2500 Fast-path k\u0131sa devre bayra\u011f\u0131 \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+    # K\u0131sa devre: LLM'i atlamak i\u00e7in hem gazetteer hem anchor hem de
+    # tek/\u00e7ift net isim \u015fart\u0131 sa\u011flanmal\u0131; rakip aday yok.
+    name_token_count = len([
+        t for t in re.split(r"\s*&\s*|\s+", label_text)
+        if t and t != INFINITY_TOKEN and len(t) >= 2
+    ]) if label_text else 0
+    fast_path = (
+        bool(label_text)
+        and gaz_confirmed
+        and has_clear_anchor
+        and 1 <= name_token_count <= 4
+        and confidence >= 0.85
+    )
 
     return {
         "label_text": label_text,
         "date_text": date_text,
         "note_text": note_text,
+        "occasion": occasion,
         "quantity": quantity,
         "name_cut_text": name_cut_text,
         "name_cut_width_mm": mapping.get("name_cut_width_mm") or 300,
         "name_cut_style": mapping.get("name_cut_style") or "Mochary Personal Use Only",
         "confidence": confidence,
+        "gazetteer_confirmed": gaz_confirmed,
+        "fast_path": fast_path,
         "warnings": warnings,
         "source_evidence": list(dict.fromkeys(evidence)),
         "field_sources": {

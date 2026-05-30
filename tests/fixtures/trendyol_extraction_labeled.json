@@ -201,5 +201,67 @@
     "message": "Merhaba, teslimat ne zaman?",
     "llm_evidence_span": "Yakup Burcu isim yazılacak",
     "expected": {"names": [], "name_found": false, "note": "Evidence span mesajda yok → blocklama"}
+  },
+  {
+    "id": "real_merhaba_confidence_low",
+    "message": "Merhaba, sipariş numaram bu, ne zaman teslim edilecek?",
+    "expected": {"names": [], "name_found": false, "max_confidence": 0.84,
+                 "note": "Merhaba mesajı asla oto-onay eşiğine ulaşamaz"}
+  },
+  {
+    "id": "real_gold_confidence_low",
+    "message": "Sipariş numaram 11276708914 PINAR & BURHAN çikolata kutusu ve isimler Gold renkli olsun",
+    "expected": {"name_found": true, "names": ["Pinar & Burhan"],
+                 "note": "Gold blocklist → isim olarak çıkamaz; PINAR & BURHAN çıkmalı"}
+  },
+  {
+    "id": "real_yakup_burcu",
+    "message": "Merhba #11276359839 sipariş numaralı ya Yakup Burcu isim yazılacak 10.06.2026 yazılacak lütfen",
+    "expected": {"names": ["Yakup Burcu"], "date": "10.06.2026", "name_found": true,
+                 "note": "Gerçek vaka: merhaba typo + sipariş no + intent key + isim + tarih"}
+  },
+  {
+    "id": "gazetteer_fast_path_pinar_burhan",
+    "message": "Pınar & Burhan isim yazılsın",
+    "expected": {"names": ["Pınar & Burhan"], "name_found": true,
+                 "note": "Gazetteer doğrulanmış + anchor → fast_path beklenir"}
+  },
+  {
+    "id": "gazetteer_fast_path_single",
+    "message": "üzerine Zeynep yazılacak",
+    "expected": {"names": ["Zeynep"], "name_found": true,
+                 "note": "Gazetteer doğrulanmış tek isim + anchor"}
+  },
+  {
+    "id": "occasion_nisan_detected",
+    "message": "nişan için isim: Elif & Ahmet yazılacak 15 Haziran 2026",
+    "expected": {"names": ["Elif", "Ahmet"], "name_found": true, "occasion_contains": "Nişan",
+                 "date_contains": "Haziran"}
+  },
+  {
+    "id": "occasion_doz_detected",
+    "message": "söz hatırası için Ceylan ve Kerem isim yazılacak",
+    "expected": {"names": ["Ceylan", "Kerem"], "name_found": true, "occasion_contains": "Söz"}
+  },
+  {
+    "id": "date_written_haziran",
+    "message": "üzerine Ayşe & Mehmet yazılacak, tarih 25 Haziran",
+    "expected": {"names": ["Ayşe", "Mehmet"], "name_found": true, "date_contains": "Haziran"}
+  },
+  {
+    "id": "date_numeric_slash",
+    "message": "isim: Reyhan yazılacak 28/06/2026",
+    "expected": {"names": ["Reyhan"], "date": "28.06.2026", "name_found": true}
+  },
+  {
+    "id": "no_name_logistics_low_confidence",
+    "message": "Teslimat #11275432108 nolu siparişi nerede, paket kayıp mı?",
+    "expected": {"names": [], "name_found": false, "max_confidence": 0.60}
+  },
+  {
+    "id": "gazetteer_no_anchor_medium_confidence",
+    "message": "Ayşe Fatma",
+    "expected": {"name_found": false,
+                 "note": "İsim adayı var ama ne anchor ne context; extraction olmaz"}
   }
 ]
