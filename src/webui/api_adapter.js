@@ -34,8 +34,28 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body || {})
     })
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r.ok) {
+          // HTTP error (405, 500, …) — parse body for detail, never swallow
+          return r.text().then(function (text) {
+            var msg = "HTTP " + r.status + " " + r.statusText;
+            var data;
+            try { data = JSON.parse(text); } catch (_) { data = null; }
+            return {
+              status: "ERROR",
+              message: (data && (data.message || data.error)) || msg,
+              error:   (data && data.error) || msg,
+              http_status: r.status
+            };
+          });
+        }
+        return r.json();
+      })
       .then(function (data) {
+        // Normalize: backend uses "error" key; app.js reads "message" → copy it
+        if (data && data.status === "ERROR" && data.error && !data.message) {
+          data = Object.assign({}, data, { message: data.error });
+        }
         if (typeof callback === "function") {
           callback(JSON.stringify(data));
         }
@@ -43,7 +63,7 @@
       .catch(function (err) {
         console.error("[api_adapter] POST error:", url, err);
         if (typeof callback === "function") {
-          callback(JSON.stringify({ status: "ERROR", error: String(err) }));
+          callback(JSON.stringify({ status: "ERROR", message: String(err), error: String(err) }));
         }
       });
   }
