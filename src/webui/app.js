@@ -4805,6 +4805,7 @@ function renderTrendyolSuggestions(rows) {
             <span>Trendyol #${esc(row.order_number || "-")} · Satır ${esc(row.line_id || "-")}</span>
           </div>
           ${trendyolStatusPill(row)}
+          <span class="card-chevron">&#9660;</span>
           <button class="trendyol-more-btn" type="button" onclick="event.stopPropagation()" title="Diğer işlemler">⋮</button>
         </div>
         ${trendyolBadges(row, questionContexts, ready, lowConfidence, potentialQuestions)}
@@ -5144,6 +5145,7 @@ function syncTrendyolTopDateFilter() {
 
 function selectTrendyolSuggestion(id) {
   selectedTrendyolSuggestionId = id || "";
+  expandedTrendyolSuggestionId = expandedTrendyolSuggestionId === id ? "" : (id || "");
   updateTrendyolOrders(currentState.trendyol || {});
 }
 

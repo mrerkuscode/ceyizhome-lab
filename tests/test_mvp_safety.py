@@ -1749,7 +1749,7 @@ reports:
         self.assertIn("#bulkLabel .bulk-row-mini-preview", css)
         self.assertIn("#labelOutputs .output-thumb", css)
         self.assertIn("#labelOutputs .output-filter-bar", css)
-        self.assertIn("grid-template-columns: minmax(0, 1fr) minmax(360px, 420px);", css)
+        self.assertIn("grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));", css)
         self.assertIn("#labelOutputs .output-stack", css)
         self.assertIn("grid-template-columns: repeat(2, minmax(0, 1fr));", css)
         self.assertIn("grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr);", css)
