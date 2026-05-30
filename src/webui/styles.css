@@ -6301,3 +6301,59 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .tsc-s b { font-weight: 600; color: var(--tc-ink); }
 .tsc-readonly-note { font-size: 11.5px; color: var(--tc-ink-3); }
 .tsc-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* ===================================================================== */
+/* === ÜRÜN EŞLEŞTİRME (Part E) ======================================== */
+/* ===================================================================== */
+
+/* Ürün listesi tablo benzeri layout (paylaşımlı) */
+.pm-table { background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:22px; }
+.lhead { display:grid;align-items:center;gap:12px;padding:10px 16px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--surface-2); }
+.lrow { display:grid;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line); }
+.badge { font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap; }
+.b-green { background:var(--ok-soft);color:var(--ok); }
+.b-amber { background:var(--warn-soft);color:var(--warn); }
+.right { text-align:right; }
+
+/* Chip filtreler */
+.chip { background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:12.5px;color:var(--text-2);cursor:pointer;transition:all .15s; }
+.chip.on,.chip:hover { background:var(--accent-soft);border-color:var(--accent-soft);color:var(--accent-ink);font-weight:600; }
+
+/* Toplu işlem çubuğu */
+.pm-bulk-bar { background:var(--text);color:#fff;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px; }
+.pm-bulk-sel { font-weight:600;font-size:13px;white-space:nowrap; }
+.pm-bulk-fields { display:flex;gap:10px;flex-wrap:wrap;align-items:center; }
+.pm-bulk-field { display:flex;flex-direction:column;gap:3px; }
+.pm-bulk-lbl { font-size:10.5px;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.04em; }
+.pm-bulk-ctrl { background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:6px 10px;font-size:12.5px;cursor:pointer; }
+.pm-bulk-num { width:72px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px; }
+
+/* Ürün liste satırları */
+#pmProductList .lhead { grid-template-columns:34px 1fr 110px 120px 140px; }
+#pmProductList .lrow { display:grid;grid-template-columns:34px 1fr 110px 120px 140px;align-items:center;gap:12px;padding:11px 16px;border-top:1px solid var(--line); }
+.pm-prod { display:flex;align-items:center;gap:12px;min-width:0; }
+.pm-thumb { width:44px;height:44px;border-radius:8px;flex:none;background:linear-gradient(135deg,#EDE6DA,#E4DBCB);border:1px solid var(--line);overflow:hidden;object-fit:cover; }
+.pm-thumb-placeholder { width:44px;height:44px;border-radius:8px;flex:none;background:linear-gradient(135deg,#EDE6DA,#E4DBCB);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:18px; }
+.pm-pname { font-weight:500;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+.pm-pmeta { color:var(--muted);font-size:11.5px; }
+
+/* Reçete slot kartları */
+.pm-slot { border:1px solid var(--line);border-radius:9px;padding:13px 14px;margin-bottom:10px;background:var(--surface-2); }
+.pm-slot-top { display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px; }
+.pm-slot-name { font-size:13.5px; }
+.pm-seg { display:inline-flex;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden; }
+.pm-seg span { padding:5px 12px;font-size:12px;color:var(--text-2);cursor:pointer; }
+.pm-seg span.on { background:var(--text);color:#fff;font-weight:500; }
+.pm-slot-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:6px; }
+.pm-slot-fld label { font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:3px; }
+.pm-slot-fld select,.pm-slot-fld input[type=number] { width:100%;background:var(--surface);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;font-size:12.5px;color:var(--text); }
+.pm-slot-hint { font-size:10.5px;color:var(--muted);margin-top:3px; }
+.pm-fixed-txt { background:var(--surface);border:1.5px dashed var(--line-strong);border-radius:8px;padding:8px 11px;font-size:12.5px;color:var(--text-2);margin-top:6px; }
+.pm-tag-laser { display:inline-block;font-size:10px;padding:2px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink);font-weight:600;margin-left:5px; }
+
+/* Önizleme */
+.pm-preview-card { border:1px solid var(--line);border-radius:9px;padding:12px;background:var(--surface); }
+.pm-preview-cap { font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px; }
+.pm-preview-label { background:#fff;border:1px solid var(--line-strong);border-radius:6px;height:50px;display:flex;align-items:center;justify-content:center;font-size:18px; }
+.pm-preview-laser { background:#2B2620;border-radius:6px;height:50px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#E9DEC4;letter-spacing:1px; }
+

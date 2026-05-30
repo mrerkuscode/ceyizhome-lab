@@ -598,3 +598,104 @@ def cancel_job(job_id: str):
         return _ok(job_manager.cancel_job(job_id))
     except Exception as exc:
         return _err(exc)
+
+
+# ── PART A — Font Kütüphanesi ────────────────────────────────────────────────
+
+@api_bp.route("/fonts")
+def list_fonts():
+    try:
+        from webui_backend import font_library_api as _fla
+        return _ok(_fla.list_fonts(_PROJECT_ROOT))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/upload_font_library", methods=["POST"])
+def upload_font_library():
+    try:
+        from webui_backend import font_library_api as _fla
+        f = request.files.get("file")
+        if not f or f.filename == "":
+            return jsonify({"status": "ERROR", "error": "Dosya seçilmedi"}), 400
+        font_type = request.form.get("tip", "label")
+        laser_safe = request.form.get("laser_safe", "false").lower() in {"true", "1", "yes"}
+        suffix = Path(f.filename).suffix.lower()
+        if suffix not in {".ttf", ".otf"}:
+            return jsonify({"status": "ERROR", "error": f"İzin verilmeyen format: {suffix}. Kabul edilen: .ttf, .otf"}), 400
+        f.seek(0, 2)
+        size = f.tell()
+        f.seek(0)
+        if size > _MAX_UPLOAD_BYTES:
+            return jsonify({"status": "ERROR", "error": f"Dosya çok büyük (maks {_MAX_UPLOAD_BYTES // (1024*1024)} MB)"}), 400
+        file_bytes = f.read()
+        result = _fla.add_font(_PROJECT_ROOT, f.filename, file_bytes, font_type, laser_safe=laser_safe)
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/font/<font_id>", methods=["DELETE"])
+def delete_font(font_id: str):
+    try:
+        from webui_backend import font_library_api as _fla
+        return _ok(_fla.delete_font(_PROJECT_ROOT, font_id))
+    except Exception as exc:
+        return _err(exc)
+
+
+# ── PART B — Trendyol Ürün Katalog Sync ─────────────────────────────────────
+
+@api_bp.route("/sync_trendyol_products", methods=["POST"])
+def sync_trendyol_products():
+    try:
+        from webui_backend import trendyol_api as _ta
+        return _ok(_ta.sync_products(_PROJECT_ROOT))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/trendyol_products")
+def trendyol_products_catalog():
+    try:
+        from webui_backend import recipe_api as _ra
+        return _ok(_ra.list_products_with_recipe_status(_PROJECT_ROOT))
+    except Exception as exc:
+        return _err(exc)
+
+
+# ── PART C — Reçete ──────────────────────────────────────────────────────────
+
+@api_bp.route("/recipe/<barkod>")
+def get_recipe(barkod: str):
+    try:
+        from webui_backend import recipe_api as _ra
+        return _ok(_ra.get_recipe(_PROJECT_ROOT, barkod))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/save_recipe", methods=["POST"])
+def save_recipe():
+    try:
+        from webui_backend import recipe_api as _ra
+        payload = request.get_json() or {}
+        barkod = payload.get("barkod", "")
+        slots = payload.get("slots", [])
+        return _ok(_ra.save_recipe(_PROJECT_ROOT, barkod, slots))
+    except Exception as exc:
+        return _err(exc)
+
+
+# ── PART D — Toplu Uygula ────────────────────────────────────────────────────
+
+@api_bp.route("/bulk_apply_recipe", methods=["POST"])
+def bulk_apply_recipe():
+    try:
+        from webui_backend import recipe_api as _ra
+        payload = request.get_json() or {}
+        barkodlar = payload.get("barkodlar", [])
+        ayarlar = payload.get("ayarlar", {})
+        return _ok(_ra.bulk_apply_recipe(_PROJECT_ROOT, barkodlar, ayarlar))
+    except Exception as exc:
+        return _err(exc)

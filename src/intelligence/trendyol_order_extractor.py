@@ -60,7 +60,11 @@ STOP_WORDS = {
     # Faz A: renkler
     "gold", "gumus", "silver", "bronz", "altin",
     # Faz A: teslimat/kargo
-    "teslimat", "kargo", "teslimatim", "teslimatim",
+    "teslimat", "kargo", "teslimatim", "teslimatimiz",
+    # Faz A: genel fiil/eylem token'lari
+    "olusturdum", "olusturduk", "verdigim", "verdim",
+    # Faz A: sifat/zarf — asla isim degil
+    "bu", "numarasi", "numarali", "numrasi",
 }
 INFINITY_TOKEN = "\u267e"
 # Faz A: niyet anahtar\u0131 tespit \u2014 bu olmadan sipari\u015f-ref yolunda isim alma

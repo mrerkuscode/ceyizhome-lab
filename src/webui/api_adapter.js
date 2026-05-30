@@ -340,6 +340,55 @@
           callback(JSON.stringify({ status: "BROWSER_MODE", message: "Aktif job yok veya zaten durdu." }));
         }
       });
+    },
+
+    // ── PART A — Font Kütüphanesi ──────────────────────────────────────────
+
+    list_fonts: function (callback) {
+      fetchJson("/api/fonts", callback);
+    },
+
+    uploadFontLibrary: function (formData, callback) {
+      fetch("/api/upload_font_library", { method: "POST", body: formData })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    delete_font: function (font_id, callback) {
+      fetch("/api/font/" + encodeURIComponent(font_id), { method: "DELETE" })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (typeof callback === "function") callback(JSON.stringify(d)); })
+        .catch(function (e) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", error: String(e) })); });
+    },
+
+    // ── PART B — Trendyol Ürün Kataloğu ───────────────────────────────────
+
+    sync_trendyol_products: function (callback) {
+      postJson("/api/sync_trendyol_products", {}, callback);
+    },
+
+    list_trendyol_products: function (callback) {
+      fetchJson("/api/trendyol_products", callback);
+    },
+
+    // ── PART C — Reçete ───────────────────────────────────────────────────
+
+    get_recipe: function (barkod, callback) {
+      fetchJson("/api/recipe/" + encodeURIComponent(barkod), callback);
+    },
+
+    save_recipe: function (barkod, slots, callback) {
+      var slotsArr = (typeof slots === "string") ? JSON.parse(slots) : slots;
+      postJson("/api/save_recipe", { barkod: barkod, slots: slotsArr }, callback);
+    },
+
+    // ── PART D — Toplu Uygula ─────────────────────────────────────────────
+
+    bulk_apply_recipe: function (barkodlar, ayarlar, callback) {
+      var barArr = (typeof barkodlar === "string") ? JSON.parse(barkodlar) : barkodlar;
+      var ayarObj = (typeof ayarlar === "string") ? JSON.parse(ayarlar) : ayarlar;
+      postJson("/api/bulk_apply_recipe", { barkodlar: barArr, ayarlar: ayarObj }, callback);
     }
 
   };

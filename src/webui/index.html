@@ -43,6 +43,9 @@
         <div class="nav-group-label">AYARLAR</div>
         <button class="nav-item nav-btn" data-settings-subpage="trendyol-api" onclick="openSettingsSubpage('trendyol-api')"><span class="nav-text">Trendyol API</span></button>
       </details>
+      <div class="nav-group"><div class="nav-group-label">Üretim</div>
+        <button class="nav-item nav-btn" data-page="productMatching" onclick="showSection('productMatching')" title="Ürün Eşleştirme"><svg viewBox="0 0 24 24"><path d="M9 3h6l1 4H8z"/><path d="M5 7h14l-1 13H6z"/><circle cx="9" cy="17" r="1.3"/><circle cx="15" cy="17" r="1.3"/></svg><span class="nav-text">Ürün Eşleştirme</span></button>
+      </div>
       <div class="nav-group"><div class="nav-group-label">Ayarlar</div>
         <button class="nav-item nav-btn" data-page="settings" onclick="showSection('settings')" title="Ayarlar"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.3-1.3L13.7 2h-3.4l-.3 2.5a7 7 0 0 0-2.3 1.3l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.3l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.3 1.3l.3 2.5h3.4l.3-2.5a7 7 0 0 0 2.3-1.3l2.3 1 2-3.4-2-1.5A7 7 0 0 0 19 12z"/></svg><span class="nav-text">Ayarlar ve Güvenlik</span></button>
       </div>
@@ -1451,6 +1454,102 @@
         </div>
       </section>
 
+      <!-- ============ <section id="productMatching"> ============ -->
+      <section id="productMatching" class="page">
+        <div class="page-head">
+          <div>
+            <h1 class="page-title">Ürün Eşleştirme</h1>
+            <p class="page-subtitle">Üretim reçetesi — etiket basımı &amp; lazer kesimi buradan beslenir. Fontlar <b style="color:var(--gold)">Ayarlar → Font Kütüphanesi</b>'nden yüklenir, burada yalnızca seçilir.</p>
+          </div>
+          <div class="toolbar">
+            <button class="btn gold" onclick="syncTrendyolProducts()">↻ Tüm ürünleri Trendyol'dan çek</button>
+          </div>
+        </div>
+
+        <div id="productMatchingStatus" class="status-line" hidden></div>
+
+        <!-- Filtre çipleri + arama -->
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap;">
+          <button class="chip on" id="pmChipUnmatched" onclick="filterProductMatching('eslesmedi')">Eşleşmeyen (<span id="pmCountUnmatched">0</span>)</button>
+          <button class="chip" id="pmChipMatched" onclick="filterProductMatching('eslesti')">Eşleşen (<span id="pmCountMatched">0</span>)</button>
+          <button class="chip" id="pmChipAll" onclick="filterProductMatching('all')">Tümü (<span id="pmCountAll">0</span>)</button>
+          <input type="search" id="pmSearch" placeholder="Ürün adı veya barkod ara…" oninput="renderProductMatchingList()" style="margin-left:auto;max-width:260px;padding:7px 12px;border:1px solid var(--line-2);border-radius:8px;font-size:13px;background:var(--surface);" />
+        </div>
+
+        <!-- Toplu işlem çubuğu -->
+        <div id="pmBulkBar" class="pm-bulk-bar" hidden>
+          <span class="pm-bulk-sel"><span id="pmBulkCount">0</span> ürün seçili</span>
+          <div class="pm-bulk-fields">
+            <div class="pm-bulk-field">
+              <span class="pm-bulk-lbl">Çıktı</span>
+              <select id="pmBulkCikti" class="pm-bulk-ctrl">
+                <option value="">— seç —</option>
+                <option value="etiket">Etiket</option>
+                <option value="lazer">Lazer</option>
+                <option value="etiket+lazer">Etiket + Lazer</option>
+              </select>
+            </div>
+            <div class="pm-bulk-field">
+              <span class="pm-bulk-lbl">Etiket fontu</span>
+              <select id="pmBulkEtiketFont" class="pm-bulk-ctrl"><option value="">— kütüphaneden —</option></select>
+            </div>
+            <div class="pm-bulk-field">
+              <span class="pm-bulk-lbl">Lazer fontu</span>
+              <select id="pmBulkLazerFont" class="pm-bulk-ctrl"><option value="">— kütüphaneden —</option></select>
+            </div>
+            <div class="pm-bulk-field">
+              <span class="pm-bulk-lbl">Adet</span>
+              <input id="pmBulkAdet" type="number" min="1" class="pm-bulk-num" placeholder="—" />
+            </div>
+          </div>
+          <div style="flex:1"></div>
+          <button class="btn ghost small" onclick="clearProductMatchingSelection()">Seçimi temizle</button>
+          <button class="btn primary" onclick="applyBulkRecipe()">Seçili <span id="pmBulkCountBtn">0</span> ürüne uygula</button>
+        </div>
+
+        <!-- Ürün listesi -->
+        <div class="list" id="pmProductList">
+          <div class="lhead" style="grid-template-columns:34px 1fr 110px 120px 140px;">
+            <span><input type="checkbox" id="pmSelectAll" onchange="toggleSelectAllProducts(this.checked)" title="Tümünü seç" style="width:16px;height:16px;cursor:pointer;" /></span>
+            <span>Ürün</span><span>Satış</span><span>Eşleşme</span><span class="right">İşlem</span>
+          </div>
+          <div id="pmProductRows"><div class="lrow" style="grid-template-columns:1fr;"><span class="muted" style="padding:12px 0;">Ürünler yükleniyor… önce "Trendyol'dan çek" butonuna basın.</span></div></div>
+        </div>
+
+        <!-- Reçete düzenleyici paneli -->
+        <div id="pmRecipePanel" hidden>
+          <div class="card" style="margin-bottom:0;">
+            <div class="rhead" id="pmRecipeHeader" style="display:flex;align-items:center;gap:14px;padding:16px;border-bottom:1px solid var(--line);">
+              <div id="pmRecipeThumb" style="width:60px;height:60px;border-radius:10px;flex:none;background:linear-gradient(135deg,#EDE6DA,#E4DBCB);border:1px solid var(--line);overflow:hidden;">
+                <img id="pmRecipeImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;" />
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div id="pmRecipeTitle" style="font-weight:600;font-size:15px;">—</div>
+                <div id="pmRecipeMeta" class="muted" style="font-size:11.5px;">—</div>
+              </div>
+              <span id="pmRecipeStatusBadge" class="badge b-amber">Reçete eksik</span>
+              <button class="btn ghost small" onclick="closePmRecipePanel()">✕ Kapat</button>
+            </div>
+
+            <div style="padding:16px;">
+              <div class="label">Kişiselleştirme slotları</div>
+              <div id="pmSlotList"></div>
+              <button class="btn ghost small" onclick="addPmSlot()" style="margin-top:4px;">+ Slot ekle</button>
+
+              <!-- Çıktı önizleme -->
+              <div class="label" style="margin:18px 0 8px;">Çıktı önizleme</div>
+              <div id="pmPreviewArea" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px;"></div>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-top:1px solid var(--line);background:var(--surface-2);flex-wrap:wrap;">
+              <span id="pmRecipeFooterNote" class="ok" style="font-size:12.5px;"></span>
+              <button class="btn primary" onclick="savePmRecipe()">Reçeteyi kaydet — bu barkod için kalıcı</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
       <!-- ============ <section id="settings"> ============ -->
       <section id="settings" class="page">
         <div class="page-head">
@@ -1487,7 +1586,41 @@
             <div id="settingsRollSummary"></div>
           </article>
 
-          <article id="s-font" class="card"><div class="card-title"><h3>Font ve Renk</h3><span>Normal kullanıcı ayarı</span></div><div id="settingsFontColorInfo" class="settings-check-list"></div></article>
+          <article id="s-font" class="card settings-wide-card">
+            <div class="card-title"><h3>Font Kütüphanesi</h3><span>Etiket &amp; Lazer fontları — reçete ekranından seçilir</span></div>
+            <div id="settingsFontColorInfo" class="settings-check-list"></div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:12px;" id="fontLibraryCols">
+
+              <!-- Etiket Fontları -->
+              <div>
+                <div class="label" style="margin-bottom:8px;">Etiket Fontları</div>
+                <div id="labelFontList" class="settings-check-list" style="min-height:48px;"></div>
+                <div style="margin-top:10px;">
+                  <label style="display:block;font-size:12px;color:var(--text-2);margin-bottom:4px;">Font dosyası yükle (.ttf / .otf)</label>
+                  <input type="file" id="labelFontFileInput" accept=".ttf,.otf" style="display:none;" onchange="uploadFontLibraryFile('label')" />
+                  <button class="btn small" onclick="document.getElementById('labelFontFileInput').click()">+ Etiket Fontu Yükle</button>
+                </div>
+              </div>
+
+              <!-- Lazer Fontları -->
+              <div>
+                <div class="label" style="margin-bottom:8px;">Lazer Fontları</div>
+                <p class="muted" style="font-size:11.5px;margin-bottom:6px;">Lazer slotunda yalnızca <b>lazer-güvenli (bağlı/connected)</b> işaretli fontlar görünür.</p>
+                <div id="lazerFontList" class="settings-check-list" style="min-height:48px;"></div>
+                <div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                  <input type="file" id="lazerFontFileInput" accept=".ttf,.otf" style="display:none;" onchange="uploadFontLibraryFile('laser')" />
+                  <button class="btn small" onclick="document.getElementById('lazerFontFileInput').click()">+ Lazer Fontu Yükle</button>
+                  <label class="check" style="font-size:12px;" id="lazerSafeLabel">
+                    <input type="checkbox" id="lazerFontSafeCheck" checked />
+                    Lazer-güvenli (bağlı/connected)
+                  </label>
+                </div>
+              </div>
+
+            </div>
+            <div id="fontLibraryStatus" class="status-line" hidden style="margin-top:10px;"></div>
+          </article>
 
           <article id="s-cikti" class="card"><div class="card-title"><h3>Çıktı Klasörleri</h3><span>Güvenli proje içi yollar</span></div><div id="settingsOutputFolders" class="settings-check-list"></div></article>
 
@@ -1586,6 +1719,7 @@
   <script src="api_adapter.js"></script>
   <script src="./app.js"></script>
   <script src="redesign-interactions.js"></script>
+  <script src="product_matching.js"></script>
   <script>
     if (!window.qt && window.cyzella) { bridge = window.cyzella; if (typeof refreshState === "function") { refreshState(); } }
   </script>
