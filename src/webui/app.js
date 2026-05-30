@@ -6690,7 +6690,7 @@ function fieldOverlayHtml(model, useManualText = false) {
       ${manualGuideState.safe ? `<span class="safe-area-guide"></span>` : ""}
     </div>
   ` : "";
-  return `${model.preview_image ? `<img class="label-design-underlay" src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" />` : ""}
+  return `${model.preview_image ? `<img class="label-design-underlay" src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" onerror="handleCanvasBgError(this)" />` : ""}
   <div class="field-overlay-wrap" data-label-width="${esc(dims.width)}" data-label-height="${esc(dims.height)}"${previewStyle}>
     ${model.preview_image ? `<div class="field-design-bg" style="background-image:url(&quot;${esc(cssUrl(model.preview_image))}&quot;)" aria-hidden="true"></div>` : ""}
     ${model.preview_image ? `<img src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" onload="syncFieldOverlay(this.closest('.field-overlay-wrap'))" />` : ""}
@@ -6773,19 +6773,177 @@ function selectField(index) {
   }
 }
 
+const _corelTabToPanel = { layers: "fields", text: "style", smart: "layout", output: "output", color: "color" };
+
 function selectCorelDockTab(tab, options = {}) {
   const allowed = ["layers", "text", "color", "smart", "output"];
   const target = allowed.includes(tab) ? tab : "layers";
   currentCorelDockTab = target;
   const suffix = target.charAt(0).toUpperCase() + target.slice(1);
+  const inspector = byId("corelInspector");
   allowed.forEach(item => {
     const itemSuffix = item.charAt(0).toUpperCase() + item.slice(1);
     byId(`corelDockTab${itemSuffix}`)?.classList.toggle("active", item === target);
-    byId(`corelDock${itemSuffix}`)?.classList.toggle("active", item === target);
+    const panelName = _corelTabToPanel[item] || item;
+    const panel = inspector?.querySelector(`[data-panel="${panelName}"]`)
+      || byId(`corelDockBody${itemSuffix}`);
+    if (panel) panel.hidden = (item !== target);
   });
   if (!options.silent) scheduleCorelEditorStateSync();
-  const selectedPanel = byId(`corelDock${suffix}`);
+  const selPanelName = _corelTabToPanel[target] || target;
+  const selectedPanel = inspector?.querySelector(`[data-panel="${selPanelName}"]`)
+    || byId(`corelDockBody${suffix}`);
   if (selectedPanel && !options.silent) selectedPanel.scrollTop = 0;
+}
+
+function initStudioInspectorTabs() {
+  const tabsContainer = document.querySelector('.studio-inspector .inspector-tabs');
+  if (!tabsContainer) return;
+  const tabs = tabsContainer.querySelectorAll('button[data-tab]');
+  const panels = document.querySelectorAll('.studio-inspector .inspector-panel[data-panel]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const tabName = tab.dataset.tab;
+      tabs.forEach(t => t.classList.toggle('active', t === tab));
+      panels.forEach(p => { p.hidden = p.dataset.panel !== tabName; });
+    });
+  });
+}
+
+function setCanvasBackground(imageSrc) {
+  const bgEl = document.querySelector('.studio-canvas-bg');
+  if (!bgEl) return;
+  if (!imageSrc) {
+    bgEl.classList.add('canvas-bg-empty');
+    bgEl.innerHTML = '<span class="canvas-bg-placeholder">Model görseli bağlı değil</span>';
+    return;
+  }
+  const img = new Image();
+  img.onload = () => {
+    bgEl.classList.remove('canvas-bg-empty', 'canvas-bg-error');
+    bgEl.style.backgroundImage = `url("${imageSrc}")`;
+    bgEl.innerHTML = '';
+  };
+  img.onerror = () => {
+    bgEl.classList.remove('canvas-bg-empty');
+    bgEl.classList.add('canvas-bg-error');
+    bgEl.innerHTML = `<div class="canvas-bg-error-content"><span class="error-icon">⚠</span><p>Model g\xf6rseli y\xfcklenemedi</p><button onclick="reattachModelImage()">G\xf6rseli yeniden bağla</button></div>`;
+  };
+  img.src = imageSrc;
+}
+
+function handleCanvasBgError(imgEl) {
+  if (!imgEl) return;
+  imgEl.style.display = 'none';
+  const artboard = imgEl.closest('.artboard');
+  if (!artboard) return;
+  let errBanner = artboard.querySelector('.canvas-bg-load-error');
+  if (!errBanner) {
+    errBanner = document.createElement('div');
+    errBanner.className = 'canvas-bg-load-error';
+    errBanner.innerHTML = `<span>⚠</span> Model g\xf6rseli y\xfcklenemedi &mdash; <button onclick="reloadCanvasBackground()">Yeniden bağla</button>`;
+    artboard.insertBefore(errBanner, artboard.firstChild);
+  }
+}
+
+function reloadCanvasBackground() {
+  const model = selectedLabelModel;
+  if (!model || !model.preview_image) return;
+  const errBanner = document.querySelector('#manualPreview .canvas-bg-load-error');
+  if (errBanner) errBanner.remove();
+  const img = document.querySelector('#manualPreview .label-design-underlay');
+  if (img) {
+    img.style.display = '';
+    img.src = model.preview_image + '?t=' + Date.now();
+  }
+}
+
+function reattachModelImage() {
+  reloadCanvasBackground();
+}
+
+function updateOutputStatus(statuses) {
+  Object.entries(statuses).forEach(([key, val]) => {
+    const dotEl = document.querySelector(`#studioOutputStatus .status-item[data-status="${key}"] .status-dot`);
+    const labelEl = document.querySelector(`#studioOutputStatus .status-item[data-status="${key}"] .status-label`);
+    if (!dotEl) return;
+    dotEl.className = 'status-dot';
+    const labelMap = {
+      data: { ok: 'Veri hazır', warn: 'Veri eksik', fail: 'Veri hatası', pending: 'Kontrol ediliyor...' },
+      preview: { ok: 'Önizleme tamam', warn: 'Önizleme eksik', fail: 'Önizleme hatası', pending: 'Kontrol ediliyor...' },
+      render: { ok: 'Render tamam', warn: 'Render uyarısı', fail: 'Render hatası', pending: 'Render kontrol ediliyor...', neutral: 'Render kontrolü' }
+    };
+    if (val === 'ok') dotEl.classList.add('dot-success');
+    else if (val === 'warn') dotEl.classList.add('dot-warning');
+    else if (val === 'fail') dotEl.classList.add('dot-danger');
+    else if (val === 'pending') { dotEl.classList.add('dot-neutral'); dotEl.style.animation = 'pulse 1s infinite'; }
+    else dotEl.classList.add('dot-neutral');
+    if (val !== 'pending') dotEl.style.animation = '';
+    if (labelEl && labelMap[key]?.[val]) labelEl.textContent = labelMap[key][val];
+  });
+}
+
+async function runRenderCheck() {
+  updateOutputStatus({ render: 'pending' });
+  try {
+    const result = await fetch('/api/preflight/check', { method: 'POST' });
+    const data = await result.json();
+    updateOutputStatus({ render: data.ok ? 'ok' : 'fail' });
+  } catch {
+    updateOutputStatus({ render: 'fail' });
+  }
+}
+
+function checkStudioStatus() {
+  const fieldIds = ['manualText', 'manualDateText', 'manualNoteText'];
+  const allFilled = fieldIds.some(id => byId(id)?.value?.trim());
+  const previewImg = document.querySelector('#manualPreview .label-design-underlay');
+  const previewOk = previewImg && previewImg.style.display !== 'none' && !previewImg.closest('.canvas-bg-error');
+  updateOutputStatus({
+    data: allFilled ? 'ok' : 'warn',
+    preview: previewOk ? 'ok' : 'warn'
+  });
+}
+
+async function exportPDF() {
+  const overflowEl = byId('canvas-overflow-warning');
+  if (overflowEl && !overflowEl.classList.contains('hidden')) {
+    const proceed = confirm(
+      'Yazı kutuya sığmıyor olabilir.\n\nYine de PDF üretmek istiyor musunuz?\n\nİPTAL → Önce düzeltin\nTAMAM → Yine de üret'
+    );
+    if (!proceed) return;
+  }
+  renderManual({ format: 'pdf' });
+}
+
+function exportPNG() {
+  renderManual({ format: 'png' });
+}
+
+function applyStudioFontStyle() {
+  const field = selectedManualField?.();
+  if (!field) return;
+  const family = byId('studio-font-family')?.value;
+  const size = parseFloat(byId('studio-font-size')?.value) || field.font_size;
+  const color = byId('studio-font-color')?.value;
+  if (family) field.font_family = family;
+  if (size) field.font_size = String(size);
+  if (color) field.font_color = color;
+  if (typeof renderManualPreviewAsync === 'function') renderManualPreviewAsync();
+}
+
+function toggleStudioFontStyle(style) {
+  const field = selectedManualField?.();
+  if (!field) return;
+  if (style === 'bold') field.font_weight = field.font_weight === 'bold' ? 'normal' : 'bold';
+  if (style === 'italic') field.font_style = field.font_style === 'italic' ? 'normal' : 'italic';
+  if (style === 'underline') field.text_decoration = field.text_decoration === 'underline' ? 'none' : 'underline';
+  document.querySelector(`.font-style-buttons [data-style="${style}"]`)?.classList.toggle('active',
+    style === 'bold' ? field.font_weight === 'bold' :
+    style === 'italic' ? field.font_style === 'italic' :
+    field.text_decoration === 'underline'
+  );
+  if (typeof renderManualPreviewAsync === 'function') renderManualPreviewAsync();
 }
 
 function markSelectedFieldBoxes(index) {
@@ -8770,8 +8928,21 @@ function newManualWork() {
 }
 
 function toggleStudioMoreMenu() {
+  const menu = byId('studioMoreMenuTb');
+  if (menu) {
+    menu.hidden = !menu.hidden;
+    if (!menu.hidden) {
+      const closeOnOutside = (e) => {
+        if (!e.target.closest?.('.toolbar-more-wrap')) {
+          menu.hidden = true;
+          document.removeEventListener('click', closeOnOutside);
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeOnOutside), 0);
+    }
+    return;
+  }
   if (typeof selectCorelDockTab === "function") selectCorelDockTab("output");
-  showStudioToolNotice("Ek aksiyonlar Çıktı Merkezi ve sağ panelden yönetilir. Bağlı olmayan işlemler bu ekranda aktif gösterilmez.", "info");
 }
 
 function showLabelStudioPassiveNotice(message = "Bu işlem henüz production backend'e bağlı değil.") {
@@ -9434,6 +9605,28 @@ function textFitPreflightHtml() {
   `;
 }
 
+function showTextOverflowWarning(fieldName, message) {
+  let warningEl = byId('canvas-overflow-warning');
+  if (!warningEl) {
+    warningEl = document.createElement('div');
+    warningEl.id = 'canvas-overflow-warning';
+    warningEl.className = 'canvas-warning hidden';
+    document.querySelector('#manualPreview')?.appendChild(warningEl);
+  }
+  warningEl.innerHTML = `&#9651; ${esc(message)}`;
+  warningEl.classList.remove('hidden');
+  const pdfBtn = document.querySelector('.btn-export-pdf');
+  if (pdfBtn) {
+    pdfBtn.classList.add('btn-warning-mode');
+    pdfBtn.title = message + ' — Yine de üretmek için tıklayın';
+  }
+}
+
+function clearTextOverflowWarning() {
+  byId('canvas-overflow-warning')?.classList.add('hidden');
+  document.querySelector('.btn-export-pdf')?.classList.remove('btn-warning-mode');
+}
+
 function updateSelectedTextFitStatus() {
   const panel = byId("manualTextFitStatus");
   if (!panel) return;
@@ -9441,6 +9634,7 @@ function updateSelectedTextFitStatus() {
   if (!result) {
     panel.hidden = true;
     panel.innerHTML = "";
+    clearTextOverflowWarning();
     return;
   }
   panel.hidden = false;
@@ -9452,6 +9646,11 @@ function updateSelectedTextFitStatus() {
     ? "Öneri: Önce Fontu Küçült, çok uzunsa Alanı Genişlet veya Satıra Böl."
     : "Karar: Yazı kutuya sığıyor; çıktı öncesi ek işlem gerekmiyor.";
   panel.innerHTML = `<b>Yazı Sığdırma Durumu</b><span>${esc(result.message)}</span><small>${esc(result.detail)}</small><small class="text-fit-decision">${esc(decision)}</small>${actions}`;
+  if (result.status === "warn") {
+    showTextOverflowWarning(result.label, result.message);
+  } else {
+    clearTextOverflowWarning();
+  }
 }
 
 function scheduleSelectedTextFitStatus() {
@@ -11012,6 +11211,7 @@ function updateManualFieldValue(column, next) {
   markManualWorkDirty();
   renderStudioOrderPanels();
   updateManualOutputControlPanel();
+  if (typeof checkStudioStatus === 'function') checkStudioStatus();
 }
 
 function missingBasicManualFields(model) {
@@ -21646,6 +21846,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLabelStudioScrollContainment();
   setupStudioCombos();
   applyStudioEditorMode();
+  initStudioInspectorTabs();
   document.addEventListener("click", event => {
     if (!event.target.closest?.(".studio-combo")) closeStudioCombos();
   });

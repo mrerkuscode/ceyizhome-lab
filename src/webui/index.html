@@ -431,6 +431,23 @@
             </aside>
 
             <section class="studio-canvas-panel">
+              <div class="studio-output-status" id="studioOutputStatus">
+                <div class="status-indicators">
+                  <span class="status-item" data-status="data">
+                    <span class="status-dot dot-neutral"></span>
+                    <span class="status-label">Veri hazır</span>
+                  </span>
+                  <span class="status-item" data-status="preview">
+                    <span class="status-dot dot-neutral"></span>
+                    <span class="status-label">Önizleme eksik</span>
+                  </span>
+                  <span class="status-item" data-status="render">
+                    <span class="status-dot dot-neutral"></span>
+                    <span class="status-label">Render kontrolü</span>
+                  </span>
+                </div>
+                <button class="btn-run-render-check" onclick="runRenderCheck()">Render kontrolü çalıştır</button>
+              </div>
               <div class="canvas-bar">
                 <span class="ttl">Canlı Etiket Alanı</span>
                 <div class="zoom-cluster" style="margin-left:auto" aria-label="Yakınlaştırma">
@@ -467,14 +484,13 @@
             </section>
 
             <aside class="studio-inspector corel-inspector" id="corelInspector">
-              <div class="dock-tabs" role="tablist" aria-label="Dock" id="corelDockLayers">
-                <button id="corelDockTabLayers" class="active" onclick="selectCorelDockTab('layers')">Alanlar</button>
-                <button id="corelDockTabText" onclick="selectCorelDockTab('text')">Stil</button>
-                <button id="corelDockTabSmart" onclick="selectCorelDockTab('smart')">Yerleşim</button>
-                <button id="corelDockTabOutput" onclick="selectCorelDockTab('output')">Çıktı</button>
-                <button id="corelDockTabColor" onclick="selectCorelDockTab('color')">Ayarlar</button>
+              <div class="inspector-tabs" role="tablist" aria-label="Dock">
+                <button data-tab="fields" id="corelDockTabLayers" class="active" onclick="selectCorelDockTab('layers')">Alanlar</button>
+                <button data-tab="style" id="corelDockTabText" onclick="selectCorelDockTab('text')">Stil</button>
+                <button data-tab="layout" id="corelDockTabSmart" onclick="selectCorelDockTab('smart')">Yerleşim</button>
+                <button data-tab="output" id="corelDockTabOutput" onclick="selectCorelDockTab('output')">Çıktı</button>
               </div>
-              <div class="dock-body dock-only-combo" id="corelDockBodyLayers">
+              <div class="dock-body dock-only-combo inspector-panel" id="corelDockBodyLayers" data-panel="fields">
                 <div class="label-size-panel"><span class="ttl">Etiket Boyutu</span></div>
                 <h3>Etikete Yazılacak Alanlar</h3>
                 <div class="field-row"><span class="ico">İ</span><div class="fl"><small>İsim</small><input id="manualText" class="live-linked" value="Ayşe &amp; Mehmet" oninput="updateManualFieldValue('isim', this.value)" /></div></div>
@@ -491,8 +507,28 @@
                 <div id="manualTextFitStatus" class="text-fit-panel"></div>
                 <p class="safe-note">Lazer kesim alanına otomatik gönderilir. Çıktıdan önce "Gerçek Render Kontrolü" çalıştırın.</p>
               </div>
-              <div class="dock-body" id="corelDockBodySmart" hidden>
-                <h3>Çıktı Kontrolü</h3>
+              <div class="dock-body inspector-panel" id="corelDockBodyText" data-panel="style" hidden>
+                <h4>Yazı stili</h4>
+                <label>Font ailesi</label>
+                <select id="studio-font-family" onchange="applyStudioFontStyle()">
+                  <option>Segoe UI</option>
+                  <option>Inter</option>
+                  <option>Arial</option>
+                  <option>Times New Roman</option>
+                  <option>Courier New</option>
+                </select>
+                <label>Punto</label>
+                <input type="number" id="studio-font-size" value="10" min="6" max="72" onchange="applyStudioFontStyle()" />
+                <div class="font-style-buttons">
+                  <button data-style="bold" onclick="toggleStudioFontStyle('bold')" title="Kalın"><b>B</b></button>
+                  <button data-style="italic" onclick="toggleStudioFontStyle('italic')" title="İtalik"><i>I</i></button>
+                  <button data-style="underline" onclick="toggleStudioFontStyle('underline')" title="Altı çizili"><u>U</u></button>
+                </div>
+                <label>Renk</label>
+                <input type="color" id="studio-font-color" value="#000000" onchange="applyStudioFontStyle()" />
+              </div>
+              <div class="dock-body inspector-panel" id="corelDockBodySmart" data-panel="layout" hidden>
+                <h3>Yerleşim <small class="panel-sub">Çıktı Kontrolü</small></h3>
                 <div class="text-fit-panel" style="margin-bottom:10px">
                   <b>Otomatik Yerleşim</b>
                   <button class="btn primary small" onclick="autoArrangeManualFields()" title="İsim+tarih+ibare için optimum font ve konum hesaplar">Akıllı Yerleşim Uygula</button>
@@ -512,7 +548,7 @@
                   <button class="btn small" onclick="splitSelectedFieldTextLine()">Satıra Böl</button>
                 </div>
               </div>
-              <div class="dock-body" id="corelDockBodyOutput" hidden>
+              <div class="dock-body inspector-panel" id="corelDockBodyOutput" data-panel="output" hidden>
                 <div id="manualOutputActions" class="manual-output-actions">
                   <button class="btn primary" onclick="renderManual()">PDF/PNG Oluştur</button>
                   <button class="btn accent" onclick="renderManualToQueue()">Yazdırma Sırasına Ekle</button>

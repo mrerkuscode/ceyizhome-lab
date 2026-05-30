@@ -6357,3 +6357,58 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .pm-preview-label { background:#fff;border:1px solid var(--line-strong);border-radius:6px;height:50px;display:flex;align-items:center;justify-content:center;font-size:18px; }
 .pm-preview-laser { background:#2B2620;border-radius:6px;height:50px;display:flex;align-items:center;justify-content:center;font-size:18px;color:#E9DEC4;letter-spacing:1px; }
 
+/* === Fix 1: Inspector tabs active switching === */
+.studio-inspector .inspector-tabs{display:flex;border-bottom:1px solid var(--line,#e5e5e5)}
+.studio-inspector .inspector-tabs button{flex:1;padding:9px 3px;font-size:11px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--text-secondary,#666);cursor:pointer;transition:color .15s,border-color .15s}
+.studio-inspector .inspector-tabs button.active{border-bottom-color:var(--primary,#4F46E5);color:var(--primary,#4F46E5);font-weight:500}
+.studio-inspector .inspector-tabs button:hover:not(.active){color:var(--text,#222)}
+.inspector-panel[hidden]{display:none}
+.inspector-panel h4{margin:0 0 10px;font-size:13px;font-weight:500}
+.inspector-panel label{display:block;font-size:11px;color:var(--text-secondary,#666);margin:10px 0 4px}
+.font-style-buttons{display:flex;gap:6px;margin:6px 0}
+.font-style-buttons button{width:32px;height:32px;border:1px solid var(--line,#e5e5e5);border-radius:4px;background:transparent;cursor:pointer;font-size:13px}
+.font-style-buttons button.active{background:var(--primary,#4F46E5);color:#fff;border-color:var(--primary,#4F46E5)}
+
+/* === Fix 2: Canvas broken image fallback === */
+.canvas-bg-load-error{position:absolute;top:8px;left:8px;right:8px;padding:6px 10px;background:#fef3c7;color:#92400e;border-radius:4px;font-size:11px;display:flex;align-items:center;gap:6px;z-index:10;border:1px solid #fcd34d}
+.canvas-bg-load-error span{font-size:14px}
+.canvas-bg-load-error button{margin-left:auto;padding:2px 8px;font-size:11px;background:#f59e0b;color:#fff;border:none;border-radius:3px;cursor:pointer}
+.studio-canvas-bg{position:absolute;inset:0;background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.25}
+.canvas-bg-empty,.canvas-bg-error{display:flex;align-items:center;justify-content:center;background:#fafafa;opacity:1}
+.canvas-bg-placeholder{color:#9ca3af;font-size:12px;font-style:italic}
+.canvas-bg-error-content{text-align:center;padding:16px}
+.canvas-bg-error-content .error-icon{font-size:24px;color:#f59e0b}
+
+/* === Fix 3: Output status card === */
+.studio-output-status{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#fef3c7;border:1px solid #fcd34d;border-radius:6px;margin-bottom:6px;flex-shrink:0}
+.status-indicators{display:flex;gap:14px}
+.status-item{display:flex;align-items:center;gap:5px;font-size:11px}
+.status-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-success{background:#10b981}
+.dot-warning{background:#f59e0b}
+.dot-danger{background:#ef4444}
+.dot-neutral{background:#e5e7eb;border:1px solid #d1d5db}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.btn-run-render-check{padding:4px 10px;font-size:11px;background:#f59e0b;color:#fff;border:none;border-radius:4px;font-weight:500;cursor:pointer;white-space:nowrap}
+.btn-run-render-check:hover{background:#d97706}
+
+/* === Fix 4: Toolbar 3-column layout === */
+.studio-toolbar-3col{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:nowrap;padding:8px 14px}
+.toolbar-left,.toolbar-middle,.toolbar-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.toolbar-left .studio-brand{display:flex;align-items:center;gap:8px}
+.toolbar-left .studio-brand h1{font-size:15px;margin:0;font-weight:500}
+.toolbar-left .studio-brand p{display:none}
+.btn-primary.btn-export-pdf{background:#1f2937;color:#fff;font-weight:500;padding:6px 14px;border:none;border-radius:5px;cursor:pointer;font-size:13px}
+.btn-primary.btn-export-pdf:hover{background:#374151}
+.btn-secondary{background:transparent;border:1px solid #d1d5db;padding:6px 12px;border-radius:5px;cursor:pointer;font-size:13px}
+.btn-secondary:hover{background:#f9fafb}
+.btn-more{padding:4px 8px;font-size:16px;cursor:pointer;border:1px solid #d1d5db;border-radius:5px;background:transparent}
+.studio-more-menu{position:absolute;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #e5e5e5;border-radius:6px;padding:4px 0;z-index:50;min-width:160px;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.studio-more-menu button{display:block;width:100%;text-align:left;padding:7px 14px;font-size:12px;background:transparent;border:none;cursor:pointer}
+.studio-more-menu button:hover{background:#f9fafb}
+
+/* === Fix 5: Text overflow warning on canvas === */
+.canvas-warning{position:absolute;bottom:10px;left:10px;padding:5px 10px;background:#fee2e2;color:#b91c1c;border-radius:4px;font-size:11px;display:flex;align-items:center;gap:5px;font-weight:500;z-index:20;pointer-events:none}
+.canvas-warning.hidden{display:none}
+.btn-export-pdf.btn-warning-mode{background:#f59e0b !important}
+.btn-export-pdf.btn-warning-mode:hover{background:#d97706 !important}
