@@ -557,6 +557,32 @@ def reanalyze_trendyol_suggestion():
         return _err(exc)
 
 
+@api_bp.route("/reanalyze_all_trendyol_suggestions", methods=["POST"])
+def reanalyze_all_trendyol_suggestions():
+    try:
+        from webui_backend import trendyol_api as _ta
+        progress = _ta.get_bulk_reanalyze_progress()
+        if progress.get("running"):
+            return _ok({"status": "ALREADY_RUNNING", "message": "Toplu analiz zaten çalışıyor.", **progress})
+        job_id = job_manager.start_job(
+            "reanalyze_all_trendyol",
+            _ta.reanalyze_all_trendyol_suggestions,
+            _PROJECT_ROOT,
+        )
+        return _ok({"status": "STARTED", "job_id": job_id})
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/reanalyze_all_trendyol_suggestions_status", methods=["GET"])
+def reanalyze_all_trendyol_suggestions_status():
+    try:
+        from webui_backend import trendyol_api as _ta
+        return _ok(_ta.get_bulk_reanalyze_progress())
+    except Exception as exc:
+        return _err(exc)
+
+
 # GRUP 9 — İsim Kesim
 
 @api_bp.route("/update_name_cut_queue_item_status", methods=["POST"])

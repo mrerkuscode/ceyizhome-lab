@@ -5,6 +5,7 @@ import hashlib
 import json
 import mimetypes
 import re
+import threading
 import time
 import unicodedata
 import urllib.error
@@ -1859,6 +1860,7 @@ def reanalyze_all_trendyol_suggestions(
         _bulk_reanalyze_progress = {
             "running": True,
             "current": 0,
+            "processed": 0,
             "total": total,
             "changed": 0,
             "failed": 0,
@@ -1866,6 +1868,7 @@ def reanalyze_all_trendyol_suggestions(
             "job_id": job_id,
             "started_at": _now(),
             "ended_at": "",
+            "done": False,
             "summary": None,
         }
 
@@ -1904,6 +1907,7 @@ def reanalyze_all_trendyol_suggestions(
 
         with _bulk_reanalyze_lock:
             _bulk_reanalyze_progress["current"] = idx + 1
+            _bulk_reanalyze_progress["processed"] = idx + 1
             _bulk_reanalyze_progress["changed"] = changed_count
             _bulk_reanalyze_progress["failed"] = failed_count
 
@@ -1931,6 +1935,7 @@ def reanalyze_all_trendyol_suggestions(
 
     with _bulk_reanalyze_lock:
         _bulk_reanalyze_progress["running"] = False
+        _bulk_reanalyze_progress["done"] = True
         _bulk_reanalyze_progress["ended_at"] = _now()
         _bulk_reanalyze_progress["summary"] = summary
 

@@ -586,12 +586,12 @@ class WebBridge(QObject):
         return json.dumps(self.controller.reanalyze_trendyol_suggestion(suggestion_id), ensure_ascii=False)
 
     @Slot(result=str)
-    def start_bulk_reanalyze(self) -> str:
-        return json.dumps(self.controller.start_bulk_reanalyze(), ensure_ascii=False)
+    def reanalyze_all_trendyol_suggestions(self) -> str:
+        return json.dumps(self.controller.reanalyze_all_trendyol_suggestions(), ensure_ascii=False)
 
     @Slot(result=str)
-    def get_bulk_reanalyze_progress(self) -> str:
-        return json.dumps(self.controller.get_bulk_reanalyze_progress(), ensure_ascii=False)
+    def get_reanalyze_all_trendyol_status(self) -> str:
+        return json.dumps(self.controller.get_reanalyze_all_trendyol_status(), ensure_ascii=False)
 
     @Slot(str, str, result=str)
     def verify_trendyol_suggestion(self, suggestion_id: str, payload: str) -> str:
