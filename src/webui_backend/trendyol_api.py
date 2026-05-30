@@ -389,7 +389,11 @@ def sync_products(project_root: Path, *, max_pages: int = 50, page_size: int = 2
             continue
         catalog[barkod] = {
             "barkod": barkod,
-            "model_code": str(prod.get("stockCode") or prod.get("sellerBarcode") or ""),
+            # productCode = Trendyol'un gösterdiği model kodu (ör: "ADE-001")
+            # stockCode   = satıcının SKU kodu (yedek)
+            "model_code": str(
+                prod.get("productCode") or prod.get("stockCode") or prod.get("sellerBarcode") or ""
+            ),
             "title": str(prod.get("title") or prod.get("name") or ""),
             "image_url": str(
                 prod.get("images", [{}])[0].get("url") if isinstance(prod.get("images"), list) and prod.get("images") else ""

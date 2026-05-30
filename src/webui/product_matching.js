@@ -323,7 +323,9 @@
     if (!_pmCurrentSlots[idx]) return;
     _pmCurrentSlots[idx][field] = value;
     if (field === "cikti" || field === "font_id") renderPreview();
-    if (field === "cikti") renderSlots(); // re-render to show/hide plaka_adedi vs adet
+    if (field === "cikti") renderSlots();
+    // besleyen değişince sabit_metin input'u göster/gizle
+    if (field === "besleyen") renderSlots();
   };
 
   function renderSlots() {
@@ -378,9 +380,43 @@
     }).join("");
   }
 
+  // @font-face injeksiyonu — yüklenen fontu tarayıcıya tanıt
+  function _injectFontFace(fontEntry) {
+    if (!fontEntry || !fontEntry.id || !fontEntry.name) return;
+    var styleId = "pmFontFace_" + fontEntry.id;
+    if (document.getElementById(styleId)) return; // zaten enjekte edildi
+    var url = "/api/font_file/" + encodeURIComponent(fontEntry.id);
+    var fmt = (fontEntry.file || "").endsWith(".otf") ? "opentype" : "truetype";
+    var style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = "@font-face { font-family: " + JSON.stringify(fontEntry.name) + "; src: url(" + JSON.stringify(url) + ") format(" + JSON.stringify(fmt) + "); }";
+    document.head.appendChild(style);
+    // Yükleme hatası: FontFace API ile kontrol et (opsiyonel, modern tarayıcı)
+    if (typeof FontFace !== "undefined") {
+      var ff = new FontFace(fontEntry.name, "url(" + url + ")");
+      ff.load().catch(function () {
+        var warn = document.getElementById("pmFontLoadWarn");
+        if (!warn) return;
+        warn.hidden = false;
+        warn.textContent = "⚠ \"" + fontEntry.name + "\" önizlemede yüklenemedi — dosya eksik veya bozuk olabilir.";
+      });
+    }
+  }
+
   function renderPreview() {
     var area = document.getElementById("pmPreviewArea");
     if (!area) return;
+
+    // Kullanılan fontları @font-face ile inject et
+    var allFonts = (_pmFonts.label_fonts || []).concat(_pmFonts.laser_fonts || []);
+    var warnEl = document.getElementById("pmFontLoadWarn");
+    if (warnEl) warnEl.hidden = true;
+    _pmCurrentSlots.forEach(function (slot) {
+      if (!slot.font_id) return;
+      var entry = allFonts.find(function (f) { return f.id === slot.font_id; });
+      if (entry) _injectFontFace(entry);
+    });
+
     area.innerHTML = _pmCurrentSlots.map(function (slot) {
       var isLazer = slot.cikti === "lazer";
       var fontName = "";
@@ -391,10 +427,10 @@
       var capText = (isLazer ? "Lazer" : "Etiket") + " · " + (slot.konum || "Slot") + (fontName ? " · " + fontName : "");
       if (isLazer) {
         return '<div class="pm-preview-card"><div class="pm-preview-cap">' + _esc(capText) + '</div>'
-          + '<div class="pm-preview-laser" style="' + (fontName ? 'font-family:"' + _esc(fontName) + '",serif;' : '') + '">' + _esc(sampleText) + '</div></div>';
+          + '<div class="pm-preview-laser" style="' + (fontName ? 'font-family:' + JSON.stringify(fontName) + ',serif;' : '') + '">' + _esc(sampleText) + '</div></div>';
       } else {
         return '<div class="pm-preview-card"><div class="pm-preview-cap">' + _esc(capText) + '</div>'
-          + '<div class="pm-preview-label" style="' + (fontName ? 'font-family:"' + _esc(fontName) + '",sans-serif;' : '') + '">' + _esc(sampleText) + '</div></div>';
+          + '<div class="pm-preview-label" style="' + (fontName ? 'font-family:' + JSON.stringify(fontName) + ',sans-serif;' : '') + '">' + _esc(sampleText) + '</div></div>';
       }
     }).join("");
 
