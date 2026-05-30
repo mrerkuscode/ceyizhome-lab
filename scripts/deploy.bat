@@ -2,13 +2,6 @@
 chcp 65001 >nul
 setlocal EnableDelayedExpansion
 
-:: ============================================================
-::  CeyizHome Lab -- Tek-Tikla Deploy
-::  Otomatik: merge edilmemis en yeni fix/* / design/* branch'i
-::  bulur, test eder, main'e merge eder, Flask'i yeniden baslatir.
-::  Bekleyen branch yoksa: main pull + test + restart.
-:: ============================================================
-
 set "PROJECT_DIR=C:\Users\Pc\Documents\New project\production-bot"
 set "VENV_PY=%PROJECT_DIR%\.venv\Scripts\python.exe"
 set "GIT=C:\Program Files\Git\cmd\git.exe"
@@ -20,95 +13,80 @@ echo  CeyizHome Lab -- Deploy Basliyor
 echo ============================================================
 echo.
 
-:: -- 1. Repo klasorune gec -----------------------------------
 echo [1/6] Proje klasorune geciliyor...
 cd /d "%PROJECT_DIR%"
-if errorlevel 1 ( echo HATA: Klasor bulunamadi: %PROJECT_DIR% & goto :FAIL )
+if errorlevel 1 ( echo HATA: Klasor bulunamadi & goto :FAIL )
 echo       OK: %CD%
 echo.
 
-:: -- On kosullar --------------------------------------------
-if not exist "%VENV_PY%" (
-    echo HATA: Sanal ortam yok: %VENV_PY%
-    echo       Once start_app.bat veya setup.bat calistirin.
-    goto :FAIL
-)
+if not exist "%VENV_PY%" ( echo HATA: Sanal ortam yok & goto :FAIL )
 "%GIT%" --version >nul 2>nul
-if errorlevel 1 ( echo HATA: git bulunamadi: %GIT% & goto :FAIL )
+if errorlevel 1 ( echo HATA: git bulunamadi & goto :FAIL )
 
-:: -- 2. En yeni merge edilmemis fix/ veya design/ branch'ini bul
-echo [2/6] Merge edilmemis fix/design branch'i aran?yor...
+:: -- main'de oldugundan emin ol ---
+"%GIT%" checkout main >nul 2>nul
+"%GIT%" pull origin main >nul 2>nul
+
+echo [2/6] Merge edilmemis fix/design branch aran?yor...
 "%GIT%" fetch origin >nul 2>nul
-set "WORK_BRANCH="
-for /f "tokens=1" %%b in ('"%GIT%" branch -r --no-merged origin/main 2^>nul') do (
-    if "!WORK_BRANCH!"=="" (
-        echo %%b | findstr /R "origin/fix/ origin/design/" >nul 2>nul
-        if not errorlevel 1 (
-            set "RAW=%%b"
-            set "WORK_BRANCH=!RAW:origin/=!"
-        )
-    )
-)
 
-if "!WORK_BRANCH!"=="" (
-    echo       Bekleyen branch yok. main pull yapiliyor...
-    "%GIT%" checkout main >nul 2>nul
-    "%GIT%" pull origin main
-    if errorlevel 1 ( echo HATA: main pull basarisiz. & goto :FAIL )
+"%VENV_PY%" -c "import subprocess,sys; m=subprocess.run(['git','branch','-r','--merged','origin/main'],capture_output=True,text=True).stdout; c=subprocess.run(['git','branch','-r','--sort=-committerdate'],capture_output=True,text=True).stdout; [print(b.strip()) or sys.exit() for b in c.splitlines() if any(p in b for p in ['origin/fix/','origin/design/']) and b.strip() not in m]" > "%TEMP%\czb.txt" 2>nul
+
+set "REMOTE_BRANCH="
+set /p REMOTE_BRANCH=<"%TEMP%\czb.txt"
+del "%TEMP%\czb.txt" >nul 2>nul
+
+if "!REMOTE_BRANCH!"=="" (
+    echo       Bekleyen branch yok. main zaten guncel.
     set "MERGE_MODE=0"
-) else (
-    echo       Bulundu: !WORK_BRANCH!
-    "%GIT%" checkout "!WORK_BRANCH!"
-    if errorlevel 1 ( echo HATA: Branch'e gecilemedi: !WORK_BRANCH! & goto :FAIL )
-    "%GIT%" pull origin "!WORK_BRANCH!"
-    if errorlevel 1 ( echo HATA: git pull basarisiz. & goto :FAIL )
-    echo       OK
-    set "MERGE_MODE=1"
+    goto :TESTS
+)
+echo       Bulundu: !REMOTE_BRANCH!
+set "MERGE_MODE=1"
+
+:: -- Deneme merge (henuz push yok) -
+echo       Test merge yapiliyor...
+"%GIT%" merge --no-ff "!REMOTE_BRANCH!" -m "deploy-test: merge !REMOTE_BRANCH!"
+if errorlevel 1 (
+    "%GIT%" merge --abort >nul 2>nul
+    echo HATA: Merge conflict. Manuel coz: git mergetool
+    goto :FAIL
 )
 echo.
 
-:: -- 3. Testleri calistir -----------------------------------
+:: -- 3. Testleri calistir -------
+:TESTS
 echo [3/6] Testler calistiriliyor...
 echo       --------------------------------------------------------
-"%VENV_PY%" -m pytest tests\ --ignore=tests\test_browser_smoke.py -v --tb=short --no-header -q 2>&1
+"%VENV_PY%" -m pytest tests\ --ignore=tests\test_browser_smoke.py --tb=short --no-header -q 2>&1
 set "TEST_EXIT=!errorlevel!"
 echo       --------------------------------------------------------
+
 if not "!TEST_EXIT!"=="0" (
+    if "!MERGE_MODE!"=="1" (
+        echo       Test merge geri aliniyor...
+        "%GIT%" reset --hard HEAD~1 >nul 2>nul
+    )
     echo.
     echo *** TESTLER PATLADI -- DEPLOY IPTAL ***
-    echo     main'e merge YAPILMADI.
-    echo     Yukaridaki hatalari duzelt, tekrar dene.
     goto :FAIL
 )
 echo       OK: Tum testler gecti.
 echo.
 
-:: -- 4. Merge (sadece bekleyen branch varsa) ----------------
+:: -- 4. Push -------------------
 if "!MERGE_MODE!"=="0" (
-    echo [4/6] Bekleyen branch yoktu, merge adimi atlaniyor.
+    echo [4/6] Bekleyen branch yoktu, push atlaniyor.
     echo.
     goto :FLASK
 )
-
-echo [4/6] main'e geciliyor, "!WORK_BRANCH!" merge ediliyor...
-"%GIT%" checkout main
-if errorlevel 1 ( echo HATA: main'e gecilemedi. & goto :FAIL )
-
-"%GIT%" pull origin main
-if errorlevel 1 ( echo HATA: main pull basarisiz. & goto :FAIL )
-
-"%GIT%" merge --no-ff "!WORK_BRANCH!" -m "deploy: merge !WORK_BRANCH! into main"
-if errorlevel 1 (
-    echo HATA: Merge basarisiz, conflict olabilir.
-    "%GIT%" merge --abort >nul 2>nul
-    goto :FAIL
-)
+echo [4/6] Push ediliyor...
 "%GIT%" push origin main
-if errorlevel 1 ( echo HATA: git push basarisiz. & goto :FAIL )
-echo       OK: main guncellendi ve push edildi.
+if errorlevel 1 ( echo HATA: Push basarisiz & goto :FAIL )
+echo       OK: main push edildi.
 echo.
 
-:: -- 5. Flask kapat ve yeniden baslat ----------------------
+:: -- 5. Flask ------------------
 :FLASK
 echo [5/6] Port %FLASK_PORT% kapatiliyor...
 for /f "tokens=5" %%p in ('netstat -ano 2^>nul ^| findstr ":%FLASK_PORT% " ^| findstr "LISTENING"') do (
@@ -116,12 +94,9 @@ for /f "tokens=5" %%p in ('netstat -ano 2^>nul ^| findstr ":%FLASK_PORT% " ^| fi
     taskkill /F /PID %%p >nul 2>nul
 )
 timeout /t 2 /nobreak >nul
-
 echo       Flask baslatiliyor...
-start "CeyizHome Lab - Flask" /d "%PROJECT_DIR%" cmd /k ^
-    ".venv\Scripts\python.exe -m src.server.flask_app"
-
-echo       Sunucu hazir olana kadar bekleniyor (max 10 sn)...
+start "CeyizHome Lab" /d "%PROJECT_DIR%" cmd /k ".venv\Scripts\python.exe -m src.server.flask_app"
+echo       Bekleniyor (max 10 sn)...
 set "READY=0"
 for /l %%i in (1,1,10) do (
     if "!READY!"=="0" (
@@ -130,25 +105,17 @@ for /l %%i in (1,1,10) do (
         if not errorlevel 1 ( set "READY=1" & echo       OK: Sunucu hazir. )
     )
 )
-if "!READY!"=="0" ( echo       UYARI: 10 sn yanit yok, tarayiciyi elle yenile. )
+if "!READY!"=="0" ( echo       UYARI: 10sn yanit yok. )
 echo.
 
-:: -- 6. Tarayici ac ----------------------------------------
-echo [6/6] Tarayici aciliyor: http://localhost:%FLASK_PORT%
+:: -- 6. Tarayici ---------------
+echo [6/6] Tarayici aciliyor...
 start "" "http://localhost:%FLASK_PORT%"
 echo.
-if "!MERGE_MODE!"=="1" (
-    echo ============================================================
-    echo  DEPLOY TAMAMLANDI
-    echo  Merge  : !WORK_BRANCH! -- main
-    echo  URL    : http://localhost:%FLASK_PORT%
-    echo ============================================================
-) else (
-    echo ============================================================
-    echo  DEPLOY TAMAMLANDI  (bekleyen branch yoktu)
-    echo  URL    : http://localhost:%FLASK_PORT%
-    echo ============================================================
-)
+echo ============================================================
+if "!MERGE_MODE!"=="1" ( echo  DEPLOY TAMAMLANDI  Merge: !REMOTE_BRANCH! ) else ( echo  DEPLOY TAMAMLANDI  Bekleyen branch yoktu )
+echo  URL: http://localhost:%FLASK_PORT%
+echo ============================================================
 echo.
 pause
 exit /b 0
