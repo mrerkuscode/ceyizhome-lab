@@ -1,3 +1,5 @@
+Güncel gerçek durum & yol haritası: [docs/PROJECT_TRUTH.md](docs/PROJECT_TRUTH.md)
+
 # Production Bot MVP
 
 Bu proje, kişiye özel ürün üretimi için yerel Windows üzerinde çalışan güvenli bir MVP otomasyon aracıdır.
