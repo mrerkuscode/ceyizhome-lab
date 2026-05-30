@@ -1,1 +1,56 @@
-{}
+{
+  "TYBC2IQMWDW901DH35": {
+    "slots": [
+      {
+        "adet": 3,
+        "besleyen": "sabit",
+        "cikti": "etiket",
+        "font_id": "6b0b9f13",
+        "id": "slot_1",
+        "konum": "Kurdele Etiketi",
+        "plaka_adedi": null,
+        "sabit_metin": "ALLAHIN EMRİYLE..."
+      }
+    ],
+    "updated_at": "2026-05-30 22:39:10"
+  },
+  "TYBX7RUBPAJ5OHVQ78": {
+    "slots": [
+      {
+        "id": "slot_1",
+        "konum": "Varsayılan",
+        "cikti": "etiket",
+        "besleyen": "isim",
+        "adet": 2,
+        "font_id": "6c3a0818"
+      }
+    ],
+    "updated_at": "2026-05-30 21:44:07"
+  },
+  "CYLZKJKJK5124544": {
+    "slots": [
+      {
+        "id": "slot_1",
+        "konum": "Varsayılan",
+        "cikti": "etiket",
+        "besleyen": "isim",
+        "adet": 2,
+        "font_id": "6c3a0818"
+      }
+    ],
+    "updated_at": "2026-05-30 21:44:07"
+  },
+  "KYJKJHHSNNNM2": {
+    "slots": [
+      {
+        "id": "slot_1",
+        "konum": "Varsayılan",
+        "cikti": "etiket",
+        "besleyen": "isim",
+        "adet": 2,
+        "font_id": "6c3a0818"
+      }
+    ],
+    "updated_at": "2026-05-30 21:44:07"
+  }
+}

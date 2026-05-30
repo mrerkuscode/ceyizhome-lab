@@ -79,6 +79,7 @@ output/*
 !output/2026-05-30/
 
 # Output altında yine de ölü/büyük klasörler dışlanır:
+output/**/github_bridge/
 output/2026-05-28/full_project_audit/01_menu_details/
 output/**/name_cut/*.dxf
 output/**/namecut_exports/*/plate_*.dxf
