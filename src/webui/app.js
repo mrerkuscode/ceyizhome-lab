@@ -3235,6 +3235,12 @@ function renderTrendyolSummary(summary, suggestions = [], questions = []) {
     ["Üretime aktarıldı", imported, "imported", "purple"],
     ["Trendyol işlem", processable, "marketplace_processable", "success"]
   ];
+  const orphaned   = Number(summary.questions_orphaned   || 0);
+  const qTotal     = Number(summary.questions_total      || 0);
+  const qLinked    = Number(summary.questions_with_order_no || 0);
+  const qUnlinked  = Number(summary.questions_unlinked   || 0);
+  const idleQ      = qTotal - questionLinked;  // questions not attached to any suggestion
+
   box.innerHTML = `
     ${metrics.map(([label, value, filter, tone]) => `
       <button class="trendyol-kpi ${filter ? "clickable" : ""} ${tone}" onclick="${filter ? `setTrendyolStatusFilter(${jsArg(filter)})` : "clearTrendyolFilters()"}">
@@ -3246,6 +3252,20 @@ function renderTrendyolSummary(summary, suggestions = [], questions = []) {
     <span class="trendyol-last-sync"><i aria-hidden="true"></i> Son çekim: ${esc(lastSyncText)}</span>
     <button class="btn tiny trendyol-refresh-btn" onclick="syncTrendyolOrders(Number(document.getElementById('trendyolTopDateFilter')?.value || 7))" title="Yenile">↻</button>
   `;
+
+  // Bütünlük uyarı şeridi
+  const integrityEl = byId("trendyolIntegrityStrip");
+  if (integrityEl) {
+    if (orphaned > 0 || idleQ > 10) {
+      const parts = [];
+      if (orphaned > 0) parts.push(`<b>${orphaned}</b> soru bağlanamadı (sipariş çekilmemiş)`);
+      if (idleQ > 0) parts.push(`<b>${idleQ}</b> soru hiçbir satıra bağlı değil`);
+      integrityEl.hidden = false;
+      integrityEl.innerHTML = `⚠ Veri eksikliği: ${parts.join(" · ")} — <a href="#" onclick="syncTrendyolOrders(7);return false">7 günü yeniden çek</a>`;
+    } else {
+      integrityEl.hidden = true;
+    }
+  }
 }
 
 function renderTrendyolQuickFilters(rows = []) {
@@ -4747,6 +4767,18 @@ function tscHighlightEvidence(text, labelText, dateText) {
   return result;
 }
 
+// --- Ürün küçük resim (inline) ---
+function _tscThumbInline(row, size) {
+  const url = getOrderImageUrl(row);
+  if (!url) {
+    return `<span class="tsc-thumb-empty" aria-hidden="true">▧</span>`;
+  }
+  const cls = size === "mini" ? "tsc-mini-img" : "tsc-prod-img";
+  return `<img class="${cls}" src="${esc(url)}" alt="${esc(row.product_name || "Ürün")}" loading="lazy"
+    onerror="this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.display='inline');" />
+    <span class="tsc-thumb-empty" style="display:none" aria-hidden="true">▧</span>`;
+}
+
 // --- TSC ana kart render: daraltilmis + acik durum ---
 function tscCard(row) {
   const ready        = trendyolVerifiedReady(row);
@@ -4785,7 +4817,7 @@ function tscCard(row) {
                onclick="selectTrendyolSuggestion(${jsArg(row.id)})">
         <div class="tsc-row">
           <span class="tsc-chev">&#9658;</span>
-          <div class="tsc-mini-thumb" data-trendyol-thumb-id="${esc(row.id||"")}"></div>
+          <div class="tsc-mini-thumb">${_tscThumbInline(row, "mini")}</div>
           <div class="tsc-who">
             <b>${esc(row.customer_name||"Müşteri")}</b>
             <span>#${esc(row.order_number||"-")}</span>
@@ -4845,7 +4877,7 @@ function tscCard(row) {
       </div>
       <div class="tsc-body">
         <div class="tsc-left">
-          <div class="tsc-product-img" data-trendyol-thumb-id="${esc(row.id||"")}"></div>
+          <div class="tsc-product-img">${_tscThumbInline(row, "full")}</div>
         </div>
         <div class="tsc-right">
           <div class="tsc-section-label">Üretilecek alanlar · AI</div>
@@ -4940,10 +4972,13 @@ function renderTrendyolSuggestions(rows) {
     list.innerHTML = `<div class="empty-state"><b>Bu filtrelere uygun Trendyol satırı yok.</b><button class="btn small" onclick="clearTrendyolFilters()">Filtreleri Temizle</button></div>`;
     return;
   }
+  // Sırala: sipariş tarihine göre azalan (en yeni önce)
+  filtered.sort((a, b) => Number(b.order_date_ms || 0) - Number(a.order_date_ms || 0));
   const moreNotice = filtered.length > visible.length
     ? `<div class="empty-state compact"><b>${esc(visible.length)} / ${esc(filtered.length)} satır gösteriliyor.</b><p>Listeyi akıcı tutmak için ilk kayıtlar çizildi; arama veya hızlı filtreyle hedef siparişi daraltın.</p></div>`
     : "";
-  list.innerHTML = visible.map(row => tscCard(row)).join("") + moreNotice;
+  const visibleSorted = filtered.slice(0, TRENDYOL_ORDER_RENDER_LIMIT);
+  list.innerHTML = visibleSorted.map(row => tscCard(row)).join("") + moreNotice;
   setTimeout(hydrateTrendyolProductThumbs, 0);
 }
 

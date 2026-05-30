@@ -1419,12 +1419,13 @@
               <button id="trendyolBulkReanalyzeBtn" class="btn small" type="button" onclick="reanalyzeAllTrendyolSuggestions()" title="Operatör düzeltmesi olmayan tüm önerileri yeniden analiz eder">Tümünü Yeniden Analiz Et</button>
             </div>
             <div id="trendyolBulkReanalyzeProgress" hidden style="padding:6px 0 2px 0;font-size:0.85em;color:var(--accent,#5b8dee)"></div>
+            <div id="trendyolIntegrityStrip" hidden class="integrity-strip" style="padding:5px 10px;font-size:0.82em;background:var(--warn-bg,#fff3cd);color:var(--warn-text,#7c5600);border-radius:4px;margin-bottom:4px"></div>
             <div id="trendyolQuickFilters" class="trendyol-status-tabs"></div>
             <div class="order-filter-bar">
               <input id="trendyolSearch" placeholder="Sipariş no, müşteri, ürün, barkod ara..." oninput="scheduleTrendyolOrdersUpdate()" />
               <select id="trendyolStatusFilter" onchange="updateTrendyolOrders(currentState.trendyol||{})" style="width:auto"><option value="">Tüm durumlar</option><option value="ready">Üretime hazır</option><option value="review">Kontrol gerekli</option><option value="unmatched">Eşleşmeyen ürünler</option><option value="low_confidence">Düşük güven</option><option value="question_waiting">Kanıt bekliyor</option><option value="verification_pending">Onay bekliyor</option><option value="imported">Aktarıldı</option></select>
               <button class="btn small ghost" onclick="clearTrendyolFilters()">Filtreleri Temizle</button>
-              <button class="btn small" type="button">Sırala: Güncel</button>
+              <button class="btn small" type="button" title="Sipariş tarihine göre en yeni önce sıralar (otomatik)">Sırala: Güncel ↓</button>
             </div>
             <div id="trendyolBulkActionBar" class="trendyol-bulk-action-bar" hidden></div>
             <div id="trendyolSuggestionsList" class="trendyol-suggestion-list">
