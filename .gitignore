@@ -110,3 +110,12 @@ release/
 
 # --- Geçici test çıktıları (proofs PNG'leri hariç tutma) -----
 # (PNG kanıtlar repo'da kalabilir; ama büyük render'lar değil)
+
+
+# --- Token cleanup (chore-token-cleanup): ek desenler --------
+diag_screenshots/
+output/**/ui_screenshots/
+output/**/test_logs/
+output/**/test_screenshots/
+dist/
+build/
