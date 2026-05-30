@@ -4720,6 +4720,162 @@ function trendyolSuggestionDetails(row = {}) {
   `;
 }
 
+// --- TSC yardimci: kanit metninde isim/tarih vurgula ---
+function tscHighlightEvidence(text, labelText, dateText) {
+  if (!text) return "";
+  let result = esc(text);
+  if (labelText && labelText.length > 1) {
+    const el = esc(labelText);
+    result = result.split(el).join(`<span class="tsc-hl">${el}</span>`);
+  }
+  if (dateText && dateText.length > 3) {
+    const ed = esc(dateText);
+    result = result.split(ed).join(`<span class="tsc-hl">${ed}</span>`);
+  }
+  return result;
+}
+
+// --- TSC ana kart render: daraltilmis + acik durum ---
+function tscCard(row) {
+  const ready        = trendyolVerifiedReady(row);
+  const confidence   = Number(row.confidence || 0);
+  const lowConf      = confidence < 0.7;
+  const qContexts    = trendyolQuestionContexts(row);
+  const potQ         = trendyolPotentialQuestionsForSuggestion(row);
+  const qText        = qContexts[0]?.question_text || row.question_text || "";
+  const qCount       = qContexts.length || (row.question_text ? 1 : 0);
+  const expanded     = expandedTrendyolSuggestionId === row.id;
+  const imported     = row.import_status === "imported";
+  const canImport    = ready && !imported && !trendyolInstructionConflictWarnings(row).length;
+  const labelText    = row.label_text || "";
+  const dateText     = row.date_text  || "";
+  const confPct      = Math.round(confidence * 100);
+  const isSel        = selectedTrendyolSuggestionId === row.id;
+
+  const dotColor  = ready            ? "var(--tc-green)"
+                  : (labelText && confidence >= 0.5) ? "var(--tc-amber)"
+                  : "var(--tc-red)";
+  const badgeLabel = ready           ? "Üretime hazır"
+                   : (labelText && confidence >= 0.5) ? "Onay bekliyor"
+                   : "Kontrol gerekli";
+  const badgeCls  = ready            ? "tsc-b-green"
+                  : (labelText && confidence >= 0.5) ? "tsc-b-amber"
+                  : "tsc-b-red";
+  const accent    = ready ? "tsc-ready" : "tsc-attention";
+  const selCls    = isSel  ? " selected"    : "";
+  const lcCls     = lowConf ? " low-confidence" : "";
+
+  // DARALTILMIS
+  if (!expanded) {
+    return `
+      <article class="trendyol-suggestion-card tsc-card ${accent}${selCls}${lcCls}"
+               data-trendyol-suggestion-id="${esc(row.id||"")}"
+               onclick="selectTrendyolSuggestion(${jsArg(row.id)})">
+        <div class="tsc-row">
+          <span class="tsc-chev">&#9658;</span>
+          <div class="tsc-mini-thumb" data-trendyol-thumb-id="${esc(row.id||"")}"></div>
+          <div class="tsc-who">
+            <b>${esc(row.customer_name||"Müşteri")}</b>
+            <span>#${esc(row.order_number||"-")}</span>
+          </div>
+          <div class="tsc-result">
+            <span class="tsc-result-k">isim</span>&nbsp;${
+              labelText
+                ? `<span class="tsc-result-v">${esc(labelText)}</span>`
+                : `<span class="tsc-result-v tsc-missing">Bulunamadı</span>`
+            }${dateText ? `<span class="tsc-result-date">&nbsp;·&nbsp;${esc(dateText)}</span>` : ""}
+          </div>
+          <span class="tsc-conf"><span class="tsc-dot" style="background:${dotColor}"></span>${confPct}%</span>
+          <span class="tsc-badge ${badgeCls}">${esc(badgeLabel)}</span>
+          ${canImport
+            ? `<button class="tsc-btn tsc-primary tsc-sm" type="button" onclick="event.stopPropagation();importTrendyolSuggestionToCustomerOrder(${jsArg(row.id)})">Üretime aktar</button>`
+            : `<button class="tsc-btn tsc-ghost tsc-sm"   type="button" onclick="event.stopPropagation();selectTrendyolSuggestion(${jsArg(row.id)})">İncele</button>`}
+        </div>
+      </article>`;
+  }
+
+  // ACIK
+  const initials  = (row.customer_name||"?").split(/\s+/).map(w=>w[0]||"").slice(0,2).join("").toUpperCase();
+  const orderDate = trendyolDateTimeShort(trendyolOrderDate(row));
+  const pkgNo     = trendyolPackageNo(row);
+  const dlvNo     = trendyolDeliveryNo(row);
+  const metaParts = [
+    "#"+(row.order_number||"-"),
+    orderDate ? "Sipariş "+orderDate : null,
+    pkgNo     ? "Paket "+pkgNo      : null,
+    dlvNo     ? "Teslimat "+dlvNo   : null,
+    row.barcode ? "Barkod "+row.barcode : null
+  ].filter(Boolean).join(" · ");
+  const productUrl  = getTrendyolProductUrl(row);
+  const highlighted = tscHighlightEvidence(qText, labelText, dateText);
+
+  return `
+    <article class="trendyol-suggestion-card tsc-card tsc-expanded ${accent}${selCls}${lcCls}"
+             data-trendyol-suggestion-id="${esc(row.id||"")}">
+      <div class="tsc-head" onclick="selectTrendyolSuggestion(${jsArg(row.id)})">
+        <span class="tsc-chev">&#9660;</span>
+        <div class="tsc-avatar">${esc(initials)}</div>
+        <div class="tsc-who-exp">
+          <b>${esc(row.customer_name||"Müşteri")}</b>
+          <span class="tsc-meta">${esc(metaParts)}</span>
+        </div>
+        <span class="tsc-conf"><span class="tsc-dot" style="background:${dotColor}"></span>${confPct}%</span>
+        <span class="tsc-badge ${badgeCls}">${esc(badgeLabel)}</span>
+        <details class="tsc-more-wrap" onclick="event.stopPropagation()">
+          <summary class="tsc-more-btn" title="Diğer işlemler">&#8942;</summary>
+          <div class="tsc-more-menu">
+            <button class="tsc-smenu-btn" type="button" onclick="openTrendyolEvidenceDrawer(${jsArg(row.id)},'customer')">Müşteri geçmişi</button>
+            <button class="tsc-smenu-btn" type="button" onclick="showSameCustomerTrendyolOrders(${jsArg(row.customer_name||'')})">Önceki siparişler</button>
+            <hr class="tsc-smenu-sep">
+            <button class="tsc-smenu-btn" type="button" onclick="toggleTrendyolOrderSelection(${jsArg(row.id)},true)">Toplu seçime ekle</button>
+          </div>
+        </details>
+      </div>
+      <div class="tsc-body">
+        <div class="tsc-left">
+          <div class="tsc-product-img" data-trendyol-thumb-id="${esc(row.id||"")}"></div>
+        </div>
+        <div class="tsc-right">
+          <div class="tsc-section-label">Üretilecek alanlar · AI</div>
+          <div class="tsc-produce">
+            <div class="tsc-name-hero${labelText?"":" tsc-missing"}">${labelText?esc(labelText):"İsim bulunamadı"}</div>
+            <div class="tsc-field-row">
+              <div class="tsc-field"><div class="tsc-field-k">Tarih</div><div class="tsc-field-v${dateText?"":" tsc-muted"}">${esc(dateText||"-")}</div></div>
+              <div class="tsc-field"><div class="tsc-field-k">Adet</div><div class="tsc-field-v">${esc(String(row.quantity||1))}</div></div>
+              <div class="tsc-field"><div class="tsc-field-k">Lazer isim</div><div class="tsc-field-v${labelText?"":" tsc-muted"}">${esc(labelText||"-")}</div></div>
+            </div>
+          </div>
+          ${qText ? `<div class="tsc-evidence">
+            <div class="tsc-section-label" style="margin-bottom:6px">Kanıt · müşteri mesajı</div>
+            <div class="tsc-msg">${highlighted}</div>
+            <div class="tsc-ev-actions">
+              <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="applyTrendyolQuestionToSuggestion(${jsArg(row.id)},${jsArg(qContexts[0]?.id||'')})">Bu mesajı kanıt al</button>
+              <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="openTrendyolEvidenceDrawer(${jsArg(row.id)},'order')">Tüm mesajlar (${qCount})</button>
+              <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="typeof openTrendyolNameEdit==='function'&&openTrendyolNameEdit(${jsArg(row.id)})" title="TODO: isim düzenleme">İsmi düzelt</button>
+            </div>
+          </div>` : ""}
+        </div>
+      </div>
+      <div class="tsc-foot">
+        <div class="tsc-status">
+          <span class="tsc-s">Kargo <b>${row.cargo_label_ready?"hazır":"bekliyor"}</b></span>
+          <span class="tsc-s">Fatura <b>${row.invoice_amount?esc(String(row.invoice_amount))+" TL":"bekliyor"}</b></span>
+          <span class="tsc-readonly-note">Read-only · statü/kargo/fatura tetiklenmez</span>
+        </div>
+        <div class="tsc-actions">
+          <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="fillTrendyolMappingFromSuggestion(${jsArg(row.id)});showTrendyolTab('mapping')">Ürün eşleştir</button>
+          ${productUrl
+            ? `<a class="tsc-btn tsc-ghost tsc-sm" href="${esc(productUrl)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Ürüne git ↗</a>`
+            : `<button class="tsc-btn tsc-ghost tsc-sm" type="button" disabled>Ürüne git ↗</button>`}
+          <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="typeof trendyolOpenInStudio==='function'&&trendyolOpenInStudio(${jsArg(row.id)})">Studio'da aç</button>
+          <button class="tsc-btn tsc-primary tsc-sm" type="button" ${canImport?"":"disabled"}
+                  onclick="event.stopPropagation();importTrendyolSuggestionToCustomerOrder(${jsArg(row.id)})"
+                  title="${canImport?"Üretime aktar":"Aktarım için onay ve model eşleştirmesi gerekir"}">Üretime aktar</button>
+        </div>
+      </div>
+    </article>`;
+}
+
 function renderTrendyolSuggestions(rows) {
   const list = byId("trendyolSuggestionsList");
   if (!list) return;
@@ -4775,53 +4931,7 @@ function renderTrendyolSuggestions(rows) {
   const moreNotice = filtered.length > visible.length
     ? `<div class="empty-state compact"><b>${esc(visible.length)} / ${esc(filtered.length)} satır gösteriliyor.</b><p>Listeyi akıcı tutmak için ilk kayıtlar çizildi; arama veya hızlı filtreyle hedef siparişi daraltın.</p></div>`
     : "";
-  const tableHead = `
-    <div class="trendyol-op-grid-head" aria-hidden="true">
-      <span>Sipariş Bilgileri</span>
-      <span>Alıcı</span>
-      <span>Ürün Bilgisi</span>
-      <span>Kargo / Fatura</span>
-      <span>Müşteri Mesajları / Kanıtlar</span>
-      <span>AI Alan Özeti & Aksiyon</span>
-    </div>
-  `;
-  list.innerHTML = tableHead + visible.map(row => {
-    const ready = trendyolVerifiedReady(row);
-    const confidence = Number(row.confidence || 0);
-    const lowConfidence = confidence < 0.7;
-    const questionContexts = trendyolQuestionContexts(row);
-    const potentialQuestions = trendyolPotentialQuestionsForSuggestion(row);
-    const productionChecks = trendyolProductionChecks(row, potentialQuestions);
-    const questionText = questionContexts[0]?.question_text || row.question_text || "";
-    const sourceWarning = Object.values(row.field_sources || {}).some(source => ["product_name", "customer_name"].includes(source));
-    const questionCount = questionContexts.length || (row.question_text ? 1 : 0);
-    const expanded = expandedTrendyolSuggestionId === row.id;
-    const checked = selectedTrendyolOrderIds.has(row.id || "");
-    return `
-      <article class="trendyol-suggestion-card ${selectedTrendyolSuggestionId === row.id ? "selected" : ""} ${expanded ? "expanded" : ""} ${lowConfidence ? "low-confidence" : ""}" data-trendyol-suggestion-id="${esc(row.id || "")}" onclick="selectTrendyolSuggestion(${jsArg(row.id)})">
-        <div class="trendyol-op-row-head">
-          <div>
-            <b>${esc(row.customer_name || "Müşteri")}</b>
-            <span>Trendyol #${esc(row.order_number || "-")} · Satır ${esc(row.line_id || "-")}</span>
-          </div>
-          ${trendyolStatusPill(row)}
-          <span class="card-chevron">&#9660;</span>
-          <button class="trendyol-more-btn" type="button" onclick="event.stopPropagation()" title="Diğer işlemler">⋮</button>
-        </div>
-        ${trendyolBadges(row, questionContexts, ready, lowConfidence, potentialQuestions)}
-        <div class="trendyol-op-grid">
-          ${trendyolOrderColumn(row, checked)}
-          ${trendyolBuyerColumn(row)}
-          ${trendyolProductColumn(row)}
-          ${trendyolLogisticsColumn(row)}
-          ${trendyolMessagesColumn(row, potentialQuestions)}
-          ${trendyolAiActionColumn(row, productionChecks)}
-        </div>
-        ${sourceWarning ? `<div class="trendyol-source-warning">AI önerisi ürün/müşteri bilgisinden gelmiş olabilir; soru ile doğrulayın.</div>` : ""}
-        ${expanded ? trendyolSuggestionDetails(row) : ""}
-      </article>
-    `;
-  }).join("") + moreNotice;
+  list.innerHTML = visible.map(row => tscCard(row)).join("") + moreNotice;
   setTimeout(hydrateTrendyolProductThumbs, 0);
 }
 

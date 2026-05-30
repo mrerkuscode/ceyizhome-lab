@@ -5975,3 +5975,329 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .smenu-btn:hover{background:var(--surface-2)}
 .smenu-btn:disabled,.smenu-btn[aria-disabled=true]{opacity:.4;cursor:not-allowed}
 .smenu-sep{border:none;border-top:1px solid var(--line);margin:4px 0}
+
+/* =====================================================================
+   TRENDYOL SIPARIS OPERASYON KARTI — yeniden tasarim (fix/trendyol-card-redesign)
+   Prefix: tsc-  (trendyol-suggestion-card)
+   ===================================================================== */
+
+/* Palet degiskenleri — mevcut token'larla eslenir */
+:root {
+  --tc-cream:       var(--bg);
+  --tc-surface:     var(--surface);
+  --tc-surface-2:   var(--surface-2);
+  --tc-ink:         var(--text);
+  --tc-ink-2:       var(--text-2);
+  --tc-ink-3:       var(--muted);
+  --tc-line:        var(--line);
+  --tc-line-2:      rgba(43,38,32,.18);
+  --tc-gold:        var(--accent);
+  --tc-gold-soft:   var(--accent-soft);
+  --tc-green:       var(--ok);
+  --tc-green-soft:  var(--ok-soft);
+  --tc-amber:       var(--warn);
+  --tc-amber-soft:  var(--warn-soft);
+  --tc-red:         var(--danger);
+  --tc-red-soft:    var(--danger-soft);
+}
+
+/* --- Kart kabi -------------------------------------------------------- */
+.tsc-card {
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-line);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.tsc-card.tsc-ready    { box-shadow: inset 3px 0 0 var(--tc-green); }
+.tsc-card.tsc-attention{ box-shadow: inset 3px 0 0 var(--tc-amber); }
+.tsc-card.selected     { box-shadow: inset 3px 0 0 var(--accent); }
+
+/* --- DURUM 1: DARALTILMIS satir --------------------------------------- */
+.tsc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  min-width: 0;
+}
+.tsc-chev {
+  color: var(--tc-ink-3);
+  font-size: 12px;
+  flex: none;
+  width: 14px;
+  text-align: center;
+}
+.tsc-mini-thumb {
+  width: 38px;
+  height: 46px;
+  border-radius: 7px;
+  flex: none;
+  background: linear-gradient(135deg, var(--surface-2), #e8e0d5);
+  border: 1px solid var(--tc-line);
+  overflow: hidden;
+}
+.tsc-mini-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.tsc-who {
+  flex: none;
+  width: 150px;
+  min-width: 0;
+}
+.tsc-who b {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tsc-who span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--tc-ink-3);
+}
+.tsc-result {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+}
+.tsc-result-k {
+  color: var(--tc-ink-3);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.tsc-result-v  { font-weight: 600; }
+.tsc-missing   { color: var(--tc-red); font-weight: 500; }
+.tsc-result-date { font-size: 11.5px; color: var(--tc-ink-3); }
+
+/* --- Paylasilan: konfians cipi + badge + butonlar --------------------- */
+.tsc-conf {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--tc-ink-2);
+  white-space: nowrap;
+  flex: none;
+}
+.tsc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+.tsc-badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex: none;
+}
+.tsc-b-green { background: var(--tc-green-soft); color: var(--tc-green); }
+.tsc-b-amber { background: var(--tc-amber-soft); color: var(--tc-amber); }
+.tsc-b-red   { background: var(--tc-red-soft);   color: var(--tc-red);   }
+
+.tsc-btn {
+  font-size: 12.5px;
+  font-weight: 500;
+  border-radius: 999px;
+  padding: 8px 15px;
+  border: 1px solid var(--tc-line-2);
+  background: var(--tc-surface);
+  color: var(--tc-ink);
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.tsc-btn:disabled { opacity: .4; cursor: not-allowed; }
+.tsc-btn.tsc-ghost   { border-color: var(--tc-line); color: var(--tc-ink-2); }
+.tsc-btn.tsc-primary { background: var(--tc-ink); border-color: var(--tc-ink); color: var(--tc-cream); }
+.tsc-btn.tsc-sm      { padding: 6px 12px; font-size: 12px; }
+
+/* --- DURUM 2: ACIK kart ----------------------------------------------- */
+.tsc-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+}
+.tsc-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--tc-gold-soft);
+  color: var(--tc-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 12.5px;
+  flex: none;
+}
+.tsc-who-exp { flex: 1; min-width: 0; }
+.tsc-who-exp b { display: block; font-weight: 600; font-size: 15px; }
+.tsc-meta {
+  display: block;
+  font-size: 12px;
+  color: var(--tc-ink-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ⋮ dropdown */
+.tsc-more-wrap { position: relative; flex: none; }
+.tsc-more-wrap > summary { list-style: none; }
+.tsc-more-wrap > summary::-webkit-details-marker { display: none; }
+.tsc-more-btn {
+  cursor: pointer;
+  color: var(--tc-ink-3);
+  font-size: 18px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  user-select: none;
+}
+.tsc-more-btn:hover { background: var(--tc-surface-2); }
+.tsc-more-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-line);
+  border-radius: 8px;
+  padding: 4px 0;
+  z-index: 60;
+  min-width: 180px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.12);
+}
+.tsc-smenu-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--tc-ink);
+}
+.tsc-smenu-btn:hover { background: var(--tc-surface-2); }
+.tsc-smenu-sep { border: none; border-top: 1px solid var(--tc-line); margin: 4px 0; }
+
+/* Govde grid */
+.tsc-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 18px;
+  padding: 4px 16px 16px;
+  border-top: 1px solid var(--tc-line);
+}
+@media(max-width:720px) { .tsc-body { grid-template-columns: 1fr; } }
+
+/* Sol: urun gorseli */
+.tsc-product-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  max-width: 200px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--surface-2), #e8e0d5);
+  border: 1px solid var(--tc-line);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--tc-ink-3);
+  font-size: 12px;
+}
+.tsc-product-img img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Sag: AI + kanit panelleri */
+.tsc-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tc-ink-3);
+  margin-bottom: 8px;
+}
+.tsc-produce {
+  background: var(--tc-surface-2);
+  border: 1px solid var(--tc-line);
+  border-radius: 9px;
+  padding: 14px 16px;
+}
+.tsc-name-hero {
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.15;
+}
+.tsc-name-hero.tsc-missing { font-size: 16px; color: var(--tc-ink-3); font-weight: 400; }
+.tsc-field-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.tsc-field-k {
+  font-size: 11px;
+  color: var(--tc-ink-3);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.tsc-field-v { font-size: 14px; font-weight: 500; margin-top: 2px; }
+.tsc-muted   { color: var(--tc-ink-3); font-weight: 400; }
+
+.tsc-evidence {
+  margin-top: 14px;
+  background: var(--tc-surface);
+  border: 1px solid var(--tc-line);
+  border-radius: 9px;
+  padding: 13px 15px;
+}
+.tsc-msg { font-size: 13px; line-height: 1.6; color: var(--tc-ink-2); }
+.tsc-hl  {
+  background: var(--tc-gold-soft);
+  color: var(--tc-gold);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-weight: 600;
+}
+.tsc-ev-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 11px;
+  flex-wrap: wrap;
+}
+
+/* Alt cubuk */
+.tsc-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--tc-line);
+  background: var(--tc-surface-2);
+  flex-wrap: wrap;
+}
+.tsc-status {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--tc-ink-2);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.tsc-s b { font-weight: 600; color: var(--tc-ink); }
+.tsc-readonly-note { font-size: 11.5px; color: var(--tc-ink-3); }
+.tsc-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
