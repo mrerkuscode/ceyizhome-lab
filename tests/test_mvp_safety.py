@@ -3608,7 +3608,7 @@ def test_friendly_errors_use_clean_turkish_text() -> None:
 
 def test_final_reports_are_utf8_and_do_not_contain_question_mark_mojibake() -> None:
     project_root = Path(__file__).resolve().parents[1]
-    report_dir = project_root / "output" / "2026-05-07"
+    report_dir = project_root / "docs" / "archive" / "2026-05-07"
     report_names = [
         "FINAL_PROJECT_AUDIT_REPORT.md",
         "FINAL_BUTTON_ACTION_MATRIX.md",
