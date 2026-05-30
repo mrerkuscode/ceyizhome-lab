@@ -3,6 +3,7 @@
 import json
 import os
 import sys
+import threading
 import time
 from datetime import datetime
 from pathlib import Path
@@ -1822,6 +1823,24 @@ class WebMainWindow(QMainWindow):
         self._append_log(result.get("message", "Trendyol AI yeniden analiz tamamlandı.") + "\n")
         self._emit_state()
         return result
+
+    def start_bulk_reanalyze(self) -> dict[str, object]:
+        prog = trendyol_api.get_bulk_reanalyze_progress()
+        if prog.get("running"):
+            return {"status": "ALREADY_RUNNING", "message": "Toplu analiz zaten çalışıyor.", "progress": prog}
+        rows = trendyol_api.list_suggestions(self.project_root)
+        total = sum(1 for r in rows if not r.get("operator_corrected"))
+
+        def _run() -> None:
+            result = trendyol_api.reanalyze_all_trendyol_suggestions(self.project_root, delay_s=0.3)
+            self._append_log(result.get("message", "Toplu yeniden analiz tamamlandı.") + "\n")
+            self._emit_state()
+
+        threading.Thread(target=_run, daemon=True, name="bulk-reanalyze").start()
+        return {"status": "STARTED", "message": f"Toplu AI analiz başlatıldı ({total} öneri).", "total": total}
+
+    def get_bulk_reanalyze_progress(self) -> dict[str, object]:
+        return trendyol_api.get_bulk_reanalyze_progress()
 
     def verify_trendyol_suggestion(self, suggestion_id: str, data: dict[str, object]) -> dict[str, object]:
         result = trendyol_api.verify_suggestion(self.project_root, suggestion_id, data)

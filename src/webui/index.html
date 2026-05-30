@@ -1379,6 +1379,7 @@
             <select id="trendyolTopDateFilter" onchange="syncTrendyolTopDateFilter()" style="width:auto"><option value="7">Son 7 gün</option><option value="2">Son 48 saat</option></select>
             <button class="btn" onclick="testTrendyolConnection()">Bağlantıyı Test Et</button>
             <button class="btn" onclick="syncTrendyolQuestions()">Soruları Oku</button>
+            <button class="btn" id="bulkReanalyzeBtn" onclick="startBulkReanalyze()">Tümünü Analiz Et</button>
             <button class="btn primary" onclick="syncTrendyolOrders(Number(document.getElementById('trendyolTopDateFilter')?.value||7))">Son 7 Günü Çek</button>
           </div>
         </div>
@@ -1412,7 +1413,7 @@
 
         <div id="trendyolTabOrders" class="trendyol-tab-panel active">
           <article class="card">
-            <div class="card-title"><h3>Üretim Operasyon Listesi</h3><span id="trendyolSuggestionCount">0 satır</span></div>
+            <div class="card-title"><h3>Üretim Operasyon Listesi</h3><span id="trendyolSuggestionCount">0 satır</span><span id="bulkReanalyzeProgress" style="display:none;font-size:12px;color:var(--text-muted,#888);margin-left:auto"></span></div>
             <div id="trendyolQuickFilters" class="trendyol-status-tabs"></div>
             <div class="order-filter-bar">
               <input id="trendyolSearch" placeholder="Sipariş no, müşteri, ürün, barkod ara..." oninput="scheduleTrendyolOrdersUpdate()" />
