@@ -644,9 +644,12 @@ def fetch_orders(
         if orders or incremental:
             return orders
     except Exception:
-        if incremental:
-            raise
-    return _fetch_orders_v1(project_root, start, end)
+        pass  # Always fall through to V1 (V2 may be unavailable for this supplier)
+    v1_orders = _fetch_orders_v1(project_root, start, end)
+    # In incremental mode, exclude already-cached packages from V1 results
+    if incremental and skip_package_ids:
+        return [o for o in v1_orders if str(o.get("shipmentPackageId") or "") not in skip_package_ids]
+    return v1_orders
 
 
 def _fetch_orders_v1(project_root: Path, start: datetime, end: datetime) -> list[dict[str, Any]]:
