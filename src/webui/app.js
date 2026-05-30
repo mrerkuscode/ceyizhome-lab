@@ -138,6 +138,8 @@ let lastTrendyolMappingImpact = null;
 let trendyolImagePreviewRequestId = 0;
 let trendyolOrdersSyncRunning = false;
 let trendyolQuestionsSyncRunning = false;
+let trendyolAutoSyncPollTimer = null;
+let trendyolAutoSyncLastNewOrders = 0;
 const trendyolProductImageCache = new Map();
 const TRENDYOL_ORDER_RENDER_LIMIT = 50;
 const TRENDYOL_QUESTION_RENDER_LIMIT = 60;
@@ -3062,6 +3064,8 @@ function updateTrendyolOrders(payload = {}) {
   const questions = Array.isArray(payload.questions) ? payload.questions : [];
   renderTrendyolSettings(settings);
   renderTrendyolSummary(summary, suggestions, questions);
+  // Init/update auto-sync UI based on settings
+  _initTrendyolAutoSyncFromSettings(settings);
   renderTrendyolModelSelect();
   renderTrendyolQuickFilters(suggestions);
   renderTrendyolSuggestions(suggestions);
@@ -3171,7 +3175,7 @@ function renderTrendyolSettings(settings) {
   if (readOnly) readOnly.checked = settings.read_only_mode !== false;
   if (readonlyBadge) readonlyBadge.textContent = settings.read_only_mode === false ? "Read-only kapalı değil: zorla açık" : "Read-only mode";
   if (connection) connection.textContent = settings.connection_status || (settings.configured ? "Ayar kaydedildi" : "Eksik credential");
-  if (lastSync) lastSync.textContent = settings.last_sync_at || settings.last_questions_sync_at || "-";
+  if (lastSync) lastSync.textContent = settings.last_orders_sync_at || settings.last_sync_at || settings.last_questions_sync_at || "-";
   if (orderCount) orderCount.textContent = String(settings.last_orders_count || 0);
   if (messageCount) messageCount.textContent = String(settings.last_messages_count || 0);
   if (aiAuto) aiAuto.checked = settings.ai_autonomous_production_enabled !== false;
@@ -3189,7 +3193,7 @@ function renderTrendyolReadonlySyncStrip(settings = {}, summary = {}, questions 
   const box = byId("trendyolReadonlySyncStrip");
   if (!box) return;
   const configured = Boolean(settings.configured);
-  const lastSync = settings.last_sync_at || settings.last_questions_sync_at || "";
+  const lastSync = settings.last_orders_sync_at || settings.last_sync_at || settings.last_questions_sync_at || "";
   const status = settings.connection_status || (configured ? "Read-only sync bekliyor" : "Eksik credential");
   const orders = Number(settings.last_orders_count || summary.total || 0);
   const messages = Number(settings.last_messages_count || questions.length || 0);
@@ -3202,6 +3206,12 @@ function renderTrendyolReadonlySyncStrip(settings = {}, summary = {}, questions 
     <span>Canlı statü/kargo/fatura tetiklenmez</span>
   `;
   box.classList.toggle("warn", !configured);
+  // Keep the static banner's credential span in sync
+  const credBanner = byId("trendyolCredentialStatusBanner");
+  if (credBanner) credBanner.textContent = status;
+  // Show the auto-sync strip once settings are loaded
+  const autoStrip = byId("trendyolAutoSyncStrip");
+  if (autoStrip) autoStrip.hidden = false;
 }
 
 function renderTrendyolSummary(summary, suggestions = [], questions = []) {
@@ -5398,6 +5408,93 @@ function syncTrendyolQuestions() {
       };
       activeTrendyolTab = "questions";
       updateTrendyolOrders(currentState.trendyol || {});
+    }
+  });
+}
+
+// ── Trendyol Auto-sync ──────────────────────────────────────────────────────
+
+function renderTrendyolAutoSyncUI(sched = {}) {
+  const toggle = byId("trendyolAutoSyncToggle");
+  const intervalInput = byId("trendyolAutoSyncInterval");
+  const lastRun = byId("trendyolAutoSyncLastRun");
+  const newBadge = byId("trendyolAutoSyncNewCount");
+  const indicator = byId("trendyolAutoSyncIndicator");
+  if (toggle) toggle.checked = Boolean(sched.enabled);
+  if (intervalInput && document.activeElement !== intervalInput) {
+    intervalInput.value = Number(sched.interval_sec || 30);
+  }
+  if (lastRun) lastRun.textContent = sched.last_run_at ? "Son: " + sched.last_run_at : "Son: —";
+  const newOrders = Number(sched.last_new_orders || 0);
+  if (newBadge) {
+    newBadge.hidden = newOrders === 0;
+    newBadge.textContent = newOrders + " yeni";
+  }
+  if (indicator) {
+    indicator.className = "autosync-indicator";
+    if (sched.enabled && sched.running_poll) indicator.classList.add("polling");
+    else if (sched.enabled) indicator.classList.add("active");
+  }
+}
+
+function _initTrendyolAutoSyncFromSettings(settings = {}) {
+  const toggle = byId("trendyolAutoSyncToggle");
+  const intervalInput = byId("trendyolAutoSyncInterval");
+  if (toggle && !toggle._autoSyncInitDone) {
+    toggle._autoSyncInitDone = true;
+    if (settings.auto_sync_enabled) toggle.checked = true;
+    if (intervalInput) intervalInput.value = Number(settings.auto_sync_interval_sec || 30);
+    if (settings.auto_sync_enabled) _startAutoSyncPoll();
+  }
+}
+
+function onTrendyolAutoSyncToggle(enabled) {
+  if (!bridge?.trendyol_auto_sync_toggle) return;
+  const interval = Number(byId("trendyolAutoSyncInterval")?.value || 30);
+  bridge.trendyol_auto_sync_toggle(enabled, interval, raw => {
+    const result = parseBridgeResult(raw);
+    if (result.scheduler) renderTrendyolAutoSyncUI(result.scheduler);
+    if (result.settings) {
+      currentState.trendyol = { ...(currentState.trendyol || {}), settings: result.settings };
+      renderTrendyolReadonlySyncStrip(result.settings, {}, currentState.trendyol?.questions || []);
+    }
+    if (enabled) {
+      _startAutoSyncPoll();
+    } else {
+      _stopAutoSyncPoll();
+      showTrendyolStatus("Otomatik çekim kapatıldı.", "warn");
+    }
+  });
+}
+
+function onTrendyolAutoSyncIntervalChange(val) {
+  const enabled = byId("trendyolAutoSyncToggle")?.checked;
+  if (enabled) onTrendyolAutoSyncToggle(true);
+}
+
+function _startAutoSyncPoll() {
+  _stopAutoSyncPoll();
+  trendyolAutoSyncPollTimer = setInterval(_pollAutoSyncStatus, 8000);
+}
+
+function _stopAutoSyncPoll() {
+  if (trendyolAutoSyncPollTimer) {
+    clearInterval(trendyolAutoSyncPollTimer);
+    trendyolAutoSyncPollTimer = null;
+  }
+}
+
+function _pollAutoSyncStatus() {
+  if (!bridge?.trendyol_auto_sync_status) return;
+  bridge.trendyol_auto_sync_status(raw => {
+    const result = parseBridgeResult(raw);
+    const sched = result.data || result || {};
+    renderTrendyolAutoSyncUI(sched);
+    // If new orders arrived since last poll, refresh the orders list
+    const newOrders = Number(sched.last_new_orders || 0);
+    if (newOrders > 0 && newOrders !== trendyolAutoSyncLastNewOrders) {
+      trendyolAutoSyncLastNewOrders = newOrders;
+      refreshState();
     }
   });
 }

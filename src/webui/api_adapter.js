@@ -239,6 +239,14 @@
       postJson("/api/save_trendyol_settings", body, callback);
     },
 
+    trendyol_auto_sync_status: function (callback) {
+      fetchJson("/api/trendyol_auto_sync_status", callback);
+    },
+
+    trendyol_auto_sync_toggle: function (enabled, interval_sec, callback) {
+      postJson("/api/trendyol_auto_sync_toggle", { enabled: Boolean(enabled), interval_sec: Number(interval_sec) || 30 }, callback);
+    },
+
     // GRUP 9 — İsim Kesim
     update_name_cut_queue_item_status: function (item_id, status, callback) {
       postJson("/api/update_name_cut_queue_item_status", { item_id: item_id, status: status }, callback);
