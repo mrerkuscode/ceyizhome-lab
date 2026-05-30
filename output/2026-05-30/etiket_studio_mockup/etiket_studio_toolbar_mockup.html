@@ -1,0 +1,127 @@
+<!-- MOCKUP - URETIM DEGIL. Bolum: Etiket Studio ust toolbar (3 grup hiyerarsi). Gercek veri baglanmadi. Tum butonlar ornek/calismaz. -->
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Etiket Studio Toolbar — Mockup</title>
+<style>
+  :root{
+    --bg:#f5f5f4; --surface:#ffffff; --line:#e4e4e1; --line-2:#cfcfca;
+    --text:#1f1f1d; --text-2:#6b6b66; --text-3:#9a9a94;
+    --primary:#1f1f1d; --primary-text:#ffffff;
+    --warn-bg:#faeeda; --warn-text:#854f0b;
+    --info-bg:#e6f1fb; --info-text:#185fa5;
+    --radius:8px; --radius-lg:12px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#1b1b19; --surface:#252523; --line:#3a3a37; --line-2:#4a4a46;
+      --text:#f3f3ef; --text-2:#b4b2a9; --text-3:#888780;
+      --primary:#f3f3ef; --primary-text:#1b1b19;
+      --warn-bg:#412402; --warn-text:#fac775;
+      --info-bg:#042c53; --info-text:#85b7eb;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:15px;line-height:1.6;padding:32px 20px}
+  .wrap{max-width:920px;margin:0 auto}
+  .head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+  h1{font-size:20px;font-weight:600;margin:0}
+  .mockup-badge{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--text-3);
+    border:1px solid var(--line-2);border-radius:var(--radius);padding:3px 9px;background:rgba(128,128,128,.10)}
+  .sub{color:var(--text-2);font-size:13px;margin:0 0 24px}
+  .eyebrow{font-size:12px;color:var(--text-3);margin:0 0 8px}
+  .section{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+    padding:14px;margin-bottom:20px}
+  .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;row-gap:8px}
+  .btn{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 10px;
+    background:transparent;border:1px solid var(--line);border-radius:var(--radius);
+    color:var(--text-2);font-size:13px;font-family:inherit;white-space:nowrap;cursor:not-allowed}
+  .btn-icon{width:32px;padding:0;justify-content:center;font-size:16px}
+  .divider{width:1px;height:20px;background:var(--line);margin:0 4px}
+  .grow{flex:1;min-width:8px}
+  .app-title{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;padding:0 4px}
+  .toggle{display:inline-flex;border:1px solid var(--line-2);border-radius:var(--radius);overflow:hidden}
+  .toggle span{font-size:13px;padding:6px 10px;color:var(--text-2)}
+  .toggle .active{background:var(--info-bg);color:var(--info-text);font-weight:600}
+  .status{font-size:12px;padding:4px 9px;border-radius:var(--radius);background:var(--warn-bg);color:var(--warn-text)}
+  .btn-png{border-color:var(--line-2);color:var(--text)}
+  .btn-pdf{background:var(--primary);color:var(--primary-text);border-color:var(--primary);font-weight:600;cursor:not-allowed}
+  table{width:100%;border-collapse:collapse;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;font-size:14px}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-weight:600;color:var(--text-2);background:rgba(128,128,128,.05)}
+  tr:last-child td{border-bottom:none}
+  .note{color:var(--text-3);font-size:12px;margin:10px 2px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <h1>Etiket Studio — Toolbar</h1>
+    <span class="mockup-badge">MOCKUP — ÜRETİM DEĞİL</span>
+  </div>
+  <p class="sub">Üst araç çubuğu sadeleştirme önerisi. Gerçek veri/handler bağlı değil; tüm butonlar örnektir.</p>
+
+  <p class="eyebrow">ÖNCE — 13+ buton tek satır, hiyerarşi yok, "PDF üret" birincil belli değil</p>
+  <div class="section">
+    <div class="toolbar">
+      <button class="btn" disabled>Yeni</button>
+      <button class="btn" disabled>Aç</button>
+      <button class="btn" disabled>Kaydet</button>
+      <button class="btn" disabled>Farklı Kaydet</button>
+      <button class="btn" disabled>Geri</button>
+      <button class="btn" disabled>İleri</button>
+      <button class="btn" disabled>PDF</button>
+      <button class="btn" disabled>PNG</button>
+      <button class="btn" disabled>Yazdır</button>
+      <button class="btn" disabled>Sıraya Ekle</button>
+      <button class="btn" disabled>Lazer Kesime Gönder</button>
+      <button class="btn" disabled>Yerel Taslak</button>
+      <button class="btn btn-icon" disabled>⋮</button>
+    </div>
+  </div>
+
+  <p class="eyebrow">SONRA — 3 grup: sol (başlık + mod + durum) / orta (dosya) / sağ (eylem)</p>
+  <div class="section">
+    <div class="toolbar">
+      <span class="app-title">Etiket Studio</span>
+      <span class="toggle"><span class="active">Hızlı</span><span>Gelişmiş</span></span>
+      <span class="status">Kaydedilmedi</span>
+      <span class="divider"></span>
+      <button class="btn" disabled>Yeni</button>
+      <button class="btn" disabled>Aç</button>
+      <button class="btn" disabled>Kaydet</button>
+      <span class="divider"></span>
+      <button class="btn btn-icon" title="Geri al (örnek)" disabled>↶</button>
+      <button class="btn btn-icon" title="İleri al (örnek)" disabled>↷</button>
+      <span class="grow"></span>
+      <button class="btn btn-png" disabled>PNG</button>
+      <button class="btn btn-pdf" disabled>PDF üret →</button>
+      <button class="btn btn-icon" title="Daha fazla: Farklı Kaydet, Yazdır, Lazer Kesim, Sıraya Ekle, Yerel Taslak (örnek)" disabled>⋮</button>
+    </div>
+  </div>
+
+  <p class="eyebrow">Hangi değişiklik, neden</p>
+  <table>
+    <thead><tr><th style="width:42%">Değişiklik</th><th>Neden</th></tr></thead>
+    <tbody>
+      <tr><td>13 buton tek satır → 3 grup (sol / orta / sağ)</td><td>Görsel hiyerarşi; operatör ilgili eylemi tarayarak bulur</td></tr>
+      <tr><td>"PDF üret" birincil eylem (koyu dolgu, ok işaretli)</td><td>Ana eylem anında göze çarpar; aranma süresi düşer</td></tr>
+      <tr><td>PNG ikincil (outline)</td><td>İkincil çıktı; birincil eylemle yarışmaz</td></tr>
+      <tr><td>Farklı Kaydet, Yazdır, Lazer Kesim, Sıraya Ekle, Yerel Taslak → ⋮ menüsü</td><td>Seyrek kullanılan eylemler kalabalığı temizler</td></tr>
+      <tr><td>Hızlı / Gelişmiş modu + "Kaydedilmedi" durumu sol başlıkta</td><td>Bağlam ve kayıt durumu tek, sabit konumda</td></tr>
+      <tr><td>Görünür buton sayısı: 13 → 7 (kalan 5'i menüde)</td><td>Bilişsel yük azalır; satır taşması biter</td></tr>
+    </tbody>
+  </table>
+
+  <p class="note">Tüm butonlar örnektir ve çalışmaz (disabled). Bu dosya inceleme/onay içindir, üretim değildir.</p>
+</div>
+<script>
+  /* MOCKUP - sadece gosterim. Gercek handler yok; butonlar disabled. */
+</script>
+</body>
+</html>

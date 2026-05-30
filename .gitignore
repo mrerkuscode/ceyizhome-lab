@@ -76,6 +76,7 @@ data/backups/
 output/*
 !output/.gitkeep
 !output/2026-05-28/
+!output/2026-05-30/
 
 # Output altında yine de ölü/büyük klasörler dışlanır:
 output/2026-05-28/full_project_audit/01_menu_details/
