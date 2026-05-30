@@ -581,6 +581,10 @@ class WebBridge(QObject):
             data = {}
         return json.dumps(self.controller.save_trendyol_operator_correction(suggestion_id, data), ensure_ascii=False)
 
+    @Slot(str, result=str)
+    def reanalyze_trendyol_suggestion(self, suggestion_id: str) -> str:
+        return json.dumps(self.controller.reanalyze_trendyol_suggestion(suggestion_id), ensure_ascii=False)
+
     @Slot(str, str, result=str)
     def verify_trendyol_suggestion(self, suggestion_id: str, payload: str) -> str:
         try:

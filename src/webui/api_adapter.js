@@ -397,6 +397,17 @@
       var barArr = (typeof barkodlar === "string") ? JSON.parse(barkodlar) : barkodlar;
       var ayarObj = (typeof ayarlar === "string") ? JSON.parse(ayarlar) : ayarlar;
       postJson("/api/bulk_apply_recipe", { barkodlar: barArr, ayarlar: ayarObj }, callback);
+    },
+
+    // ── PART E — Trendyol Operatör Düzeltme + AI Yeniden Analiz ─────────────
+    save_trendyol_operator_correction: function (suggestion_id, payload_json, callback) {
+      var body = (typeof payload_json === "string") ? JSON.parse(payload_json || "{}") : (payload_json || {});
+      body.suggestion_id = suggestion_id;
+      postJson("/api/save_trendyol_operator_correction", body, callback);
+    },
+
+    reanalyze_trendyol_suggestion: function (suggestion_id, callback) {
+      postJson("/api/reanalyze_trendyol_suggestion", { id: suggestion_id }, callback);
     }
 
   };

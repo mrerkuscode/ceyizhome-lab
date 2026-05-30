@@ -6161,5 +6161,338 @@
     },
     "needs_user_review": false,
     "cached_at": "2026-05-19 22:35:29"
+  },
+  "6297d51fd8f295b7699ccd4220fa20bb4c5111f47bfe495b7c68805a390f1ebf": {
+    "label_text": "İpek & Turan",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "İpek",
+      "Turan"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "İpek & Turan",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.95,
+    "field_confidence": {
+      "labelName": 95,
+      "laserName": 95,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "çikolata",
+          "textToWrite": "İpek ve Turan",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "İpek & Turan",
+      "name_cut_text": "İpek & Turan",
+      "date_text": "",
+      "person_names": [
+        "İpek",
+        "Turan"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.95
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "İsimler İpek ve Turan",
+      "label_text": "İsimler İpek ve Turan",
+      "name_cut_text": "İsimler İpek ve Turan"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-30 22:11:33"
+  },
+  "c0cb1490b023d438b861f9b12d3db48cb537672ff85bc0a3b34cd357da9c7930": {
+    "label_text": "Gülnur & Mehmet",
+    "date_text": "06.06.2026",
+    "note_text": "",
+    "person_names": [
+      "Gülnur",
+      "Mehmet"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Gülnur & Mehmet",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 96,
+      "date": 90,
+      "eventDate": 90,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": true,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "etiket",
+          "textToWrite": "Gülnur,Mehmet",
+          "colorOrStyle": null,
+          "note": "isimler için etiket üzerinde yazılacak"
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Gülnur & Mehmet",
+      "name_cut_text": "Gülnur & Mehmet",
+      "date_text": "06.06.2026",
+      "person_names": [
+        "Gülnur",
+        "Mehmet"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "question_text",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Gülnur ve Mehmet",
+      "label_text": "isimler Gülnur ve Mehmet",
+      "name_cut_text": "isimler Gülnur ve Mehmet",
+      "date_text": "tarih 06.06.2026"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-30 22:57:42"
+  },
+  "259f2a1faeb47899097d52bcc75c246227434ca783b20c5f968c270891fefac0": {
+    "label_text": "Yunus & Merve",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "Yunus",
+      "Merve"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Yunus & Merve",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.92,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 92,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 85,
+      "note": 85,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": true,
+      "detectedSurfaces": [
+        {
+          "surface": "çikolata",
+          "textToWrite": "Yunus & Merve",
+          "colorOrStyle": null,
+          "note": null
+        },
+        {
+          "surface": "çiçek",
+          "textToWrite": "Yunus & Merve",
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "Yunus & Merve",
+      "name_cut_text": "Yunus & Merve",
+      "date_text": "",
+      "person_names": [
+        "Yunus",
+        "Merve"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.92
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Yunus ve Merve",
+      "label_text": "isimler Yunus ve Merve",
+      "name_cut_text": "isimler Yunus ve Merve",
+      "production_note": "Yunus ve Merve isimleri yazılacak; çikolata ve çiçeğe"
+    },
+    "needs_user_review": false,
+    "cached_at": "2026-05-30 22:59:41"
+  },
+  "83597f8c73e3a646499232ace8cc0f6769ade30b4098320b9bfa9c7e6a448a37": {
+    "label_text": "Mert Mete & Bensu",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [
+      "MERT METE",
+      "BENSU"
+    ],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "Mert Mete & Bensu",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.95,
+    "field_confidence": {
+      "labelName": 90,
+      "laserName": 90,
+      "personNames": 95,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": [
+        {
+          "surface": "unknown",
+          "textToWrite": null,
+          "colorOrStyle": null,
+          "note": null
+        }
+      ]
+    },
+    "_debug_final_before_validation": {
+      "label_text": "MERT METE & BENSU",
+      "name_cut_text": "MERT METE & BENSU",
+      "date_text": "",
+      "person_names": [
+        "MERT METE",
+        "BENSU"
+      ],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.95
+    },
+    "_debug_validation_warnings": [
+      "Final validator label/lazer alanını sadece kişi isimlerinden yeniden kurdu."
+    ],
+    "warnings": [
+      "Final validator label/lazer alanını sadece kişi isimlerinden yeniden kurdu.",
+      "Tarih müşteri mesajında bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "question_text",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "question_text",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler MERT METE ve BENSU",
+      "label_text": "isimler MERT METE ve BENSU",
+      "name_cut_text": "isimler MERT METE ve BENSU"
+    },
+    "needs_user_review": true,
+    "cached_at": "2026-05-30 23:23:18"
   }
 }

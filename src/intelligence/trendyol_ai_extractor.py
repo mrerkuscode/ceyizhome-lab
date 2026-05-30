@@ -826,6 +826,8 @@ def _sanitize_ai_result(raw: dict[str, Any], source: dict[str, Any], mapping: di
         },
         "evidence_spans": evidence_spans,
         "needs_user_review": not bool(label) or confidence < DEFAULT_CONFIDENCE_THRESHOLD or bool(validation_warnings),
+        "_diag_reasoning": raw_reasoning,
+        "_diag_evidence_span": evidence_span,
     }
 
 

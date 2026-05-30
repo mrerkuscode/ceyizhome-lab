@@ -1,1 +1,25 @@
-{"label_fonts": [], "laser_fonts": []}
+{
+  "label_fonts": [
+    {
+      "id": "6c3a0818",
+      "name": "TestEtiketFont",
+      "file": "6c3a0818_TestEtiketFont.ttf",
+      "uploaded_at": "2026-05-30 21:38"
+    },
+    {
+      "id": "6b0b9f13",
+      "name": "broken test",
+      "file": "6b0b9f13_broken_test.ttf",
+      "uploaded_at": "2026-05-30 22:36"
+    }
+  ],
+  "laser_fonts": [
+    {
+      "id": "18e5d850",
+      "name": "TestLazerFont",
+      "file": "18e5d850_TestLazerFont.ttf",
+      "uploaded_at": "2026-05-30 21:38",
+      "laser_safe": true
+    }
+  ]
+}
