@@ -684,7 +684,13 @@ def _fetch_orders_from_v2_packages(
     start_ms = int(start.timestamp() * 1000)
     end_ms = int(end.timestamp() * 1000)
     supplier = _supplier_id(project_root)
-    statuses = poll_statuses or ["Created", "Picking", "Invoiced", "Shipped", "Delivered"]
+    # Trendyol V2 package statuses — include all known statuses so "Fatura
+    # Bekliyor" (WaitingForApproval) and other non-standard statuses are caught.
+    statuses = poll_statuses or [
+        "Created", "Picking", "Invoiced", "Shipped", "Delivered",
+        "WaitingForApproval", "Undelivered", "Returned", "ReadyToShip",
+        "Repack", "AwaitingOrder",
+    ]
     skip = skip_package_ids or set()
     packages: list[dict[str, Any]] = []
     seen_packages: set[str] = set()
@@ -700,7 +706,10 @@ def _fetch_orders_from_v2_packages(
                     "size": 200,
                 }
             )
-            data = _fetch_json_with_retry(project_root, f"/integration/ecgw/v2/{supplier}/packages?{qs}", v2=True)
+            try:
+                data = _fetch_json_with_retry(project_root, f"/integration/ecgw/v2/{supplier}/packages?{qs}", v2=True)
+            except Exception:  # noqa: BLE001
+                break  # invalid/unsupported status — skip silently
             time.sleep(_REQUEST_INTER_DELAY)
             items = data.get("items") or []
             if not isinstance(items, list) or not items:
@@ -833,7 +842,10 @@ def build_suggestions_from_orders(
         for line in lines:
             if not isinstance(line, dict):
                 continue
-            normalized = _normalize_line(order_number, package_id, customer_name, line)
+            normalized = _normalize_line(
+                order_number, package_id, customer_name, line,
+                order_date_ms=int(order.get("orderDate") or order.get("createdDate") or 0),
+            )
             normalized["source_api"] = normalized.get("source_api") or str(order.get("source_api") or "")
             unique_key = f"{normalized['order_number']}:{normalized['package_id']}:{normalized['line_id']}"
             if unique_key in seen:
@@ -1271,6 +1283,8 @@ def _refresh_existing_suggestion_from_line(
             "image_url_source": line.get("image_url_source") or row.get("image_url_source") or "",
             "product_url_source": line.get("product_url_source") or row.get("product_url_source") or "",
             "quantity": line.get("quantity") or row.get("quantity") or deterministic.get("quantity") or 1,
+            "order_date": line.get("order_date") or row.get("order_date") or "",
+            "order_date_ms": int(line.get("order_date_ms") or row.get("order_date_ms") or 0),
             "updated_at": _now(),
         }
     )
@@ -1443,6 +1457,9 @@ def import_suggestion_to_customer_order(project_root: Path, suggestion_id: str) 
 
 def summary(project_root: Path) -> dict[str, int]:
     suggestions = list_suggestions(project_root)
+    questions = list_questions(project_root)
+    sug_order_numbers = {str(s.get("order_number") or "") for s in suggestions if s.get("order_number")}
+    questions_with_order = [q for q in questions if q.get("order_number")]
     return {
         "total": len(suggestions),
         "ready": sum(1 for row in suggestions if _is_verified_ready(row)),
@@ -1455,6 +1472,14 @@ def summary(project_root: Path) -> dict[str, int]:
         "total_quantity": sum(int(row.get("quantity") or 0) for row in suggestions),
         "both": sum(1 for row in suggestions if row.get("production_type") == "label_and_name_cut"),
         "imported": sum(1 for row in suggestions if row.get("import_status")),
+        # Bütünlük istatistikleri (Faz 4 uyarı şeridi için)
+        "questions_total": len(questions),
+        "questions_with_order_no": len(questions_with_order),
+        "questions_orphaned": sum(
+            1 for q in questions_with_order
+            if str(q.get("order_number") or "") not in sug_order_numbers
+        ),
+        "questions_unlinked": sum(1 for q in questions if not q.get("order_number")),
     }
 
 
@@ -2272,6 +2297,8 @@ def _suggestion_from_line(line: dict[str, Any], mapping: dict[str, Any] | None, 
         "product_url": line.get("product_url") or "",
         "image_url_source": line.get("image_url_source") or "",
         "product_url_source": line.get("product_url_source") or "",
+        "order_date": line.get("order_date") or "",
+        "order_date_ms": int(line.get("order_date_ms") or 0),
         "quantity": extracted.get("quantity") or line.get("quantity") or 1,
         "production_type": production_type,
         "model_key": (mapping or {}).get("model_key") or "",
@@ -2480,7 +2507,20 @@ def _all_question_contexts_for_suggestion(project_root: Path, suggestion: dict[s
     return _merge_question_contexts(contexts, extra)
 
 
-def _normalize_line(order_number: str, package_id: str, customer_name: str, line: dict[str, Any]) -> dict[str, Any]:
+def _normalize_line(
+    order_number: str,
+    package_id: str,
+    customer_name: str,
+    line: dict[str, Any],
+    *,
+    order_date_ms: int = 0,
+) -> dict[str, Any]:
+    ts = int(order_date_ms or 0)
+    if ts:
+        from datetime import datetime as _dt  # local import to avoid circular
+        order_date = _dt.fromtimestamp(ts / 1000).strftime("%d.%m.%Y %H:%M")
+    else:
+        order_date = ""
     return {
         "order_number": order_number,
         "package_id": package_id,
@@ -2500,6 +2540,8 @@ def _normalize_line(order_number: str, package_id: str, customer_name: str, line
         "product_url": str(line.get("productUrl") or line.get("product_url") or ""),
         "image_url_source": "order_line" if _line_image_url(line) else "",
         "product_url_source": "order_line" if str(line.get("productUrl") or line.get("product_url") or "").strip() else "",
+        "order_date": order_date,
+        "order_date_ms": ts,
     }
 
 
