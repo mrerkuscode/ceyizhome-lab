@@ -6494,5 +6494,74 @@
     },
     "needs_user_review": true,
     "cached_at": "2026-05-30 23:23:18"
+  },
+  "316847b0691bb4ef5403ad02cb6f2a1d4464bdb85c193774e27805168106c8fe": {
+    "label_text": "",
+    "date_text": "",
+    "note_text": "",
+    "person_names": [],
+    "custom_text": "",
+    "production_note": "",
+    "quantity": 1,
+    "name_cut_text": "",
+    "name_cut_width_mm": 300.0,
+    "name_cut_style": "Mochary Personal Use Only",
+    "confidence": 0.7,
+    "field_confidence": {
+      "labelName": 0,
+      "laserName": 0,
+      "personNames": 0,
+      "date": 0,
+      "eventDate": 0,
+      "customText": 0,
+      "productionNote": 0,
+      "note": 0,
+      "quantity": 90
+    },
+    "classification": {
+      "containsPersonName": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false
+    },
+    "message_understanding": {
+      "containsPersonNames": true,
+      "containsDate": false,
+      "containsCustomText": false,
+      "containsProductionInstruction": false,
+      "detectedSurfaces": []
+    },
+    "_debug_final_before_validation": {
+      "label_text": "",
+      "name_cut_text": "",
+      "date_text": "",
+      "person_names": [],
+      "custom_text": "",
+      "production_note": "",
+      "quantity": 1,
+      "confidence": 0.7
+    },
+    "_debug_validation_warnings": [],
+    "warnings": [
+      "Tarih müşteri mesajında bulunamadı.",
+      "Müşteri mesajında isim bulunamadı."
+    ],
+    "source_evidence": [
+      "cloud_ai_extract"
+    ],
+    "field_sources": {
+      "label_text": "empty",
+      "date_text": "empty",
+      "note_text": "empty",
+      "name_cut_text": "empty",
+      "quantity": "order_line"
+    },
+    "evidence_spans": {
+      "person_names": "isimler Funda Murat"
+    },
+    "needs_user_review": true,
+    "_diag_reasoning": "Müşteri mesajında kişi adı tespit edildi fakat ürüne yazılacak isim talimatı açıkça ifade edilmemiştir.",
+    "_diag_evidence_span": "",
+    "cached_at": "2026-05-31 01:44:39"
   }
 }

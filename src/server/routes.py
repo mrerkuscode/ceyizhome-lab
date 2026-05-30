@@ -409,6 +409,47 @@ def ai_connection_test():
         return _err(exc)
 
 
+@api_bp.route("/reanalyze_all_trendyol_suggestions", methods=["POST"])
+def reanalyze_all_trendyol_suggestions():
+    """Toplu AI yeniden analiz — background job başlatır, job_id döner."""
+    try:
+        from webui_backend import trendyol_api as _ta
+        prog = _ta.get_bulk_reanalyze_progress()
+        if prog.get("running"):
+            return _ok({"status": "ALREADY_RUNNING", "message": "Toplu analiz zaten çalışıyor.", "progress": prog})
+        job_id = job_manager.start_job(
+            "reanalyze_all",
+            job_manager._browser_reanalyze_all,
+            str(_PROJECT_ROOT),
+        )
+        # job_id'yi progress tracker'a da yaz
+        with _ta._bulk_reanalyze_lock:
+            _ta._bulk_reanalyze_progress["job_id"] = job_id
+        rows = _ta.list_suggestions(_PROJECT_ROOT)
+        total = sum(1 for r in rows if not r.get("operator_corrected"))
+        return _ok({"status": "STARTED", "job_id": job_id, "total": total,
+                    "message": f"Toplu AI analiz başlatıldı ({total} öneri)."})
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/bulk_reanalyze_progress", methods=["GET"])
+def bulk_reanalyze_progress():
+    """Anlık ilerleme durumu — running, current, total, changed, failed."""
+    try:
+        from webui_backend import trendyol_api as _ta
+        prog = _ta.get_bulk_reanalyze_progress()
+        # job tamamlandıysa result'ı da ekle
+        job_id = prog.get("job_id") or ""
+        if job_id and not prog.get("running"):
+            job_stat = job_manager.get_status(job_id)
+            if job_stat.get("status") == "completed":
+                prog["result"] = job_stat.get("result")
+        return _ok(prog)
+    except Exception as exc:
+        return _err(exc)
+
+
 @api_bp.route("/test_trendyol_connection", methods=["POST"])
 def test_trendyol_connection():
     try:
@@ -512,6 +553,32 @@ def reanalyze_trendyol_suggestion():
         payload = request.get_json() or {}
         suggestion_id = str(payload.get("id") or payload.get("suggestion_id") or "")
         return _ok(_ta.reanalyze_trendyol_suggestion(_PROJECT_ROOT, suggestion_id))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/reanalyze_all_trendyol_suggestions", methods=["POST"])
+def reanalyze_all_trendyol_suggestions():
+    try:
+        from webui_backend import trendyol_api as _ta
+        progress = _ta.get_bulk_reanalyze_progress()
+        if progress.get("running"):
+            return _ok({"status": "ALREADY_RUNNING", "message": "Toplu analiz zaten çalışıyor.", **progress})
+        job_id = job_manager.start_job(
+            "reanalyze_all_trendyol",
+            _ta.reanalyze_all_trendyol_suggestions,
+            _PROJECT_ROOT,
+        )
+        return _ok({"status": "STARTED", "job_id": job_id})
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/reanalyze_all_trendyol_suggestions_status", methods=["GET"])
+def reanalyze_all_trendyol_suggestions_status():
+    try:
+        from webui_backend import trendyol_api as _ta
+        return _ok(_ta.get_bulk_reanalyze_progress())
     except Exception as exc:
         return _err(exc)
 

@@ -5,6 +5,7 @@ import hashlib
 import json
 import mimetypes
 import re
+import threading
 import time
 import unicodedata
 import urllib.error
@@ -13,6 +14,7 @@ import urllib.request
 import uuid
 from datetime import datetime, timedelta
 from pathlib import Path
+import threading
 from typing import Any
 
 import pandas as pd
@@ -1814,6 +1816,130 @@ def reanalyze_trendyol_suggestion(project_root: Path, suggestion_id: str) -> dic
         "reasoning": reasoning,
         "evidence_span": evidence_span,
     }
+
+
+# ── Toplu yeniden analiz — modül seviyesi ilerleme durumu ────────────────────
+_bulk_reanalyze_lock = threading.Lock()
+_bulk_reanalyze_progress: dict[str, Any] = {
+    "running": False,
+    "current": 0,
+    "total": 0,
+    "changed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "job_id": "",
+    "started_at": "",
+    "ended_at": "",
+    "summary": None,
+}
+
+
+def get_bulk_reanalyze_progress() -> dict[str, Any]:
+    with _bulk_reanalyze_lock:
+        return dict(_bulk_reanalyze_progress)
+
+
+def reanalyze_all_trendyol_suggestions(
+    project_root: Path,
+    delay_s: float = 0.3,
+    job_id: str = "",
+) -> dict[str, Any]:
+    """Tüm Trendyol önerilerini AI ile yeniden analiz et.
+
+    operator_corrected=True kayıtları atlanır.
+    Read-only: sadece yerel suggestion dosyasını günceller, Trendyol'a yazma yok.
+    """
+    global _bulk_reanalyze_progress  # noqa: PLW0603
+
+    rows = list_suggestions(project_root)
+    to_process = [r for r in rows if not r.get("operator_corrected")]
+    skipped_corrected = len(rows) - len(to_process)
+    total = len(to_process)
+
+    with _bulk_reanalyze_lock:
+        _bulk_reanalyze_progress = {
+            "running": True,
+            "current": 0,
+            "processed": 0,
+            "total": total,
+            "changed": 0,
+            "failed": 0,
+            "skipped": skipped_corrected,
+            "job_id": job_id,
+            "started_at": _now(),
+            "ended_at": "",
+            "done": False,
+            "summary": None,
+        }
+
+    changed_count = 0
+    failed_count = 0
+    skip_no_evidence = 0
+    examples: list[dict[str, Any]] = []
+
+    for idx, row in enumerate(to_process):
+        sid = str(row.get("id") or "")
+        old_label = str(row.get("label_text") or "")
+        old_date = str(row.get("date_text") or "")
+
+        result = reanalyze_trendyol_suggestion(project_root, sid)
+
+        new_label = str(result.get("suggestion", {}).get("label_text") or "")
+        new_date = str(result.get("suggestion", {}).get("date_text") or "")
+        status = result.get("status", "")
+
+        if status == "SKIP":
+            skip_no_evidence += 1
+        elif status in ("OK", "AI_ERROR"):
+            if old_label != new_label or old_date != new_date:
+                changed_count += 1
+                if len(examples) < 5:
+                    examples.append({
+                        "order_number": row.get("order_number"),
+                        "old_label": old_label,
+                        "new_label": new_label,
+                        "old_date": old_date,
+                        "new_date": new_date,
+                        "llm_error": result.get("llm_error"),
+                    })
+        else:
+            failed_count += 1
+
+        with _bulk_reanalyze_lock:
+            _bulk_reanalyze_progress["current"] = idx + 1
+            _bulk_reanalyze_progress["processed"] = idx + 1
+            _bulk_reanalyze_progress["changed"] = changed_count
+            _bulk_reanalyze_progress["failed"] = failed_count
+
+        if idx < total - 1 and delay_s > 0:
+            time.sleep(delay_s)
+
+    no_label = sum(1 for r in list_suggestions(project_root) if not r.get("label_text") and not r.get("operator_corrected"))
+
+    summary: dict[str, Any] = {
+        "status": "OK",
+        "total_processed": total,
+        "skipped_operator_corrected": skipped_corrected,
+        "skipped_no_evidence": skip_no_evidence,
+        "changed": changed_count,
+        "failed": failed_count,
+        "no_label_remaining": no_label,
+        "examples": examples,
+        "message": (
+            f"{total} öneri işlendi: {changed_count} değişti, "
+            f"{skipped_corrected} operatör onaylı atlandı, "
+            f"{skip_no_evidence} mesajsız atlandı, "
+            f"{failed_count} hata. Hâlâ 'bulunamadı': {no_label}."
+        ),
+    }
+
+    with _bulk_reanalyze_lock:
+        _bulk_reanalyze_progress["running"] = False
+        _bulk_reanalyze_progress["done"] = True
+        _bulk_reanalyze_progress["ended_at"] = _now()
+        _bulk_reanalyze_progress["summary"] = summary
+
+    return summary
 
 
 def _label_model_index(label_models: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:

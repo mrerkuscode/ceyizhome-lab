@@ -5474,6 +5474,81 @@ function testTrendyolConnection() {
   });
 }
 
+// ── Toplu Yeniden Analiz ──────────────────────────────────────────────────────
+let _bulkReanalyzeTimer = null;
+
+function startBulkReanalyze() {
+  if (!bridge?.start_bulk_reanalyze) {
+    showTrendyolStatus("Toplu analiz köprüsü bu oturumda hazır değil.", "warn");
+    return;
+  }
+  const btn = byId("bulkReanalyzeBtn");
+  if (btn?.disabled) return;
+
+  showTrendyolStatus("Toplu AI analiz başlatılıyor...", "warn");
+  bridge.start_bulk_reanalyze(raw => {
+    const result = parseBridgeResult(raw);
+    if (result.status === "ALREADY_RUNNING") {
+      showTrendyolStatus("Toplu analiz zaten çalışıyor.", "warn");
+      _startBulkReanalyzePolling();
+      return;
+    }
+    if (result.status !== "STARTED") {
+      showTrendyolStatus(result.message || "Toplu analiz başlatılamadı.", "warn");
+      return;
+    }
+    showTrendyolStatus(result.message || "Toplu AI analiz çalışıyor...", "warn");
+    _startBulkReanalyzePolling();
+  });
+}
+
+function _startBulkReanalyzePolling() {
+  if (_bulkReanalyzeTimer) return;
+  const btn = byId("bulkReanalyzeBtn");
+  const prog = byId("bulkReanalyzeProgress");
+  if (btn) { btn.disabled = true; btn.textContent = "Analiz ediliyor..."; }
+  if (prog) prog.style.display = "";
+
+  _bulkReanalyzeTimer = setInterval(() => {
+    if (!bridge?.get_bulk_reanalyze_progress) return;
+    bridge.get_bulk_reanalyze_progress(raw => {
+      const p = parseBridgeResult(raw);
+      const cur = Number(p.current || 0);
+      const tot = Number(p.total || 0);
+      const changed = Number(p.changed || 0);
+      const label = tot > 0 ? `${cur}/${tot} işlendi · ${changed} değişti` : "Hazırlanıyor...";
+      if (prog) prog.textContent = label;
+      showTrendyolStatus(label, "warn");
+
+      if (!p.running) {
+        clearInterval(_bulkReanalyzeTimer);
+        _bulkReanalyzeTimer = null;
+        if (btn) { btn.disabled = false; btn.textContent = "Tümünü Analiz Et"; }
+        const summary = p.summary || {};
+        const msg = summary.message || `Tamamlandı: ${changed} değişti.`;
+        showTrendyolStatus(msg, "ok");
+        if (prog) { prog.textContent = msg; setTimeout(() => { if (prog) prog.style.display = "none"; }, 8000); }
+        if (typeof showToast === "function") showToast(msg, "success");
+        // Listeyi tazele
+        if (Array.isArray(currentState.trendyol?.suggestions)) {
+          bridge?.get_bulk_reanalyze_progress && bridge.get_bulk_reanalyze_progress(raw2 => {
+            // Güncel suggestions'ı yeniden çek
+            if (bridge?.initialState) {
+              bridge.initialState(raw3 => {
+                const st = parseBridgeResult(raw3);
+                if (st?.trendyol) {
+                  currentState.trendyol = st.trendyol;
+                  updateTrendyolOrders(currentState.trendyol);
+                }
+              });
+            }
+          });
+        }
+      }
+    });
+  }, 2000);
+}
+
 function syncTrendyolOrders(days) {
   if (!bridge?.sync_trendyol_recent_orders) {
     showTrendyolStatus("Trendyol senkron köprüsü bu oturumda hazır değil.", "warn");
@@ -5500,6 +5575,88 @@ function syncTrendyolOrders(days) {
       updateTrendyolOrders(currentState.trendyol || {});
     }
   });
+}
+
+let _bulkReanalyzePollTimer = null;
+
+function reanalyzeAllTrendyolSuggestions() {
+  if (!bridge?.reanalyze_all_trendyol_suggestions) {
+    showTrendyolStatus("Toplu yeniden analiz bu oturumda bağlı değil.", "warn");
+    return;
+  }
+  const btn = document.getElementById("trendyolBulkReanalyzeBtn");
+  const progressEl = document.getElementById("trendyolBulkReanalyzeProgress");
+  if (btn) { btn.disabled = true; btn.textContent = "Analiz çalışıyor…"; }
+  if (progressEl) { progressEl.hidden = false; progressEl.textContent = "Başlatılıyor…"; }
+
+  bridge.reanalyze_all_trendyol_suggestions(raw => {
+    const result = parseBridgeResult(raw);
+    if (result.status === "ALREADY_RUNNING") {
+      if (progressEl) progressEl.textContent = result.message || "Zaten çalışıyor…";
+      _startBulkReanalyzePoll();
+      return;
+    }
+    if (result.status === "ERROR") {
+      if (btn) { btn.disabled = false; btn.textContent = "Tümünü Yeniden Analiz Et"; }
+      if (progressEl) { progressEl.hidden = true; }
+      showTrendyolStatus(result.message || "Toplu analiz başlatılamadı.", "bad");
+      return;
+    }
+    // STARTED — poll for progress
+    _startBulkReanalyzePoll();
+  });
+}
+
+function _startBulkReanalyzePoll() {
+  if (_bulkReanalyzePollTimer) clearInterval(_bulkReanalyzePollTimer);
+  _bulkReanalyzePollTimer = setInterval(() => {
+    if (!bridge?.get_reanalyze_all_trendyol_status) {
+      clearInterval(_bulkReanalyzePollTimer);
+      _bulkReanalyzePollTimer = null;
+      return;
+    }
+    bridge.get_reanalyze_all_trendyol_status(raw => {
+      const p = parseBridgeResult(raw);
+      const progressEl = document.getElementById("trendyolBulkReanalyzeProgress");
+      const btn = document.getElementById("trendyolBulkReanalyzeBtn");
+      const processed = p.processed ?? p.current ?? 0;
+      if (p.running || (!p.done && !p.running && !processed)) {
+        const pct = p.total ? `${processed}/${p.total} işlendi` : "başlatılıyor…";
+        if (progressEl) progressEl.textContent = `⟳ ${pct}`;
+        return;
+      }
+      // Done
+      clearInterval(_bulkReanalyzePollTimer);
+      _bulkReanalyzePollTimer = null;
+      if (btn) { btn.disabled = false; btn.textContent = "Tümünü Yeniden Analiz Et"; }
+      if (progressEl) { progressEl.hidden = true; }
+
+      const s = p.summary || p;
+      const total = s.total_processed ?? s.total ?? p.total ?? 0;
+      const changed = s.changed ?? p.changed ?? 0;
+      const skipped = s.skipped_operator_corrected ?? s.skipped_operator ?? p.skipped ?? 0;
+      const notFound = s.no_label_remaining ?? s.not_found_after ?? p.not_found_after ?? 0;
+      const failed = s.failed ?? p.failed ?? 0;
+
+      const smsg = s.message || p.message;
+      let msg = smsg || (`Toplu analiz tamamlandı: ${total} işlendi, ${changed} değişti` +
+        (skipped ? `, ${skipped} op.düzeltmesi atlandı` : "") +
+        (notFound ? `, ${notFound} hâlâ bulunamadı` : "") +
+        (failed ? `, ${failed} hata` : "") + ".");
+      showTrendyolStatus(msg, "ok");
+
+      // Refresh suggestion list from server state
+      if (bridge?.get_status) {
+        bridge.get_status(raw2 => {
+          const st = parseBridgeResult(raw2);
+          if (st.trendyol) {
+            currentState.trendyol = st.trendyol;
+            updateTrendyolOrders(currentState.trendyol);
+          }
+        });
+      }
+    });
+  }, 500);
 }
 
 function syncTrendyolQuestions() {

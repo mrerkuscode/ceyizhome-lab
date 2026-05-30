@@ -410,8 +410,25 @@
       postJson("/api/reanalyze_trendyol_suggestion", { id: suggestion_id }, callback);
     },
 
+    reanalyze_all_trendyol_suggestions: function (callback) {
+      postJson("/api/reanalyze_all_trendyol_suggestions", {}, callback);
+    },
+
+    get_reanalyze_all_trendyol_status: function (callback) {
+      fetchJson("/api/reanalyze_all_trendyol_suggestions_status", callback);
+    },
+
     ai_connection_test: function (callback) {
       fetchJson("/api/ai_connection_test", callback);
+    },
+
+    // ── PART F — Toplu Yeniden Analiz ────────────────────────────────────────
+    start_bulk_reanalyze: function (callback) {
+      postJson("/api/reanalyze_all_trendyol_suggestions", {}, callback);
+    },
+
+    get_bulk_reanalyze_progress: function (callback) {
+      fetchJson("/api/bulk_reanalyze_progress", callback);
     }
 
   };

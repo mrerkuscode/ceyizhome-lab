@@ -138,6 +138,14 @@ def _browser_render_labels(excel_path: str = "") -> dict:
     }
 
 
+def _browser_reanalyze_all(project_root_str: str = "", job_id: str = "") -> dict:
+    """Browser mode: toplu Trendyol AI yeniden analiz."""
+    from pathlib import Path
+    from webui_backend import trendyol_api as _ta
+    root = Path(project_root_str) if project_root_str else Path(__file__).resolve().parents[2]
+    return _ta.reanalyze_all_trendyol_suggestions(root, delay_s=0.3, job_id=job_id)
+
+
 def _browser_run_dry(excel_path: str = "") -> dict:
     """Browser mode dry-run — validation pass without real production."""
     from server import controller_proxy as proxy
