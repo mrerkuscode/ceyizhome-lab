@@ -444,6 +444,44 @@ def save_trendyol_settings():
         return _err(exc)
 
 
+@api_bp.route("/trendyol_auto_sync_status", methods=["GET"])
+def trendyol_auto_sync_status():
+    try:
+        from server import trendyol_scheduler as _sched
+        return _ok(_sched.get_status())
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/trendyol_auto_sync_toggle", methods=["POST"])
+def trendyol_auto_sync_toggle():
+    try:
+        from server import trendyol_scheduler as _sched
+        from webui_backend import trendyol_api as _ta
+        payload = request.get_json() or {}
+        enabled = bool(payload.get("enabled"))
+        interval = max(10, int(payload.get("interval_sec") or 30))
+        # Persist to settings file
+        current = _ta.get_settings(_PROJECT_ROOT, masked=False)
+        current["auto_sync_enabled"] = enabled
+        current["auto_sync_interval_sec"] = interval
+        _ta.settings_path(_PROJECT_ROOT).write_text(
+            json.dumps(current, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        if enabled:
+            _sched.start(_PROJECT_ROOT, interval_sec=interval)
+        else:
+            _sched.stop()
+        return _ok({
+            "enabled": enabled,
+            "interval_sec": interval,
+            "scheduler": _sched.get_status(),
+            "settings": _ta.get_settings(_PROJECT_ROOT),
+        })
+    except Exception as exc:
+        return _err(exc)
+
+
 # GRUP 9 — İsim Kesim
 
 @api_bp.route("/update_name_cut_queue_item_status", methods=["POST"])

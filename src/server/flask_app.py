@@ -29,6 +29,17 @@ app = Flask(__name__, static_folder=str(_WEBUI_DIR), static_url_path="")
 # Register API routes under /api
 app.register_blueprint(api_bp)
 
+# Start auto-sync scheduler if it was enabled in settings
+try:
+    from webui_backend import trendyol_api as _ta
+    _proj = _SRC.parent
+    _ts = _ta.get_settings(_proj, masked=False)
+    if _ts.get("auto_sync_enabled"):
+        from server import trendyol_scheduler as _sched
+        _sched.start(_proj, interval_sec=int(_ts.get("auto_sync_interval_sec") or 30))
+except Exception:
+    pass
+
 
 @app.route("/")
 def index():

@@ -47,6 +47,11 @@ ORDER_NUMBER_PATTERNS = [
     re.compile(r"\b(\d{10,})\b"),
 ]
 
+# Rate-limit / retry constants
+_RETRY_ON_CODES = {429, 502, 503}
+_REQUEST_INTER_DELAY = 0.05   # seconds between sequential list API requests
+_ITEMS_INTER_DELAY = 0.10     # seconds between per-package items requests
+
 
 def settings_path(project_root: Path) -> Path:
     path = project_root / "data" / "trendyol_settings.json"
@@ -76,6 +81,23 @@ def readonly_orders_cache_path(project_root: Path) -> Path:
     path = project_root / "data" / "trendyol_readonly_orders_cache.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     return path
+
+
+def _load_cached_orders_by_package_id(project_root: Path) -> dict[str, dict[str, Any]]:
+    """Return existing cached orders indexed by shipmentPackageId."""
+    path = readonly_orders_cache_path(project_root)
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        orders = data.get("orders") or [] if isinstance(data, dict) else []
+        return {
+            str(o.get("shipmentPackageId") or ""): o
+            for o in orders
+            if isinstance(o, dict) and o.get("shipmentPackageId")
+        }
+    except (json.JSONDecodeError, OSError):
+        return {}
 
 
 def image_cache_dir(project_root: Path) -> Path:
@@ -118,6 +140,9 @@ def get_settings(project_root: Path, *, masked: bool = True) -> dict[str, Any]:
         "ai_confidence_threshold": float(data.get("ai_confidence_threshold") or DEFAULT_CONFIDENCE_THRESHOLD),
         "ai_timeout_seconds": float(data.get("ai_timeout_seconds") or AI_DEFAULT_TIMEOUT_SECONDS),
         "ai_cache_enabled": _safe_bool(data.get("ai_cache_enabled"), True),
+        "last_orders_sync_at": str(data.get("last_orders_sync_at") or data.get("last_sync_at") or ""),
+        "auto_sync_enabled": _safe_bool(data.get("auto_sync_enabled"), False),
+        "auto_sync_interval_sec": max(10, int(data.get("auto_sync_interval_sec") or 30)),
     }
     if masked:
         normalized["api_key"] = _mask(normalized["api_key"])
@@ -172,6 +197,9 @@ def save_settings(project_root: Path, payload: dict[str, Any]) -> dict[str, Any]
         "ai_confidence_threshold": float(payload.get("ai_confidence_threshold") or current.get("ai_confidence_threshold") or DEFAULT_CONFIDENCE_THRESHOLD),
         "ai_timeout_seconds": float(payload.get("ai_timeout_seconds") or current.get("ai_timeout_seconds") or AI_DEFAULT_TIMEOUT_SECONDS),
         "ai_cache_enabled": _safe_bool(payload.get("ai_cache_enabled"), _safe_bool(current.get("ai_cache_enabled"), True)),
+        "last_orders_sync_at": current.get("last_orders_sync_at") or current.get("last_sync_at") or "",
+        "auto_sync_enabled": _safe_bool(payload.get("auto_sync_enabled"), _safe_bool(current.get("auto_sync_enabled"), False)),
+        "auto_sync_interval_sec": max(10, int(payload.get("auto_sync_interval_sec") or current.get("auto_sync_interval_sec") or 30)),
     }
     merged["environment"] = "stage" if merged["stage"] else "live"
     settings_path(project_root).write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -218,7 +246,13 @@ def test_connection(project_root: Path) -> dict[str, Any]:
         "packages": packages.get("totalItemCount", 0),
     }
 
-def sync_recent_orders(project_root: Path, days: int = 2, label_models: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+def sync_recent_orders(
+    project_root: Path,
+    days: int = 2,
+    label_models: list[dict[str, Any]] | None = None,
+    *,
+    incremental: bool = True,
+) -> dict[str, Any]:
     if not is_configured(project_root):
         _save_orders_sync_status(project_root, "CONFIG_MISSING", "Trendyol API ayarları eksik.", 0, 0)
         return {"status": "CONFIG_MISSING", "message": "Trendyol API ayarları eksik. Read-only sync başlatılmadı.", "suggestions": list_suggestions(project_root), "settings": get_settings(project_root)}
@@ -228,9 +262,37 @@ def sync_recent_orders(project_root: Path, days: int = 2, label_models: list[dic
         _save_orders_sync_status(project_root, "CONFIG_INVALID", problem, 0, 0)
         return {"status": "CONFIG_INVALID", "message": problem, "suggestions": list_suggestions(project_root), "settings": get_settings(project_root)}
     end = datetime.now()
-    start = end - timedelta(days=max(1, min(days, 14)))
+    # Determine API window start — incremental uses last_orders_sync_at
+    last_sync_str = settings.get("last_orders_sync_at") or settings.get("last_sync_at") or ""
+    if incremental and last_sync_str:
+        try:
+            last_dt = datetime.strptime(last_sync_str[:19], "%Y-%m-%d %H:%M:%S")
+            # 1-hour buffer to catch orders modified just before last sync
+            api_start = max(last_dt - timedelta(hours=1), end - timedelta(days=14))
+        except ValueError:
+            api_start = end - timedelta(days=max(1, min(days, 14)))
+    else:
+        api_start = end - timedelta(days=max(1, min(days, 14)))
+    # Load existing cache for merge + skip optimisation
+    cached_by_id = _load_cached_orders_by_package_id(project_root) if incremental else {}
+    skip_ids: set[str] = set(cached_by_id.keys())
     try:
-        raw_orders = fetch_orders(project_root, start, end)
+        # Only pass skip_package_ids when there are known packages to skip —
+        # avoids breaking callers that patched fetch_orders without **kwargs
+        _fetch_kw: dict[str, Any] = {}
+        if incremental and skip_ids:
+            _fetch_kw["skip_package_ids"] = skip_ids
+        new_orders = fetch_orders(project_root, api_start, end, **_fetch_kw)
+        # Merge: existing cached orders + new orders (new overwrites by package_id)
+        if incremental and cached_by_id:
+            merged_map = dict(cached_by_id)
+            for order in new_orders:
+                pid = str(order.get("shipmentPackageId") or "")
+                if pid:
+                    merged_map[pid] = order
+            raw_orders = list(merged_map.values())
+        else:
+            raw_orders = new_orders
         raw_orders = enrich_orders_with_product_catalog(project_root, raw_orders)
         question_rows = _refresh_questions_safely(project_root)
     except Exception as exc:  # noqa: BLE001
@@ -243,7 +305,7 @@ def sync_recent_orders(project_root: Path, days: int = 2, label_models: list[dic
             "questions": list_questions(project_root),
             "settings": get_settings(project_root),
         }
-    _save_readonly_orders_cache(project_root, raw_orders, start=start, end=end, questions=question_rows)
+    _save_readonly_orders_cache(project_root, raw_orders, start=api_start, end=end, questions=question_rows)
     suggestions = build_suggestions_from_orders(
         project_root,
         raw_orders,
@@ -253,15 +315,25 @@ def sync_recent_orders(project_root: Path, days: int = 2, label_models: list[dic
         reuse_existing=True,
     )
     _save_suggestions(project_root, suggestions)
-    _save_orders_sync_status(project_root, "OK", f"{len(raw_orders)} sipariş paketi ve {len(question_rows)} soru/mesaj kanıtı read-only çekildi.", len(raw_orders), len(question_rows))
+    new_count = len(new_orders)
+    total_count = len(raw_orders)
+    _save_orders_sync_status(
+        project_root, "OK",
+        f"{total_count} sipariş paketi ({new_count} yeni) ve {len(question_rows)} soru/mesaj kanıtı read-only çekildi.",
+        total_count, len(question_rows),
+    )
     return {
         "status": "OK",
-        "message": f"{len(suggestions)} Trendyol üretim önerisi hazırlandı. Read-only mod: Trendyol statüsü, kargo ve fatura tetiklenmedi.",
+        "message": (
+            f"{len(suggestions)} Trendyol üretim önerisi hazırlandı "
+            f"({new_count} yeni sipariş). Read-only mod: Trendyol statüsü, kargo ve fatura tetiklenmedi."
+        ),
         "suggestions": suggestions,
         "questions": question_rows,
         "settings": get_settings(project_root),
         "sync_summary": {
-            "orders": len(raw_orders),
+            "orders": total_count,
+            "new_orders": new_count,
             "messages": len(question_rows),
             "read_only_mode": True,
             "marketplace_status_changed": False,
@@ -326,7 +398,9 @@ def _save_readonly_orders_cache(
 
 def _save_orders_sync_status(project_root: Path, status: str, message: str, order_count: int, message_count: int) -> None:
     settings = get_settings(project_root, masked=False)
-    settings["last_sync_at"] = _now()
+    _ts = _now()
+    settings["last_sync_at"] = _ts
+    settings["last_orders_sync_at"] = _ts
     settings["last_orders_sync_status"] = status
     settings["last_orders_sync_message"] = _safe_trendyol_service_message(message, stage=bool(settings.get("stage"))) if status not in {"OK", "CONFIG_MISSING"} else message
     settings["last_orders_count"] = int(order_count or 0)
@@ -544,20 +618,34 @@ def propose_mapping_from_catalog(project_root: Path, label_models: list[dict[str
     }
 
 
-def fetch_orders(project_root: Path, start: datetime, end: datetime) -> list[dict[str, Any]]:
-    """Read orders with the old working integration's V2+V1 strategy.
+def fetch_orders(
+    project_root: Path,
+    start: datetime,
+    end: datetime,
+    *,
+    skip_package_ids: set[str] | None = None,
+    poll_statuses: list[str] | None = None,
+) -> list[dict[str, Any]]:
+    """Read orders with V2+V1 strategy.
 
-    V2 packages/package-items are the primary operational source. V1 orders are
-    used as enrichment for customer fields because Trendyol's V2 package list can
-    omit them. If V2 is unavailable, this safely falls back to the older V1 order
-    endpoint.
+    skip_package_ids: if provided, packages already in cache are skipped
+    (no _fetch_package_items_v2 call). In this incremental mode an empty
+    list is a valid result (no new packages) so V1 fallback is suppressed.
+    poll_statuses: limit to specific Trendyol package statuses (for polling).
     """
+    incremental = skip_package_ids is not None
     try:
-        orders = _fetch_orders_from_v2_packages(project_root, start, end)
-        if orders:
+        orders = _fetch_orders_from_v2_packages(
+            project_root, start, end,
+            skip_package_ids=skip_package_ids,
+            poll_statuses=poll_statuses,
+        )
+        # In incremental mode empty list means "nothing new" — don't fall back
+        if orders or incremental:
             return orders
     except Exception:
-        pass
+        if incremental:
+            raise
     return _fetch_orders_v1(project_root, start, end)
 
 
@@ -580,13 +668,22 @@ def _fetch_orders_v1(project_root: Path, start: datetime, end: datetime) -> list
     return orders
 
 
-def _fetch_orders_from_v2_packages(project_root: Path, start: datetime, end: datetime) -> list[dict[str, Any]]:
+def _fetch_orders_from_v2_packages(
+    project_root: Path,
+    start: datetime,
+    end: datetime,
+    *,
+    skip_package_ids: set[str] | None = None,
+    poll_statuses: list[str] | None = None,
+) -> list[dict[str, Any]]:
     start_ms = int(start.timestamp() * 1000)
     end_ms = int(end.timestamp() * 1000)
     supplier = _supplier_id(project_root)
+    statuses = poll_statuses or ["Created", "Picking", "Invoiced", "Shipped", "Delivered"]
+    skip = skip_package_ids or set()
     packages: list[dict[str, Any]] = []
     seen_packages: set[str] = set()
-    for status in ["Created", "Picking", "Invoiced", "Shipped", "Delivered"]:
+    for status in statuses:
         page = 1
         while page < 20:
             qs = urllib.parse.urlencode(
@@ -598,7 +695,8 @@ def _fetch_orders_from_v2_packages(project_root: Path, start: datetime, end: dat
                     "size": 200,
                 }
             )
-            data = _fetch_json(project_root, f"/integration/ecgw/v2/{supplier}/packages?{qs}", v2=True)
+            data = _fetch_json_with_retry(project_root, f"/integration/ecgw/v2/{supplier}/packages?{qs}", v2=True)
+            time.sleep(_REQUEST_INTER_DELAY)
             items = data.get("items") or []
             if not isinstance(items, list) or not items:
                 break
@@ -618,10 +716,16 @@ def _fetch_orders_from_v2_packages(project_root: Path, start: datetime, end: dat
     if not packages:
         return []
 
+    # Only fetch items for packages NOT already in the cache (skip optimisation)
+    new_packages = [p for p in packages if str(p.get("packageId") or "") not in skip]
+    if not new_packages:
+        return []
+
     v1_index = _build_v1_enrichment_index(_fetch_orders_v1(project_root, start, end))
     orders: list[dict[str, Any]] = []
-    for package in packages:
+    for package in new_packages:
         package_id = str(package.get("packageId") or "")
+        time.sleep(_ITEMS_INTER_DELAY)
         package_items = _fetch_package_items_v2(project_root, package_id)
         if not package_items:
             continue
@@ -2225,6 +2329,34 @@ def _test_connection_probe(project_root: Path, *, force_stage: bool | None = Non
     return products, packages
 
 
+def _fetch_json_with_retry(
+    project_root: Path,
+    path: str,
+    *,
+    v2: bool,
+    timeout: int = 20,
+    max_retries: int = 4,
+) -> dict[str, Any]:
+    """_fetch_json with exponential backoff on 429/502/503 and connection errors."""
+    delay = 2.0
+    last_exc: Exception = RuntimeError("No attempts")
+    for attempt in range(max_retries + 1):
+        try:
+            return _fetch_json(project_root, path, v2=v2, timeout=timeout)
+        except RuntimeError as exc:
+            last_exc = exc
+            code_match = re.search(r"HTTP (\d+)", str(exc))
+            code = int(code_match.group(1)) if code_match else 0
+            if code not in _RETRY_ON_CODES:
+                raise
+        except OSError as exc:
+            last_exc = exc
+        if attempt < max_retries:
+            time.sleep(delay)
+            delay = min(delay * 2, 30.0)
+    raise last_exc
+
+
 def _fetch_json(project_root: Path, path: str, *, v2: bool, force_stage: bool | None = None, timeout: int = 20) -> dict[str, Any]:
     settings = get_settings(project_root, masked=False)
     problem = _credential_configuration_problem(settings)
@@ -2812,6 +2944,131 @@ def _question_sort_key(row: dict[str, Any]) -> tuple[str, str]:
 
 def _sort_questions_newest_first(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return sorted(rows, key=_question_sort_key, reverse=True)
+
+
+def delta_sync_for_poll(project_root: Path) -> dict[str, Any]:
+    """Lightweight incremental sync for the auto-poll scheduler.
+
+    - Fetches only Created/Picking packages since last sync (typically 0-5 requests).
+    - Skips _fetch_package_items_v2 for already-cached packages.
+    - Merges new orders into the existing cache.
+    - Runs AI extraction only on NEW suggestions if AI is enabled.
+    Returns {status, new_orders, new_questions, total_orders, message}.
+    """
+    if not is_configured(project_root):
+        return {"status": "CONFIG_MISSING", "new_orders": 0, "new_questions": 0, "message": "API ayarları eksik."}
+    settings_raw = get_settings(project_root, masked=False)
+    end = datetime.now()
+    last_sync_str = settings_raw.get("last_orders_sync_at") or settings_raw.get("last_sync_at") or ""
+    if last_sync_str:
+        try:
+            last_dt = datetime.strptime(last_sync_str[:19], "%Y-%m-%d %H:%M:%S")
+            # 5-minute buffer; cap at 7 days for first-ever poll after manual sync
+            api_start = max(last_dt - timedelta(minutes=5), end - timedelta(days=7))
+        except ValueError:
+            api_start = end - timedelta(days=7)
+    else:
+        api_start = end - timedelta(days=7)
+    cached_by_id = _load_cached_orders_by_package_id(project_root)
+    try:
+        new_orders = fetch_orders(
+            project_root, api_start, end,
+            skip_package_ids=set(cached_by_id.keys()),
+            poll_statuses=["Created", "Picking"],
+        )
+    except Exception as exc:  # noqa: BLE001
+        detail = _safe_trendyol_service_message(str(exc), stage=bool(settings_raw.get("stage")))
+        return {"status": "UNAVAILABLE", "new_orders": 0, "new_questions": 0, "message": detail}
+    new_question_rows: list[dict[str, Any]] = []
+    try:
+        new_question_rows = _refresh_questions_delta(project_root)
+    except Exception:  # noqa: BLE001
+        pass
+    if not new_orders and not new_question_rows:
+        _save_orders_sync_status(
+            project_root, "OK", "Delta poll: yeni sipariş yok.",
+            len(cached_by_id), len(list_questions(project_root)),
+        )
+        return {"status": "OK_NO_NEW", "new_orders": 0, "new_questions": 0, "total_orders": len(cached_by_id), "message": "Yeni sipariş yok."}
+    # Merge new orders into cache
+    merged_map = dict(cached_by_id)
+    for order in new_orders:
+        pid = str(order.get("shipmentPackageId") or "")
+        if pid:
+            merged_map[pid] = order
+    all_orders = enrich_orders_with_product_catalog(project_root, list(merged_map.values()))
+    all_questions = list_questions(project_root)
+    _save_readonly_orders_cache(project_root, all_orders, start=api_start, end=end, questions=all_questions)
+    # Build suggestions for NEW orders only
+    run_ai = bool(settings_raw.get("ai_enabled"))
+    new_suggestions = build_suggestions_from_orders(
+        project_root, new_orders,
+        questions=all_questions,
+        run_ai=run_ai,
+        reuse_existing=False,
+    )
+    # Merge new suggestions into existing (dedupe by order:package:line key)
+    existing_sug = list_suggestions(project_root)
+    existing_keys = {
+        f"{s.get('order_number', '')}:{s.get('package_id', '')}:{s.get('line_id', '')}"
+        for s in existing_sug if isinstance(s, dict)
+    }
+    truly_new = [
+        s for s in new_suggestions
+        if f"{s.get('order_number', '')}:{s.get('package_id', '')}:{s.get('line_id', '')}" not in existing_keys
+    ]
+    if truly_new:
+        _save_suggestions(project_root, existing_sug + truly_new)
+    total = len(merged_map)
+    msg = f"Delta poll: {len(new_orders)} yeni sipariş, {len(new_question_rows)} yeni soru çekildi."
+    _save_orders_sync_status(project_root, "OK", msg, total, len(all_questions))
+    return {
+        "status": "OK",
+        "new_orders": len(new_orders),
+        "new_questions": len(new_question_rows),
+        "new_suggestions": len(truly_new),
+        "total_orders": total,
+        "message": msg,
+    }
+
+
+def _refresh_questions_delta(project_root: Path) -> list[dict[str, Any]]:
+    """Fetch only questions modified since last questions sync (single page, fast)."""
+    if not is_configured(project_root):
+        return []
+    settings_raw = get_settings(project_root, masked=False)
+    last_q_str = settings_raw.get("last_questions_sync_at") or ""
+    if not last_q_str:
+        return []
+    try:
+        last_dt = datetime.strptime(last_q_str[:19], "%Y-%m-%d %H:%M:%S")
+        since_dt = last_dt - timedelta(minutes=5)
+    except ValueError:
+        return []
+    supplier = _supplier_id(project_root)
+    since_ms = int(since_dt.timestamp() * 1000)
+    end_ms = int(datetime.now().timestamp() * 1000)
+    try:
+        qs = urllib.parse.urlencode({
+            "page": 0, "size": QUESTION_PAGE_SIZE,
+            "startDate": since_ms, "endDate": end_ms,
+            "orderByField": "LastModifiedDate", "orderByDirection": "DESC",
+        })
+        data = _fetch_json_with_retry(
+            project_root, f"/qna/sellers/{supplier}/questions/filter?{qs}",
+            v2=False, timeout=QUESTION_REQUEST_TIMEOUT_SECONDS,
+        )
+        new_rows = [r for r in (data.get("content") or []) if isinstance(r, dict)]
+    except Exception:  # noqa: BLE001
+        return []
+    if not new_rows:
+        return []
+    product_index = _cached_product_reference_index(project_root)
+    normalized = [_normalize_question_context(project_root, q, product_index=product_index) for q in new_rows]
+    merged = _dedupe_questions(normalized + list_questions(project_root))
+    _save_questions(project_root, merged)
+    _save_question_sync_status(project_root, "OK", f"{len(new_rows)} yeni soru/mesaj delta çekildi.")
+    return new_rows
 
 
 def _save_question_sync_status(project_root: Path, status: str, message: str) -> None:
