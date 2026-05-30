@@ -1644,7 +1644,7 @@ def test_trendyol_ui_and_bridge_hooks_exist() -> None:
     assert "trendyolAiAutonomous" not in html
     assert "trendyolBulkActionBar" in html
     assert "trendyolEvidenceDrawer" in app_js
-    assert "trendyol-op-grid" in app_js
+    assert "tsc-card" in app_js
     assert "trendyolMapImageUrl" in html
     assert "trendyolMappingImagePreview" in html
     assert "trendyolMappingSearch" in html
