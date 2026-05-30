@@ -55,8 +55,22 @@ STOP_WORDS = {
     "t\u00fcl", "tulu", "t\u00fcl\u00fc", "tul\u00fc", "sekilde", "\u015fekilde", "model",
     "allah\u0131n", "allah\u2019\u0131n", "k\u0131z\u0131m\u0131z\u0131", "kizimizi", "istemeye", "geldik",
     "cikolatal\u0131", "\u00e7ikolatal\u0131", "tepsi", "gibi", "sadece", "yapal\u0131m", "yapalim", "in", "ile",
+    # Faz A: selamlama typo varyantlar\u0131
+    "merhba", "mrhb", "mrhba", "mrb", "slm", "sln", "meraba",
+    # Faz A: renkler
+    "gold", "gumus", "silver", "bronz", "altin",
+    # Faz A: teslimat/kargo
+    "teslimat", "kargo", "teslimatim", "teslimatim",
 }
 INFINITY_TOKEN = "\u267e"
+# Faz A: niyet anahtar\u0131 tespit \u2014 bu olmadan sipari\u015f-ref yolunda isim alma
+_INTENT_KEY_DET_RE = re.compile(
+    r"(?:isim(?:ler)?\s*(?:yaz\u0131lacak|yazilacak|yaz\u0131ls\u0131n|yazilsin|:)|"
+    r"yaz\u0131lacak\s+isim|yazilacak\s+isim|"
+    r"isimleri\s+|\u00fczerine|uzerine|\u00fczerinde|uzerinde|\u00fcst\u00fcne|ustune|\u00fcst\u00fcnde|ustunde|"
+    r"isim\s*:\s*|etikete|etiketine|lazer\s*isim|yaz\u0131ls\u0131n|yazilsin|yazacak|yaz\u0131lacak)",
+    re.IGNORECASE,
+)
 
 
 def extract_production_fields(source: dict[str, Any], mapping: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -264,7 +278,12 @@ def _drop_stopword_runs(value: str) -> str:
 
 
 def _extract_name_after_order_ref(text: str) -> str:
+    """Faz A: sipariş no. varsa YONLYintent-key ile birlikte isim al.
+    Eski davranış ('ilk token'ı al') kaldırıldı — false-positive üretiyordu."""
     if not ORDER_REF_PATTERN.search(text):
+        return ""
+    # Niyet anahtarı yoksa bu yolda isim ÇIKARMA
+    if not _INTENT_KEY_DET_RE.search(text):
         return ""
     candidate = _strip_personalization_noise(text)
     if not _looks_like_name(candidate):

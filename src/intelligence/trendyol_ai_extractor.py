@@ -25,6 +25,43 @@ INSTRUCTION_NAME_WORDS = {
     "yazilsin", "yazılsın", "tepsi", "sunumluk", "katli", "katlı", "hatirasi", "hatırası",
 }
 
+# --- Faz A: genişletilmiş bloklama sabitleri ---
+# Selamlama yazım varyantları (typo dahil)
+_GREETING_KEYS: frozenset[str] = frozenset({
+    "merhaba", "meraba", "merhba", "mrhb", "mrhba", "mrb", "slm", "sln",
+    "selam", "iyi", "gunaydin", "günaydın", "selamlar", "kolay", "hayirli",
+    "hayırlı", "iyi gunler", "iyi günler",
+})
+# Tek başına isim olamayacak token'lar (normalize edilmiş, diacritic'siz)
+_BLOCKED_NAME_KEYS: frozenset[str] = frozenset({
+    # Renkler
+    "gold", "gumus", "silver", "beyaz", "siyah", "kirmizi",
+    "pembe", "mavi", "mor", "yesil", "sari", "bronz", "bakir", "altin",
+    # Teslimat/sipariş
+    "teslimat", "teslimatim", "teslimatimiz",
+    "kargo", "kargom", "kargonuz",
+    "siparis", "siparisim", "siparisimiz",
+    "numara", "numarasi", "numarayi",
+    "verdigim", "olusturdum",
+    # Sıfat/zarf/hal eki — asla isim değil
+    "seklinde", "gibi", "boyle", "aynisi", "ayni",
+    "sadece", "hepsi", "butun", "tum",
+    # Fiil gövdeleri
+    "olsun", "olacak", "olucak", "yazsin", "yazilsin", "yazilacak",
+    "yazacak", "yazabilir", "misiniz", "rica", "ediyorum",
+    # Bağlaçlar ve genel kelimeler
+    "ve", "ile", "bu", "bir", "de", "da", "this",
+    "ozel", "kisiye", "kisisellestirme",
+})
+# Niyet anahtarı regex (Faz A: bu varsa LLM'e güven artıyor)
+_INTENT_KEY_RE = re.compile(
+    r"(?:isim(?:ler)?\s*(?:yazılacak|yazilacak|yazılsın|yazilsin|:)|"
+    r"(?:yazılacak|yazilacak|yazılsın|yazilsin)\s+isim|"
+    r"üzerine|uzerine|üstüne|ustune|etikete|etiketine|"
+    r"isim\s*:\s*|isimleri\s+|yazılmasını|yazilmasini)",
+    re.IGNORECASE,
+)
+
 
 def ai_cache_path(project_root: Path) -> Path:
     path = project_root / "data" / "trendyol_ai_extraction_cache.json"
@@ -188,40 +225,44 @@ def _extract_response_text(response: dict[str, Any]) -> str:
 
 
 def _system_prompt() -> str:
+    # Faz A: niyet-anahtari odakli, anti-halusinasyon, evidence_span zorunlu
     return (
-        "Sen bir e-ticaret kişiselleştirme alanı çıkarma uzmanısın.\n\n"
-        "Müşteri mesajını insan gibi oku. Amacın, üretime gidecek kişisel yazıları ve üretim talimatlarını ayırmaktır.\n\n"
-        "Önce mesajı sınıflandır:\n"
-        "- containsPersonName: açık kişi adı veya ürüne yazılacak özel isim var mı?\n"
-        "- containsDate: açık tarih var mı?\n"
-        "- containsCustomText: kişi adı olmayan özel yazı var mı?\n"
-        "- containsProductionInstruction: renk, model, tasarım, fotoğraf, teslimat gibi üretim talimatı var mı?\n\n"
-        "Ayrıca messageUnderstanding nesnesi içinde detectedSurfaces listesi döndür. "
-        "Her yüzey için surface, textToWrite, colorOrStyle ve note alanlarını yaz.\n\n"
-        "Şunları ayrı ayrı çıkar:\n"
-        "- personNames: kişi isimleri\n"
-        "- labelName: etiket/lazer üzerinde kişi adı olarak kullanılacak normalize metin\n"
-        "- laserName: genelde labelName ile aynı\n"
-        "- eventDate: açık tarih varsa\n"
-        "- customText: ürüne yazılacak ama kişi ismi olmayan kısa metinler. Örn: “Nişan hatırası”, “Allah’ın emri ile kızımızı istemeye geldik”\n"
-        "- productionNote: renk, model, teslim öncesi fotoğraf, görseldeki gibi, tül rengi gibi üretim talimatları\n"
-        "- quantity: sipariş adedi\n\n"
-        "Kurallar:\n"
-        "- “hatırası” tek başına kişi adı değildir.\n"
-        "- “nişan hatırası” kişi adı değildir.\n"
-        "- “isimler Derya ve M.Şerif” gördüğünde kişi isimleri Derya ve M. Şerif’tir.\n"
-        "- “Derya ve M.Şerif” çıktısı labelName ve laserName içinde “Derya & M. Şerif” olarak normalize edilir.\n"
-        "- “Tuğçe & Murat” gibi açık kişi isimleri varsa labelName sadece bu isimlerden oluşmalıdır.\n"
-        "- “kurdele”, “gold yazı”, “üstüne”, “çiçek”, “çikolata”, “tepsi”, “tasarım” kişi ismi değildir; productionNote içinde kalmalıdır.\n"
-        "- “Allah’ın emri ile kızınızı istemeye geldik” kişi ismi değildir; customText alanıdır.\n"
-        "- Tarih yoksa uydurma.\n"
-        "- İsim yoksa uydurma.\n"
-        "- containsPersonName false ise personNames, labelName ve laserName null olmalıdır.\n"
-        "- “Hepsi beyaz olsun”, “beyaz istiyorum”, “sadece rengi beyaz olsun”, “görseldeki gibi olsun” gibi cümlelerde kişi ismi yoktur; bunlar productionNote alanına yazılır.\n"
-        "- “Hepsi Beyaz” hiçbir zaman kişi adı değildir.\n"
-        "- Product title’dan isim çıkarma.\n"
-        "- Seller answer’dan isim çıkarma.\n"
-        "- Sadece JSON döndür."
+        "Sen Türkçe müşteri mesajlarından, müşterinin ürüne YAZILMASINI istediği "
+        "isim(ler)i, tarihi ve talimatları çıkaran uzmansın. "
+        "temperature=0 seviyesinde çalış; kesinlikle emin olmadığın hiçbir değeri üretme.\n\n"
+
+        "== YENİ ALANLAR (Faz A) ==\n"
+        "- name_found: true yalnızca müşteri ürüne yazılacak ismi AÇIKÇA belirttiyse.\n"
+        "- names: [string] — çıkarılan isimler dizisi; yoksa [].\n"
+        "- evidence_span: müşterin mesajında HARFİ HARFİNE geçen, ismi gerekçelendiren parça. "
+        "  Kanıt parçası mesajda birebir yoksa o ismi VERME.\n\n"
+
+        "== NİYET ANAHTARLARI (bunlar varsa isim al) ==\n"
+        "  'X isim yazılacak', 'isim: X', 'isimleri X ve Y', 'X yazılsın', "
+        "'üzerine X', 'X ismi yazılacak', 'X~Y yazarmısınız', 'yazılacak isim X'\n\n"
+
+        "== KESİNLİKLE İSİM OLMAYANLAR ==\n"
+        "1. Selamlamalar (tüm yazım varyantları): merhaba, meraba, merhba, mrhb, mrb, slm, "
+        "   selam, iyi günler, günaydın\n"
+        "2. Sipariş/teslimat numaraları ve '#{rakam}' kalıpları\n"
+        "3. Renkler: gold, gümüş, silver, beyaz, siyah, kırmızı, mavi, mor, yeşil, sarı, bronz, altın\n"
+        "4. Ölçü ve adet kalıpları: '4/4', 'x adet', '6 tane'\n"
+        "5. Satıcı cevabından gelen metinler ('Satıcı cevabı: ...')\n"
+        "6. Ürün başlığından gelen metinler\n"
+        "7. Fiiller: yazılacak, yazılsın, olacak, olsun, istemek, gelmek\n"
+        "8. İyelik ekleri: siparişin, numarası, ürününüz\n"
+        "9. Kalıp cümleler: 'nişan hatırası', 'hatırası', 'kızımızı istemeye'\n\n"
+
+        "== ÇOKLU İSİM AYRAÇLARI ==\n"
+        "  'X ve Y', 'X / Y', 'X,Y', 'X~Y', 'X & Y', 'X + Y' → her biri ayrı names[]\n\n"
+
+        "== DİĞER KURALLAR ==\n"
+        "- containsPersonName false ise personNames, names, labelName, laserName null/[].\n"
+        "- Tarih yoksa uydurma. İsim yoksa uydurma.\n"
+        "- Product title veya seller answer'dan isim ÇIKARMA.\n"
+        "- eventDate'i DD.MM.YYYY veya 'D Ay YYYY' formatında normalize et.\n"
+        "- evidence_span her zaman müşteri mesajındaki orijinal metinden al.\n"
+        "- Sadece JSON döndür, başka metin yok.\n"
     )
 
 
@@ -245,9 +286,9 @@ def _build_prompt(source: dict[str, Any]) -> str:
         "Aynı siparişe ait tüm müşteri mesajları:\n"
         + json.dumps(context["customerMessages"], ensure_ascii=False, indent=2)
         + "\n\n"
-        f"Seçili müşteri mesajı:\n\"\"\"\n{context['selectedCustomerMessage']}\n\"\"\"\n\n"
-        f"Satıcı cevabı:\n\"\"\"\n{context['sellerAnswer'] or ''}\n\"\"\"\n\n"
-        f"Ürün başlığı:\n\"\"\"\n{context['productTitle'] or ''}\n\"\"\"\n\n"
+        f"Seçili müşteri mesajı:\n“““\n{context['selectedCustomerMessage']}\n“““\n\n"
+        f"Satıcı cevabı:\n“““\n{context['sellerAnswer'] or ''}\n“““\n\n"
+        f"Ürün başlığı:\n“““\n{context['productTitle'] or ''}\n“““\n\n"
         f"Sipariş adedi:\n{context['orderQuantity']}\n\n"
         "Benzer kullanıcı onaylı doğru örnekler:\n"
         + json.dumps(context["similarApprovedExamples"], ensure_ascii=False, indent=2)
@@ -263,7 +304,7 @@ def _build_prompt(source: dict[str, Any]) -> str:
                     "laserName": "Derya & M. Şerif",
                     "eventDate": "30.05.2026",
                     "customText": "Nişan hatırası",
-                    "productionNote": "Çikolataların üzerine tarih ve “Nişan hatırası” yazılacak. Teslim etmeden önce ürün fotoğrafı mesaj yoluyla gönderilmeli.",
+                    "productionNote": "Cikolatalarin uzerine tarih ve Nisan hatirasi yazilacak. Teslim etmeden once urun fotografı mesaj yoluyla gonderilmeli.",
                     "quantity": 1,
                     "confidence": 93,
                     "fieldConfidence": {"personNames": 96, "labelName": 95, "laserName": 95, "eventDate": 94, "customText": 90, "productionNote": 90, "quantity": 90},
@@ -315,6 +356,9 @@ def _build_prompt(source: dict[str, Any]) -> str:
         "Beklenen JSON şeması:\n"
         + json.dumps(
             {
+                "name_found": "boolean — müşteri ürüne yazılacak ismi açıkça belirtti mi?",
+                "names": ["string — çıkarılan isimler; yoksa []"],
+                "evidence_span": "string — ismi destekleyen, mesajda HARFİ HARFİNE geçen parça; yoksa ''",
                 "containsPersonName": "boolean",
                 "containsDate": "boolean",
                 "containsCustomText": "boolean",
@@ -331,11 +375,12 @@ def _build_prompt(source: dict[str, Any]) -> str:
                 "personNames": ["string"],
                 "labelName": "string|null",
                 "laserName": "string|null",
-                "eventDate": "string|null",
+                "eventDate": "string|null — DD.MM.YYYY veya D Ay YYYY",
                 "customText": "string|null",
                 "productionNote": "string|null",
                 "quantity": "number|null",
                 "confidence": "0..100",
+                "reasoning": "string — kısa gerekçe (audit/debug için)",
                 "fieldConfidence": {"personNames": 0, "labelName": 0, "laserName": 0, "eventDate": 0, "customText": 0, "productionNote": 0, "quantity": 0},
                 "sources": {
                     "personNames": "string|null",
@@ -351,6 +396,43 @@ def _build_prompt(source: dict[str, Any]) -> str:
             ensure_ascii=False,
             indent=2,
         )
+        + "\n\n"
+        "Faz A örnekleri (§4c):\n"
+        + json.dumps([
+            {
+                "msg": "Merhba #11276359839 sipariş numaralı ya Yakup Burcu isim yazılacak 10.06.2026 yazılacak lütfen",
+                "out": {"name_found": True, "names": ["Yakup Burcu"], "evidence_span": "Yakup Burcu isim yazılacak",
+                        "labelName": "Yakup Burcu", "eventDate": "10.06.2026", "confidence": 95},
+            },
+            {
+                "msg": "...yazılacak isim Gizem / Emirhan boyut =4/4",
+                "out": {"name_found": True, "names": ["Gizem", "Emirhan"], "evidence_span": "yazılacak isim Gizem / Emirhan",
+                        "labelName": "Gizem & Emirhan", "confidence": 93},
+            },
+            {
+                "msg": "Sipariş no:11273868045 / Teslimat no:10539753922. HASAN~BÜŞRA 07.06.2026 yazarmısınız",
+                "out": {"name_found": True, "names": ["HASAN", "BÜŞRA"], "evidence_span": "HASAN~BÜŞRA",
+                        "labelName": "Hasan & Büşra", "eventDate": "07.06.2026", "confidence": 90},
+            },
+            {
+                "msg": "...nişan için isimleri Melda ve Tarık gümüş rengi, tarih 13 Haziran 2026",
+                "out": {"name_found": True, "names": ["Melda", "Tarık"], "evidence_span": "isimleri Melda ve Tarık",
+                        "labelName": "Melda & Tarık", "eventDate": "13 Haziran 2026", "productionNote": "gümüş rengi", "confidence": 92},
+            },
+            {
+                "msg": "...isimleri Gülnur,Mehmet tarihte 06.06.2026 olcak",
+                "out": {"name_found": True, "names": ["Gülnur", "Mehmet"], "evidence_span": "isimleri Gülnur,Mehmet",
+                        "labelName": "Gülnur & Mehmet", "eventDate": "06.06.2026", "confidence": 92},
+            },
+            {
+                "msg": "Merhaba sipariş numaram bu, ne zaman kargolanır?",
+                "out": {"name_found": False, "names": [], "evidence_span": "", "confidence": 97},
+            },
+            {
+                "msg": "...gold renk olsun",
+                "out": {"name_found": False, "names": [], "evidence_span": "", "confidence": 90},
+            },
+        ], ensure_ascii=False, indent=2)
     )
 
 
@@ -556,6 +638,22 @@ def _learning_tokens(value: str) -> set[str]:
 
 
 def _sanitize_ai_result(raw: dict[str, Any], source: dict[str, Any], mapping: dict[str, Any] | None) -> dict[str, Any]:
+    # --- Faz A: yeni alanlar ---
+    name_found_flag = _optional_bool(raw.get("name_found"))   # LLM'in niyet tespiti
+    raw_names       = raw.get("names") or []                  # yeni names[] dizisi
+    evidence_span   = str(raw.get("evidence_span") or "").strip()
+    raw_reasoning   = str(raw.get("reasoning") or "").strip()
+
+    # Faz A: name_found=False ise LLM'in personNames/labelName'ini de temizle
+    if name_found_flag is False:
+        raw = {**raw, "personNames": None, "labelName": None, "laserName": None}
+
+    # Faz A: names[] dizisi varsa personNames'i güncelle (yeni şema öncelikli)
+    if raw_names and isinstance(raw_names, list):
+        cleaned_names = [_normalize_ai_text(n) for n in raw_names if _normalize_ai_text(n)]
+        if cleaned_names and not any(_is_blocked_name(n) for n in cleaned_names):
+            raw = {**raw, "personNames": cleaned_names}
+
     contains_person_name = _optional_bool(raw.get("containsPersonName"))
     contains_production_instruction = _optional_bool(raw.get("containsProductionInstruction"))
     person_names = _normalize_person_names(raw.get("personNames"))
@@ -593,6 +691,27 @@ def _sanitize_ai_result(raw: dict[str, Any], source: dict[str, Any], mapping: di
             if not any("isim alanına aktarılmamalı" in warning.lower() for warning in warnings):
                 warnings.append("Mesaj renk/tasarım talimatı içeriyor; isim alanına aktarılmamalı.")
         confidence = min(confidence or 0.7, 0.78)
+
+    # --- Faz A: evidence_span anti-halüsinasyon doğrulaması ---
+    customer_msg = _full_customer_message(source)
+    span_valid = _validate_evidence_span(evidence_span, customer_msg) if evidence_span and label else True
+    if label and evidence_span and not span_valid:
+        label = ""
+        laser = ""
+        person_names = []
+        confidence = min(confidence or 0.5, 0.60)
+        warnings.append(
+            "Faz-A anti-halüsinasyon: evidence_span müşteri mesajında bulunamadı; "
+            "isim alanı güvenlik nedeniyle boşaltıldı."
+        )
+
+    # --- Faz A: tek token blocklist doğrulaması ---
+    if label and _is_blocked_name(label):
+        label = ""
+        laser = ""
+        person_names = []
+        confidence = min(confidence or 0.5, 0.60)
+        warnings.append("Faz-A blocklist: çıkarılan isim token'ı reddedildi (renk/selamlama/genel kelime).")
 
     unsafe_name_source = False
     if _unsafe_source(sources.get("labelName") or sources.get("label_text")):
@@ -641,6 +760,26 @@ def _sanitize_ai_result(raw: dict[str, Any], source: dict[str, Any], mapping: di
         field_confidence["labelName"] = 0 if not label else max(field_confidence.get("labelName", 0), 90)
         field_confidence["laserName"] = 0 if not laser else max(field_confidence.get("laserName", 0), 90)
         field_confidence["personNames"] = 0 if not person_names else max(field_confidence.get("personNames", 0), 90)
+
+    # --- Faz A: post-guard blocklist (guard mesajdan yeniden çıkarmış olabilir) ---
+    if person_names:
+        valid_names = [n for n in person_names if n and not _is_blocked_name(n)]
+        if len(valid_names) != len(person_names):
+            person_names = valid_names
+            label = " & ".join(person_names) if person_names else ""
+            laser = label
+            if not label:
+                confidence = min(confidence or 0.5, 0.60)
+                if not any("blocklist" in w.lower() for w in warnings):
+                    warnings.append("Faz-A post-guard blocklist: geçersiz isim token temizlendi.")
+    if label and _is_blocked_name(label):
+        label = ""
+        laser = ""
+        person_names = []
+        confidence = min(confidence or 0.5, 0.60)
+        if not any("blocklist" in w.lower() for w in warnings):
+            warnings.append("Faz-A post-guard blocklist: birleşik isim token reddedildi.")
+
     if not label:
         laser = ""
         person_names = []
@@ -931,6 +1070,41 @@ def _full_customer_message(source: dict[str, Any]) -> str:
     return clean_spaces(" | ".join(_customer_messages(source) or [repair_text(source.get("question_text") or "")]))
 
 
+# --- Faz A: yardımcı doğrulama fonksiyonları ---
+
+def _normalize_for_span_check(text: str) -> str:
+    """Büyük/küçük harf, Türkçe karakter normalize + fazla boşluk sil."""
+    tr_table = str.maketrans("ğĞıİöÖüÜşŞçÇ", "ggiioouusscc")
+    return re.sub(r"\s+", " ", repair_text(text).lower().translate(tr_table)).strip()
+
+
+def _validate_evidence_span(evidence_span: str, customer_message: str) -> bool:
+    """evidence_span müşteri mesajında birebir (normalize edilmiş) geçiyor mu?"""
+    if not evidence_span or not customer_message:
+        return False
+    norm_span = _normalize_for_span_check(evidence_span)
+    norm_msg  = _normalize_for_span_check(customer_message)
+    return bool(norm_span) and norm_span in norm_msg
+
+
+def _is_blocked_name(label: str) -> bool:
+    """Tek token renk/selamlama/genel kelime mi? (blocklist kontrolü)"""
+    if not label:
+        return False
+    tr_table = str.maketrans("ğĞıİöÖüÜşŞçÇ", "ggiioouusscc")
+    tokens = re.split(r"[\s&]+", label.strip())
+    if len(tokens) == 1:
+        key = re.sub(r"[^a-z0-9]", "", tokens[0].lower().translate(tr_table))
+        return key in _BLOCKED_NAME_KEYS or key in _GREETING_KEYS
+    # Tüm token'lar blocklist'te ise reddet
+    if all(
+        re.sub(r"[^a-z0-9]", "", t.lower().translate(tr_table)) in _BLOCKED_NAME_KEYS | _GREETING_KEYS
+        for t in tokens if t.strip()
+    ):
+        return True
+    return False
+
+
 def _message_understanding(raw: dict[str, Any]) -> dict[str, Any]:
     value = raw.get("messageUnderstanding") or raw.get("message_understanding") or {}
     if not isinstance(value, dict):
@@ -1105,7 +1279,7 @@ def _person_key(value: str) -> str:
 
 
 def _valid_person_name_token(value: str) -> bool:
-    text = clean_spaces(repair_text(value)).strip(" .,:;!?()[]{}\"'“”‘’")
+    text = clean_spaces(repair_text(value)).strip(" .,:;!?()[]{}“'""''")
     if not text or _name_has_instruction_noise(text):
         return False
     if re.search(r"\d", text):
@@ -1131,7 +1305,7 @@ def _valid_person_name_token(value: str) -> bool:
 
 
 def _valid_person_phrase(value: str) -> bool:
-    text = clean_spaces(repair_text(value)).strip(" .,:;!?()[]{}\"'“”‘’")
+    text = clean_spaces(repair_text(value)).strip(" .,:;!?()[]{}“'""''")
     if not text or _name_has_instruction_noise(text):
         return False
     tokens = [token for token in re.split(r"\s+", text) if token]
@@ -1165,7 +1339,7 @@ def _infer_person_names_from_message(message: str) -> list[str]:
         r"cift\s+isimleri)"
     )
     separator = r"(?:&|\+|/|-|_|\.)"
-    quote = r"[\"'“”‘’]"
+    quote = r"[“'""'']"
     patterns = [
         rf"\b(?P<a>{name_word})\s*(?:♾|∞|sonsuzluk(?:\s+i(?:ş|s)areti)?|infinity)\s*(?P<b>{name_word})\b",
         rf"\b{trigger}\s*:?\s+(?:tarih\s+)?{quote}\s*(?P<a>{initial_name})\s*{quote}\s+{quote}\s*(?P<b>{initial_name})\s*{quote}{stop}",
@@ -1199,8 +1373,8 @@ def _infer_custom_text_from_message(message: str) -> str:
     key = repair_text(message).lower()
     if "allah" in key and "emri" in key and "istemeye geldik" in key:
         if "kızınızı" in key or "kizinizi" in key:
-            return "Allah’ın emri ile kızınızı istemeye geldik"
-        return "Allah’ın emri ile kızımızı istemeye geldik"
+            return "Allah'ın emri ile kızınızı istemeye geldik"
+        return "Allah'ın emri ile kızımızı istemeye geldik"
     if re.search(r"\bnişan\s+hatırası\b|\bnisan\s+hatirasi\b", key, flags=re.IGNORECASE):
         return "Nişan hatırası"
     return ""
@@ -1208,8 +1382,8 @@ def _infer_custom_text_from_message(message: str) -> str:
 
 def _normalize_custom_phrase_in_text(value: str) -> str:
     text = repair_text(value)
-    text = re.sub(r"Allah[ıi]n emri ile kızınızı istemeye geldik", "Allah’ın emri ile kızınızı istemeye geldik", text, flags=re.IGNORECASE)
-    text = re.sub(r"Allah[ıi]n emri ile kızımızı istemeye geldik", "Allah’ın emri ile kızımızı istemeye geldik", text, flags=re.IGNORECASE)
+    text = re.sub(r"Allah[ıi]n emri ile kızınızı istemeye geldik", "Allah'ın emri ile kızınızı istemeye geldik", text, flags=re.IGNORECASE)
+    text = re.sub(r"Allah[ıi]n emri ile kızımızı istemeye geldik", "Allah'ın emri ile kızımızı istemeye geldik", text, flags=re.IGNORECASE)
     return clean_spaces(text)
 
 
@@ -1248,7 +1422,7 @@ def _infer_production_note_from_message(message: str, person_names: list[str], d
         parts.append("Çiçekli tasarım isteniyor.")
     if ("tepsi" in key or "çikolatalarda" in key or "cikolatalarda" in key) and custom_text:
         style = " gold yazı ile" if "gold" in key else ""
-        parts.append(f"Tepsi içindeki çikolatalarda “{custom_text}”{style} yazılacak.")
+        parts.append(f"Tepsi içindeki çikolatalarda {custom_text}{style} yazılacak.")
     if "gold olsun" in key or "gold yaz" in key:
         if not parts:
             parts.append("Gold yazı kullanılacak.")
@@ -1293,10 +1467,10 @@ def _compose_note(custom_text: str, production_note: str) -> str:
     if production_note and custom.lower() not in production_note.lower():
         if "yaz" in production_note.lower():
             return production_note
-        return f"Çikolataların üzerine “{custom}” yazılacak. {production_note}"
+        return f"Çikolataların üzerine {custom} yazılacak. {production_note}"
     if production_note:
         return production_note
-    return f"“{custom}” yazılacak."
+    return f"{custom} yazılacak."
 
 
 def _remove_duplicate_name_note(value: str, person_names: list[str]) -> str:

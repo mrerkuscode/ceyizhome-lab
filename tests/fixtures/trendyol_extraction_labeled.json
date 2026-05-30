@@ -1,0 +1,205 @@
+[
+  {
+    "id": "sec4c_1",
+    "message": "Merhba #11276359839 sipariş numaralı ya Yakup Burcu isim yazılacak 10.06.2026 yazılacak lütfen",
+    "expected": {"names": ["Yakup Burcu"], "date": "10.06.2026", "name_found": true, "evidence_span_contains": "Yakup Burcu isim yazılacak"}
+  },
+  {
+    "id": "sec4c_2",
+    "message": "...yazılacak isim Gizem / Emirhan boyut =4/4",
+    "expected": {"names": ["Gizem", "Emirhan"], "name_found": true, "evidence_span_contains": "Gizem"}
+  },
+  {
+    "id": "sec4c_3",
+    "message": "Sipariş no:11273868045 / Teslimat no:10539753922. HASAN~BÜŞRA 07.06.2026 yazarmısınız",
+    "expected": {"names": ["HASAN", "BÜŞRA"], "date": "07.06.2026", "name_found": true}
+  },
+  {
+    "id": "sec4c_4",
+    "message": "nişan için isimleri Melda ve Tarık gümüş rengi, tarih 13 Haziran 2026",
+    "expected": {"names": ["Melda", "Tarık"], "date_contains": "Haziran 2026", "name_found": true, "evidence_span_contains": "isimleri Melda ve Tarık"}
+  },
+  {
+    "id": "sec4c_5",
+    "message": "isimleri Gülnur,Mehmet tarihte 06.06.2026 olcak",
+    "expected": {"names": ["Gülnur", "Mehmet"], "date": "06.06.2026", "name_found": true}
+  },
+  {
+    "id": "sec4c_6_no_name",
+    "message": "Merhaba sipariş numaram bu, ne zaman kargolanır?",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "sec4c_7_color_not_name",
+    "message": "gold renk olsun lütfen",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "greeting_typo_merhba",
+    "message": "Merhba ya #1234567890 numaram bu sipariş için Teslimat bilgisi lazım",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "greeting_typo_mrb",
+    "message": "mrb siparişim hazır mı?",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "gold_not_name",
+    "message": "Siparişim için gold renk olsun, çiçekler sarı olacak",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "teslimat_not_name",
+    "message": "Teslimat #11275432108 nolu siparişi nerede?",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "explicit_isim_pattern",
+    "message": "Sipariş 11276000001 için isim: Ayşe Nur yazılsın",
+    "expected": {"names": ["Ayşe Nur"], "name_found": true, "evidence_span_contains": "isim"}
+  },
+  {
+    "id": "isimleri_ve_pattern",
+    "message": "Sipariş 11276000002 üzerine isimleri Fatma ve Mehmet yazılacak tarih 15.07.2026",
+    "expected": {"names": ["Fatma", "Mehmet"], "date": "15.07.2026", "name_found": true}
+  },
+  {
+    "id": "ampersand_pair",
+    "message": "Siparişim #11276000003 üzerine Elif & Emre yazılacak",
+    "expected": {"names": ["Elif", "Emre"], "name_found": true}
+  },
+  {
+    "id": "turkish_chars",
+    "message": "Siparişim 11276000004 için Şükran ve Çağla isim yazılsın",
+    "expected": {"names_contain": ["Şükran", "Çağla"], "name_found": true}
+  },
+  {
+    "id": "cargo_question_no_name",
+    "message": "Merhabalar, siparişim 11276000005 hâlâ kargoya verilmedi, ne zaman gönderilecek?",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "color_instruction_no_name",
+    "message": "Sipariş 11276000006 için altın sarısı renk olsun, görseldeki gibi",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "seller_answer_name_not_extracted",
+    "message": "müşteri sorusu: kargo ne zaman?",
+    "seller_answer": "Satıcı cevabı: Ahmet Bey siparişiniz yolda",
+    "expected": {"names": [], "name_found": false, "note": "Satıcı cevabındaki isim alınmamalı"}
+  },
+  {
+    "id": "single_name_uzerne",
+    "message": "Siparişim 11276000007 üzerine Zeynep yazsın",
+    "expected": {"names": ["Zeynep"], "name_found": true}
+  },
+  {
+    "id": "three_names_comma",
+    "message": "isimler: Ali, Veli, Ayşe yazılacak",
+    "expected": {"name_found": true, "names_min_count": 2}
+  },
+  {
+    "id": "infinity_symbol",
+    "message": "Elif ♾ Emre isim yazılacak 20.06.2026",
+    "expected": {"name_found": true, "names_min_count": 1}
+  },
+  {
+    "id": "tilde_separator",
+    "message": "#11276000010 nolu sipariş Hasan~Büşra 07.06.2026 yazarmısınız",
+    "expected": {"names": ["Hasan", "Büşra"], "date": "07.06.2026", "name_found": true}
+  },
+  {
+    "id": "no_name_only_note",
+    "message": "Nişan hatırası yazılacak, lütfen güzel hazırlayın",
+    "expected": {"names": [], "name_found": false, "note": "Nişan hatırası isim değil"}
+  },
+  {
+    "id": "date_month_name",
+    "message": "isim yazılacak: Melike & Serhan tarih 13 Haziran 2026",
+    "expected": {"names": ["Melike", "Serhan"], "date_contains": "Haziran", "name_found": true}
+  },
+  {
+    "id": "order_ref_without_intent_no_name",
+    "message": "#11276359839 Teslimat bilgisi lütfen",
+    "expected": {"names": [], "name_found": false, "note": "Sipariş no + niyet anahtarı yok → isim çıkarma"}
+  },
+  {
+    "id": "oluşturdum_not_name",
+    "message": "Oluşturdum Numrası Bu #11275432108 sipariş bilgisi",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "mixed_case_turkish",
+    "message": "Sipariş 11276000020 için İrem ve Ömer isim yazılsın",
+    "expected": {"names": ["İrem", "Ömer"], "name_found": true}
+  },
+  {
+    "id": "explicit_name_field_colon",
+    "message": "Ürün üzerine isim: Gülşah Demir yazılacak",
+    "expected": {"names": ["Gülşah Demir"], "name_found": true}
+  },
+  {
+    "id": "ve_separator_date_after",
+    "message": "Nihat ve Aslı isim yazılacak 25.07.2026 tarihinde",
+    "expected": {"names": ["Nihat", "Aslı"], "date_contains": "25.07.2026", "name_found": true}
+  },
+  {
+    "id": "slash_separator_simple",
+    "message": "isim yazılacak: Berat / Zehra",
+    "expected": {"names": ["Berat", "Zehra"], "name_found": true}
+  },
+  {
+    "id": "long_message_with_name",
+    "message": "Merhaba, sipariş numaram 11276000030. Bu sipariş için nişan organizasyonumuz için hazırlıyoruz. Üzerine Selin & Murat isimlerini yazmak istiyoruz. Tarih 28.06.2026 olacak. Beyaz renk tercih ediyoruz.",
+    "expected": {"names": ["Selin", "Murat"], "date": "28.06.2026", "name_found": true}
+  },
+  {
+    "id": "product_title_no_name",
+    "message": "Bu ürün ne kadar sürer?",
+    "product_name": "Kişiye Özel Nişan Etiketi isim: Ahmet",
+    "expected": {"names": [], "name_found": false, "note": "Ürün başlığından isim alınmamalı"}
+  },
+  {
+    "id": "low_confidence_ambiguous",
+    "message": "Merhaba, bir sorum var sipariş hakkında",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "confidence_high_with_intent",
+    "message": "isim: Ceylan Yıldız yazılsın lütfen 10.06.2026",
+    "expected": {"names": ["Ceylan Yıldız"], "name_found": true, "min_confidence": 0.85}
+  },
+  {
+    "id": "gold_gümüş_color_blocked",
+    "message": "#11276000040 Gümüş renk olsun",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "verdigim_not_name",
+    "message": "Verdiğim sipariş 11276000041 hakkında bilgi almak istiyorum",
+    "expected": {"names": [], "name_found": false}
+  },
+  {
+    "id": "triple_name_isimleri",
+    "message": "isimleri Ayşe, Fatma ve Zeynep yazılacak",
+    "expected": {"name_found": true, "names_min_count": 2}
+  },
+  {
+    "id": "only_date_no_name",
+    "message": "tarih 20.06.2026 olsun lütfen",
+    "expected": {"names": [], "name_found": false, "date": "20.06.2026"}
+  },
+  {
+    "id": "order_no_plus_intent_plus_name",
+    "message": "#11276500001 numaralı siparişe Leyla isim yazılacak",
+    "expected": {"names": ["Leyla"], "name_found": true}
+  },
+  {
+    "id": "evidence_span_not_in_message",
+    "message": "Merhaba, teslimat ne zaman?",
+    "llm_evidence_span": "Yakup Burcu isim yazılacak",
+    "expected": {"names": [], "name_found": false, "note": "Evidence span mesajda yok → blocklama"}
+  }
+]
