@@ -3206,9 +3206,11 @@ function renderTrendyolReadonlySyncStrip(settings = {}, summary = {}, questions 
     <span>Canlı statü/kargo/fatura tetiklenmez</span>
   `;
   box.classList.toggle("warn", !configured);
-  // Keep the static banner's credential span in sync
+  // Keep the static banner spans in sync
   const credBanner = byId("trendyolCredentialStatusBanner");
   if (credBanner) credBanner.textContent = status;
+  const lastSyncTop = byId("trendyolLastSyncAtTop");
+  if (lastSyncTop) lastSyncTop.textContent = lastSync ? String(lastSync).slice(11, 19) || lastSync : "-";
   // Show the auto-sync strip once settings are loaded
   const autoStrip = byId("trendyolAutoSyncStrip");
   if (autoStrip) autoStrip.hidden = false;
