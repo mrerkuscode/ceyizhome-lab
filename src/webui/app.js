@@ -1445,6 +1445,7 @@ function showSection(id, options = {}) {
   updateLabelStudioEntryChrome();
   const main = document.querySelector(".main");
   if (main) main.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  (document.querySelector(".content") || {}).scrollTop = 0;
   if (window.matchMedia?.("(max-width: 920px)")?.matches) closeMobileSidebar();
   setTimeout(scheduleFieldOverlaySync, 120);
   if (id === "label") {
