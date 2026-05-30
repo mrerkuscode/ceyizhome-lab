@@ -80,6 +80,9 @@ def is_ai_configured(settings: dict[str, Any] | None) -> bool:
     return _safe_bool(settings.get("ai_enabled"), False) and bool(str(settings.get("ai_api_key") or "").strip())
 
 
+_FAST_PATH_CONFIDENCE_FLOOR = 0.85
+
+
 def extract_with_ai_or_fallback(
     project_root: Path,
     source: dict[str, Any],
@@ -89,6 +92,19 @@ def extract_with_ai_or_fallback(
 ) -> dict[str, Any]:
     source = {**(source or {}), "_project_root": str(project_root)}
     settings = settings or _load_settings(project_root)
+
+    # Fast-path kısa devre: gazetteer-doğrulanmış + anchor + yüksek güven → LLM'i ATLA
+    if (
+        (deterministic or {}).get("fast_path")
+        and float((deterministic or {}).get("confidence", 0)) >= _FAST_PATH_CONFIDENCE_FLOOR
+    ):
+        result = _fallback_result({**(deterministic or {}), "_source": source}, mapping, "fast_path_deterministic")
+        result["source_evidence"] = list(dict.fromkeys([
+            *(deterministic.get("source_evidence") or []),
+            "fast_path_deterministic",
+        ]))
+        return result
+
     if not is_ai_configured(settings):
         return _fallback_result({**(deterministic or {}), "_source": source}, mapping, "rule_fallback_ai_disabled")
     last_exc: Exception | None = None
@@ -887,6 +903,18 @@ def _sanitize_ai_result(raw: dict[str, Any], source: dict[str, Any], mapping: di
         warnings.append("Müşteri mesajında isim bulunamadı.")
     if not confidence:
         confidence = _derive_confidence(label, date, note, field_confidence)
+
+    # ── Dürüst güven kalibrasyonu ─────────────────────────────────────────────
+    # İsim çıkarılamadıysa güven ASLA oto-onay eşiğine (0.85) ulaşamaz.
+    # LLM "analizi hakkında %87 emindim" demesi ≠ "ismin %87 doğruyum".
+    if not label:
+        if name_found_flag is False:
+            confidence = min(confidence or 0.0, 0.40)  # açıkça isim yok
+        else:
+            confidence = min(confidence or 0.0, 0.58)  # isim bulunamadı ama flag set değil
+    elif confidence and confidence >= 0.85:
+        # Yüksek güven ama gazetteer bilgisi yok; evidence_span kontrolü yeterli
+        pass  # evidence_span zaten üstte doğrulandı
 
     return {
         "label_text": label,
