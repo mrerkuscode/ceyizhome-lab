@@ -1383,8 +1383,16 @@
           </div>
         </div>
         <div id="trendyolStatus" class="status-line" hidden></div>
-        <div class="readonly-banner"><span class="readonly-badge">Read-only mode</span><span>Eksik credential</span><span>Son sync: <b id="trendyolLastSyncAtTop">-</b></span><span>Canlı statü/kargo/fatura tetiklenmez</span></div>
+        <div class="readonly-banner"><span class="readonly-badge">Read-only mode</span><span id="trendyolCredentialStatusBanner">Eksik credential</span><span>Son sync: <b id="trendyolLastSyncAtTop">-</b></span><span>Canlı statü/kargo/fatura tetiklenmez</span></div>
         <div id="trendyolReadonlySyncStrip" class="trendyol-readonly-sync-strip"></div>
+        <div id="trendyolAutoSyncStrip" class="trendyol-autosync-strip" hidden>
+          <span id="trendyolAutoSyncIndicator" class="autosync-indicator"></span>
+          <label class="autosync-toggle-label"><input type="checkbox" id="trendyolAutoSyncToggle" onchange="onTrendyolAutoSyncToggle(this.checked)" /> Otomatik çekim</label>
+          <span>Her <input id="trendyolAutoSyncInterval" type="number" min="10" max="3600" step="10" value="30" style="width:52px;padding:2px 4px" onchange="onTrendyolAutoSyncIntervalChange(this.value)" /> sn</span>
+          <span id="trendyolAutoSyncLastRun">Son: —</span>
+          <span id="trendyolAutoSyncNewCount" class="autosync-new-badge" hidden>0 yeni</span>
+          <span class="muted-note" style="font-size:11px">Uygulama açıkken çalışır</span>
+        </div>
         <div id="trendyolSummary" class="trendyol-summary-grid">
           <div class="tysum"><small><span class="dot" style="background:var(--muted)"></span>Toplam</small><b>0</b></div>
           <div class="tysum"><small><span class="dot" style="background:var(--ok)"></span>Üretime hazır</small><b>0</b></div>
