@@ -4863,7 +4863,7 @@ function tscCard(row) {
             <div class="tsc-ev-actions">
               <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="applyTrendyolQuestionToSuggestion(${jsArg(row.id)},${jsArg(qContexts[0]?.id||'')})">Bu mesajı kanıt al</button>
               <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="openTrendyolEvidenceDrawer(${jsArg(row.id)},'order')">Tüm mesajlar (${qCount})</button>
-              <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="typeof openTrendyolNameEdit==='function'&&openTrendyolNameEdit(${jsArg(row.id)})" title="TODO: isim düzenleme">İsmi düzelt</button>
+              <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="openTrendyolNameEdit(${jsArg(row.id)})">İsmi düzelt</button>
             </div>
           </div>` : ""}
         </div>
@@ -5071,6 +5071,122 @@ function trendyolDrawerMessages(row = {}) {
     .map(item => ({ ...item, _linked: false }));
   if (!contexts.length && row.question_text) contexts.push({ id: "inline-question", question_text: row.question_text, answer_text: row.answer_text || "", source: "question", _linked: true });
   return [...contexts, ...extra].sort((a, b) => String(b.created_date || b.creation_date || "").localeCompare(String(a.created_date || a.creation_date || "")));
+}
+
+// ── Trendyol İsim Düzeltme Modali ────────────────────────────────────────────
+let _trendyolNameEditId = null;
+
+function openTrendyolNameEdit(id) {
+  _trendyolNameEditId = id || null;
+  const existing = byId("trendyolNameEditModal");
+  if (existing) existing.remove();
+
+  const suggestions = Array.isArray(currentState.trendyol?.suggestions) ? currentState.trendyol.suggestions : [];
+  const row = suggestions.find(r => String(r.id || "") === String(id || "")) || {};
+
+  const modal = document.createElement("div");
+  modal.id = "trendyolNameEditModal";
+  modal.className = "modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.addEventListener("click", e => { if (e.target === modal) closeTrendyolNameEdit(); });
+  modal.innerHTML = `
+    <div class="modal-inner" style="max-width:460px">
+      <h2 style="margin:0 0 4px;font-size:16px">İsmi Düzelt</h2>
+      <p style="margin:0 0 14px;font-size:12px;color:var(--text-muted,#888)">
+        Sipariş #${esc(String(row.order_number || ""))} — ${esc(String(row.customer_name || ""))}
+      </p>
+      <div id="trendyolNameEditStatus" style="display:none;margin-bottom:10px;padding:8px 10px;border-radius:6px;font-size:13px"></div>
+      <label style="display:block;margin-bottom:10px">
+        <span style="font-size:12px;font-weight:600;display:block;margin-bottom:4px">İsim (etiket / label_text)</span>
+        <input id="tneLabel" type="text" style="width:100%;box-sizing:border-box" value="${esc(String(row.label_text || ""))}">
+      </label>
+      <label style="display:block;margin-bottom:10px">
+        <span style="font-size:12px;font-weight:600;display:block;margin-bottom:4px">Lazer isim (name_cut_text)</span>
+        <input id="tneLaser" type="text" style="width:100%;box-sizing:border-box" value="${esc(String(row.name_cut_text || ""))}">
+      </label>
+      <label style="display:block;margin-bottom:16px">
+        <span style="font-size:12px;font-weight:600;display:block;margin-bottom:4px">Tarih (date_text)</span>
+        <input id="tneDate" type="text" style="width:100%;box-sizing:border-box" placeholder="gün.ay.yıl" value="${esc(String(row.date_text || ""))}">
+      </label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn primary" onclick="saveTrendyolNameEdit()">Kaydet</button>
+        <button class="btn" onclick="reanalyzeTrendyolNameEdit()" title="AI modelini tekrar çalıştırır; mevcut değerlerin üzerine yazar">AI ile tekrar dene</button>
+        <button class="btn" onclick="closeTrendyolNameEdit()" style="margin-left:auto">İptal</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  byId("tneLabel")?.focus();
+}
+
+function closeTrendyolNameEdit() {
+  byId("trendyolNameEditModal")?.remove();
+  _trendyolNameEditId = null;
+}
+
+function _setTrendyolNameEditStatus(msg, type) {
+  const box = byId("trendyolNameEditStatus");
+  if (!box) return;
+  box.textContent = msg;
+  box.style.display = "block";
+  const colors = { ok: ["#d1fae5", "#065f46"], warn: ["#fef9c3", "#713f12"], bad: ["#fee2e2", "#991b1b"], info: ["#e0f2fe", "#0c4a6e"] };
+  const [bg, col] = colors[type] || colors.info;
+  box.style.background = bg;
+  box.style.color = col;
+}
+
+function saveTrendyolNameEdit() {
+  const id = _trendyolNameEditId;
+  if (!id) return;
+  if (!bridge?.save_trendyol_operator_correction) {
+    _setTrendyolNameEditStatus("Operatör düzeltme bridge'i bu oturumda bağlı değil.", "bad");
+    return;
+  }
+  const payload = {
+    label_text: byId("tneLabel")?.value ?? "",
+    name_cut_text: byId("tneLaser")?.value ?? "",
+    date_text: byId("tneDate")?.value ?? "",
+  };
+  _setTrendyolNameEditStatus("Kaydediliyor…", "info");
+  bridge.save_trendyol_operator_correction(id, JSON.stringify(payload), raw => {
+    const result = parseBridgeResult(raw);
+    if (Array.isArray(result.suggestions)) {
+      currentState.trendyol = { ...(currentState.trendyol || {}), suggestions: result.suggestions };
+      renderTrendyolSuggestions(result.suggestions);
+    }
+    const ok = String(result.status || "").toUpperCase() !== "BLOCKED" && String(result.status || "").toUpperCase() !== "ERROR";
+    _setTrendyolNameEditStatus(result.message || "Düzeltme kaydedildi.", ok ? "ok" : "warn");
+    if (typeof showToast === "function") showToast(result.message || "Operatör düzeltmesi kaydedildi.", ok ? "success" : "warning");
+    if (ok) setTimeout(closeTrendyolNameEdit, 900);
+  });
+}
+
+function reanalyzeTrendyolNameEdit() {
+  const id = _trendyolNameEditId;
+  if (!id) return;
+  if (!bridge?.reanalyze_trendyol_suggestion) {
+    _setTrendyolNameEditStatus("AI yeniden analiz bu oturumda bağlı değil.", "bad");
+    return;
+  }
+  _setTrendyolNameEditStatus("AI analiz çalışıyor…", "info");
+  bridge.reanalyze_trendyol_suggestion(id, raw => {
+    const result = parseBridgeResult(raw);
+    if (Array.isArray(result.suggestions)) {
+      currentState.trendyol = { ...(currentState.trendyol || {}), suggestions: result.suggestions };
+      renderTrendyolSuggestions(result.suggestions);
+    }
+    if (result.suggestion) {
+      const s = result.suggestion;
+      const labelEl = byId("tneLabel");
+      const laserEl = byId("tneLaser");
+      const dateEl  = byId("tneDate");
+      if (labelEl) labelEl.value = s.label_text || "";
+      if (laserEl) laserEl.value = s.name_cut_text || "";
+      if (dateEl)  dateEl.value  = s.date_text || "";
+    }
+    const ok = String(result.status || "").toUpperCase() === "OK";
+    _setTrendyolNameEditStatus(result.message || "AI analiz tamamlandı.", ok ? "ok" : "warn");
+  });
 }
 
 function openTrendyolEvidenceDrawer(id, filter = "all") {

@@ -482,6 +482,28 @@ def trendyol_auto_sync_toggle():
         return _err(exc)
 
 
+@api_bp.route("/save_trendyol_operator_correction", methods=["POST"])
+def save_trendyol_operator_correction():
+    try:
+        from webui_backend import trendyol_api as _ta
+        payload = request.get_json() or {}
+        suggestion_id = str(payload.pop("suggestion_id", "") or "")
+        return _ok(_ta.save_trendyol_operator_correction(_PROJECT_ROOT, suggestion_id, payload))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/reanalyze_trendyol_suggestion", methods=["POST"])
+def reanalyze_trendyol_suggestion():
+    try:
+        from webui_backend import trendyol_api as _ta
+        payload = request.get_json() or {}
+        suggestion_id = str(payload.get("id") or payload.get("suggestion_id") or "")
+        return _ok(_ta.reanalyze_trendyol_suggestion(_PROJECT_ROOT, suggestion_id))
+    except Exception as exc:
+        return _err(exc)
+
+
 # GRUP 9 — İsim Kesim
 
 @api_bp.route("/update_name_cut_queue_item_status", methods=["POST"])

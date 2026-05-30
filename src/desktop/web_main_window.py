@@ -1817,6 +1817,12 @@ class WebMainWindow(QMainWindow):
         self._emit_state()
         return result
 
+    def reanalyze_trendyol_suggestion(self, suggestion_id: str) -> dict[str, object]:
+        result = trendyol_api.reanalyze_trendyol_suggestion(self.project_root, suggestion_id)
+        self._append_log(result.get("message", "Trendyol AI yeniden analiz tamamlandı.") + "\n")
+        self._emit_state()
+        return result
+
     def verify_trendyol_suggestion(self, suggestion_id: str, data: dict[str, object]) -> dict[str, object]:
         result = trendyol_api.verify_suggestion(self.project_root, suggestion_id, data)
         self._append_log(result.get("message", "Trendyol satırı doğrulandı.") + "\n")

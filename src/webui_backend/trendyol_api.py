@@ -19,7 +19,7 @@ import pandas as pd
 
 from intelligence.text_cleanup import repair_text, title_turkish_name
 from intelligence.trendyol_ai_extractor import DEFAULT_CONFIDENCE_THRESHOLD, DEFAULT_MODEL as DEFAULT_AI_MODEL
-from intelligence.trendyol_ai_extractor import extract_with_ai_or_fallback, record_learning_example
+from intelligence.trendyol_ai_extractor import extract_with_ai_or_fallback, extract_with_cloud_ai, is_ai_configured, record_learning_example
 from intelligence.trendyol_order_extractor import extract_production_fields
 from webui_backend import customer_order_api, file_api, trendyol_mapping_api
 
@@ -1728,6 +1728,91 @@ def save_trendyol_operator_correction(project_root: Path, suggestion_id: str, pa
         "suggestions": rows,
         "audit_events": audit_events,
         "changed_fields": changed_fields,
+    }
+
+
+def reanalyze_trendyol_suggestion(project_root: Path, suggestion_id: str) -> dict[str, Any]:
+    """Re-run AI extraction on a single suggestion, bypassing the response cache.
+
+    Returns full diagnostics: ai_enabled, model_used, llm_called, llm_error,
+    reasoning, evidence_span.  LLM errors are surfaced — no silent fallback.
+    Read-only to Trendyol: only the local suggestion record is updated.
+    """
+    rows = list_suggestions(project_root)
+    suggestion = next((row for row in rows if str(row.get("id") or "") == str(suggestion_id)), None)
+    if not suggestion:
+        return {"status": "ERROR", "message": "Trendyol önerisi bulunamadı.", "suggestions": rows}
+
+    if not _has_question_evidence(suggestion):
+        return {
+            "status": "SKIP",
+            "message": "Bu siparişe bağlı müşteri mesajı yok; AI analizi çalıştırılamadı.",
+            "suggestion": suggestion,
+            "suggestions": rows,
+            "ai_enabled": False,
+            "llm_called": False,
+        }
+
+    settings_raw = get_settings(project_root, masked=False)
+    settings_no_cache = {**settings_raw, "ai_cache_enabled": False}
+    ai_enabled = is_ai_configured(settings_raw)
+    model_used = str(settings_raw.get("ai_model") or DEFAULT_AI_MODEL)
+    deterministic = extract_production_fields(suggestion, _mapping_from_suggestion(suggestion))
+    mapping = _mapping_from_suggestion(suggestion)
+
+    llm_called = False
+    llm_error: str | None = None
+    extracted: dict[str, Any] | None = None
+
+    if ai_enabled:
+        llm_called = True
+        try:
+            extracted = extract_with_cloud_ai(project_root, suggestion, mapping, deterministic, settings_no_cache)
+        except Exception as exc:  # noqa: BLE001
+            llm_error = str(exc)
+            extracted = None
+
+    if extracted is None:
+        # Deterministic fallback — use ai_enabled=False override so it takes the safe path
+        extracted = extract_with_ai_or_fallback(
+            project_root, suggestion, mapping, deterministic,
+            {**settings_no_cache, "ai_enabled": False},
+        )
+
+    reasoning = str(extracted.pop("_diag_reasoning", "") or "")
+    evidence_span = str(extracted.pop("_diag_evidence_span", "") or "")
+
+    _apply_extracted_fields(suggestion, extracted)
+
+    field_sources = dict(suggestion.get("field_sources") or {})
+    for field in ("label_text", "date_text", "name_cut_text", "note_text"):
+        if field_sources.get(field) == "operator_manual":
+            field_sources.pop(field, None)
+    suggestion["field_sources"] = field_sources
+    suggestion["operator_corrected"] = False
+    suggestion["verification_status"] = VERIFICATION_WAITING_APPROVAL
+    suggestion["status"] = "review"
+    suggestion["user_verified"] = False
+    suggestion["updated_at"] = _now()
+    _save_suggestions(project_root, rows)
+
+    label = suggestion.get("label_text") or "(bulunamadı)"
+    status = "OK" if not llm_error else "AI_ERROR"
+    msg = f"AI yeniden analiz tamamlandı. İsim: {label}"
+    if llm_error:
+        msg = f"LLM hatası (deterministik fallback kullanıldı). İsim: {label}. Hata: {llm_error}"
+
+    return {
+        "status": status,
+        "message": msg,
+        "suggestion": suggestion,
+        "suggestions": rows,
+        "ai_enabled": ai_enabled,
+        "model_used": model_used,
+        "llm_called": llm_called,
+        "llm_error": llm_error,
+        "reasoning": reasoning,
+        "evidence_span": evidence_span,
     }
 
 
