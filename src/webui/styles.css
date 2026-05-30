@@ -5838,3 +5838,111 @@ input[type="checkbox"] { accent-color: var(--blue); }
   box-shadow: 0 0 0 2px rgba(37,99,235,.18);
 }
 .name-cut-edit-preview .name-cut-preview .name-cut-computed-text { opacity: .18; }
+
+/* =====================================================================
+   BATCH 1 + BATCH 2 DESIGN FIXES — 2026-05-30
+   ===================================================================== */
+
+/* A1 — max-width sprawl durdurucu */
+.content {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* A2 — .page-head standardize */
+.page-head {
+  padding: 20px 24px;
+  min-height: 80px;
+  max-height: none;
+}
+
+/* A3 — .topbar 64px / search 40px */
+.topbar { min-height: 64px; }
+.topbar-search input { height: 40px; }
+
+/* A4 — .queue-summary auto-fit grid */
+.queue-summary {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* A5 — .output-filter-bar grid (had no CSS rule) */
+.output-filter-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: var(--s-4);
+}
+
+/* A6 — Trendyol ürün görseli kırpma önle */
+.order-product-thumb-wrap {
+  display: block;
+  max-width: 280px;
+  max-height: 280px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  flex: none;
+}
+.order-product-thumb {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  max-height: 280px;
+  object-fit: contain;
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+}
+
+/* A7 — Trendyol op-grid kolon taşması düzelt (1200px > 983px) */
+#trendyolOrders .trendyol-op-grid-head,
+#trendyolOrders .trendyol-op-grid {
+  grid-template-columns:
+    minmax(100px, 0.8fr)
+    minmax(100px, 0.7fr)
+    minmax(180px, 1.4fr)
+    minmax(100px, 0.7fr)
+    minmax(150px, 1fr)
+    minmax(200px, 1.5fr);
+}
+
+/* A8 — Trendyol kartlar başlangıçta daraltılmış
+        .selected veya .expanded olunca .trendyol-card-ai-panel açılır */
+.trendyol-suggestion-card:not(.selected):not(.expanded) .trendyol-card-ai-panel {
+  display: none;
+}
+
+/* A9 — Etiket Modelleri: kart görseli taşmasın */
+.model-card img {
+  max-height: 180px;
+  object-fit: contain;
+}
+
+/* =====================================================================
+   BATCH 2 — Etiket Studio işlevsel buglar
+   ===================================================================== */
+
+/* B1 — .corel-left-toolbar class'ı display:flex tanımlıyor ve HTML [hidden]
+        attribute'unu (specificity olarak class > attribute selector) eziyor.
+        Bu yüzden içeriksiz div 1005×8px genişlemiş görünüyor, gerçek
+        .studio-rail'i gizlemiyor. Legacy wrapper'ları kalıcı olarak gizle. */
+#corelLeftToolbarWrap,
+#corelCanvasPanelWrap,
+#corelBottomPanelWrap,
+#corelStatusbarWrap,
+#corelPropertyBarWrap { display: none !important; }
+
+/* B2 — .studio-topbar +366px taşması: nowrap kaldır, butonlar satır kırsın */
+.studio-topbar,
+.nc-topbar {
+  flex-wrap: wrap;
+  overflow-x: visible;
+  overflow-y: visible;
+  white-space: normal;
+}
+/* Buton etiketleri tek satırda kalsın, sadece grup kırsın */
+.studio-topbar .tbtn,
+.studio-topbar .btn,
+.studio-topbar .icon-btn,
+.nc-topbar .tbtn {
+  white-space: nowrap;
+}
