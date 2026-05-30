@@ -27,6 +27,29 @@ _UPLOAD_FONTS_DIR = _PROJECT_ROOT / "assets" / "fonts"
 _UPLOAD_TEMP_DIR = _PROJECT_ROOT / "input" / "upload_temp"
 _MAX_UPLOAD_BYTES = 16 * 1024 * 1024  # 16 MB
 
+# Geçerli TTF/OTF imzaları (sfnt magic bytes)
+_FONT_MAGIC: dict[str, set[bytes]] = {
+    ".ttf": {b"\x00\x01\x00\x00", b"true", b"typ1"},
+    ".otf": {b"OTTO"},
+}
+# Her iki uzantı için ortak geçerliler (bazı ttf dosyaları OTTO imzası taşıyabilir)
+_ALL_FONT_MAGIC: set[bytes] = {b"\x00\x01\x00\x00", b"true", b"typ1", b"OTTO"}
+
+
+def _is_valid_font_bytes(data: bytes, suffix: str) -> bool:
+    """TTF/OTF sfnt imzasını ve minimum tablo sayısını kontrol eder."""
+    if len(data) < 12:
+        return False
+    magic = data[:4]
+    if magic not in _ALL_FONT_MAGIC:
+        return False
+    # sfnt tablo sayısı: byte 4-5, en az 1 tablo olmalı
+    try:
+        num_tables = int.from_bytes(data[4:6], "big")
+        return num_tables >= 1
+    except Exception:
+        return False
+
 _ALLOWED = {
     "excel":   {".xlsx", ".xls"},
     "font":    {".ttf", ".otf"},
@@ -667,6 +690,8 @@ def upload_font_library():
         if size > _MAX_UPLOAD_BYTES:
             return jsonify({"status": "ERROR", "error": f"Dosya çok büyük (maks {_MAX_UPLOAD_BYTES // (1024*1024)} MB)"}), 400
         file_bytes = f.read()
+        if not _is_valid_font_bytes(file_bytes, suffix):
+            return jsonify({"status": "ERROR", "error": "Geçersiz font dosyası — TTF/OTF imzası doğrulanamadı."}), 400
         result = _fla.add_font(_PROJECT_ROOT, f.filename, file_bytes, font_type, laser_safe=laser_safe)
         return _ok(result)
     except Exception as exc:
