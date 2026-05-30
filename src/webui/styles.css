@@ -5489,7 +5489,7 @@ body.label-studio-active .sidebar { overflow: hidden !important; }
 
 /* label outputs */
 #labelOutputs .output-thumb { object-fit: contain; }
-#labelOutputs .output-filter-bar { display: flex; gap: var(--s-2); grid-template-columns: minmax(0, 1fr) minmax(360px, 420px); }
+#labelOutputs .output-filter-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
 #labelOutputs .output-stack { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 #labelOutputs .output-stack { grid-template-columns: minmax(220px, 1fr) minmax(220px, 1fr); }
 .output-preview-panel { display: flex; flex-direction: column; gap: var(--s-3); }
@@ -5905,11 +5905,24 @@ input[type="checkbox"] { accent-color: var(--blue); }
     minmax(200px, 1.5fr);
 }
 
-/* A8 — Trendyol kartlar başlangıçta daraltılmış
-        .selected veya .expanded olunca .trendyol-card-ai-panel açılır */
-.trendyol-suggestion-card:not(.selected):not(.expanded) .trendyol-card-ai-panel {
+/* A8 — Trendyol kartlar varsayilan olarak daraltilmis.
+        .expanded olmadan agir kisimlar (grid, badge'ler, uyari) gizli. */
+.trendyol-suggestion-card:not(.expanded) .trendyol-op-grid,
+.trendyol-suggestion-card:not(.expanded) .trendyol-badge-row,
+.trendyol-suggestion-card:not(.expanded) .trendyol-badge-stack,
+.trendyol-suggestion-card:not(.expanded) .trendyol-source-warning,
+.trendyol-suggestion-card:not(.expanded) .trendyol-card-ai-panel {
   display: none;
 }
+.trendyol-op-row-head { cursor: pointer; }
+.card-chevron {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--text-2);
+  flex-shrink: 0;
+  transition: transform .15s;
+}
+.trendyol-suggestion-card.expanded .card-chevron { transform: rotate(180deg); }
 
 /* A9 — Etiket Modelleri: kart görseli taşmasın */
 .model-card img {
