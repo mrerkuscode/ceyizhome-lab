@@ -22150,18 +22150,18 @@ function toggleNameCutFullBoard(btn) {
   };
 })();
 
-/* ============================================================
-   Corel tarzi tabla ici isim duzenleme (on-board editing)
-   Eklenti: nameCutEditModal icindeki board (tabla) onizlemesi
-   uzerine dogrudan yazilabilir bir isim katmani koyar.
-   Mevcut updateNameCutDraftField / renderNameCutEditor sozlesmesini
-   bozmadan, render sonrasi calisir.
-   ============================================================ */
+/* ............................................................
+   Corel tarzi tabla ici isim duzenleme (on-board editing) v2
+   nameCutEditModal icindeki board (tabla) onizlemesi uzerine
+   dogrudan yazilabilir bir isim katmani koyar. Yazarken her
+   tusta re-render katmani yok etmesin diye: degisiklik debounce
+   edilir (yazim bitince commit) ve preview yeniden cizilince
+   katman, odak/caret korunarak yeniden enjekte edilir.
+   ............................................................ */
 (function () {
   "use strict";
   function byId2(id) { try { return document.getElementById(id); } catch (e) { return null; } }
-
-  function syncName(value) {
+  function commit(value) {
     try {
       var input = byId2("nameCutEditName");
       if (input) input.value = value;
@@ -22170,41 +22170,69 @@ function toggleNameCutFullBoard(btn) {
       }
     } catch (e) {}
   }
-
-  function enhanceBoard() {
+  function placeCaretEnd(el) {
+    try {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      r.collapse(false);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (e) {}
+  }
+  function enhanceBoard(refocus) {
     var preview = byId2("nameCutEditPreview");
     if (!preview) return;
-    if (preview.querySelector(".name-cut-board-edit")) return;
     var wrap = preview.querySelector(".name-cut-preview");
     if (!wrap) return;
+    if (wrap.querySelector(".name-cut-board-edit")) return;
     var nameText = "";
-    try { if (typeof nameCutDraft === "object" && nameCutDraft) nameText = nameCutDraft.name_text || ""; } catch (e) {}
+    try { if (typeof nameCutDraft === "object" && nameCutDraft) nameText = nameCutDraft.name_text || nameCutDraft.text || ""; } catch (e) {}
     wrap.style.position = wrap.style.position || "relative";
     var editor = document.createElement("div");
     editor.className = "name-cut-board-edit";
     editor.contentEditable = "true";
     editor.spellcheck = false;
     editor.setAttribute("role", "textbox");
-    editor.setAttribute("aria-label", "Tabla ici isim duzenleme");
+    editor.setAttribute("aria-label", "Isim duzenle");
     editor.textContent = nameText;
+    var timer = null;
     editor.addEventListener("input", function () {
-      syncName(editor.textContent || "");
+      window.__ncBoardTyping = true;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () {
+        window.__ncBoardTyping = false;
+        commit(editor.textContent || "");
+      }, 450);
     });
     editor.addEventListener("keydown", function (ev) {
       if (ev.key === "Enter") { ev.preventDefault(); editor.blur(); }
     });
     editor.addEventListener("blur", function () {
-      try { if (typeof renderNameCutEditor === "function") renderNameCutEditor(); } catch (e) {}
+      if (timer) clearTimeout(timer);
+      window.__ncBoardTyping = false;
+      commit(editor.textContent || "");
     });
     wrap.appendChild(editor);
+    if (refocus) { editor.focus(); placeCaretEnd(editor); }
   }
-
+  function reattach() {
+    try { enhanceBoard(window.__ncBoardTyping === true); } catch (e) {}
+  }
   try {
     if (typeof window.renderNameCutEditor === "function") {
-      var __orig = window.renderNameCutEditor;
+      var __origRender = window.renderNameCutEditor;
       window.renderNameCutEditor = function () {
-        var r = __orig.apply(this, arguments);
-        try { enhanceBoard(); } catch (e) {}
+        var r = __origRender.apply(this, arguments);
+        reattach();
+        return r;
+      };
+    }
+    if (typeof window.refreshNameCutEditorFeedback === "function") {
+      var __origFb = window.refreshNameCutEditorFeedback;
+      window.refreshNameCutEditorFeedback = function () {
+        var r = __origFb.apply(this, arguments);
+        reattach();
         return r;
       };
     }
