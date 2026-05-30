@@ -408,6 +408,10 @@
 
     reanalyze_trendyol_suggestion: function (suggestion_id, callback) {
       postJson("/api/reanalyze_trendyol_suggestion", { id: suggestion_id }, callback);
+    },
+
+    ai_connection_test: function (callback) {
+      fetchJson("/api/ai_connection_test", callback);
     }
 
   };

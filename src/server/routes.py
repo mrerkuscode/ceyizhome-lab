@@ -397,6 +397,18 @@ def restore_backup():
 
 # GRUP 8 — Trendyol
 
+@api_bp.route("/ai_connection_test", methods=["GET"])
+def ai_connection_test():
+    """Read-only LLM bağlantı testi — hiçbir kaydı değiştirmez."""
+    try:
+        from intelligence.trendyol_ai_extractor import test_ai_connection
+        from webui_backend import trendyol_api as _ta
+        settings = _ta.get_settings(_PROJECT_ROOT, masked=False)
+        return _ok(test_ai_connection(settings, _PROJECT_ROOT))
+    except Exception as exc:
+        return _err(exc)
+
+
 @api_bp.route("/test_trendyol_connection", methods=["POST"])
 def test_trendyol_connection():
     try:

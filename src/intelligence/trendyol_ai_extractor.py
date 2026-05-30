@@ -140,6 +140,94 @@ def extract_with_cloud_ai(
     return sanitized
 
 
+_AI_TEST_MESSAGE = (
+    "Merhaba sipariş numaram 12345, isimler PINAR & BURHAN olsun, "
+    "Gold renkli, 10.06.2026'ya yetişsin"
+)
+
+_AI_TEST_SOURCE: dict[str, Any] = {
+    "question_text": _AI_TEST_MESSAGE,
+    "answer_text": "",
+    "product_name": "AI Bağlantı Test Ürünü",
+    "barcode": "TEST-AI-001",
+    "merchant_sku": "TEST-AI-001",
+    "order_number": "12345",
+}
+
+
+def test_ai_connection(settings: dict[str, Any] | None, project_root: "Path | None" = None) -> dict[str, Any]:
+    """Send a fixed test message to the LLM and return full diagnostics.
+
+    No suggestion records are read or written.  No silent fallback — if the
+    LLM call fails the error is surfaced directly.
+    """
+    import time as _time
+
+    settings = settings or {}
+    ai_enabled = is_ai_configured(settings)
+    model = str(settings.get("ai_model") or DEFAULT_MODEL).strip() or DEFAULT_MODEL
+    endpoint = str(settings.get("ai_api_base") or OPENAI_CHAT_URL)
+    api_key_present = bool(str(settings.get("ai_api_key") or "").strip())
+
+    base: dict[str, Any] = {
+        "ai_enabled": ai_enabled,
+        "ai_model": model,
+        "endpoint": endpoint,
+        "api_key_present": api_key_present,
+        "test_message": _AI_TEST_MESSAGE,
+        "llm_called": False,
+        "llm_status": "NOT_CALLED",
+        "llm_error": None,
+        "latency_ms": None,
+        "ham_yanit": None,
+        "extracted": {"isim": None, "tarih": None},
+    }
+
+    if not ai_enabled:
+        base["llm_status"] = "SKIPPED"
+        base["llm_error"] = "AI yapılandırılmamış (ai_enabled=False veya api_key yok)."
+        return base
+
+    source = {**_AI_TEST_SOURCE}
+    if project_root is not None:
+        source["_project_root"] = str(project_root)
+
+    prompt = _build_prompt(source)
+    t0 = _time.monotonic()
+    base["llm_called"] = True
+    try:
+        raw_text = _call_openai_compatible(settings, model, prompt)
+        latency_ms = round((_time.monotonic() - t0) * 1000)
+        base["latency_ms"] = latency_ms
+        base["ham_yanit"] = raw_text
+        try:
+            parsed = parse_ai_response(raw_text)
+        except Exception as parse_exc:  # noqa: BLE001
+            base["llm_status"] = "PARSE_ERROR"
+            base["llm_error"] = str(parse_exc)
+            return base
+
+        names = parsed.get("names") or []
+        label = parsed.get("labelName") or parsed.get("label_text") or ""
+        if names and isinstance(names, list):
+            label = " & ".join(str(n) for n in names if n)
+        date = (
+            parsed.get("eventDate")
+            or parsed.get("date")
+            or parsed.get("date_text")
+            or ""
+        )
+        base["llm_status"] = "OK"
+        base["extracted"] = {"isim": label or None, "tarih": date or None}
+    except Exception as exc:  # noqa: BLE001
+        latency_ms = round((_time.monotonic() - t0) * 1000)
+        base["latency_ms"] = latency_ms
+        base["llm_status"] = "ERROR"
+        base["llm_error"] = str(exc)
+
+    return base
+
+
 def parse_ai_response(payload_text: str) -> dict[str, Any]:
     try:
         data = json.loads(repair_text(payload_text).strip())
