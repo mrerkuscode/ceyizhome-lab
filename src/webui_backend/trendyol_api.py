@@ -351,6 +351,65 @@ def fetch_products(project_root: Path, *, max_pages: int = 10, page_size: int = 
     return products
 
 
+def trendyol_products_path(project_root: Path) -> Path:
+    p = project_root / "data" / "trendyol_products.json"
+    p.parent.mkdir(parents=True, exist_ok=True)
+    return p
+
+
+def sync_products(project_root: Path, *, max_pages: int = 50, page_size: int = 200) -> dict[str, Any]:
+    """Fetch ALL Trendyol products (paginated) and write to data/trendyol_products.json.
+
+    READ-ONLY: never triggers orders, status, cargo or billing.
+    Returns {status, count, synced_at} on success.
+    """
+    if not is_configured(project_root):
+        return {
+            "status": "CONFIG_MISSING",
+            "error": "Trendyol API ayarları eksik. Credential girilmeden ürün kataloğu çekilemez.",
+            "count": 0,
+        }
+    settings = get_settings(project_root, masked=False)
+    problem = _credential_configuration_problem(settings)
+    if problem:
+        return {"status": "CONFIG_INVALID", "error": problem, "count": 0}
+
+    try:
+        all_products = fetch_products(project_root, max_pages=max_pages, page_size=page_size)
+    except Exception as exc:  # noqa: BLE001
+        detail = _safe_trendyol_service_message(str(exc), stage=bool(settings.get("stage")))
+        return {"status": "ERROR", "error": detail, "count": 0}
+
+    catalog: dict[str, Any] = {}
+    for prod in all_products:
+        if not isinstance(prod, dict):
+            continue
+        barkod = str(prod.get("barcode") or prod.get("sellerBarcode") or "").strip()
+        if not barkod:
+            continue
+        catalog[barkod] = {
+            "barkod": barkod,
+            "model_code": str(prod.get("stockCode") or prod.get("sellerBarcode") or ""),
+            "title": str(prod.get("title") or prod.get("name") or ""),
+            "image_url": str(
+                prod.get("images", [{}])[0].get("url") if isinstance(prod.get("images"), list) and prod.get("images") else ""
+            ),
+            "sale_status": str(prod.get("onSale") or prod.get("saleStatus") or ""),
+            "synced_at": _now(),
+        }
+
+    synced_at = _now()
+    trendyol_products_path(project_root).write_text(
+        json.dumps(catalog, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    return {
+        "status": "OK",
+        "count": len(catalog),
+        "synced_at": synced_at,
+        "message": f"{len(catalog)} Trendyol ürünü kataloga yazıldı. Read-only: durum/kargo/fatura tetiklenmedi.",
+    }
+
+
 def enrich_orders_with_product_catalog(project_root: Path, orders: list[dict[str, Any]], *, max_pages: int = 10) -> list[dict[str, Any]]:
     """Attach product catalog details such as image URL to order lines.
 
