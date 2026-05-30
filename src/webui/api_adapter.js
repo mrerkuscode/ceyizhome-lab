@@ -197,6 +197,18 @@
     },
 
     // GRUP 8 — Trendyol
+    test_trendyol_connection: function (callback) {
+      postJson("/api/test_trendyol_connection", {}, callback);
+    },
+
+    sync_trendyol_recent_orders: function (days, callback) {
+      postJson("/api/sync_trendyol_recent_orders", { days: Number(days) || 2 }, callback);
+    },
+
+    sync_trendyol_questions: function (callback) {
+      postJson("/api/read_trendyol_questions", {}, callback);
+    },
+
     upsert_trendyol_mapping: function (payload, callback) {
       var body = (typeof payload === "string") ? JSON.parse(payload) : payload;
       postJson("/api/upsert_trendyol_mapping", body, callback);
@@ -328,7 +340,6 @@
     "choose_new_label_model_design_visual", "choose_label_model_preview",
     "import_template_pack", "importTemplatePack", "import_label_font",
     "validate_backup",
-    "test_trendyol_connection", "sync_trendyol_recent_orders",
     "export_production_audit_events",
     "guard_live_integration_action",
     "open_output_folder", "openOutput", "open_reports_folder", "openReports",
@@ -358,6 +369,6 @@
   cyzella.logChanged   = { connect: function () {} };
 
   window.cyzella = cyzella;
-  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job endpoints)");
+  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job + Sprint 4: 3 Trendyol endpoints)");
 
 }());
