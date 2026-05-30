@@ -5959,3 +5959,19 @@ input[type="checkbox"] { accent-color: var(--blue); }
 .nc-topbar .tbtn {
   white-space: nowrap;
 }
+/* === Toolbar 3-col layout (mockup: design/etiket-studio-toolbar-mockup) === */
+.studio-topbar-3col{justify-content:space-between;gap:0;overflow:visible}
+.studio-tb-left{display:flex;align-items:center;gap:6px;flex:none}
+.studio-tb-mid{display:flex;align-items:center;gap:3px;flex:0 1 auto}
+.studio-tb-right{display:flex;align-items:center;gap:5px;flex:none}
+.studio-pdf-btn{font-weight:600;white-space:nowrap}
+/* ⋮ dropdown */
+.studio-more-wrap{position:relative}
+.studio-more-wrap>summary{list-style:none}
+.studio-more-wrap>summary::-webkit-details-marker{display:none}
+.studio-more-summary{cursor:pointer}
+.studio-more-menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:4px 0;z-index:60;min-width:164px;box-shadow:0 4px 16px rgba(0,0,0,.13)}
+.smenu-btn{display:block;width:100%;text-align:left;padding:8px 14px;font-size:13px;font-family:inherit;background:transparent;border:none;cursor:pointer;color:var(--text)}
+.smenu-btn:hover{background:var(--surface-2)}
+.smenu-btn:disabled,.smenu-btn[aria-disabled=true]{opacity:.4;cursor:not-allowed}
+.smenu-sep{border:none;border-top:1px solid var(--line);margin:4px 0}
