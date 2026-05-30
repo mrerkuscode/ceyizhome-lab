@@ -4,8 +4,9 @@ setlocal EnableDelayedExpansion
 
 :: ============================================================
 ::  CeyizHome Lab -- Tek-Tikla Deploy
-::  main'den: pull + test + Flask restart
-::  feature branch'ten: test + main'e merge + push + restart
+::  Otomatik: merge edilmemis en yeni fix/* / design/* branch'i
+::  bulur, test eder, main'e merge eder, Flask'i yeniden baslatir.
+::  Bekleyen branch yoksa: main pull + test + restart.
 :: ============================================================
 
 set "PROJECT_DIR=C:\Users\Pc\Documents\New project\production-bot"
@@ -22,10 +23,7 @@ echo.
 :: -- 1. Repo klasorune gec -----------------------------------
 echo [1/6] Proje klasorune geciliyor...
 cd /d "%PROJECT_DIR%"
-if errorlevel 1 (
-    echo HATA: Klasor bulunamadi: %PROJECT_DIR%
-    goto :FAIL
-)
+if errorlevel 1 ( echo HATA: Klasor bulunamadi: %PROJECT_DIR% & goto :FAIL )
 echo       OK: %CD%
 echo.
 
@@ -36,28 +34,37 @@ if not exist "%VENV_PY%" (
     goto :FAIL
 )
 "%GIT%" --version >nul 2>nul
-if errorlevel 1 (
-    echo HATA: git bulunamadi: %GIT%
-    goto :FAIL
+if errorlevel 1 ( echo HATA: git bulunamadi: %GIT% & goto :FAIL )
+
+:: -- 2. En yeni merge edilmemis fix/ veya design/ branch'ini bul
+echo [2/6] Merge edilmemis fix/design branch'i aran?yor...
+"%GIT%" fetch origin >nul 2>nul
+set "WORK_BRANCH="
+for /f "tokens=1" %%b in ('"%GIT%" branch -r --no-merged origin/main 2^>nul') do (
+    if "!WORK_BRANCH!"=="" (
+        echo %%b | findstr /R "origin/fix/ origin/design/" >nul 2>nul
+        if not errorlevel 1 (
+            set "RAW=%%b"
+            set "WORK_BRANCH=!RAW:origin/=!"
+        )
+    )
 )
 
-:: -- Mevcut branch'i tespit et ------------------------------
-for /f "delims=" %%b in ('"%GIT%" rev-parse --abbrev-ref HEAD 2^>nul') do set "WORK_BRANCH=%%b"
-if "%WORK_BRANCH%"=="" (
-    echo HATA: Aktif branch tespit edilemedi.
-    goto :FAIL
+if "!WORK_BRANCH!"=="" (
+    echo       Bekleyen branch yok. main pull yapiliyor...
+    "%GIT%" checkout main >nul 2>nul
+    "%GIT%" pull origin main
+    if errorlevel 1 ( echo HATA: main pull basarisiz. & goto :FAIL )
+    set "MERGE_MODE=0"
+) else (
+    echo       Bulundu: !WORK_BRANCH!
+    "%GIT%" checkout "!WORK_BRANCH!"
+    if errorlevel 1 ( echo HATA: Branch'e gecilemedi: !WORK_BRANCH! & goto :FAIL )
+    "%GIT%" pull origin "!WORK_BRANCH!"
+    if errorlevel 1 ( echo HATA: git pull basarisiz. & goto :FAIL )
+    echo       OK
+    set "MERGE_MODE=1"
 )
-echo       Aktif branch: %WORK_BRANCH%
-echo.
-
-:: -- 2. Pull et ---------------------------------------------
-echo [2/6] "%WORK_BRANCH%" pull ediliyor...
-"%GIT%" pull origin "%WORK_BRANCH%"
-if errorlevel 1 (
-    echo HATA: git pull basarisiz.
-    goto :FAIL
-)
-echo       OK
 echo.
 
 :: -- 3. Testleri calistir -----------------------------------
@@ -69,27 +76,28 @@ echo       --------------------------------------------------------
 if not "!TEST_EXIT!"=="0" (
     echo.
     echo *** TESTLER PATLADI -- DEPLOY IPTAL ***
-    echo     Merge YAPILMADI. Hatalari duzelt, tekrar dene.
+    echo     main'e merge YAPILMADI.
+    echo     Yukaridaki hatalari duzelt, tekrar dene.
     goto :FAIL
 )
 echo       OK: Tum testler gecti.
 echo.
 
-:: -- 4. Merge (sadece feature branch'teyse) -----------------
-if /i "%WORK_BRANCH%"=="main" (
-    echo [4/6] main'desin, merge adimi atlaniyor.
+:: -- 4. Merge (sadece bekleyen branch varsa) ----------------
+if "!MERGE_MODE!"=="0" (
+    echo [4/6] Bekleyen branch yoktu, merge adimi atlaniyor.
     echo.
     goto :FLASK
 )
 
-echo [4/6] main'e geciliyor, "%WORK_BRANCH%" merge ediliyor...
+echo [4/6] main'e geciliyor, "!WORK_BRANCH!" merge ediliyor...
 "%GIT%" checkout main
 if errorlevel 1 ( echo HATA: main'e gecilemedi. & goto :FAIL )
 
 "%GIT%" pull origin main
 if errorlevel 1 ( echo HATA: main pull basarisiz. & goto :FAIL )
 
-"%GIT%" merge --no-ff "%WORK_BRANCH%" -m "deploy: merge %WORK_BRANCH% into main"
+"%GIT%" merge --no-ff "!WORK_BRANCH!" -m "deploy: merge !WORK_BRANCH! into main"
 if errorlevel 1 (
     echo HATA: Merge basarisiz, conflict olabilir.
     "%GIT%" merge --abort >nul 2>nul
@@ -129,9 +137,18 @@ echo.
 echo [6/6] Tarayici aciliyor: http://localhost:%FLASK_PORT%
 start "" "http://localhost:%FLASK_PORT%"
 echo.
-echo ============================================================
-echo  DEPLOY TAMAMLANDI  --  http://localhost:%FLASK_PORT%
-echo ============================================================
+if "!MERGE_MODE!"=="1" (
+    echo ============================================================
+    echo  DEPLOY TAMAMLANDI
+    echo  Merge  : !WORK_BRANCH! -- main
+    echo  URL    : http://localhost:%FLASK_PORT%
+    echo ============================================================
+) else (
+    echo ============================================================
+    echo  DEPLOY TAMAMLANDI  (bekleyen branch yoktu)
+    echo  URL    : http://localhost:%FLASK_PORT%
+    echo ============================================================
+)
 echo.
 pause
 exit /b 0
