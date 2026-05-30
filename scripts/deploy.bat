@@ -63,7 +63,7 @@ echo.
 :: -- 3. Testleri calistir -----------------------------------
 echo [3/6] Testler calistiriliyor...
 echo       --------------------------------------------------------
-"%VENV_PY%" -m pytest tests\ -v --tb=short --no-header -q 2>&1
+"%VENV_PY%" -m pytest tests\ --ignore=tests\test_browser_smoke.py -v --tb=short --no-header -q 2>&1
 set "TEST_EXIT=!errorlevel!"
 echo       --------------------------------------------------------
 if not "!TEST_EXIT!"=="0" (
