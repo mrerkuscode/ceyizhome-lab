@@ -238,13 +238,22 @@ def parse_ai_response(payload_text: str) -> dict[str, Any]:
     return data
 
 
+def _is_reasoning_model(model: str) -> bool:
+    m = model.lower()
+    return m.startswith("gpt-5") or m.startswith("o1") or m.startswith("o3") or m.startswith("o4")
+
+
 def _call_openai_compatible(settings: dict[str, Any], model: str, prompt: str) -> str:
     api_key = str(settings.get("ai_api_key") or "").strip()
     timeout = _safe_float(settings.get("ai_timeout_seconds"), DEFAULT_TIMEOUT_SECONDS)
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    responses_payload = {"model": model, "instructions": _system_prompt(), "input": prompt}
-    if model.lower().startswith("gpt-5"):
-        chat_first_payload = {
+
+    reasoning = _is_reasoning_model(model)
+    # reasoning_effort ayarı: settings'ten oku, yoksa "low"
+    effort = str(settings.get("ai_reasoning_effort") or "low").strip() or "low"
+
+    def _chat_payload() -> dict[str, Any]:
+        p: dict[str, Any] = {
             "model": model,
             "messages": [
                 {"role": "system", "content": _system_prompt()},
@@ -252,39 +261,37 @@ def _call_openai_compatible(settings: dict[str, Any], model: str, prompt: str) -
             ],
             "response_format": {"type": "json_object"},
         }
+        if reasoning:
+            p["reasoning_effort"] = effort
+        return p
+
+    def _responses_payload() -> dict[str, Any]:
+        p: dict[str, Any] = {"model": model, "instructions": _system_prompt(), "input": prompt}
+        if reasoning:
+            p["reasoning"] = {"effort": effort}
+        return p
+
+    # gpt-5 ailesi: önce chat/completions dene (en güvenilir)
+    if model.lower().startswith("gpt-5"):
         try:
-            response = _post_json(OPENAI_CHAT_URL, headers, chat_first_payload, timeout)
+            response = _post_json(OPENAI_CHAT_URL, headers, _chat_payload(), timeout)
             output = _extract_response_text(response)
             if output:
                 return output
         except Exception:
             pass
+
+    # Responses API fallback
     try:
-        response = _post_json(OPENAI_RESPONSES_URL, headers, responses_payload, timeout)
+        response = _post_json(OPENAI_RESPONSES_URL, headers, _responses_payload(), timeout)
         output = _extract_response_text(response)
         if output:
             return output
     except Exception:
         pass
 
-    chat_payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": _system_prompt()},
-            {"role": "user", "content": prompt},
-        ],
-        "response_format": {"type": "json_object"},
-    }
-    if model.lower().startswith("gpt-5"):
-        try:
-            response = _post_json(OPENAI_CHAT_URL, headers, chat_payload, timeout)
-            output = _extract_response_text(response)
-            if output:
-                return output
-        except Exception:
-            pass
-
-    response = _post_json(OPENAI_CHAT_URL, headers, chat_payload, timeout)
+    # Son çare: chat/completions
+    response = _post_json(OPENAI_CHAT_URL, headers, _chat_payload(), timeout)
     output = _extract_response_text(response)
     if not output:
         raise ValueError("AI yanıtında metin yok.")
