@@ -72,7 +72,36 @@
     "categoryName": "Çikolata",
     "productName": "Beyaz İncili Cam Sunumluk Kapaklı Sandık, Çikolata Şeker Ve Takı Kutusu 25x15cm",
     "order_date_ms": 1780167296014,
-    "order_date": "30.05.2026 21:54"
+    "order_date": "30.05.2026 21:54",
+    "shipping_address": {
+      "id": 9046849761,
+      "firstName": "samet",
+      "lastName": "sezer",
+      "company": "",
+      "address1": "Hadaroğlu mahallesi 158 sokak no:46 z02 yüreğir/adana",
+      "address2": "",
+      "city": "Adana",
+      "cityCode": 1,
+      "district": "Yüreğir",
+      "districtId": 112,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "01000",
+      "countryCode": "TR",
+      "neighborhoodId": 11805,
+      "neighborhood": "Haydaroğlu Mah",
+      "phone": null,
+      "fullAddress": "Hadaroğlu mahallesi 158 sokak no:46 z02 yüreğir/adana     Yüreğir Adana",
+      "fullName": "samet sezer"
+    },
+    "cargo_tracking_number": "7280033073914250",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "092d92a5ec785f1cbb940936138e5cb8",
@@ -205,7 +234,36 @@
       "containsProductionInstruction": true
     },
     "order_date_ms": 1780164240963,
-    "order_date": "30.05.2026 21:04"
+    "order_date": "30.05.2026 21:04",
+    "shipping_address": {
+      "id": 9046665318,
+      "firstName": "burhan",
+      "lastName": "akdağ",
+      "company": "",
+      "address1": "fındık sokak no 6/1",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Sarıyer",
+      "districtId": 57,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28391,
+      "neighborhood": "Ptt Evleri Mah",
+      "phone": null,
+      "fullAddress": "fındık sokak no 6/1     Sarıyer İstanbul",
+      "fullName": "burhan akdağ"
+    },
+    "cargo_tracking_number": "7280033073165256",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "a191aab19a78505eaccba937dde21936",
@@ -280,7 +338,36 @@
     "categoryName": "Çikolata",
     "productName": "Kian Gümüş Söz Nişan 60 Ve 36 Adet Kız Isteme Çikolatası Ve 41 Adet Isteme Çiçeği Seti",
     "order_date_ms": 1780160017362,
-    "order_date": "30.05.2026 19:53"
+    "order_date": "30.05.2026 19:53",
+    "shipping_address": {
+      "id": 9046404011,
+      "firstName": "Emrecan",
+      "lastName": "Akman",
+      "company": "",
+      "address1": "Ketenciler köyü kahyalar mah. No:32 ",
+      "address2": "",
+      "city": "Zonguldak",
+      "cityCode": 67,
+      "district": "Ereğli",
+      "districtId": 1030,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "67000",
+      "countryCode": "TR",
+      "neighborhoodId": 67640,
+      "neighborhood": "Kahyalar Mah (Ketenciler Köyü)",
+      "phone": null,
+      "fullAddress": "Ketenciler köyü kahyalar mah. No:32     Ereğli Zonguldak",
+      "fullName": "Emrecan Akman"
+    },
+    "cargo_tracking_number": "7280033072097749",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "6aa53366d2bb520c9c297b0b5a3e63b0",
@@ -404,7 +491,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1780156228543,
-    "order_date": "30.05.2026 18:50"
+    "order_date": "30.05.2026 18:50",
+    "shipping_address": {
+      "id": 9046167087,
+      "firstName": "yonca",
+      "lastName": "Özoğlu",
+      "company": "",
+      "address1": "Orhantepe mahallesi gülizar sokak cabbar apartmanı no1 daire5 istanbul/kartal",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Kartal",
+      "districtId": 32,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28233,
+      "neighborhood": "Orhantepe Mah",
+      "phone": null,
+      "fullAddress": "Orhantepe mahallesi gülizar sokak cabbar apartmanı no1 daire5 istanbul/kartal     Kartal İstanbul",
+      "fullName": "yonca Özoğlu"
+    },
+    "cargo_tracking_number": "7280033071132915",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "4ab3f4e3fc3058aea14a2c427e0e31b7",
@@ -479,7 +595,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 150 Adet Söz Nişan Kız Isteme Çikolatası",
     "order_date_ms": 1780154956543,
-    "order_date": "30.05.2026 18:29"
+    "order_date": "30.05.2026 18:29",
+    "shipping_address": {
+      "id": 9046083600,
+      "firstName": "yonca",
+      "lastName": "özoglu",
+      "company": "",
+      "address1": "orhantepe mahallesi gulizarsokak cabbar apartmanı no1 daire5 istanbul/kartal",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Kartal",
+      "districtId": 32,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28233,
+      "neighborhood": "Orhantepe Mah",
+      "phone": null,
+      "fullAddress": "orhantepe mahallesi gulizarsokak cabbar apartmanı no1 daire5 istanbul/kartal     Kartal İstanbul",
+      "fullName": "yonca özoglu"
+    },
+    "cargo_tracking_number": "7280033070791915",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "346d62a0e8dd59c38e06e8430abbee28",
@@ -604,7 +749,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1780150233713,
-    "order_date": "30.05.2026 17:10"
+    "order_date": "30.05.2026 17:10",
+    "shipping_address": {
+      "id": 9045768750,
+      "firstName": "zulfiye",
+      "lastName": "ışık",
+      "company": "",
+      "address1": "istiklal mh. mesir sk. no:28BALIKESİR/SAVASTEPE",
+      "address2": "",
+      "city": "Balıkesir",
+      "cityCode": 10,
+      "district": "Savaştepe",
+      "districtId": 237,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "10000",
+      "countryCode": "TR",
+      "neighborhoodId": 15256,
+      "neighborhood": "İstiklal Mah",
+      "phone": null,
+      "fullAddress": "istiklal mh. mesir sk. no:28BALIKESİR/SAVASTEPE     Savaştepe Balıkesir",
+      "fullName": "zulfiye ışık"
+    },
+    "cargo_tracking_number": "7280033069503383",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "b9303c41f05a5023b44d0cabe968500f",
@@ -679,7 +853,36 @@
     "categoryName": "Çikolata",
     "productName": "41’li Kırmızı Kızİsteme Çiçeği ve 80 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım",
     "order_date_ms": 1780144685571,
-    "order_date": "30.05.2026 15:38"
+    "order_date": "30.05.2026 15:38",
+    "shipping_address": {
+      "id": 9045408097,
+      "firstName": "Nurhan",
+      "lastName": "Kırmızıgül",
+      "company": "",
+      "address1": "Dicle mah Dicle CAD melikhan aort kat 5 no 28 ",
+      "address2": "",
+      "city": "Şırnak",
+      "cityCode": 73,
+      "district": "Cizre",
+      "districtId": 932,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "73000",
+      "countryCode": "TR",
+      "neighborhoodId": 73413,
+      "neighborhood": "Dicle Mah",
+      "phone": null,
+      "fullAddress": "Dicle mah Dicle CAD melikhan aort kat 5 no 28     Cizre Şırnak",
+      "fullName": "Nurhan Kırmızıgül"
+    },
+    "cargo_tracking_number": "7280033067949930",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "1e2753a5ad3c5329bd02fa3deedf5f54",
@@ -805,7 +1008,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1780105957281,
-    "order_date": "30.05.2026 04:52"
+    "order_date": "30.05.2026 04:52",
+    "shipping_address": {
+      "id": 9044582440,
+      "firstName": "elif",
+      "lastName": "soratlı",
+      "company": "",
+      "address1": "Mimar sinan mahallesi selim sokak Kiptaş 2.etap konutları C1 blok daire:14 kat:3 ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Tuzla",
+      "districtId": 29,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 29474,
+      "neighborhood": "Şifa Mah",
+      "phone": null,
+      "fullAddress": "Mimar sinan mahallesi selim sokak Kiptaş 2.etap konutları C1 blok daire:14 kat:3     Tuzla İstanbul",
+      "fullName": "elif soratlı"
+    },
+    "cargo_tracking_number": "7280033064425765",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "045ccb7915cf57f385a7d0b2b7c1002d",
@@ -880,7 +1112,36 @@
     "categoryName": "Çikolata",
     "productName": "Nala Gold Söz Nişan Kız Isteme Çikolatası",
     "order_date_ms": 1780065144464,
-    "order_date": "29.05.2026 17:32"
+    "order_date": "29.05.2026 17:32",
+    "shipping_address": {
+      "id": 9042339198,
+      "firstName": "Mesut",
+      "lastName": "Gumus",
+      "company": "",
+      "address1": "Alemdağ cad. Aşşağı dudullu mah.kaptanderya sok. 14/3 ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Ümraniye",
+      "districtId": 37,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28537,
+      "neighborhood": "Aşağı Dudullu Mah",
+      "phone": null,
+      "fullAddress": "Alemdağ cad. Aşşağı dudullu mah.kaptanderya sok. 14/3     Ümraniye İstanbul",
+      "fullName": "Mesut Gumus"
+    },
+    "cargo_tracking_number": "7280033055543768",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "50a257c297525d45a980dec5f39d8841",
@@ -955,7 +1216,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1780091249058,
-    "order_date": "30.05.2026 00:47"
+    "order_date": "30.05.2026 00:47",
+    "shipping_address": {
+      "id": 9043781597,
+      "firstName": "İbrahim",
+      "lastName": "Çakır",
+      "company": "",
+      "address1": "Fırat Yılmaz Çakıroğlu caddesi no 105/A",
+      "address2": "",
+      "city": "Manisa",
+      "cityCode": 45,
+      "district": "Turgutlu",
+      "districtId": 740,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "45000",
+      "countryCode": "TR",
+      "neighborhoodId": 46578,
+      "neighborhood": "Subaşı Mah",
+      "phone": null,
+      "fullAddress": "Fırat Yılmaz Çakıroğlu caddesi no 105/A     Turgutlu Manisa",
+      "fullName": "İbrahim Çakır"
+    },
+    "cargo_tracking_number": "7280033061340092",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "2a6d610ea27c578489d903f2db9ef22a",
@@ -1030,7 +1320,36 @@
     "categoryName": "Çikolata",
     "productName": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 Adet Kız İsteme Çikolatası,Nişan Çikolatası Draje",
     "order_date_ms": 1780072647815,
-    "order_date": "29.05.2026 19:37"
+    "order_date": "29.05.2026 19:37",
+    "shipping_address": {
+      "id": 9042759609,
+      "firstName": "ümmühan",
+      "lastName": "çelik",
+      "company": "",
+      "address1": "haydar mahallesı 202_2 sokak no :13",
+      "address2": "",
+      "city": "Denizli",
+      "cityCode": 20,
+      "district": "Honaz",
+      "districtId": 387,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "20000",
+      "countryCode": "TR",
+      "neighborhoodId": 30994,
+      "neighborhood": "Haydar Mah",
+      "phone": null,
+      "fullAddress": "haydar mahallesı 202_2 sokak no :13     Honaz Denizli",
+      "fullName": "ümmühan çelik"
+    },
+    "cargo_tracking_number": "7280033057242140",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "2f58f2e8380f51d29164f96b6c3e8814",
@@ -1105,7 +1424,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1780065857904,
-    "order_date": "29.05.2026 17:44"
+    "order_date": "29.05.2026 17:44",
+    "shipping_address": {
+      "id": 9042386122,
+      "firstName": "Nurcan",
+      "lastName": "Türker",
+      "company": "",
+      "address1": "Adatepe mahallesi 3/2 sokak no 26 daire 4 kat4 menduhoğulları apt. İzmir - Buca",
+      "address2": "",
+      "city": "İzmir",
+      "cityCode": 35,
+      "district": "Buca",
+      "districtId": 90,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "35000",
+      "countryCode": "TR",
+      "neighborhoodId": 27079,
+      "neighborhood": "Adatepe Mah",
+      "phone": null,
+      "fullAddress": "Adatepe mahallesi 3/2 sokak no 26 daire 4 kat4 menduhoğulları apt. İzmir - Buca     Buca İzmir",
+      "fullName": "Nurcan Türker"
+    },
+    "cargo_tracking_number": "7280033055719194",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "4a55d8200d7254e88d4a05ad17b75cf9",
@@ -1180,7 +1528,36 @@
     "categoryName": "Çikolata",
     "productName": "3 Adet Kızisteme Söz Nişan Anne Baldız Gülü",
     "order_date_ms": 1780065857904,
-    "order_date": "29.05.2026 17:44"
+    "order_date": "29.05.2026 17:44",
+    "shipping_address": {
+      "id": 9042386122,
+      "firstName": "Nurcan",
+      "lastName": "Türker",
+      "company": "",
+      "address1": "Adatepe mahallesi 3/2 sokak no 26 daire 4 kat4 menduhoğulları apt. İzmir - Buca",
+      "address2": "",
+      "city": "İzmir",
+      "cityCode": 35,
+      "district": "Buca",
+      "districtId": 90,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "35000",
+      "countryCode": "TR",
+      "neighborhoodId": 27079,
+      "neighborhood": "Adatepe Mah",
+      "phone": null,
+      "fullAddress": "Adatepe mahallesi 3/2 sokak no 26 daire 4 kat4 menduhoğulları apt. İzmir - Buca     Buca İzmir",
+      "fullName": "Nurcan Türker"
+    },
+    "cargo_tracking_number": "7280033055719194",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "58b696a332055ced93b9a662844a8db3",
@@ -1255,7 +1632,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1780064055441,
-    "order_date": "29.05.2026 17:14"
+    "order_date": "29.05.2026 17:14",
+    "shipping_address": {
+      "id": 9042276536,
+      "firstName": "veysel",
+      "lastName": "çaparlar",
+      "company": "",
+      "address1": "Bahçelievler mah cumhuriyet Cad selamet sokak çiftçi apartman no 10/12 merkez/ Bingöl",
+      "address2": "",
+      "city": "Bingöl",
+      "cityCode": 12,
+      "district": "Merkez",
+      "districtId": 263,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "12000",
+      "countryCode": "TR",
+      "neighborhoodId": 14979,
+      "neighborhood": "Bahçelievler Mah",
+      "phone": null,
+      "fullAddress": "Bahçelievler mah cumhuriyet Cad selamet sokak çiftçi apartman no 10/12 merkez/ Bingöl     Merkez Bingöl",
+      "fullName": "veysel çaparlar"
+    },
+    "cargo_tracking_number": "7280033055289789",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "6334f70b15dc5ce6b95d7b050609d962",
@@ -1380,7 +1786,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1780060602312,
-    "order_date": "29.05.2026 16:16"
+    "order_date": "29.05.2026 16:16",
+    "shipping_address": {
+      "id": 9042073399,
+      "firstName": "Hasan",
+      "lastName": "Yağmur",
+      "company": "",
+      "address1": "1708 sk. Bina no:6 ELA apt. daire 8 mamak/Ankara",
+      "address2": "",
+      "city": "Ankara",
+      "cityCode": 6,
+      "district": "Mamak",
+      "districtId": 18,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "06000",
+      "countryCode": "TR",
+      "neighborhoodId": 11683,
+      "neighborhood": "Başak Mah",
+      "phone": null,
+      "fullAddress": "1708 sk. Bina no:6 ELA apt. daire 8 mamak/Ankara     Mamak Ankara",
+      "fullName": "Hasan Yağmur"
+    },
+    "cargo_tracking_number": "7280033054461209",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "7dddcac03fe65d15bef70dda907e3d84",
@@ -1530,7 +1965,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1780054638286,
-    "order_date": "29.05.2026 14:37"
+    "order_date": "29.05.2026 14:37",
+    "shipping_address": {
+      "id": 9041763062,
+      "firstName": "Mehmet",
+      "lastName": "oruç",
+      "company": "",
+      "address1": "679/14 sokak no:58 Göksu mahallesi Buca_ İzmir",
+      "address2": "",
+      "city": "İzmir",
+      "cityCode": 35,
+      "district": "Buca",
+      "districtId": 90,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "35000",
+      "countryCode": "TR",
+      "neighborhoodId": 27695,
+      "neighborhood": "Göksu Mah",
+      "phone": null,
+      "fullAddress": "679/14 sokak no:58 Göksu mahallesi Buca_ İzmir     Buca İzmir",
+      "fullName": "Mehmet oruç"
+    },
+    "cargo_tracking_number": "7280033053190377",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e42650c50ed9559b9ea1992d746d9c3d",
@@ -1656,7 +2120,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779987237983,
-    "order_date": "28.05.2026 19:53"
+    "order_date": "28.05.2026 19:53",
+    "shipping_address": {
+      "id": 9039644395,
+      "firstName": "Melda",
+      "lastName": "Kurt",
+      "company": "",
+      "address1": "Beştelsiz mahallesi 105/2 sokak no 32 daire 1 kat 1 Zeytinburnu /istanbul ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Zeytinburnu",
+      "districtId": 50,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28714,
+      "neighborhood": "Beştelsiz Mah",
+      "phone": null,
+      "fullAddress": "Beştelsiz mahallesi 105/2 sokak no 32 daire 1 kat 1 Zeytinburnu /istanbul     Zeytinburnu İstanbul",
+      "fullName": "Melda Kurt"
+    },
+    "cargo_tracking_number": "7280033044991204",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "652c3fe7234651759344134267a8df74",
@@ -1781,7 +2274,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779973643678,
-    "order_date": "28.05.2026 16:07"
+    "order_date": "28.05.2026 16:07",
+    "shipping_address": {
+      "id": 9038988339,
+      "firstName": "Anıl",
+      "lastName": "Kaya",
+      "company": "",
+      "address1": "Aşşağı kayabaşı mah. Kapıcıoğlu sok. Osman Bircan sitesi A blok no:20",
+      "address2": "",
+      "city": "Niğde",
+      "cityCode": 51,
+      "district": "Merkez",
+      "districtId": 791,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "51000",
+      "countryCode": "TR",
+      "neighborhoodId": 50623,
+      "neighborhood": "Aşağı Kayabaşı Mah",
+      "phone": null,
+      "fullAddress": "Aşşağı kayabaşı mah. Kapıcıoğlu sok. Osman Bircan sitesi A blok no:20     Merkez Niğde",
+      "fullName": "Anıl Kaya"
+    },
+    "cargo_tracking_number": "7280033042437469",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "2fcf77e42cf05a73a6df5fe85e440804",
@@ -1907,7 +2429,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779963550299,
-    "order_date": "28.05.2026 13:19"
+    "order_date": "28.05.2026 13:19",
+    "shipping_address": {
+      "id": 9038587696,
+      "firstName": "özlem",
+      "lastName": "Topakkaya",
+      "company": "",
+      "address1": "tacetyin veli mh kartal blv kadir bey sitesi 72/9 kat5 b blok",
+      "address2": "",
+      "city": "Kayseri",
+      "cityCode": 38,
+      "district": "Melikgazi",
+      "districtId": 627,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "38000",
+      "countryCode": "TR",
+      "neighborhoodId": 40704,
+      "neighborhood": "Tacettin Veli Mah",
+      "phone": null,
+      "fullAddress": "tacetyin veli mh kartal blv kadir bey sitesi 72/9 kat5 b blok     Melikgazi Kayseri",
+      "fullName": "özlem Topakkaya"
+    },
+    "cargo_tracking_number": "7280033040822892",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "5ce45f76152757a0b04eb31d0a8c93db",
@@ -2034,7 +2585,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779961386158,
-    "order_date": "28.05.2026 12:43"
+    "order_date": "28.05.2026 12:43",
+    "shipping_address": {
+      "id": 9038533962,
+      "firstName": "Yunus",
+      "lastName": "Sanlı",
+      "company": "",
+      "address1": "Ahmet Yesevi caddesi görgülü sokak No:22 daire:5 doğuş apt.İstanbul/Bahçelievler ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Bahçelievler",
+      "districtId": 48,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28432,
+      "neighborhood": "Kocasinan Merkez Mah",
+      "phone": null,
+      "fullAddress": "Ahmet Yesevi caddesi görgülü sokak No:22 daire:5 doğuş apt.İstanbul/Bahçelievler     Bahçelievler İstanbul",
+      "fullName": "Yunus Sanlı"
+    },
+    "cargo_tracking_number": "7280033040598360",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "8a00d727e8bc561b831b69da7affb3d7",
@@ -2109,7 +2689,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779951495332,
-    "order_date": "28.05.2026 09:58"
+    "order_date": "28.05.2026 09:58",
+    "shipping_address": {
+      "id": 9038412236,
+      "firstName": "Büşra",
+      "lastName": "Kucur",
+      "company": "",
+      "address1": "Topçuasım mahallesi 3503. sokak no:15 iç kapı no :2 Manisa/YUNUSEMRE",
+      "address2": "",
+      "city": "Manisa",
+      "cityCode": 45,
+      "district": "Yunusemre",
+      "districtId": 101081,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "45000",
+      "countryCode": "TR",
+      "neighborhoodId": 46617,
+      "neighborhood": "Topçuasım Mah",
+      "phone": null,
+      "fullAddress": "Topçuasım mahallesi 3503. sokak no:15 iç kapı no :2 Manisa/YUNUSEMRE     Yunusemre Manisa",
+      "fullName": "Büşra Kucur"
+    },
+    "cargo_tracking_number": "7280033040071559",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "dec6a365bb87500da44b64ab233f80c1",
@@ -2234,7 +2843,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779584656731,
-    "order_date": "24.05.2026 04:04"
+    "order_date": "24.05.2026 04:04",
+    "shipping_address": {
+      "id": 9026184898,
+      "firstName": "Kibariye",
+      "lastName": "Bacak",
+      "company": "",
+      "address1": "Balıkesir Bigadiç cami mi kırbıyıklar eczanesi",
+      "address2": "",
+      "city": "Balıkesir",
+      "cityCode": 10,
+      "district": "Bigadiç",
+      "districtId": 227,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "10000",
+      "countryCode": "TR",
+      "neighborhoodId": 2799,
+      "neighborhood": "Camii Mah",
+      "phone": null,
+      "fullAddress": "Balıkesir Bigadiç cami mi kırbıyıklar eczanesi     Bigadiç Balıkesir",
+      "fullName": "Kibariye Bacak"
+    },
+    "cargo_tracking_number": "7280032988147944",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "037d623efa4556d59d17b6388ea342ee",
@@ -2361,7 +2999,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779917593955,
-    "order_date": "28.05.2026 00:33"
+    "order_date": "28.05.2026 00:33",
+    "shipping_address": {
+      "id": 9037659903,
+      "firstName": "Çiğdem",
+      "lastName": "Yalçın",
+      "company": "",
+      "address1": "Öğretmenler mahallesi 2953 sok Çamlıca apt kat/ 1 no /4 Mersin /Tarsus",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Tarsus",
+      "districtId": 555,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 57387,
+      "neighborhood": "Öğretmenler Mah",
+      "phone": null,
+      "fullAddress": "Öğretmenler mahallesi 2953 sok Çamlıca apt kat/ 1 no /4 Mersin /Tarsus     Tarsus Mersin",
+      "fullName": "Çiğdem Yalçın"
+    },
+    "cargo_tracking_number": "7280033037240548",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "93cfffdc5bb8509299635ba63b574d73",
@@ -2436,7 +3103,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779840966639,
-    "order_date": "27.05.2026 03:16"
+    "order_date": "27.05.2026 03:16",
+    "shipping_address": {
+      "id": 9035653813,
+      "firstName": "Ömer",
+      "lastName": "Polat",
+      "company": "",
+      "address1": "İzzettin mah. Özgürlük cad. No:20Çatalca/İstanbul",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Çatalca",
+      "districtId": 60,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 29586,
+      "neighborhood": "İzzettin Mah",
+      "phone": null,
+      "fullAddress": "İzzettin mah. Özgürlük cad. No:20Çatalca/İstanbul     Çatalca İstanbul",
+      "fullName": "Ömer Polat"
+    },
+    "cargo_tracking_number": "7280033029505112",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "74670ed57a0855f69b7a645c764f91bd",
@@ -2511,7 +3207,36 @@
     "categoryName": "Çikolata",
     "productName": "100 Adet Kişiye Özel Cam Kutuda Çikolata – Söz, Nişan, Kız İsteme Çikolatası",
     "order_date_ms": 1779557531982,
-    "order_date": "23.05.2026 20:32"
+    "order_date": "23.05.2026 20:32",
+    "shipping_address": {
+      "id": 9024461681,
+      "firstName": "Döndü",
+      "lastName": "Çakır",
+      "company": "",
+      "address1": "405 Sok. No:13B B2 Blok Daire 8 Yeni Yaşam Evleri",
+      "address2": "",
+      "city": "Manisa",
+      "cityCode": 45,
+      "district": "Yunusemre",
+      "districtId": 101081,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "45000",
+      "countryCode": "TR",
+      "neighborhoodId": 46259,
+      "neighborhood": "Muradiye Mah",
+      "phone": null,
+      "fullAddress": "405 Sok. No:13B B2 Blok Daire 8 Yeni Yaşam Evleri     Yunusemre Manisa",
+      "fullName": "Döndü Çakır"
+    },
+    "cargo_tracking_number": "7280032981231114",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "f310713c74be5c8383d941a8f745f956",
@@ -2660,7 +3385,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779816648649,
-    "order_date": "26.05.2026 20:30"
+    "order_date": "26.05.2026 20:30",
+    "shipping_address": {
+      "id": 9034556520,
+      "firstName": "Erdem",
+      "lastName": "Gedik",
+      "company": "",
+      "address1": "Erzincan Merkez inönü mahallesi 4. Sokak no:23/a 23/2",
+      "address2": "",
+      "city": "Erzincan",
+      "cityCode": 24,
+      "district": "Merkez",
+      "districtId": 438,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "24000",
+      "countryCode": "TR",
+      "neighborhoodId": 19540,
+      "neighborhood": "İnönü Mah",
+      "phone": null,
+      "fullAddress": "Erzincan Merkez inönü mahallesi 4. Sokak no:23/a 23/2     Merkez Erzincan",
+      "fullName": "Erdem Gedik"
+    },
+    "cargo_tracking_number": "7280033025255301",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "ef84a3446bdf589ba28c284c2f9def89",
@@ -2791,7 +3545,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779460701186,
-    "order_date": "22.05.2026 17:38"
+    "order_date": "22.05.2026 17:38",
+    "shipping_address": {
+      "id": 9019564493,
+      "firstName": "Senanur",
+      "lastName": "Aygün",
+      "company": "",
+      "address1": "Yakuplu mahallesi ata caddesi 108.sokak no:1 daire:14 best gold emlağın üstü, binanın girişi cadde üstünde",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Beylikdüzü",
+      "districtId": 43,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 29600,
+      "neighborhood": "Yakuplu Mah",
+      "phone": null,
+      "fullAddress": "Yakuplu mahallesi ata caddesi 108.sokak no:1 daire:14 best gold emlağın üstü, binanın girişi cadde üstünde     Beylikdüzü İstanbul",
+      "fullName": "Senanur Aygün"
+    },
+    "cargo_tracking_number": "7280032959210035",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "8daba0530c6851cd8055cf21da1453d7",
@@ -2863,7 +3646,36 @@
     "updated_at": "2026-05-31 01:44:39",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779455778193,
-    "order_date": "22.05.2026 16:16"
+    "order_date": "22.05.2026 16:16",
+    "shipping_address": {
+      "id": 9019180993,
+      "firstName": "Zümrüt",
+      "lastName": "Gürdal",
+      "company": "",
+      "address1": "hafiziye mah şehit osman çavuş sokagi fergul life b blok 23 numara kat 2 no 14",
+      "address2": "",
+      "city": "Van",
+      "cityCode": 65,
+      "district": "İpekyolu",
+      "districtId": 101095,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "65000",
+      "countryCode": "TR",
+      "neighborhoodId": 59472,
+      "neighborhood": "Hafiziye Mah",
+      "phone": null,
+      "fullAddress": "hafiziye mah şehit osman çavuş sokagi fergul life b blok 23 numara kat 2 no 14     İpekyolu Van",
+      "fullName": "Zümrüt Gürdal"
+    },
+    "cargo_tracking_number": "7280032957388187",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "9846dda16395508994d50618510183ee",
@@ -2988,7 +3800,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779812834876,
-    "order_date": "26.05.2026 19:27"
+    "order_date": "26.05.2026 19:27",
+    "shipping_address": {
+      "id": 9034393088,
+      "firstName": "Fatih Muhammet",
+      "lastName": "Karaca",
+      "company": "",
+      "address1": "Birlik Mah. 847 Sok. No: 15 Daire :3 Esenler/İstanbul",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Esenler",
+      "districtId": 65,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 27854,
+      "neighborhood": "Birlik Mah",
+      "phone": null,
+      "fullAddress": "Birlik Mah. 847 Sok. No: 15 Daire :3 Esenler/İstanbul     Esenler İstanbul",
+      "fullName": "Fatih Muhammet Karaca"
+    },
+    "cargo_tracking_number": "7280033024593084",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "a3bed7ad83d855ff84ed5bd3b5ae4cec",
@@ -3113,7 +3954,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779806767943,
-    "order_date": "26.05.2026 17:46"
+    "order_date": "26.05.2026 17:46",
+    "shipping_address": {
+      "id": 9034115632,
+      "firstName": "Ismail",
+      "lastName": "Degirmenci",
+      "company": "",
+      "address1": "Uncalı mahallesi 24. Cadde 1221 sokak No:2 Tondemir apartmanı Kat 2 Daire 3 adıyaman çiğkötecisi üstü zil: ünal değirmenci",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Konyaaltı",
+      "districtId": 1050,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 6877,
+      "neighborhood": "Uncalı Mah",
+      "phone": null,
+      "fullAddress": "Uncalı mahallesi 24. Cadde 1221 sokak No:2 Tondemir apartmanı Kat 2 Daire 3 adıyaman çiğkötecisi üstü zil: ünal değirmenci     Konyaaltı Antalya",
+      "fullName": "Ismail Degirmenci"
+    },
+    "cargo_tracking_number": "7280033023447081",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "1c779095a61a519fb18067684bf17034",
@@ -3239,7 +4109,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779806564137,
-    "order_date": "26.05.2026 17:42"
+    "order_date": "26.05.2026 17:42",
+    "shipping_address": {
+      "id": 9034103201,
+      "firstName": "Gizem",
+      "lastName": "Koca",
+      "company": "",
+      "address1": "2392 sokak no 53 daire 3",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Sultangazi",
+      "districtId": 44,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 29342,
+      "neighborhood": "Esentepe Mah",
+      "phone": null,
+      "fullAddress": "2392 sokak no 53 daire 3     Sultangazi İstanbul",
+      "fullName": "Gizem Koca"
+    },
+    "cargo_tracking_number": "7280033023402608",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "2e13867fcedb542ca2ce6fb4fa26e945",
@@ -3387,7 +4286,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779806342437,
-    "order_date": "26.05.2026 17:39"
+    "order_date": "26.05.2026 17:39",
+    "shipping_address": {
+      "id": 9034095714,
+      "firstName": "Aylin ",
+      "lastName": "mutlu ",
+      "company": "",
+      "address1": "1646.sokak Kiptaş 3.etap A:1 D:30",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Esenyurt",
+      "districtId": 66,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28709,
+      "neighborhood": "Orhan Gazi Mah",
+      "phone": null,
+      "fullAddress": "1646.sokak Kiptaş 3.etap A:1 D:30     Esenyurt İstanbul",
+      "fullName": "Aylin  mutlu"
+    },
+    "cargo_tracking_number": "7280033023369758",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "c3e255ef6efc5429a46807670252582c",
@@ -3462,7 +4390,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779452903880,
-    "order_date": "22.05.2026 15:28"
+    "order_date": "22.05.2026 15:28",
+    "shipping_address": {
+      "id": 9018970501,
+      "firstName": "Hakan",
+      "lastName": "Ebiri",
+      "company": "",
+      "address1": "Seyran tepe mah. Fatih cad. Beyza sokak no:11",
+      "address2": "",
+      "city": "Van",
+      "cityCode": 65,
+      "district": "Tuşba",
+      "districtId": 101096,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "65000",
+      "countryCode": "TR",
+      "neighborhoodId": 66065,
+      "neighborhood": "Seyrantepe Mah",
+      "phone": null,
+      "fullAddress": "Seyran tepe mah. Fatih cad. Beyza sokak no:11     Tuşba Van",
+      "fullName": "Hakan Ebiri"
+    },
+    "cargo_tracking_number": "7280032956375270",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "446b838da88b57ffb889cfc73682d275",
@@ -3611,7 +4568,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779447503911,
-    "order_date": "22.05.2026 13:58"
+    "order_date": "22.05.2026 13:58",
+    "shipping_address": {
+      "id": 9018580558,
+      "firstName": "Hasan",
+      "lastName": "Bakan",
+      "company": "",
+      "address1": "Akköprü mah. Akköprü Taş ekmek fırını. Van/ Tuşba",
+      "address2": "",
+      "city": "Van",
+      "cityCode": 65,
+      "district": "Tuşba",
+      "districtId": 101096,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "65000",
+      "countryCode": "TR",
+      "neighborhoodId": 65593,
+      "neighborhood": "Akköprü Mah",
+      "phone": null,
+      "fullAddress": "Akköprü mah. Akköprü Taş ekmek fırını. Van/ Tuşba     Tuşba Van",
+      "fullName": "Hasan Bakan"
+    },
+    "cargo_tracking_number": "7280032954496113",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "d0e6b3717dc55105b5e4b9855f775e0b",
@@ -3686,7 +4672,36 @@
     "categoryName": "Çikolata",
     "productName": "Tül Süslemeli 36 Adet Allahın Emriyle Kızınızı İstemeye Geldik Yazılı Kız İsteme Çikolatası",
     "order_date_ms": 1779561122698,
-    "order_date": "23.05.2026 21:32"
+    "order_date": "23.05.2026 21:32",
+    "shipping_address": {
+      "id": 9024676299,
+      "firstName": "Hatice",
+      "lastName": "Benli",
+      "company": "",
+      "address1": "Pazaryeri mahallesi 432.sokak no:22 tunç apartmanı daire :6 Fethiye Muğla",
+      "address2": "",
+      "city": "Muğla",
+      "cityCode": 48,
+      "district": "Fethiye",
+      "districtId": 758,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "48000",
+      "countryCode": "TR",
+      "neighborhoodId": 68150,
+      "neighborhood": "Pazaryeri Mah",
+      "phone": null,
+      "fullAddress": "Pazaryeri mahallesi 432.sokak no:22 tunç apartmanı daire :6 Fethiye Muğla     Fethiye Muğla",
+      "fullName": "Hatice Benli"
+    },
+    "cargo_tracking_number": "7280032982141641",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "9b1db06592f855f88106e1967d38d566",
@@ -3816,7 +4831,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779354120516,
-    "order_date": "21.05.2026 12:02"
+    "order_date": "21.05.2026 12:02",
+    "shipping_address": {
+      "id": 9012926467,
+      "firstName": "İsmigül",
+      "lastName": "Samur",
+      "company": "",
+      "address1": "Selvi sok.no.11 star evleri",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Alanya",
+      "districtId": 166,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 6566,
+      "neighborhood": "Demirtaş Mah",
+      "phone": null,
+      "fullAddress": "Selvi sok.no.11 star evleri     Alanya Antalya",
+      "fullName": "İsmigül Samur"
+    },
+    "cargo_tracking_number": "7280032928440791",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "8f08a864352458baab66f2e88e4a9ddb",
@@ -3941,7 +4985,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779530969984,
-    "order_date": "23.05.2026 13:09"
+    "order_date": "23.05.2026 13:09",
+    "shipping_address": {
+      "id": 9022805351,
+      "firstName": "İsmigül",
+      "lastName": "Samur",
+      "company": "",
+      "address1": "Selvi sok.no.11 star evleri",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Alanya",
+      "districtId": 166,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 6566,
+      "neighborhood": "Demirtaş Mah",
+      "phone": null,
+      "fullAddress": "Selvi sok.no.11 star evleri     Alanya Antalya",
+      "fullName": "İsmigül Samur"
+    },
+    "cargo_tracking_number": "7280032973529489",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "4979628db8475cbeb4a460ecd590296c",
@@ -4066,7 +5139,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779793827686,
-    "order_date": "26.05.2026 14:10"
+    "order_date": "26.05.2026 14:10",
+    "shipping_address": {
+      "id": 9033507342,
+      "firstName": "Gülsüm",
+      "lastName": "Koçak",
+      "company": "",
+      "address1": "Diyarbakır Bağlar Bağcılar mahallesi Mehmet uzun caddesi Bedirhan yapı zin sitesi B Blok kat 5 no 14",
+      "address2": "",
+      "city": "Diyarbakır",
+      "cityCode": 21,
+      "district": "Bağlar",
+      "districtId": 101074,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "21000",
+      "countryCode": "TR",
+      "neighborhoodId": 14597,
+      "neighborhood": "Bağcılar Mah",
+      "phone": null,
+      "fullAddress": "Diyarbakır Bağlar Bağcılar mahallesi Mehmet uzun caddesi Bedirhan yapı zin sitesi B Blok kat 5 no 14     Bağlar Diyarbakır",
+      "fullName": "Gülsüm Koçak"
+    },
+    "cargo_tracking_number": "7280033020767267",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "b7689c6bb6c157b2976cbc7834660493",
@@ -4141,7 +5243,36 @@
     "categoryName": "Çikolata",
     "productName": "100 Adet Kişiye Özel Cam Kutuda Çikolata – Söz, Nişan, Kız İsteme Çikolatası",
     "order_date_ms": 1779407706600,
-    "order_date": "22.05.2026 02:55"
+    "order_date": "22.05.2026 02:55",
+    "shipping_address": {
+      "id": 9017369676,
+      "firstName": "Hamide",
+      "lastName": "Ateş",
+      "company": "",
+      "address1": "istiklal caddesi yasemin sokak 27, cadde garaj üzeri",
+      "address2": "",
+      "city": "Tokat",
+      "cityCode": 60,
+      "district": "Erbaa",
+      "districtId": 950,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "60000",
+      "countryCode": "TR",
+      "neighborhoodId": 55687,
+      "neighborhood": "Yavuz Sultan Selim Mah",
+      "phone": null,
+      "fullAddress": "istiklal caddesi yasemin sokak 27, cadde garaj üzeri     Erbaa Tokat",
+      "fullName": "Hamide Ateş"
+    },
+    "cargo_tracking_number": "7280032948762866",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "0a70052fc2f8553ca7e85707745f606b",
@@ -4213,7 +5344,36 @@
     "updated_at": "2026-05-31 01:44:39",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779369154061,
-    "order_date": "21.05.2026 16:12"
+    "order_date": "21.05.2026 16:12",
+    "shipping_address": {
+      "id": 9014066358,
+      "firstName": "serkan",
+      "lastName": "tektaş",
+      "company": "",
+      "address1": "Ertem mahallesi Alan küme evleri no 10 ",
+      "address2": "",
+      "city": "Şanlıurfa",
+      "cityCode": 63,
+      "district": "Siverek",
+      "districtId": 926,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "63000",
+      "countryCode": "TR",
+      "neighborhoodId": 57066,
+      "neighborhood": "Ertem Mah",
+      "phone": null,
+      "fullAddress": "Ertem mahallesi Alan küme evleri no 10     Siverek Şanlıurfa",
+      "fullName": "serkan tektaş"
+    },
+    "cargo_tracking_number": "7280032934169846",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "3a1f81499c38554b8a3d069cd3cf5890",
@@ -4288,7 +5448,36 @@
     "categoryName": "Söz Tepsisi",
     "productName": "Cam Kutuda Söz Nişan Çikolatası – 50 Madlen Ve Draje",
     "order_date_ms": 1779536413359,
-    "order_date": "23.05.2026 14:40"
+    "order_date": "23.05.2026 14:40",
+    "shipping_address": {
+      "id": 9023084310,
+      "firstName": "Helin",
+      "lastName": "Çelikay",
+      "company": "",
+      "address1": "Mersin/ Yenişehir ilçesi/ Mersin üniversitesi/ Çiftlikköy kampüsü/ Mersin KYK kız yurdu",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Yenişehir",
+      "districtId": 101079,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 54881,
+      "neighborhood": "Çiftlikköy Mah",
+      "phone": null,
+      "fullAddress": "Mersin/ Yenişehir ilçesi/ Mersin üniversitesi/ Çiftlikköy kampüsü/ Mersin KYK kız yurdu     Yenişehir Mersin",
+      "fullName": "Helin Çelikay"
+    },
+    "cargo_tracking_number": "7280032974965880",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "f4e192a86c2652c9ae6fc498bc09d2b9",
@@ -4363,7 +5552,35 @@
     "categoryName": "Çikolata",
     "productName": "100 Adet Kişiye Özel Cam Kutuda Çikolata – Söz, Nişan, Kız İsteme Çikolatası",
     "order_date_ms": 1779484836822,
-    "order_date": "23.05.2026 00:20"
+    "order_date": "23.05.2026 00:20",
+    "shipping_address": {
+      "id": 9021255390,
+      "firstName": "Aybegüm",
+      "lastName": "Karakılıç",
+      "company": "",
+      "address1": "Teyyaredüzü mahallesi Atatürk bulvarı Güzelyurt apartmanı 393/c daire 17 ",
+      "address2": "",
+      "city": "Giresun",
+      "cityCode": 28,
+      "district": "Merkez",
+      "districtId": 494,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "28000",
+      "countryCode": "TR",
+      "neighborhoodId": 0,
+      "phone": null,
+      "fullAddress": "Teyyaredüzü mahallesi Atatürk bulvarı Güzelyurt apartmanı 393/c daire 17     Merkez Giresun",
+      "fullName": "Aybegüm Karakılıç"
+    },
+    "cargo_tracking_number": "7280032966779358",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "29413970a7ac571c8836d295d87e8fd9",
@@ -4514,7 +5731,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779543195415,
-    "order_date": "23.05.2026 16:33"
+    "order_date": "23.05.2026 16:33",
+    "shipping_address": {
+      "id": 9023535000,
+      "firstName": "Fatma Nur",
+      "lastName": "Çamur",
+      "company": "",
+      "address1": "istiklal mahduatepe cadno:49kat:4Aydın/İncirliova",
+      "address2": "",
+      "city": "Aydın",
+      "cityCode": 9,
+      "district": "İncirliova",
+      "districtId": 212,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "09000",
+      "countryCode": "TR",
+      "neighborhoodId": 4310,
+      "neighborhood": "İstiklal Mah",
+      "phone": null,
+      "fullAddress": "istiklal mahduatepe cadno:49kat:4Aydın/İncirliova     İncirliova Aydın",
+      "fullName": "Fatma Nur Çamur"
+    },
+    "cargo_tracking_number": "7280032977161050",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "f12a175c404359bc9d0b3164e2aa763d",
@@ -4663,7 +5909,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779367934647,
-    "order_date": "21.05.2026 15:52"
+    "order_date": "21.05.2026 15:52",
+    "shipping_address": {
+      "id": 9013956408,
+      "firstName": "Şulenur",
+      "lastName": "Kürücü",
+      "company": "",
+      "address1": "3 Mart mahallesi eski TOKİ evleri k1 daire 3 Erzurum/Aşkale",
+      "address2": "",
+      "city": "Erzurum",
+      "cityCode": 25,
+      "district": "Aşkale",
+      "districtId": 448,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "25000",
+      "countryCode": "TR",
+      "neighborhoodId": 22576,
+      "neighborhood": "Üç Mart Mah",
+      "phone": null,
+      "fullAddress": "3 Mart mahallesi eski TOKİ evleri k1 daire 3 Erzurum/Aşkale     Aşkale Erzurum",
+      "fullName": "Şulenur Kürücü"
+    },
+    "cargo_tracking_number": "7280032933655449",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e40a06fc9de951e39d11359f3fd93240",
@@ -4735,7 +6010,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1778925915726,
-    "order_date": "16.05.2026 13:05"
+    "order_date": "16.05.2026 13:05",
+    "shipping_address": {
+      "id": 8983428854,
+      "firstName": "Fakirullah",
+      "lastName": "yaldız",
+      "company": "",
+      "address1": "yeşilova mahallesi. kültür caddesi. tarım karşısı. no:111/C Edo Market.",
+      "address2": "",
+      "city": "Bitlis",
+      "cityCode": 13,
+      "district": "Hizan",
+      "districtId": 274,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "13000",
+      "countryCode": "TR",
+      "neighborhoodId": 8773,
+      "neighborhood": "Yeşil Ova Mah",
+      "phone": null,
+      "fullAddress": "yeşilova mahallesi. kültür caddesi. tarım karşısı. no:111/C Edo Market.     Hizan Bitlis",
+      "fullName": "Fakirullah yaldız"
+    },
+    "cargo_tracking_number": "7280032796049287",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "85a5e41a5b9f5217a9b9fa1fc788d857",
@@ -4810,7 +6114,36 @@
     "categoryName": "Çikolata",
     "productName": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım",
     "order_date_ms": 1779744478997,
-    "order_date": "26.05.2026 00:27"
+    "order_date": "26.05.2026 00:27",
+    "shipping_address": {
+      "id": 9032251185,
+      "firstName": "Elif",
+      "lastName": "Yılmaz",
+      "company": "",
+      "address1": "Necip Fazıl konteynır kent 18. Sokak no 609",
+      "address2": "",
+      "city": "Kahramanmaraş",
+      "cityCode": 46,
+      "district": "Dulkadiroğlu",
+      "districtId": 101082,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "46000",
+      "countryCode": "TR",
+      "neighborhoodId": 35785,
+      "neighborhood": "Karacasu Mamaraş Mah",
+      "phone": null,
+      "fullAddress": "Necip Fazıl konteynır kent 18. Sokak no 609     Dulkadiroğlu Kahramanmaraş",
+      "fullName": "Elif Yılmaz"
+    },
+    "cargo_tracking_number": "7280033015356780",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "faebef49078e5fd8aba84d55ed3f5d62",
@@ -4935,7 +6268,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779741594002,
-    "order_date": "25.05.2026 23:39"
+    "order_date": "25.05.2026 23:39",
+    "shipping_address": {
+      "id": 9032098013,
+      "firstName": "İkra İrem",
+      "lastName": "Aydaş",
+      "company": "",
+      "address1": "ahatlı mah. 3111. sok. kadirler apt. no:52 daire:1 Kepez/Antalya",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Kepez",
+      "districtId": 1042,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 3994,
+      "neighborhood": "Ahatlı Mah",
+      "phone": null,
+      "fullAddress": "ahatlı mah. 3111. sok. kadirler apt. no:52 daire:1 Kepez/Antalya     Kepez Antalya",
+      "fullName": "İkra İrem Aydaş"
+    },
+    "cargo_tracking_number": "7280033014723644",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "121f32a6a1715058a552c6cf60a6ed6b",
@@ -5057,7 +6419,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779733852113,
-    "order_date": "25.05.2026 21:30"
+    "order_date": "25.05.2026 21:30",
+    "shipping_address": {
+      "id": 9031721402,
+      "firstName": "Hilal",
+      "lastName": "Duman",
+      "company": "",
+      "address1": "6598 sokak duman apt no7/6",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Kepez",
+      "districtId": 1042,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 5647,
+      "neighborhood": "Gazi Mah",
+      "phone": null,
+      "fullAddress": "6598 sokak duman apt no7/6     Kepez Antalya",
+      "fullName": "Hilal Duman"
+    },
+    "cargo_tracking_number": "7280033013141166",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "58fe829a6cae5e3995188957b696a9d0",
@@ -5207,7 +6598,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779446609554,
-    "order_date": "22.05.2026 13:43"
+    "order_date": "22.05.2026 13:43",
+    "shipping_address": {
+      "id": 9018520206,
+      "firstName": "Canan",
+      "lastName": "Demir",
+      "company": "",
+      "address1": "Muğla Milas Güneş mahallesi Barbaros sokak 37 no c blok no 3",
+      "address2": "",
+      "city": "Muğla",
+      "cityCode": 48,
+      "district": "Milas",
+      "districtId": 761,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "48000",
+      "countryCode": "TR",
+      "neighborhoodId": 68350,
+      "neighborhood": "Güneş Mah",
+      "phone": null,
+      "fullAddress": "Muğla Milas Güneş mahallesi Barbaros sokak 37 no c blok no 3     Milas Muğla",
+      "fullName": "Canan Demir"
+    },
+    "cargo_tracking_number": "7280032954199519",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "c7eeed92e72856eb9dc5b80b68a0526f",
@@ -5357,7 +6777,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779368350176,
-    "order_date": "21.05.2026 15:59"
+    "order_date": "21.05.2026 15:59",
+    "shipping_address": {
+      "id": 9013993889,
+      "firstName": "Zozan",
+      "lastName": "Ülgüt",
+      "company": "",
+      "address1": "Merkez mahallesi 52136sokak elmas2 sitesi D blok 6. Kat 12 numara",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Mezitli",
+      "districtId": 1041,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 51106,
+      "neighborhood": "Merkez Mah",
+      "phone": null,
+      "fullAddress": "Merkez mahallesi 52136sokak elmas2 sitesi D blok 6. Kat 12 numara     Mezitli Mersin",
+      "fullName": "Zozan Ülgüt"
+    },
+    "cargo_tracking_number": "7280032933828904",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "1084bde8fdb95e1a98389e0c249a6c21",
@@ -5508,7 +6957,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779459736540,
-    "order_date": "22.05.2026 17:22"
+    "order_date": "22.05.2026 17:22",
+    "shipping_address": {
+      "id": 9019489270,
+      "firstName": "hacer ",
+      "lastName": "tekin",
+      "company": "",
+      "address1": "tavsan ahmet sokak no 2/4",
+      "address2": "",
+      "city": "Zonguldak",
+      "cityCode": 67,
+      "district": "Kozlu",
+      "districtId": 1054,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "67000",
+      "countryCode": "TR",
+      "neighborhoodId": 62847,
+      "neighborhood": "19 Mayıs Mah",
+      "phone": null,
+      "fullAddress": "tavsan ahmet sokak no 2/4     Kozlu Zonguldak",
+      "fullName": "hacer  tekin"
+    },
+    "cargo_tracking_number": "7280032958856548",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "09c514c218c45ebfb1099a313ee8cb87",
@@ -5580,7 +7058,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779727284282,
-    "order_date": "25.05.2026 19:41"
+    "order_date": "25.05.2026 19:41",
+    "shipping_address": {
+      "id": 9031401503,
+      "firstName": "SEYLA",
+      "lastName": "TAŞ",
+      "company": "",
+      "address1": "yeşilkent mah .G-5 Sok. no 43/1/3",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Avcılar",
+      "districtId": 46,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28590,
+      "neighborhood": "Yeşilkent Mah",
+      "phone": null,
+      "fullAddress": "yeşilkent mah .G-5 Sok. no 43/1/3     Avcılar İstanbul",
+      "fullName": "SEYLA TAŞ"
+    },
+    "cargo_tracking_number": "7280033011715536",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "12624676ddf551abb1a2f991f4085d4d",
@@ -5729,7 +7236,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779320981330,
-    "order_date": "21.05.2026 02:49"
+    "order_date": "21.05.2026 02:49",
+    "shipping_address": {
+      "id": 9011983952,
+      "firstName": "Adem",
+      "lastName": "Taş",
+      "company": "",
+      "address1": "net optik ",
+      "address2": "",
+      "city": "Van",
+      "cityCode": 65,
+      "district": "Muradiye",
+      "districtId": 999,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "65000",
+      "countryCode": "TR",
+      "neighborhoodId": 61914,
+      "neighborhood": "Yenişehir Mah",
+      "phone": null,
+      "fullAddress": "net optik     Muradiye Van",
+      "fullName": "Adem Taş"
+    },
+    "cargo_tracking_number": "7280032924259656",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "7e067f1f1fb55aa1aa7c9e613eaa7e9d",
@@ -5804,7 +7340,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779484583241,
-    "order_date": "23.05.2026 00:16"
+    "order_date": "23.05.2026 00:16",
+    "shipping_address": {
+      "id": 9021230461,
+      "firstName": "Ferhat",
+      "lastName": "gül",
+      "company": "",
+      "address1": "Cömertler sokak",
+      "address2": "",
+      "city": "Elazığ",
+      "cityCode": 23,
+      "district": "Merkez",
+      "districtId": 426,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "23000",
+      "countryCode": "TR",
+      "neighborhoodId": 47872,
+      "neighborhood": "Ulu Kent Mah",
+      "phone": null,
+      "fullAddress": "Cömertler sokak     Merkez Elazığ",
+      "fullName": "Ferhat gül"
+    },
+    "cargo_tracking_number": "7280032966676480",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e8179afb54805fb5a2856456e6d39d20",
@@ -5879,7 +7444,36 @@
     "categoryName": "Çikolata",
     "productName": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım",
     "order_date_ms": 1779381868975,
-    "order_date": "21.05.2026 19:44"
+    "order_date": "21.05.2026 19:44",
+    "shipping_address": {
+      "id": 9015150807,
+      "firstName": "Esma",
+      "lastName": "Muslu",
+      "company": "",
+      "address1": "Merkez mahallesi Ahmet Karaşahin sokak 12.sokak no:18 daire:3",
+      "address2": "",
+      "city": "Muğla",
+      "cityCode": 48,
+      "district": "Dalaman",
+      "districtId": 765,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "48000",
+      "countryCode": "TR",
+      "neighborhoodId": 68099,
+      "neighborhood": "Merkez Mah",
+      "phone": null,
+      "fullAddress": "Merkez mahallesi Ahmet Karaşahin sokak 12.sokak no:18 daire:3     Dalaman Muğla",
+      "fullName": "Esma Muslu"
+    },
+    "cargo_tracking_number": "7280032939231746",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e52eac6a834e596481ba8bd6ff2ccaf8",
@@ -6003,7 +7597,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779449390368,
-    "order_date": "22.05.2026 14:29"
+    "order_date": "22.05.2026 14:29",
+    "shipping_address": {
+      "id": 9018716010,
+      "firstName": "ebru",
+      "lastName": "serttaş",
+      "company": "",
+      "address1": "cumhuriyet caddesi no 20 bağlan iç giyim",
+      "address2": "",
+      "city": "Burdur",
+      "cityCode": 15,
+      "district": "Gölhisar",
+      "districtId": 300,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "15000",
+      "countryCode": "TR",
+      "neighborhoodId": 14903,
+      "neighborhood": "Çeşme Mah",
+      "phone": null,
+      "fullAddress": "cumhuriyet caddesi no 20 bağlan iç giyim     Gölhisar Burdur",
+      "fullName": "ebru serttaş"
+    },
+    "cargo_tracking_number": "7280032955154203",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "b87384c5b95a51ef80a057d62e7b382a",
@@ -6125,7 +7748,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779389655839,
-    "order_date": "21.05.2026 21:54"
+    "order_date": "21.05.2026 21:54",
+    "shipping_address": {
+      "id": 9015740838,
+      "firstName": "Zeki can",
+      "lastName": "Uysal",
+      "company": "",
+      "address1": "Eskihisar mah 1/2 sok no7 iç kapı no1 merkez efendi Denizli ",
+      "address2": "",
+      "city": "Denizli",
+      "cityCode": 20,
+      "district": "Merkezefendi",
+      "districtId": 101073,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "20000",
+      "countryCode": "TR",
+      "neighborhoodId": 32169,
+      "neighborhood": "Eskihisar Mah",
+      "phone": null,
+      "fullAddress": "Eskihisar mah 1/2 sok no7 iç kapı no1 merkez efendi Denizli     Merkezefendi Denizli",
+      "fullName": "Zeki can Uysal"
+    },
+    "cargo_tracking_number": "7280032941885593",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "13e16b4335675f7b94148bd10dd2510e",
@@ -6327,7 +7979,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779400870167,
-    "order_date": "22.05.2026 01:01"
+    "order_date": "22.05.2026 01:01",
+    "shipping_address": {
+      "id": 9016696555,
+      "firstName": "Mehmet",
+      "lastName": "Eker",
+      "company": "",
+      "address1": "Yavuz Sultan Selim Bulvarı Kayhan Kır Konutları B Blok No:38 Kat:2 Daire:5",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Tarsus",
+      "districtId": 555,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 52487,
+      "neighborhood": "Akşemsettin Mah",
+      "phone": null,
+      "fullAddress": "Yavuz Sultan Selim Bulvarı Kayhan Kır Konutları B Blok No:38 Kat:2 Daire:5     Tarsus Mersin",
+      "fullName": "Mehmet Eker"
+    },
+    "cargo_tracking_number": "7280032945987521",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "05efde94604c58c6af1f3e9fe4bbe92b",
@@ -6402,7 +8083,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779279449801,
-    "order_date": "20.05.2026 15:17"
+    "order_date": "20.05.2026 15:17",
+    "shipping_address": {
+      "id": 9007936553,
+      "firstName": "Ceren",
+      "lastName": "boztaş",
+      "company": "",
+      "address1": "işçi sokak no 7 d blok kat 1 daire 2",
+      "address2": "",
+      "city": "Elazığ",
+      "cityCode": 23,
+      "district": "Merkez",
+      "districtId": 426,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "23000",
+      "countryCode": "TR",
+      "neighborhoodId": 39159,
+      "neighborhood": "Fevzi Çakmak Mah",
+      "phone": null,
+      "fullAddress": "işçi sokak no 7 d blok kat 1 daire 2     Merkez Elazığ",
+      "fullName": "Ceren boztaş"
+    },
+    "cargo_tracking_number": "7280032906100280",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "7b1729ee281f51fcb28e9111a712ffed",
@@ -6528,7 +8238,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779723494267,
-    "order_date": "25.05.2026 18:38"
+    "order_date": "25.05.2026 18:38",
+    "shipping_address": {
+      "id": 9031214904,
+      "firstName": "selvi",
+      "lastName": "karatas",
+      "company": "",
+      "address1": "lale sokak no6 kat2 daire7",
+      "address2": "",
+      "city": "Erzurum",
+      "cityCode": 25,
+      "district": "Horasan",
+      "districtId": 451,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "25000",
+      "countryCode": "TR",
+      "neighborhoodId": 31281,
+      "neighborhood": "Recep Tayyip Erdoğan Mah",
+      "phone": null,
+      "fullAddress": "lale sokak no6 kat2 daire7     Horasan Erzurum",
+      "fullName": "selvi karatas"
+    },
+    "cargo_tracking_number": "7280033010796505",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "0afce9a483995bca8ef6b36b19ce2e99",
@@ -6654,7 +8393,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779374381280,
-    "order_date": "21.05.2026 17:39"
+    "order_date": "21.05.2026 17:39",
+    "shipping_address": {
+      "id": 9014528104,
+      "firstName": "Merve",
+      "lastName": "akbulut",
+      "company": "",
+      "address1": "Mehmet Akif mahallesi Adnan Menderes bulv no5 kat 3 daire 7 burdur bucak ",
+      "address2": "",
+      "city": "Burdur",
+      "cityCode": 15,
+      "district": "Bucak",
+      "districtId": 298,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "15000",
+      "countryCode": "TR",
+      "neighborhoodId": 12755,
+      "neighborhood": "Mehmet Akif Mah",
+      "phone": null,
+      "fullAddress": "Mehmet Akif mahallesi Adnan Menderes bulv no5 kat 3 daire 7 burdur bucak     Bucak Burdur",
+      "fullName": "Merve akbulut"
+    },
+    "cargo_tracking_number": "7280032936335461",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "f5bbe322339b5562a624831830cac2c2",
@@ -6729,7 +8497,36 @@
     "categoryName": "Söz Tepsisi",
     "productName": "Cam Kutuda Söz Nişan Çikolatası – 50 Madlen Ve Draje",
     "order_date_ms": 1779421515555,
-    "order_date": "22.05.2026 06:45"
+    "order_date": "22.05.2026 06:45",
+    "shipping_address": {
+      "id": 9017923133,
+      "firstName": "HALİME",
+      "lastName": "GÜLYİYEN",
+      "company": "",
+      "address1": "ŞEHİTLER MAHALLESİ CUMHURİYET CADDESİ NEBİOĞLU APARTMANI 19/3 MERKEZ/KARS",
+      "address2": "",
+      "city": "Kars",
+      "cityCode": 36,
+      "district": "Merkez",
+      "districtId": 581,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "36000",
+      "countryCode": "TR",
+      "neighborhoodId": 29132,
+      "neighborhood": "Şehitler Mah",
+      "phone": null,
+      "fullAddress": "ŞEHİTLER MAHALLESİ CUMHURİYET CADDESİ NEBİOĞLU APARTMANI 19/3 MERKEZ/KARS     Merkez Kars",
+      "fullName": "HALİME GÜLYİYEN"
+    },
+    "cargo_tracking_number": "7280032950844901",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "3c35d61176f35faca1ac518688a5f281",
@@ -6854,7 +8651,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779721343018,
-    "order_date": "25.05.2026 18:02"
+    "order_date": "25.05.2026 18:02",
+    "shipping_address": {
+      "id": 9031103232,
+      "firstName": "Murat",
+      "lastName": "Başpınar",
+      "company": "Murat Başpınar",
+      "address1": "Silivri Gümüşyaka. Çanakkale Çaddesi no 23 kat 2",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Silivri",
+      "districtId": 58,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28550,
+      "neighborhood": "Gümüşyaka Mah",
+      "phone": null,
+      "fullAddress": "Silivri Gümüşyaka. Çanakkale Çaddesi no 23 kat 2     Silivri İstanbul",
+      "fullName": "Murat Başpınar"
+    },
+    "cargo_tracking_number": "7280033010250533",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "a712b9dc796e51c4aabd01eec5554687",
@@ -7028,7 +8854,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779359225969,
-    "order_date": "21.05.2026 13:27"
+    "order_date": "21.05.2026 13:27",
+    "shipping_address": {
+      "id": 9013237418,
+      "firstName": "Meryem",
+      "lastName": "Şahin",
+      "company": "",
+      "address1": "Salbaş beldesi 11. sokak ev no 14 salbaş Adana",
+      "address2": "",
+      "city": "Adana",
+      "cityCode": 1,
+      "district": "Çukurova",
+      "districtId": 100,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "01000",
+      "countryCode": "TR",
+      "neighborhoodId": 1417,
+      "neighborhood": "Salbaş Esentepe Mah",
+      "phone": null,
+      "fullAddress": "Salbaş beldesi 11. sokak ev no 14 salbaş Adana     Çukurova Adana",
+      "fullName": "Meryem Şahin"
+    },
+    "cargo_tracking_number": "7280032930191001",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "c9e2af3e0a005f6d9c904b20d6dcf9de",
@@ -7154,7 +9009,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779391047844,
-    "order_date": "21.05.2026 22:17"
+    "order_date": "21.05.2026 22:17",
+    "shipping_address": {
+      "id": 9015849313,
+      "firstName": "Abdullah",
+      "lastName": "Kargün",
+      "company": "",
+      "address1": "52048. sokak parkorman mezitli 4 apartmani kat 9 daire 18",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Mezitli",
+      "districtId": 1041,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 51106,
+      "neighborhood": "Merkez Mah",
+      "phone": null,
+      "fullAddress": "52048. sokak parkorman mezitli 4 apartmani kat 9 daire 18     Mezitli Mersin",
+      "fullName": "Abdullah Kargün"
+    },
+    "cargo_tracking_number": "7280032942344990",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e99f74a433b4526cbbf3efbaaf79cb7a",
@@ -7284,7 +9168,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779718761484,
-    "order_date": "25.05.2026 17:19"
+    "order_date": "25.05.2026 17:19",
+    "shipping_address": {
+      "id": 9030966663,
+      "firstName": "Şeyma",
+      "lastName": "Kaya",
+      "company": "",
+      "address1": "Çay Mahallesi Samet Sokak No:2 Kat :4 Terme/Samsun",
+      "address2": "",
+      "city": "Samsun",
+      "cityCode": 55,
+      "district": "Terme",
+      "districtId": 873,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "55000",
+      "countryCode": "TR",
+      "neighborhoodId": 70767,
+      "neighborhood": "Çay Mah",
+      "phone": null,
+      "fullAddress": "Çay Mahallesi Samet Sokak No:2 Kat :4 Terme/Samsun     Terme Samsun",
+      "fullName": "Şeyma Kaya"
+    },
+    "cargo_tracking_number": "7280033009576880",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "7eff62e3541b599e936ffeca04dcc0d6",
@@ -7409,7 +9322,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779718693517,
-    "order_date": "25.05.2026 17:18"
+    "order_date": "25.05.2026 17:18",
+    "shipping_address": {
+      "id": 9030960363,
+      "firstName": "Düşüm",
+      "lastName": "Çobanoğlu",
+      "company": "",
+      "address1": "1487 sokak Zehra Çimili apt. Kat 4 no 10 Yaşam Hastanesi Önü. Muratpaşa/ Antalya Yalı eczanesi üstü ",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Muratpaşa",
+      "districtId": 1048,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 8770,
+      "neighborhood": "Şirinyalı Mah",
+      "phone": null,
+      "fullAddress": "1487 sokak Zehra Çimili apt. Kat 4 no 10 Yaşam Hastanesi Önü. Muratpaşa/ Antalya Yalı eczanesi üstü     Muratpaşa Antalya",
+      "fullName": "Düşüm Çobanoğlu"
+    },
+    "cargo_tracking_number": "7280033009539106",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "b1652e80ebb65094a7299590357bb474",
@@ -7535,7 +9477,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779376127694,
-    "order_date": "21.05.2026 18:08"
+    "order_date": "21.05.2026 18:08",
+    "shipping_address": {
+      "id": 9014671990,
+      "firstName": "nehir",
+      "lastName": "koç",
+      "company": "",
+      "address1": "Diyarbakır Newroz alanı ozanamala armanç sitesi E blok 4. Kaat 16 numara",
+      "address2": "",
+      "city": "Diyarbakır",
+      "cityCode": 21,
+      "district": "Bağlar",
+      "districtId": 101074,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "21000",
+      "countryCode": "TR",
+      "neighborhoodId": 14597,
+      "neighborhood": "Bağcılar Mah",
+      "phone": null,
+      "fullAddress": "Diyarbakır Newroz alanı ozanamala armanç sitesi E blok 4. Kaat 16 numara     Bağlar Diyarbakır",
+      "fullName": "nehir koç"
+    },
+    "cargo_tracking_number": "7280032937013931",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "952c66b0daad50eb9f2fe642a59b51d8",
@@ -7658,7 +9629,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779452124142,
-    "order_date": "22.05.2026 15:15"
+    "order_date": "22.05.2026 15:15",
+    "shipping_address": {
+      "id": 9018915620,
+      "firstName": "çiğdem",
+      "lastName": "yıldırım",
+      "company": "",
+      "address1": "Kırklarsırtı mahallesi 2673 sokak no5 daire 13 Cansu apt 05458836709",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Tarsus",
+      "districtId": 555,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 52288,
+      "neighborhood": "Kırklarsırtı Mah",
+      "phone": null,
+      "fullAddress": "Kırklarsırtı mahallesi 2673 sokak no5 daire 13 Cansu apt 05458836709     Tarsus Mersin",
+      "fullName": "çiğdem yıldırım"
+    },
+    "cargo_tracking_number": "7280032956104269",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "39b6b944f0a25cd5875cf3c450dbcd6f",
@@ -7789,7 +9789,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779366318972,
-    "order_date": "21.05.2026 15:25"
+    "order_date": "21.05.2026 15:25",
+    "shipping_address": {
+      "id": 9013819971,
+      "firstName": "melike",
+      "lastName": "demiryurek",
+      "company": "",
+      "address1": "Yenice mah. 287. Sok cetinkaya apartmani no.2 daire.6 kat.3 ",
+      "address2": "",
+      "city": "Kırşehir",
+      "cityCode": 40,
+      "district": "Merkez",
+      "districtId": 648,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "40000",
+      "countryCode": "TR",
+      "neighborhoodId": 27674,
+      "neighborhood": "Yenice Mah",
+      "phone": null,
+      "fullAddress": "Yenice mah. 287. Sok cetinkaya apartmani no.2 daire.6 kat.3     Merkez Kırşehir",
+      "fullName": "melike demiryurek"
+    },
+    "cargo_tracking_number": "7280032933013393",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "f25f6ef612a1556ea7798049cccd046f",
@@ -7915,7 +9944,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779715108058,
-    "order_date": "25.05.2026 16:18"
+    "order_date": "25.05.2026 16:18",
+    "shipping_address": {
+      "id": 9030767090,
+      "firstName": "bilge",
+      "lastName": "gür",
+      "company": "",
+      "address1": " cumhuriyet mahallesi halide edip adıvar cd no 5 D 2 lapseki canakkale",
+      "address2": "",
+      "city": "Çanakkale",
+      "cityCode": 17,
+      "district": "Lapseki",
+      "districtId": 343,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "17000",
+      "countryCode": "TR",
+      "neighborhoodId": 13312,
+      "neighborhood": "Cumhuriyet Mah",
+      "phone": null,
+      "fullAddress": "cumhuriyet mahallesi halide edip adıvar cd no 5 D 2 lapseki canakkale     Lapseki Çanakkale",
+      "fullName": "bilge gür"
+    },
+    "cargo_tracking_number": "7280033008545849",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "19589d3a839d5718a3ee67835b1260a0",
@@ -8042,7 +10100,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779408736352,
-    "order_date": "22.05.2026 03:12"
+    "order_date": "22.05.2026 03:12",
+    "shipping_address": {
+      "id": 9017451830,
+      "firstName": "Harun",
+      "lastName": "Özden",
+      "company": "",
+      "address1": "Bağlar mahallesi danışment gazi bulvarı 35 B Atmaca erkek kuaför",
+      "address2": "",
+      "city": "Tokat",
+      "cityCode": 60,
+      "district": "Niksar",
+      "districtId": 951,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "60000",
+      "countryCode": "TR",
+      "neighborhoodId": 65894,
+      "neighborhood": "Bağlar Mah",
+      "phone": null,
+      "fullAddress": "Bağlar mahallesi danışment gazi bulvarı 35 B Atmaca erkek kuaför     Niksar Tokat",
+      "fullName": "Harun Özden"
+    },
+    "cargo_tracking_number": "7280032949089078",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "53e3822cb62a558bb7833730cbe352bb",
@@ -8117,7 +10204,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779713333733,
-    "order_date": "25.05.2026 15:48"
+    "order_date": "25.05.2026 15:48",
+    "shipping_address": {
+      "id": 9030669151,
+      "firstName": "Kübra",
+      "lastName": "Kaya",
+      "company": "",
+      "address1": "yunus emre mah. necip sok. hüma cad. No:12 D:1",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Arnavutköy",
+      "districtId": 41,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 27450,
+      "neighborhood": "Yunus Emre Mah",
+      "phone": null,
+      "fullAddress": "yunus emre mah. necip sok. hüma cad. No:12 D:1     Arnavutköy İstanbul",
+      "fullName": "Kübra Kaya"
+    },
+    "cargo_tracking_number": "7280033008042102",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "22c9cbd1055852a784acb87a6775ce9a",
@@ -8192,7 +10308,36 @@
     "categoryName": "Çikolata",
     "productName": "40 Adet Madlen Çikolata Söz Nişan İsteme Çikolatası Bebek Çikolatası Gold Veya Gümüş",
     "order_date_ms": 1779713333733,
-    "order_date": "25.05.2026 15:48"
+    "order_date": "25.05.2026 15:48",
+    "shipping_address": {
+      "id": 9030669151,
+      "firstName": "Kübra",
+      "lastName": "Kaya",
+      "company": "",
+      "address1": "yunus emre mah. necip sok. hüma cad. No:12 D:1",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Arnavutköy",
+      "districtId": 41,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 27450,
+      "neighborhood": "Yunus Emre Mah",
+      "phone": null,
+      "fullAddress": "yunus emre mah. necip sok. hüma cad. No:12 D:1     Arnavutköy İstanbul",
+      "fullName": "Kübra Kaya"
+    },
+    "cargo_tracking_number": "7280033008042102",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "bde73e266b1a509b98c9d94efc425d4e",
@@ -8317,7 +10462,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779405494661,
-    "order_date": "22.05.2026 02:18"
+    "order_date": "22.05.2026 02:18",
+    "shipping_address": {
+      "id": 9017160546,
+      "firstName": "Engin",
+      "lastName": "Koçoğlu",
+      "company": "",
+      "address1": "Müştakbey Mah. , Orgeneral Mustafa Muğlalı Cad. , No: 47 Daire 2 Ünal Apt. Menteşe/Muğla",
+      "address2": "",
+      "city": "Muğla",
+      "cityCode": 48,
+      "district": "Menteşe",
+      "districtId": 101085,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "48000",
+      "countryCode": "TR",
+      "neighborhoodId": 68267,
+      "neighborhood": "Müştakbey Mah",
+      "phone": null,
+      "fullAddress": "Müştakbey Mah. , Orgeneral Mustafa Muğlalı Cad. , No: 47 Daire 2 Ünal Apt. Menteşe/Muğla     Menteşe Muğla",
+      "fullName": "Engin Koçoğlu"
+    },
+    "cargo_tracking_number": "7280032947919544",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "4edd5e18f215513a916f0345620c8bd1",
@@ -8392,7 +10566,36 @@
     "categoryName": "Çikolata",
     "productName": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 Adet Kız İsteme Çikolatası,Nişan Çikolatası Draje",
     "order_date_ms": 1779710719560,
-    "order_date": "25.05.2026 15:05"
+    "order_date": "25.05.2026 15:05",
+    "shipping_address": {
+      "id": 9030533804,
+      "firstName": "Eren",
+      "lastName": "Soylu",
+      "company": "",
+      "address1": "Ulucami Mahallesi Bayrak Sokak No:19 ",
+      "address2": "",
+      "city": "Kütahya",
+      "cityCode": 43,
+      "district": "Tavşanlı",
+      "districtId": 707,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "43000",
+      "countryCode": "TR",
+      "neighborhoodId": 57585,
+      "neighborhood": "Ulucami Mah",
+      "phone": null,
+      "fullAddress": "Ulucami Mahallesi Bayrak Sokak No:19     Tavşanlı Kütahya",
+      "fullName": "Eren Soylu"
+    },
+    "cargo_tracking_number": "7280033007331146",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "7648ae34e7cb59a4821989803186f197",
@@ -8518,7 +10721,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779383422084,
-    "order_date": "21.05.2026 20:10"
+    "order_date": "21.05.2026 20:10",
+    "shipping_address": {
+      "id": 9015271681,
+      "firstName": "Zeynep Büşra",
+      "lastName": "Nar",
+      "company": "",
+      "address1": "Başkale sokak Çağlayan Fırat sitesi c2 5/7 ",
+      "address2": "",
+      "city": "Konya",
+      "cityCode": 42,
+      "district": "Selçuklu",
+      "districtId": 692,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "42000",
+      "countryCode": "TR",
+      "neighborhoodId": 52404,
+      "neighborhood": "Malazgirt Mah",
+      "phone": null,
+      "fullAddress": "Başkale sokak Çağlayan Fırat sitesi c2 5/7     Selçuklu Konya",
+      "fullName": "Zeynep Büşra Nar"
+    },
+    "cargo_tracking_number": "7280032939788660",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "1fd345091b8a58e0abe16376791bf32e",
@@ -8590,7 +10822,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779309801641,
-    "order_date": "20.05.2026 23:43"
+    "order_date": "20.05.2026 23:43",
+    "shipping_address": {
+      "id": 9010732688,
+      "firstName": "eren",
+      "lastName": "subaşı",
+      "company": "",
+      "address1": "hacı hüseyin efendi mah 100 sok no:85 akpınar kırşehir ",
+      "address2": "",
+      "city": "Kırşehir",
+      "cityCode": 40,
+      "district": "Akpınar",
+      "districtId": 652,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "40000",
+      "countryCode": "TR",
+      "neighborhoodId": 26983,
+      "neighborhood": "Hacıselimli Köyü",
+      "phone": null,
+      "fullAddress": "hacı hüseyin efendi mah 100 sok no:85 akpınar kırşehir     Akpınar Kırşehir",
+      "fullName": "eren subaşı"
+    },
+    "cargo_tracking_number": "7280032919033933",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "a4849291b9db524ba2a745737aff1f12",
@@ -8715,7 +10976,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779462484025,
-    "order_date": "22.05.2026 18:08"
+    "order_date": "22.05.2026 18:08",
+    "shipping_address": {
+      "id": 9019692715,
+      "firstName": "sultan",
+      "lastName": "kutluay",
+      "company": "",
+      "address1": "Kaymakam hasan tütün mah huzur kent apt kat:1 No:1",
+      "address2": "",
+      "city": "Adıyaman",
+      "cityCode": 2,
+      "district": "Besni",
+      "districtId": 116,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "02000",
+      "countryCode": "TR",
+      "neighborhoodId": 91,
+      "neighborhood": "Kaymakam Hasan Tütün Mah",
+      "phone": null,
+      "fullAddress": "Kaymakam hasan tütün mah huzur kent apt kat:1 No:1     Besni Adıyaman",
+      "fullName": "sultan kutluay"
+    },
+    "cargo_tracking_number": "7280032959812581",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "5fa0deaa3d0d5b6f9294571461ee2329",
@@ -8839,7 +11129,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779385585435,
-    "order_date": "21.05.2026 20:46"
+    "order_date": "21.05.2026 20:46",
+    "shipping_address": {
+      "id": 9015437719,
+      "firstName": "Yılmaz",
+      "lastName": "Yıldıran",
+      "company": "",
+      "address1": "karataş mah 103415 sokak Nurkent sitesi 2c blok kat 6 iç kapı no 12",
+      "address2": "",
+      "city": "Gaziantep",
+      "cityCode": 27,
+      "district": "Şahinbey",
+      "districtId": 485,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "27000",
+      "countryCode": "TR",
+      "neighborhoodId": 26305,
+      "neighborhood": "Karataş Mah",
+      "phone": null,
+      "fullAddress": "karataş mah 103415 sokak Nurkent sitesi 2c blok kat 6 iç kapı no 12     Şahinbey Gaziantep",
+      "fullName": "Yılmaz Yıldıran"
+    },
+    "cargo_tracking_number": "7280032940556241",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "c67b0b5f3e7352d2b7b047f1d1c20d05",
@@ -8967,7 +11286,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779378049964,
-    "order_date": "21.05.2026 18:40"
+    "order_date": "21.05.2026 18:40",
+    "shipping_address": {
+      "id": 9014838355,
+      "firstName": "Sercan",
+      "lastName": "Damar",
+      "company": "",
+      "address1": "Sunrise 3 sitesi 52040 sk. B/32 8/15 Mersin/Mezitli",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Mezitli",
+      "districtId": 1041,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 51106,
+      "neighborhood": "Merkez Mah",
+      "phone": null,
+      "fullAddress": "Sunrise 3 sitesi 52040 sk. B/32 8/15 Mersin/Mezitli     Mezitli Mersin",
+      "fullName": "Sercan Damar"
+    },
+    "cargo_tracking_number": "7280032937777536",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "3299069643e45dbfb7f5c1656b462750",
@@ -9039,7 +11387,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779499628111,
-    "order_date": "23.05.2026 04:27"
+    "order_date": "23.05.2026 04:27",
+    "shipping_address": {
+      "id": 9022290008,
+      "firstName": "Zeynep",
+      "lastName": "adikti",
+      "company": "",
+      "address1": "Sancaktepe Eyüp Sultan mah. Müminler cad. Site sk. Ptt blokları A blok kat 4 no 15",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Sancaktepe",
+      "districtId": 39,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28358,
+      "neighborhood": "Eyüp Sultan Mah",
+      "phone": null,
+      "fullAddress": "Sancaktepe Eyüp Sultan mah. Müminler cad. Site sk. Ptt blokları A blok kat 4 no 15     Sancaktepe İstanbul",
+      "fullName": "Zeynep adikti"
+    },
+    "cargo_tracking_number": "7280032970932329",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "3a422d4e3ceb58eaa1c219a25b1298a9",
@@ -9164,7 +11541,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779494279623,
-    "order_date": "23.05.2026 02:57"
+    "order_date": "23.05.2026 02:57",
+    "shipping_address": {
+      "id": 9021985368,
+      "firstName": "ceylan",
+      "lastName": "gedik",
+      "company": "",
+      "address1": "Hasanbey mahallesi, Cemal Hüsnü taray sokak, no:17 d:1 ezber apartmanı ",
+      "address2": "",
+      "city": "Gümüşhane",
+      "cityCode": 29,
+      "district": "Merkez",
+      "districtId": 506,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "29000",
+      "countryCode": "TR",
+      "neighborhoodId": 17805,
+      "neighborhood": "Hasanbey Mah",
+      "phone": null,
+      "fullAddress": "Hasanbey mahallesi, Cemal Hüsnü taray sokak, no:17 d:1 ezber apartmanı     Merkez Gümüşhane",
+      "fullName": "ceylan gedik"
+    },
+    "cargo_tracking_number": "7280032969759432",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "7b140ab70d155458b0e35eb6e761eedd",
@@ -9291,7 +11697,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779359882553,
-    "order_date": "21.05.2026 13:38"
+    "order_date": "21.05.2026 13:38",
+    "shipping_address": {
+      "id": 9013286705,
+      "firstName": "Büşra",
+      "lastName": "Altın",
+      "company": "",
+      "address1": "Şehit fethi sekin caddesi İzmir Adliyesi 44. Asliye Ceza Mahkemesi ",
+      "address2": "",
+      "city": "İzmir",
+      "cityCode": 35,
+      "district": "Konak",
+      "districtId": 91,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "35000",
+      "countryCode": "TR",
+      "neighborhoodId": 45454,
+      "neighborhood": "Çınarlı Mah",
+      "phone": null,
+      "fullAddress": "Şehit fethi sekin caddesi İzmir Adliyesi 44. Asliye Ceza Mahkemesi     Konak İzmir",
+      "fullName": "Büşra Altın"
+    },
+    "cargo_tracking_number": "7280032930445357",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "95cac9b1128b524f8f2ceeb6a72595ac",
@@ -9418,7 +11853,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779361057991,
-    "order_date": "21.05.2026 13:57"
+    "order_date": "21.05.2026 13:57",
+    "shipping_address": {
+      "id": 9013374805,
+      "firstName": "Özlem",
+      "lastName": "Köse",
+      "company": "",
+      "address1": "Bahçelievler mahallesi 1024.sokak Florya Apt kat:1 daire:2 Erzin/HATAY",
+      "address2": "",
+      "city": "Hatay",
+      "cityCode": 31,
+      "district": "Erzin",
+      "districtId": 523,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "31000",
+      "countryCode": "TR",
+      "neighborhoodId": 23514,
+      "neighborhood": "Bahçelievler Mah",
+      "phone": null,
+      "fullAddress": "Bahçelievler mahallesi 1024.sokak Florya Apt kat:1 daire:2 Erzin/HATAY     Erzin Hatay",
+      "fullName": "Özlem Köse"
+    },
+    "cargo_tracking_number": "7280032930867692",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "8c5f75f8ae5b55aca40452efb005dcbf",
@@ -9541,7 +12005,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779380656089,
-    "order_date": "21.05.2026 19:24"
+    "order_date": "21.05.2026 19:24",
+    "shipping_address": {
+      "id": 9015055259,
+      "firstName": "Eren",
+      "lastName": "Uludağ",
+      "company": "",
+      "address1": "Onur mahallesi 45067 sokak no 6 ",
+      "address2": "",
+      "city": "Adana",
+      "cityCode": 1,
+      "district": "Seyhan",
+      "districtId": 102,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "01000",
+      "countryCode": "TR",
+      "neighborhoodId": 10543,
+      "neighborhood": "Onur Mah",
+      "phone": null,
+      "fullAddress": "Onur mahallesi 45067 sokak no 6     Seyhan Adana",
+      "fullName": "Eren Uludağ"
+    },
+    "cargo_tracking_number": "7280032938782683",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "ba85c8aabab459b3bd599a917fc85554",
@@ -9616,7 +12109,36 @@
     "categoryName": "Çikolata",
     "productName": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım",
     "order_date_ms": 1779458737261,
-    "order_date": "22.05.2026 17:05"
+    "order_date": "22.05.2026 17:05",
+    "shipping_address": {
+      "id": 9019416585,
+      "firstName": "Ezgi",
+      "lastName": "şah",
+      "company": "",
+      "address1": "Çukurtarla sokak no 30 daire 11",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Gaziosmanpaşa",
+      "districtId": 64,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28197,
+      "neighborhood": "Karlıtepe Mah",
+      "phone": null,
+      "fullAddress": "Çukurtarla sokak no 30 daire 11     Gaziosmanpaşa İstanbul",
+      "fullName": "Ezgi şah"
+    },
+    "cargo_tracking_number": "7280032958512413",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "af08f5217de75ea9aa871e2117a5720c",
@@ -9741,7 +12263,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779478664932,
-    "order_date": "22.05.2026 22:37"
+    "order_date": "22.05.2026 22:37",
+    "shipping_address": {
+      "id": 9020796817,
+      "firstName": "Büşra",
+      "lastName": "Kondu",
+      "company": "",
+      "address1": "Kosova mahallesi Terakki sokak Baldan sitesi 15/4 Selçuklu / Konya",
+      "address2": "",
+      "city": "Konya",
+      "cityCode": 42,
+      "district": "Selçuklu",
+      "districtId": 692,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "42000",
+      "countryCode": "TR",
+      "neighborhoodId": 51050,
+      "neighborhood": "Kosova Mah",
+      "phone": null,
+      "fullAddress": "Kosova mahallesi Terakki sokak Baldan sitesi 15/4 Selçuklu / Konya     Selçuklu Konya",
+      "fullName": "Büşra Kondu"
+    },
+    "cargo_tracking_number": "7280032964836282",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e4d0ccb9978e52b089dacbcb7a935ff6",
@@ -9866,7 +12417,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779451148361,
-    "order_date": "22.05.2026 14:59"
+    "order_date": "22.05.2026 14:59",
+    "shipping_address": {
+      "id": 9018844487,
+      "firstName": "Ferda",
+      "lastName": "Özdemir",
+      "company": "",
+      "address1": "Cennetayağı Mahallesi Çıkrıkçı caddesi Şentürkler apartmanı no:1 A101 Market Edremit/BALIKESİR",
+      "address2": "",
+      "city": "Balıkesir",
+      "cityCode": 10,
+      "district": "Edremit",
+      "districtId": 230,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "10000",
+      "countryCode": "TR",
+      "neighborhoodId": 8184,
+      "neighborhood": "Cennetayağı Mah",
+      "phone": null,
+      "fullAddress": "Cennetayağı Mahallesi Çıkrıkçı caddesi Şentürkler apartmanı no:1 A101 Market Edremit/BALIKESİR     Edremit Balıkesir",
+      "fullName": "Ferda Özdemir"
+    },
+    "cargo_tracking_number": "7280032955768233",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "ca0fec398fb95c24961d3a9bf297393c",
@@ -9941,7 +12521,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779273733615,
-    "order_date": "20.05.2026 13:42"
+    "order_date": "20.05.2026 13:42",
+    "shipping_address": {
+      "id": 9007441119,
+      "firstName": "Mukaddes",
+      "lastName": "kaya",
+      "company": "",
+      "address1": "Muştakbaba mahallesi kureyşi caddesi no 47 B Bitlis merkez",
+      "address2": "",
+      "city": "Bitlis",
+      "cityCode": 13,
+      "district": "Merkez",
+      "districtId": 273,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "13000",
+      "countryCode": "TR",
+      "neighborhoodId": 10373,
+      "neighborhood": "Zeydan Mah",
+      "phone": null,
+      "fullAddress": "Muştakbaba mahallesi kureyşi caddesi no 47 B Bitlis merkez     Merkez Bitlis",
+      "fullName": "Mukaddes kaya"
+    },
+    "cargo_tracking_number": "7280032903679222",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "60d7131b75605c709eceacce9a77371d",
@@ -10067,7 +12676,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779472191865,
-    "order_date": "22.05.2026 20:49"
+    "order_date": "22.05.2026 20:49",
+    "shipping_address": {
+      "id": 9020370840,
+      "firstName": "Semanur",
+      "lastName": "susuz",
+      "company": "",
+      "address1": "Erkan sokak no 15 daire 2",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Arnavutköy",
+      "districtId": 41,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 27731,
+      "neighborhood": "Karlıbayır Mah",
+      "phone": null,
+      "fullAddress": "Erkan sokak no 15 daire 2     Arnavutköy İstanbul",
+      "fullName": "Semanur susuz"
+    },
+    "cargo_tracking_number": "7280032962984206",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "b2807de876685b9588eb1ba4f3827f20",
@@ -10142,7 +12780,36 @@
     "categoryName": "Çikolata",
     "productName": "Kişiye Özel Cam Kutuda 80 Adet Çikolata – Söz, Nişan, Kız Isteme Çikolatası",
     "order_date_ms": 1779282388145,
-    "order_date": "20.05.2026 16:06"
+    "order_date": "20.05.2026 16:06",
+    "shipping_address": {
+      "id": 9008213084,
+      "firstName": "zeynel abidin",
+      "lastName": "kara",
+      "company": "",
+      "address1": "1. İstasyon caddesi No:7/B gazi okulu yanı 1 inci ağız diş sağlığı polikliniği",
+      "address2": "",
+      "city": "Karaman",
+      "cityCode": 70,
+      "district": "Merkez",
+      "districtId": 576,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "70000",
+      "countryCode": "TR",
+      "neighborhoodId": 39755,
+      "neighborhood": "Alişahane Mah",
+      "phone": null,
+      "fullAddress": "1. İstasyon caddesi No:7/B gazi okulu yanı 1 inci ağız diş sağlığı polikliniği     Merkez Karaman",
+      "fullName": "zeynel abidin kara"
+    },
+    "cargo_tracking_number": "7280032907438207",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "d7bc7e543e5d515d9978e1c8067a0fc6",
@@ -10217,7 +12884,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1778921965388,
-    "order_date": "16.05.2026 11:59"
+    "order_date": "16.05.2026 11:59",
+    "shipping_address": {
+      "id": 8983225748,
+      "firstName": "Fatih",
+      "lastName": "kurt",
+      "company": "",
+      "address1": "merkez mah. oruç 2.sok. iç kapi:03 dış kapı :04 Hani/Diyarbakır ",
+      "address2": "",
+      "city": "Diyarbakır",
+      "cityCode": 21,
+      "district": "Hani",
+      "districtId": 400,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "21000",
+      "countryCode": "TR",
+      "neighborhoodId": 23992,
+      "neighborhood": "Merkez Mah",
+      "phone": null,
+      "fullAddress": "merkez mah. oruç 2.sok. iç kapi:03 dış kapı :04 Hani/Diyarbakır     Hani Diyarbakır",
+      "fullName": "Fatih kurt"
+    },
+    "cargo_tracking_number": "7280032794864103",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e0e7e8e44b9d5e9fa29d18fa2c770bc9",
@@ -10289,7 +12985,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779470479688,
-    "order_date": "22.05.2026 20:21"
+    "order_date": "22.05.2026 20:21",
+    "shipping_address": {
+      "id": 9020262315,
+      "firstName": "Dilek",
+      "lastName": "Şimşek",
+      "company": "",
+      "address1": "Evrimalatas CAD. Gökkuşağı villari bitisiginde Elvankent Florya Sitesi 3. blok kat:9 no:18",
+      "address2": "",
+      "city": "Diyarbakır",
+      "cityCode": 21,
+      "district": "Bağlar",
+      "districtId": 101074,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "21000",
+      "countryCode": "TR",
+      "neighborhoodId": 14597,
+      "neighborhood": "Bağcılar Mah",
+      "phone": null,
+      "fullAddress": "Evrimalatas CAD. Gökkuşağı villari bitisiginde Elvankent Florya Sitesi 3. blok kat:9 no:18     Bağlar Diyarbakır",
+      "fullName": "Dilek Şimşek"
+    },
+    "cargo_tracking_number": "7280032962479146",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "b3b72f6e07915bbe9ad9f6138301a77e",
@@ -10364,7 +13089,36 @@
     "categoryName": "Çikolata",
     "productName": "100 Adet Kişiye Özel Cam Kutuda Çikolata – Söz, Nişan, Kız İsteme Çikolatası",
     "order_date_ms": 1779475752949,
-    "order_date": "22.05.2026 21:49"
+    "order_date": "22.05.2026 21:49",
+    "shipping_address": {
+      "id": 9020605067,
+      "firstName": "Aysel",
+      "lastName": "Taştan",
+      "company": "",
+      "address1": "616.sokak koparatof ceylan sitesi c blok kat 4 no 7",
+      "address2": "",
+      "city": "Şanlıurfa",
+      "cityCode": 63,
+      "district": "Haliliye",
+      "districtId": 101093,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "63000",
+      "countryCode": "TR",
+      "neighborhoodId": 61726,
+      "neighborhood": "Sırrın Mah",
+      "phone": null,
+      "fullAddress": "616.sokak koparatof ceylan sitesi c blok kat 4 no 7     Haliliye Şanlıurfa",
+      "fullName": "Aysel Taştan"
+    },
+    "cargo_tracking_number": "7280032964013072",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "4221cce88b135a21809c5a4898827214",
@@ -10489,7 +13243,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779380894518,
-    "order_date": "21.05.2026 19:28"
+    "order_date": "21.05.2026 19:28",
+    "shipping_address": {
+      "id": 9015076128,
+      "firstName": "Adem Büreyde",
+      "lastName": "Bozoğlu",
+      "company": "",
+      "address1": "5353 Sokak Ahmet Doğan Sitesi A Blok Numara 8 Daire 11 ",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Kepez",
+      "districtId": 1042,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 5367,
+      "neighborhood": "Göçerler Mah",
+      "phone": null,
+      "fullAddress": "5353 Sokak Ahmet Doğan Sitesi A Blok Numara 8 Daire 11     Kepez Antalya",
+      "fullName": "Adem Büreyde Bozoğlu"
+    },
+    "cargo_tracking_number": "7280032938875569",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "452b1a532ba452a2b475171d47b431da",
@@ -10615,7 +13398,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779562502997,
-    "order_date": "23.05.2026 21:55"
+    "order_date": "23.05.2026 21:55",
+    "shipping_address": {
+      "id": 9024759035,
+      "firstName": "Yasemin",
+      "lastName": "Satar",
+      "company": "",
+      "address1": "İsmetpaşa bul. İsmetpaşa mah. Ozaltın apt altı İlhan erkek kuaförü 84/b Mersin\\TarsusMustafa Yıldırım",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Tarsus",
+      "districtId": 555,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 58537,
+      "neighborhood": "İsmetpaşa Mah",
+      "phone": null,
+      "fullAddress": "İsmetpaşa bul. İsmetpaşa mah. Ozaltın apt altı İlhan erkek kuaförü 84/b Mersin\\TarsusMustafa Yıldırım     Tarsus Mersin",
+      "fullName": "Yasemin Satar"
+    },
+    "cargo_tracking_number": "7280032982476903",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "fdd8d9429961596bbbbb772670d4f7ec",
@@ -10687,7 +13499,36 @@
     "updated_at": "2026-05-31 01:44:40",
     "productName": "Kız Isteme Çikolatası 100 Adet ,çiçek 25363727272, one size",
     "order_date_ms": 1779441455859,
-    "order_date": "22.05.2026 12:17"
+    "order_date": "22.05.2026 12:17",
+    "shipping_address": {
+      "id": 9018229183,
+      "firstName": "Okşan",
+      "lastName": "Yücel",
+      "company": "",
+      "address1": "Cumhuriyet Mah.Mehmetcik Sok.Müfide Ayer Apartmanı No:10 Kapı No :3 Kepez Beldesi/Çanakkale",
+      "address2": "",
+      "city": "Çanakkale",
+      "cityCode": 17,
+      "district": "Merkez",
+      "districtId": 335,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "17000",
+      "countryCode": "TR",
+      "neighborhoodId": 16802,
+      "neighborhood": "Cumhuriyet Mah (Kepez Köyü)",
+      "phone": null,
+      "fullAddress": "Cumhuriyet Mah.Mehmetcik Sok.Müfide Ayer Apartmanı No:10 Kapı No :3 Kepez Beldesi/Çanakkale     Merkez Çanakkale",
+      "fullName": "Okşan Yücel"
+    },
+    "cargo_tracking_number": "7280032952672946",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "ddbc0a1a96e45bf59e41e9b9fabe26c0",
@@ -10762,7 +13603,36 @@
     "categoryName": "Çikolata",
     "productName": "100 Adet Kişiye Özel Cam Kutuda Çikolata – Söz, Nişan, Kız İsteme Çikolatası",
     "order_date_ms": 1779569478710,
-    "order_date": "23.05.2026 23:51"
+    "order_date": "23.05.2026 23:51",
+    "shipping_address": {
+      "id": 9025176846,
+      "firstName": "Begüm",
+      "lastName": "Özdemir",
+      "company": "",
+      "address1": "Barbaros mahallesi hakimiyet caddesi emas sitesi A blok 50:14 ",
+      "address2": "",
+      "city": "Kayseri",
+      "cityCode": 38,
+      "district": "Kocasinan",
+      "districtId": 626,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "38000",
+      "countryCode": "TR",
+      "neighborhoodId": 41044,
+      "neighborhood": "Barbaros Mah",
+      "phone": null,
+      "fullAddress": "Barbaros mahallesi hakimiyet caddesi emas sitesi A blok 50:14     Kocasinan Kayseri",
+      "fullName": "Begüm Özdemir"
+    },
+    "cargo_tracking_number": "7280032984203668",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "1fefe503abf154aab5d7b67aa24edc6b",
@@ -10913,7 +13783,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779461384283,
-    "order_date": "22.05.2026 17:49"
+    "order_date": "22.05.2026 17:49",
+    "shipping_address": {
+      "id": 9019612963,
+      "firstName": "murat",
+      "lastName": "genç",
+      "company": "",
+      "address1": "bahar sokak yasemin apartmani A blok no23 daire 16",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Avcılar",
+      "districtId": 46,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28591,
+      "neighborhood": "Üniversite Mah",
+      "phone": null,
+      "fullAddress": "bahar sokak yasemin apartmani A blok no23 daire 16     Avcılar İstanbul",
+      "fullName": "murat genç"
+    },
+    "cargo_tracking_number": "7280032959421356",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e136dd57b8535aceac9903f67311b490",
@@ -11041,7 +13940,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779391261589,
-    "order_date": "21.05.2026 22:21"
+    "order_date": "21.05.2026 22:21",
+    "shipping_address": {
+      "id": 9015861988,
+      "firstName": "Sibel",
+      "lastName": "Tekin",
+      "company": "",
+      "address1": "Altıok mahallesi 604 sokak serhat apartman no:43 kat:5 kapını:10 ",
+      "address2": "",
+      "city": "Diyarbakır",
+      "cityCode": 21,
+      "district": "Bismil",
+      "districtId": 394,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "21000",
+      "countryCode": "TR",
+      "neighborhoodId": 15126,
+      "neighborhood": "Altıok Mah",
+      "phone": null,
+      "fullAddress": "Altıok mahallesi 604 sokak serhat apartman no:43 kat:5 kapını:10     Bismil Diyarbakır",
+      "fullName": "Sibel Tekin"
+    },
+    "cargo_tracking_number": "7280032942411081",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "3708379f7c685257b6a9da71f0b4a6d8",
@@ -11168,7 +14096,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779358711334,
-    "order_date": "21.05.2026 13:18"
+    "order_date": "21.05.2026 13:18",
+    "shipping_address": {
+      "id": 9013201870,
+      "firstName": "kamil",
+      "lastName": "ocakci",
+      "company": "",
+      "address1": "doktor devlet bahceli bulvari no:22/2d ocakci motor",
+      "address2": "",
+      "city": "Muğla",
+      "cityCode": 48,
+      "district": "Fethiye",
+      "districtId": 758,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "48000",
+      "countryCode": "TR",
+      "neighborhoodId": 68137,
+      "neighborhood": "Karaçulha Mah",
+      "phone": null,
+      "fullAddress": "doktor devlet bahceli bulvari no:22/2d ocakci motor     Fethiye Muğla",
+      "fullName": "kamil ocakci"
+    },
+    "cargo_tracking_number": "7280032930007678",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "cd4a2e0988b4525badff7d01b592a236",
@@ -11290,7 +14247,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779674401382,
-    "order_date": "25.05.2026 05:00"
+    "order_date": "25.05.2026 05:00",
+    "shipping_address": {
+      "id": 9029856455,
+      "firstName": "hasret",
+      "lastName": "Taşel",
+      "company": "",
+      "address1": "buzhane mahallesi uzun şehit 1. sokak no 10 ipekyolu van ",
+      "address2": "",
+      "city": "Van",
+      "cityCode": 65,
+      "district": "İpekyolu",
+      "districtId": 101095,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "65000",
+      "countryCode": "TR",
+      "neighborhoodId": 58612,
+      "neighborhood": "Buzhane Mah",
+      "phone": null,
+      "fullAddress": "buzhane mahallesi uzun şehit 1. sokak no 10 ipekyolu van     İpekyolu Van",
+      "fullName": "hasret Taşel"
+    },
+    "cargo_tracking_number": "7280033003123653",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "ccc9c7abd851585987687b81ac224427",
@@ -11365,7 +14351,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779668934877,
-    "order_date": "25.05.2026 03:28"
+    "order_date": "25.05.2026 03:28",
+    "shipping_address": {
+      "id": 9029645812,
+      "firstName": "İbrahim emin",
+      "lastName": "göbütoğlu",
+      "company": "",
+      "address1": "Aynur sokak Veysel Karani apartmanı no 1/16",
+      "address2": "",
+      "city": "Ankara",
+      "cityCode": 6,
+      "district": "Pursaklar",
+      "districtId": 1037,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "06000",
+      "countryCode": "TR",
+      "neighborhoodId": 12969,
+      "neighborhood": "Tevfik İleri Mah",
+      "phone": null,
+      "fullAddress": "Aynur sokak Veysel Karani apartmanı no 1/16     Pursaklar Ankara",
+      "fullName": "İbrahim emin göbütoğlu"
+    },
+    "cargo_tracking_number": "7280033002304558",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "540205296cff5683b0a98b0bfc1df469",
@@ -11490,7 +14505,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779664196384,
-    "order_date": "25.05.2026 02:09"
+    "order_date": "25.05.2026 02:09",
+    "shipping_address": {
+      "id": 9029349435,
+      "firstName": "Necla",
+      "lastName": "Çiçek",
+      "company": "",
+      "address1": "Çiğdem mahallesi kardelen Sokak no:4/3 Beykoz Paşabahçe İstanbul ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Beykoz",
+      "districtId": 30,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 27862,
+      "neighborhood": "Çiğdem Mah",
+      "phone": null,
+      "fullAddress": "Çiğdem mahallesi kardelen Sokak no:4/3 Beykoz Paşabahçe İstanbul     Beykoz İstanbul",
+      "fullName": "Necla Çiçek"
+    },
+    "cargo_tracking_number": "7280033001085106",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "23ef6179d6f55f32aa07387b6637187e",
@@ -11615,7 +14659,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779650701912,
-    "order_date": "24.05.2026 22:25"
+    "order_date": "24.05.2026 22:25",
+    "shipping_address": {
+      "id": 9028500993,
+      "firstName": "Muhammet",
+      "lastName": "görür",
+      "company": "",
+      "address1": "Burhanettin onat caddesi no 1 meydan apartmanı mackbear coffe ırmak in adına gelicek coffenin kendisine gelecek ",
+      "address2": "",
+      "city": "Antalya",
+      "cityCode": 7,
+      "district": "Muratpaşa",
+      "districtId": 1048,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "07000",
+      "countryCode": "TR",
+      "neighborhoodId": 9457,
+      "neighborhood": "Çaybaşı Mah",
+      "phone": null,
+      "fullAddress": "Burhanettin onat caddesi no 1 meydan apartmanı mackbear coffe ırmak in adına gelicek coffenin kendisine gelecek     Muratpaşa Antalya",
+      "fullName": "Muhammet görür"
+    },
+    "cargo_tracking_number": "7280032997586819",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "e979db45d46e56c3acc9f3fdca9151e8",
@@ -11741,7 +14814,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779645396048,
-    "order_date": "24.05.2026 20:56"
+    "order_date": "24.05.2026 20:56",
+    "shipping_address": {
+      "id": 9028214245,
+      "firstName": "nazmi",
+      "lastName": "dinç alev",
+      "company": "",
+      "address1": "İsmail saraç CAD no:8",
+      "address2": "",
+      "city": "Edirne",
+      "cityCode": 22,
+      "district": "Keşan",
+      "districtId": 420,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "22000",
+      "countryCode": "TR",
+      "neighborhoodId": 17034,
+      "neighborhood": "Büyük Cami Mah",
+      "phone": null,
+      "fullAddress": "İsmail saraç CAD no:8     Keşan Edirne",
+      "fullName": "nazmi dinç alev"
+    },
+    "cargo_tracking_number": "7280032996390622",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "6cb1c3e6d63e51139eedc22651aa67b1",
@@ -11816,7 +14918,36 @@
     "categoryName": "Söz Hediyelik",
     "productName": "Yuvarlak Beyaz İnci söz nişan tepsi seti, incili damat kahve tepsisi incili söz- Nişan kurdelesi",
     "order_date_ms": 1779639320309,
-    "order_date": "24.05.2026 19:15"
+    "order_date": "24.05.2026 19:15",
+    "shipping_address": {
+      "id": 9027874025,
+      "firstName": "Songül",
+      "lastName": "Öner",
+      "company": "",
+      "address1": "Hakkari merkez merzan mahallesi 402sk no13",
+      "address2": "",
+      "city": "Hakkari",
+      "cityCode": 30,
+      "district": "Merkez",
+      "districtId": 512,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "30000",
+      "countryCode": "TR",
+      "neighborhoodId": 33803,
+      "neighborhood": "Merzan Mah",
+      "phone": null,
+      "fullAddress": "Hakkari merkez merzan mahallesi 402sk no13     Merkez Hakkari",
+      "fullName": "Songül Öner"
+    },
+    "cargo_tracking_number": "7280032995008924",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "be2c5be85e8659e3aa9967c0ba243040",
@@ -11944,7 +15075,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779630949044,
-    "order_date": "24.05.2026 16:55"
+    "order_date": "24.05.2026 16:55",
+    "shipping_address": {
+      "id": 9027383082,
+      "firstName": "Tuğçe",
+      "lastName": "Rüzgar",
+      "company": "",
+      "address1": "mithatpasa mahallesi 2855 sk no 36 kat 1 daire 1",
+      "address2": "",
+      "city": "Mersin",
+      "cityCode": 33,
+      "district": "Tarsus",
+      "districtId": 555,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "33000",
+      "countryCode": "TR",
+      "neighborhoodId": 53156,
+      "neighborhood": "Mithatpaşa Mah",
+      "phone": null,
+      "fullAddress": "mithatpasa mahallesi 2855 sk no 36 kat 1 daire 1     Tarsus Mersin",
+      "fullName": "Tuğçe Rüzgar"
+    },
+    "cargo_tracking_number": "7280032992989448",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "817ad940a698574cac99f10e3239f5ff",
@@ -12019,7 +15179,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779628547518,
-    "order_date": "24.05.2026 16:15"
+    "order_date": "24.05.2026 16:15",
+    "shipping_address": {
+      "id": 9027237916,
+      "firstName": "naz",
+      "lastName": "Öztaş",
+      "company": "",
+      "address1": "Bahçelievler mahallesi Fazıl Karaibrahim caddesi no47",
+      "address2": "",
+      "city": "Giresun",
+      "cityCode": 28,
+      "district": "Bulancak",
+      "districtId": 490,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "28000",
+      "countryCode": "TR",
+      "neighborhoodId": 15223,
+      "neighborhood": "Bahçelievler Mah",
+      "phone": null,
+      "fullAddress": "Bahçelievler mahallesi Fazıl Karaibrahim caddesi no47     Bulancak Giresun",
+      "fullName": "naz Öztaş"
+    },
+    "cargo_tracking_number": "7280032992381884",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "22e428cc969e5ed393aa73f4b8a1932b",
@@ -12094,7 +15283,36 @@
     "categoryName": "Çikolata",
     "productName": "Kişiye Özel Çift Katlı Sunumluk Tül Süslemeli 80 Adet Kız İsteme Çikolatası,Nişan Çikolatası Draje",
     "order_date_ms": 1778735164971,
-    "order_date": "14.05.2026 08:06"
+    "order_date": "14.05.2026 08:06",
+    "shipping_address": {
+      "id": 0,
+      "firstName": "Umico",
+      "lastName": "Logistics",
+      "company": "",
+      "address1": "Akşemseddin Mahallesi, Kazım Karabekir Cd. No: 63, 34510 Esenyurt/İstanbul",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Esenyurt",
+      "districtId": 66,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34510",
+      "countryCode": "TR",
+      "neighborhoodId": 28174,
+      "neighborhood": "Akşemseddin Mah",
+      "phone": null,
+      "fullAddress": "Akşemseddin Mahallesi, Kazım Karabekir Cd. No: 63, 34510 Esenyurt/İstanbul     Esenyurt İstanbul",
+      "fullName": "Umico Logistics"
+    },
+    "cargo_tracking_number": "7280032738781558",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "251d9ee51155598ba81600f99f055b14",
@@ -12220,7 +15438,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779620460745,
-    "order_date": "24.05.2026 14:01"
+    "order_date": "24.05.2026 14:01",
+    "shipping_address": {
+      "id": 9026802356,
+      "firstName": "Muhammed Azat",
+      "lastName": "Darak",
+      "company": "",
+      "address1": "Ayazma Cad Osmangazi Mahallesi 2607 sokak Dış kapı No 25 kat 5 daire 5 ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Esenyurt",
+      "districtId": 66,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28486,
+      "neighborhood": "Osmangazi Mah",
+      "phone": null,
+      "fullAddress": "Ayazma Cad Osmangazi Mahallesi 2607 sokak Dış kapı No 25 kat 5 daire 5     Esenyurt İstanbul",
+      "fullName": "Muhammed Azat Darak"
+    },
+    "cargo_tracking_number": "7280032990561202",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "ec1e73889fc1513290b6985f902fefe0",
@@ -12295,7 +15542,36 @@
     "categoryName": "Çikolata",
     "productName": "41’li Kızİsteme Çiçeği ve 150 Adet Söz Çikolatası, Nişan Çikolatası – Gül Çiçek Tasarım",
     "order_date_ms": 1779615165875,
-    "order_date": "24.05.2026 12:32"
+    "order_date": "24.05.2026 12:32",
+    "shipping_address": {
+      "id": 9026618070,
+      "firstName": "Seyed Mehdi",
+      "lastName": "hussaini",
+      "company": "",
+      "address1": "Menderes cad.no56 D10",
+      "address2": "",
+      "city": "Kütahya",
+      "cityCode": 43,
+      "district": "Merkez",
+      "districtId": 701,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "43000",
+      "countryCode": "TR",
+      "neighborhoodId": 45155,
+      "neighborhood": "Cemalettin Mah",
+      "phone": null,
+      "fullAddress": "Menderes cad.no56 D10     Merkez Kütahya",
+      "fullName": "Seyed Mehdi hussaini"
+    },
+    "cargo_tracking_number": "7280032989798817",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "2dc5550f87fe5f079984c19c421c6c46",
@@ -12421,7 +15697,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779606106914,
-    "order_date": "24.05.2026 10:01"
+    "order_date": "24.05.2026 10:01",
+    "shipping_address": {
+      "id": 9026483923,
+      "firstName": "ebru",
+      "lastName": "yaşar",
+      "company": "",
+      "address1": "halkalı bezirgan bahçe istasyon mahallesi millet caddesi no 19/21 kapıcı dairesi evfa 144",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Küçükçekmece",
+      "districtId": 53,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 28177,
+      "neighborhood": "İstasyon Mah",
+      "phone": null,
+      "fullAddress": "halkalı bezirgan bahçe istasyon mahallesi millet caddesi no 19/21 kapıcı dairesi evfa 144     Küçükçekmece İstanbul",
+      "fullName": "ebru yaşar"
+    },
+    "cargo_tracking_number": "7280032989220813",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "64cdc182c69c546cab8814a9130f0557",
@@ -12496,7 +15801,36 @@
     "categoryName": "Çikolata",
     "productName": "41 Karışık Şakayık İsteme Çiçeği Buketi & Kişiye Özel 100 Adet İsimli Söz Nişan Kız Isteme Çikolata",
     "order_date_ms": 1779587939220,
-    "order_date": "24.05.2026 04:58"
+    "order_date": "24.05.2026 04:58",
+    "shipping_address": {
+      "id": 9026302986,
+      "firstName": "Nimet",
+      "lastName": "Çamlı",
+      "company": "",
+      "address1": "Karahüyük mahallesi yüzbaşı caddesi no 1",
+      "address2": "",
+      "city": "Konya",
+      "cityCode": 42,
+      "district": "Akşehir",
+      "districtId": 671,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "42000",
+      "countryCode": "TR",
+      "neighborhoodId": 41221,
+      "neighborhood": "Karahüyük Mah",
+      "phone": null,
+      "fullAddress": "Karahüyük mahallesi yüzbaşı caddesi no 1     Akşehir Konya",
+      "fullName": "Nimet Çamlı"
+    },
+    "cargo_tracking_number": "7280032988579592",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "a61a08bf201656bdb6824ed986bebf42",
@@ -12622,7 +15956,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779572363628,
-    "order_date": "24.05.2026 00:39"
+    "order_date": "24.05.2026 00:39",
+    "shipping_address": {
+      "id": 9025378046,
+      "firstName": "Mert",
+      "lastName": "OCAK",
+      "company": "",
+      "address1": "istiklal-kurtpınar mahallesi 60.sokak Özdemir apt No:21 Daire:7",
+      "address2": "",
+      "city": "Tekirdağ",
+      "cityCode": 59,
+      "district": "Muratlı",
+      "districtId": 944,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "59000",
+      "countryCode": "TR",
+      "neighborhoodId": 73232,
+      "neighborhood": "İstiklal - Kurtpınar Mah",
+      "phone": null,
+      "fullAddress": "istiklal-kurtpınar mahallesi 60.sokak Özdemir apt No:21 Daire:7     Muratlı Tekirdağ",
+      "fullName": "Mert OCAK"
+    },
+    "cargo_tracking_number": "7280032985010128",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "a674a2bb59eb520c8edbd18fde8b882b",
@@ -12749,7 +16112,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779572341405,
-    "order_date": "24.05.2026 00:39"
+    "order_date": "24.05.2026 00:39",
+    "shipping_address": {
+      "id": 9025379155,
+      "firstName": "Berivan",
+      "lastName": "Abak",
+      "company": "",
+      "address1": "Mardin Kızıltepe 247. Sokak no 69 Bahçelievler mahallesi",
+      "address2": "",
+      "city": "Mardin",
+      "cityCode": 47,
+      "district": "Kızıltepe",
+      "districtId": 748,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "47000",
+      "countryCode": "TR",
+      "neighborhoodId": 54779,
+      "neighborhood": "Bahçelievler Mah",
+      "phone": null,
+      "fullAddress": "Mardin Kızıltepe 247. Sokak no 69 Bahçelievler mahallesi     Kızıltepe Mardin",
+      "fullName": "Berivan Abak"
+    },
+    "cargo_tracking_number": "7280032985007456",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "1a84ecf9151d52d7be1b4a8368b8cd81",
@@ -12824,7 +16216,36 @@
     "categoryName": "Çikolata",
     "productName": "Kız İsteme Çikolatası Söz Çikolatası Nişan Çikolatası İsteme Çiçeği",
     "order_date_ms": 1779572214710,
-    "order_date": "24.05.2026 00:36"
+    "order_date": "24.05.2026 00:36",
+    "shipping_address": {
+      "id": 9025370748,
+      "firstName": "Amine",
+      "lastName": "Aktaş",
+      "company": "",
+      "address1": "ulu cami mahallesi 374 sokak no 58/1 doğan cami karşısı",
+      "address2": "",
+      "city": "Manisa",
+      "cityCode": 45,
+      "district": "Akhisar",
+      "districtId": 729,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "45000",
+      "countryCode": "TR",
+      "neighborhoodId": 52466,
+      "neighborhood": "Ulu Camii Mah",
+      "phone": null,
+      "fullAddress": "ulu cami mahallesi 374 sokak no 58/1 doğan cami karşısı     Akhisar Manisa",
+      "fullName": "Amine Aktaş"
+    },
+    "cargo_tracking_number": "7280032984972083",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "720f81b268a15f33bbeecc9d1db87c68",
@@ -12954,7 +16375,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779320452982,
-    "order_date": "21.05.2026 02:40"
+    "order_date": "21.05.2026 02:40",
+    "shipping_address": {
+      "id": 9011929273,
+      "firstName": "Büşra",
+      "lastName": "Aygün",
+      "company": "",
+      "address1": "Atatürk Mah. Müderris Osman Efendi Cad.no:13/3 Kekit G.Hane",
+      "address2": "",
+      "city": "Gümüşhane",
+      "cityCode": 29,
+      "district": "Kelkit",
+      "districtId": 507,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "29000",
+      "countryCode": "TR",
+      "neighborhoodId": 15153,
+      "neighborhood": "Atatürk Mah",
+      "phone": null,
+      "fullAddress": "Atatürk Mah. Müderris Osman Efendi Cad.no:13/3 Kekit G.Hane     Kelkit Gümüşhane",
+      "fullName": "Büşra Aygün"
+    },
+    "cargo_tracking_number": "7280032924054800",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "c5b54af5f76456ad884cb9fbeee9e0b8",
@@ -13105,7 +16555,36 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779568214125,
-    "order_date": "23.05.2026 23:30"
+    "order_date": "23.05.2026 23:30",
+    "shipping_address": {
+      "id": 9025100558,
+      "firstName": "Furkan",
+      "lastName": "Güngörenoğlu",
+      "company": "",
+      "address1": "Mevlana mahallesi karasu caddesi cabepark apartmanı no :42 daire : 47 Talas Kayseri",
+      "address2": "",
+      "city": "Kayseri",
+      "cityCode": 38,
+      "district": "Talas",
+      "districtId": 625,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "38000",
+      "countryCode": "TR",
+      "neighborhoodId": 41174,
+      "neighborhood": "Mevlana Mah",
+      "phone": null,
+      "fullAddress": "Mevlana mahallesi karasu caddesi cabepark apartmanı no :42 daire : 47 Talas Kayseri     Talas Kayseri",
+      "fullName": "Furkan Güngörenoğlu"
+    },
+    "cargo_tracking_number": "7280032983881577",
+    "cargo_provider": "DHL eCommerce Marketplace"
   },
   {
     "id": "c06389cf55685744bc8f1595a552354d",
@@ -13230,6 +16709,35 @@
     },
     "operator_corrected": false,
     "order_date_ms": 1779564210981,
-    "order_date": "23.05.2026 22:23"
+    "order_date": "23.05.2026 22:23",
+    "shipping_address": {
+      "id": 9024857569,
+      "firstName": "Yeşim",
+      "lastName": "Akman",
+      "company": "",
+      "address1": "fatih mahallesi 235.sokak no 10 daire 4 kat 2esenler /İstanbul ",
+      "address2": "",
+      "city": "İstanbul",
+      "cityCode": 34,
+      "district": "Esenler",
+      "districtId": 65,
+      "countyId": 0,
+      "countyName": "",
+      "shortAddress": "",
+      "stateName": "",
+      "addressLines": {
+        "addressLine1": "",
+        "addressLine2": ""
+      },
+      "postalCode": "34000",
+      "countryCode": "TR",
+      "neighborhoodId": 29139,
+      "neighborhood": "Fatih Mah",
+      "phone": null,
+      "fullAddress": "fatih mahallesi 235.sokak no 10 daire 4 kat 2esenler /İstanbul     Esenler İstanbul",
+      "fullName": "Yeşim Akman"
+    },
+    "cargo_tracking_number": "7280032982890815",
+    "cargo_provider": "DHL eCommerce Marketplace"
   }
 ]
