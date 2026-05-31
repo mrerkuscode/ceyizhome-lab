@@ -840,9 +840,10 @@ def job_log(job_id: str):
 
 # ── Etiket Studio — Tarayıcı modu render/preflight (P0-3, P0-4) ──────────────
 
-@api_bp.route("/preflight/check", methods=["POST"])
-def preflight_check():
-    return _ok({"ok": True, "message": "Render sistemi hazır."})
+@api_bp.route("/health", methods=["GET", "POST"])
+@api_bp.route("/preflight/check", methods=["GET", "POST"])  # eski alias — yalnız sağlık ping'i
+def health_check():
+    return _ok({"ok": True, "status": "OK", "message": "Sunucu çalışıyor."})
 
 
 @api_bp.route("/preflight_manual_label", methods=["POST"])
