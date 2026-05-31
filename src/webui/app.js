@@ -4818,13 +4818,19 @@ function tscCard(row) {
     const sla       = (slaRaw && slaRaw !== "Süre bilgisi yok") ? slaRaw : "";
     const sku       = trendyolMeaningfulSku(row.merchant_sku || row.stock_code);
     const psize     = row.product_size || "";
-    const orderNum  = row.order_number || "-";
+    const orderNum    = row.order_number || "-";
+    const isBulkSel   = selectedTrendyolOrderIds.has(row.id || "");
+    const bulkSelCls  = isBulkSel ? " tsc-bulk-selected" : "";
     return `
-      <article class="trendyol-suggestion-card tsc-card ${accent}${selCls}${lcCls}"
+      <article class="trendyol-suggestion-card tsc-card ${accent}${selCls}${lcCls}${bulkSelCls}"
                data-trendyol-suggestion-id="${esc(row.id||"")}"
                onclick="selectTrendyolSuggestion(${jsArg(row.id)})"
                style="cursor:pointer">
         <div class="tsc-rich-row">
+          <label class="tsc-bulk-check" onclick="event.stopPropagation()" title="Toplu seçime ekle">
+            <input type="checkbox" ${isBulkSel ? "checked" : ""}
+                   onchange="toggleTrendyolOrderSelection(${jsArg(row.id)},this.checked)" />
+          </label>
           <div class="tsc-lb">
             <div class="tsc-lb-header">
               <span class="tsc-chev">&#9658;</span>
@@ -4863,6 +4869,9 @@ function tscCard(row) {
             <button class="tsc-btn tsc-ghost tsc-sm tsc-analyze-btn" type="button"
                     onclick="event.stopPropagation();analyzeSingleTrendyolSuggestion(${jsArg(row.id)},this)"
                     title="Sadece bu siparişi yeniden analiz et">Analiz Et</button>
+            <button class="tsc-btn tsc-ghost tsc-sm" type="button"
+                    onclick="event.stopPropagation();printSingleTrendyolOrder(${jsArg(row.id)})"
+                    title="Bu siparişin üretim fişini yazdır">🖨 Yazdır</button>
             ${canImport ? `<button class="tsc-btn tsc-primary tsc-sm" type="button" onclick="event.stopPropagation();importTrendyolSuggestionToCustomerOrder(${jsArg(row.id)})">Üretime aktar</button>` : ""}
           </div>
         </div>
@@ -4943,6 +4952,9 @@ function tscCard(row) {
             ? `<a class="tsc-btn tsc-ghost tsc-sm" href="${esc(productUrl)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Ürüne git ↗</a>`
             : `<button class="tsc-btn tsc-ghost tsc-sm" type="button" disabled>Ürüne git ↗</button>`}
           <button class="tsc-btn tsc-ghost tsc-sm" type="button" onclick="typeof trendyolOpenInStudio==='function'&&trendyolOpenInStudio(${jsArg(row.id)})">Studio'da aç</button>
+          <button class="tsc-btn tsc-ghost tsc-sm" type="button"
+                  onclick="printSingleTrendyolOrder(${jsArg(row.id)})"
+                  title="Üretim fişini yazdır">🖨 Yazdır</button>
           <button class="tsc-btn tsc-primary tsc-sm" type="button" ${canImport?"":"disabled"}
                   onclick="event.stopPropagation();importTrendyolSuggestionToCustomerOrder(${jsArg(row.id)})"
                   title="${canImport?"Üretime aktar":"Aktarım için onay ve model eşleştirmesi gerekir"}">Üretime aktar</button>
@@ -5005,11 +5017,23 @@ function renderTrendyolSuggestions(rows) {
   }
   // Sırala: sipariş tarihine göre azalan (en yeni önce)
   filtered.sort((a, b) => Number(b.order_date_ms || 0) - Number(a.order_date_ms || 0));
-  const moreNotice = filtered.length > visible.length
-    ? `<div class="empty-state compact"><b>${esc(visible.length)} / ${esc(filtered.length)} satır gösteriliyor.</b><p>Listeyi akıcı tutmak için ilk kayıtlar çizildi; arama veya hızlı filtreyle hedef siparişi daraltın.</p></div>`
+  const allBulkSel = filtered.length > 0 && filtered.every(r => selectedTrendyolOrderIds.has(r.id || ""));
+  const someBulkSel = filtered.some(r => selectedTrendyolOrderIds.has(r.id || ""));
+  const selectAllHeader = `<div class="tsc-select-all-bar">
+    <label class="tsc-bulk-check" title="${allBulkSel ? "Seçimi kaldır" : "Tümünü seç"}">
+      <input type="checkbox" ${allBulkSel ? "checked" : ""} ${someBulkSel && !allBulkSel ? "indeterminate-hint" : ""}
+             onchange="if(this.checked){filtered_for_select_all.forEach(r=>selectedTrendyolOrderIds.add(r.id||''))}else{filtered_for_select_all.forEach(r=>selectedTrendyolOrderIds.delete(r.id||''))};renderTrendyolBulkActionBar(trendYolSuggestions());renderTrendyolSuggestions(trendYolSuggestions())" />
+      Tümünü Seç
+    </label>
+    <span class="tsc-sel-hint">${someBulkSel ? selectedTrendyolOrderIds.size + " seçili" : ""}</span>
+  </div>`;
+  // expose filtered rows for select-all handler
+  window.filtered_for_select_all = filtered;
+  const moreNotice = filtered.length > TRENDYOL_ORDER_RENDER_LIMIT
+    ? `<div class="empty-state compact"><b>${esc(TRENDYOL_ORDER_RENDER_LIMIT)} / ${esc(filtered.length)} satır gösteriliyor.</b><p>Listeyi akıcı tutmak için ilk kayıtlar çizildi; arama veya hızlı filtreyle hedef siparişi daraltın.</p></div>`
     : "";
   const visibleSorted = filtered.slice(0, TRENDYOL_ORDER_RENDER_LIMIT);
-  list.innerHTML = visibleSorted.map(row => tscCard(row)).join("") + moreNotice;
+  list.innerHTML = selectAllHeader + visibleSorted.map(row => tscCard(row)).join("") + moreNotice;
   setTimeout(hydrateTrendyolProductThumbs, 0);
 }
 
@@ -5080,12 +5104,14 @@ function renderTrendyolBulkActionBar(rows = []) {
       <small>Toplu Üretim aktarımı yalnızca yerel hazırlık oluşturur; Trendyol canlı sipariş durumu değişmez.</small>
     </div>
     <div class="toolbar compact">
-      <button class="btn small" type="button" onclick="showTrendyolStatus('Toplu aksiyon menüsü: canlı güvenlik için sadece bağlı işlemler aktif tutuluyor.', 'warn')">Toplu Aksiyonlar ▾</button>
-      <button class="btn small primary" ${selectedRows.length ? "" : "disabled"} onclick="bulkImportReadyTrendyolOrders()">${esc(selectedRows.length)} seçili satırı Toplu Üretim’e aktar</button>
-      <button class="btn small" onclick="bulkReviewTrendyolOrders()">Sorunluları kontrol kuyruğuna gönder</button>
+      <b id="trendyolBulkAnalyzeStatus" style="font-size:0.85em;color:var(--accent)"></b>
+      <button class="btn small primary" type="button" onclick="bulkAnalyzeTrendyolSelected()"
+              title="Seçili satırları sırayla yeniden analiz et">Toplu Analiz Et</button>
+      <button class="btn small" type="button" onclick="bulkPrintTrendyolSelected()"
+              title="Seçili siparişlerin üretim fişlerini bir belgede yazdır">🖨 Toplu Yazdır</button>
+      <button class="btn small" onclick="bulkImportReadyTrendyolOrders()">Toplu Üretim’e aktar</button>
+      <button class="btn small" onclick="bulkReviewTrendyolOrders()">Sorunluları kuyruğa gönder</button>
       <button class="btn small" ${processable ? "" : "disabled"} onclick="bulkMarkTrendyolProcessed()">Trendyol’da işleme al</button>
-      <button class="btn small" type="button" disabled title="Toplu kargo etiketi canlı entegrasyona bağlanmadı">Kargo Etiketi Hazırla</button>
-      <button class="btn small" type="button" disabled title="Toplu fatura işlemi canlı entegrasyona bağlanmadı">Fatura İşlemlerine Geç</button>
       <button class="btn small" onclick="clearTrendyolBulkSelection()">Seçimi Temizle</button>
     </div>
   `;
@@ -5112,6 +5138,192 @@ function bulkMarkTrendyolProcessed() {
     return;
   }
   showTrendyolStatus(`${rows.length} sipariş Trendyol işlem adımı için hazır. Canlı Trendyol durumu otomatik değiştirilmedi; operatör onayı gerekir.`, "warn");
+}
+
+// ── Toplu Analiz ──────────────────────────────────────────────────────────────
+
+let _bulkTrendyolAnalyzeRunning = false;
+
+async function bulkAnalyzeTrendyolSelected() {
+  const selected = trendyolSelectedOrders();
+  if (!selected.length) { showTrendyolStatus("Analiz için en az bir satır seçin.", "warn"); return; }
+  if (!bridge?.reanalyze_trendyol_suggestion) { showTrendyolStatus("Analiz bağlantısı bu oturumda hazır değil.", "warn"); return; }
+  if (_bulkTrendyolAnalyzeRunning) { showTrendyolStatus("Toplu analiz zaten çalışıyor; bitmesini bekleyin.", "warn"); return; }
+  _bulkTrendyolAnalyzeRunning = true;
+  const statusEl = byId("trendyolBulkAnalyzeStatus");
+  const setStatus = txt => { if (statusEl) statusEl.textContent = txt; showTrendyolStatus(txt, "warn"); };
+  setStatus(`0/${selected.length} analiz ediliyor…`);
+  for (let i = 0; i < selected.length; i++) {
+    const row = selected[i];
+    setStatus(`${i + 1}/${selected.length} analiz ediliyor…`);
+    await new Promise(resolve => {
+      bridge.reanalyze_trendyol_suggestion(row.id, raw => {
+        const result = parseBridgeResult(raw);
+        if (Array.isArray(result.suggestions)) {
+          currentState.trendyol = { ...(currentState.trendyol || {}), suggestions: result.suggestions };
+        }
+        resolve();
+      });
+    });
+    await new Promise(r => setTimeout(r, 200));
+  }
+  _bulkTrendyolAnalyzeRunning = false;
+  if (statusEl) statusEl.textContent = "";
+  showTrendyolStatus(`${selected.length} satır yeniden analiz tamamlandı.`, "ok");
+  updateTrendyolOrders(currentState.trendyol || {});
+}
+
+// ── Üretim Fişi Yazdırma ──────────────────────────────────────────────────────
+
+function printSingleTrendyolOrder(id) {
+  const rows = (currentState.trendyol?.suggestions || []);
+  const row = rows.find(r => String(r.id || "") === String(id || ""));
+  if (!row) { showTrendyolStatus("Sipariş verisi bulunamadı.", "warn"); return; }
+  _openTrendyolPrintWindow([row]);
+}
+
+function bulkPrintTrendyolSelected() {
+  const selected = trendyolSelectedOrders();
+  if (!selected.length) { showTrendyolStatus("Yazdırmak için en az bir satır seçin.", "warn"); return; }
+  _openTrendyolPrintWindow(selected);
+}
+
+function _openTrendyolPrintWindow(rows) {
+  const html = _buildTrendyolPrintDocument(rows);
+  const win = window.open("", "_blank", "width=900,height=760");
+  if (!win) { showTrendyolStatus("Popup engellendi; tarayıcı izinlerini kontrol edin.", "warn"); return; }
+  win.document.open();
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+}
+
+function _trendyolPrintAddress(row) {
+  const addr = row.shipping_address;
+  if (!addr || typeof addr !== "object") return "—";
+  const parts = [
+    addr.address1 || addr.fullAddress || "",
+    [addr.neighborhood, addr.district, addr.city].filter(Boolean).join(" / "),
+    addr.postalCode || "",
+  ].filter(Boolean);
+  return parts.join(" · ") || addr.fullName || "—";
+}
+
+function _buildTrendyolPrintDocument(rows) {
+  const fisHtml = rows.map((row, idx) => {
+    const lazerIsim  = row.name_cut_text || row.label_text || "—";
+    const etiketIsim = row.label_text     || row.name_cut_text || "—";
+    const not        = row.note_text || row.production_note || row.custom_text || "—";
+    const addr       = _trendyolPrintAddress(row);
+    const cargo      = row.cargo_tracking_number || "—";
+    const cargoFirm  = row.cargo_provider || "";
+    const imgUrl     = row.image_url || "";
+    const isLast     = idx === rows.length - 1;
+    return `
+<div class="fis${isLast ? "" : " fis-break"}">
+  <div class="fis-warn-strip">Üretim fişi — kargo etiketi değildir.</div>
+  <div class="fis-top">
+    <div class="fis-branding">
+      <strong>CeyizHome Üretim</strong>
+      <span class="fis-order-date">${esc(row.order_date || "")}</span>
+    </div>
+    <div class="fis-prod-box">
+      <div class="fis-prod-field">
+        <span class="fis-prod-label">LAZER İSİM</span>
+        <span class="fis-prod-value${lazerIsim === "—" ? " fis-empty" : ""}">${esc(lazerIsim)}</span>
+      </div>
+      <div class="fis-prod-field">
+        <span class="fis-prod-label">ETİKET</span>
+        <span class="fis-prod-value${etiketIsim === "—" ? " fis-empty" : ""}">${esc(etiketIsim)}</span>
+      </div>
+      <div class="fis-prod-field">
+        <span class="fis-prod-label">NOT</span>
+        <span class="fis-prod-value fis-note${not === "—" ? " fis-empty" : ""}">${esc(not)}</span>
+      </div>
+    </div>
+  </div>
+  <div class="fis-section">
+    <div class="fis-section-title">Alıcı Bilgileri</div>
+    <div class="fis-kv"><span>Sipariş No</span><b>${esc(row.order_number || "—")}</b></div>
+    <div class="fis-kv"><span>Ad Soyad</span><b>${esc(row.customer_name || "—")}</b></div>
+    <div class="fis-kv"><span>Adres</span><b>${esc(addr)}</b></div>
+  </div>
+  <div class="fis-section fis-cargo-section">
+    <div class="fis-section-title">Kargo Bilgileri</div>
+    <div class="fis-kv"><span>Kargo Firması</span><b>${esc(cargoFirm || "—")}</b></div>
+    <div class="fis-kv"><span>Takip No</span><b class="fis-tracking">${esc(cargo)}</b></div>
+  </div>
+  <div class="fis-section fis-product-section">
+    <div class="fis-section-title">Ürün Bilgileri</div>
+    <div class="fis-product-row">
+      ${imgUrl ? `<img class="fis-product-img" src="${esc(imgUrl)}" alt="${esc(row.product_name||"ürün")}" />` : '<div class="fis-product-img fis-img-placeholder">▧</div>'}
+      <div class="fis-product-details">
+        <div class="fis-kv fis-kv-wide"><span>Ürün Adı</span><b>${esc(row.product_name || "—")}</b></div>
+        <div class="fis-kv"><span>Adet</span><b>${esc(String(row.quantity || 1))}</b></div>
+        ${row.product_color ? `<div class="fis-kv"><span>Renk</span><b>${esc(row.product_color)}</b></div>` : ""}
+        ${row.product_size  ? `<div class="fis-kv"><span>Beden</span><b>${esc(row.product_size)}</b></div>` : ""}
+        <div class="fis-kv"><span>Barkod</span><b>${esc(row.barcode || "—")}</b></div>
+        <div class="fis-kv"><span>Stok Kodu</span><b>${esc(row.merchant_sku || row.stock_code || "—")}</b></div>
+      </div>
+    </div>
+  </div>
+</div>`;
+  }).join("\n");
+
+  return `<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<title>CeyizHome Üretim Fişi (${rows.length} sipariş)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;font-size:11px;color:#111;background:#fff}
+.print-bar{display:flex;align-items:center;gap:12px;padding:8px 12px;background:#f0f0f0;border-bottom:1px solid #ddd;margin-bottom:12px}
+.print-bar button{padding:6px 18px;font-size:13px;cursor:pointer;border:1px solid #666;border-radius:4px;background:#fff}
+.print-bar button.primary{background:#1a56db;color:#fff;border-color:#1a56db}
+.fis{width:100%;max-width:210mm;margin:0 auto;padding:8mm;border:1px solid #ccc}
+.fis-break{page-break-after:always}
+.fis-warn-strip{background:#fef3c7;color:#92400e;padding:4px 8px;font-weight:bold;font-size:10px;border-bottom:1px solid #fbbf24;margin-bottom:8px}
+.fis-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:12px}
+.fis-branding strong{font-size:14px;display:block}
+.fis-order-date{font-size:10px;color:#555;display:block;margin-top:2px}
+.fis-prod-box{border:2px solid #111;padding:6px 10px;min-width:200px;max-width:260px}
+.fis-prod-field{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.fis-prod-field:last-child{margin-bottom:0}
+.fis-prod-label{font-size:9px;font-weight:bold;text-transform:uppercase;color:#555;min-width:70px;white-space:nowrap}
+.fis-prod-value{font-size:14px;font-weight:bold;color:#111;word-break:break-word}
+.fis-prod-value.fis-empty{color:#999;font-weight:normal;font-size:12px}
+.fis-note{font-size:12px}
+.fis-section{border-top:1px solid #ddd;margin-top:6px;padding-top:5px}
+.fis-section-title{font-size:9px;font-weight:bold;text-transform:uppercase;color:#888;margin-bottom:3px}
+.fis-kv{display:flex;gap:8px;margin-bottom:2px;align-items:baseline}
+.fis-kv span{font-size:10px;color:#555;min-width:80px;white-space:nowrap}
+.fis-kv b{font-size:11px;color:#111;word-break:break-word}
+.fis-kv-wide span{min-width:60px}
+.fis-tracking{font-size:14px;font-family:monospace;letter-spacing:1px}
+.fis-product-row{display:flex;gap:10px;align-items:flex-start}
+.fis-product-img{width:60px;height:60px;object-fit:contain;border:1px solid #ddd;flex-shrink:0}
+.fis-img-placeholder{width:60px;height:60px;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:20px;flex-shrink:0}
+.fis-product-details{flex:1}
+@media print{
+  @page{margin:8mm}
+  body{font-size:11px}
+  .fis{border:none;padding:0;max-width:100%}
+  .fis-break{page-break-after:always}
+  .print-bar,.no-print{display:none!important}
+}
+</style>
+</head>
+<body>
+<div class="print-bar no-print">
+  <b>CeyizHome Üretim Fişi — ${rows.length} sipariş</b>
+  <button class="primary" onclick="this.closest('.print-bar').style.display='none';document.body.querySelectorAll('.fis').forEach(f=>f.style.border='none');self.focus();self.moveTo(0,0);self.resizeTo(screen.width,screen.height)">Tam Ekrana Geç</button>
+  <button onclick="self.close()">Kapat</button>
+  <span style="font-size:10px;color:#888">Yazdırmak için tarayıcı Dosya → Yazdır (Ctrl+P)</span>
+</div>
+${fisHtml}
+</body>
+</html>`;
 }
 
 function showSameCustomerTrendyolOrders(customerName = "") {
