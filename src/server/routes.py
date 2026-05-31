@@ -567,6 +567,31 @@ def reanalyze_all_trendyol_suggestions_status():
         return _err(exc)
 
 
+@api_bp.route("/mark_trendyol_orders_processing", methods=["POST"])
+def mark_trendyol_orders_processing():
+    """İnsan onaylı İşleme Al — seçili Trendyol siparişlerini İşleme Alındı statüsüne taşır.
+
+    Güvenlik: confirmed=True olmadan hiçbir API çağrısı yapılmaz.
+    Token log/audit'e ASLA yazılmaz.
+    """
+    try:
+        from webui_backend import trendyol_api as _ta
+        payload = request.get_json() or {}
+        suggestion_ids = payload.get("suggestion_ids") or []
+        confirmed = bool(payload.get("confirmed"))
+        confirmed_by = str(payload.get("confirmed_by") or "operator")
+        if not isinstance(suggestion_ids, list) or not suggestion_ids:
+            return jsonify({"status": "ERROR", "message": "suggestion_ids listesi boş veya geçersiz."}), 400
+        return _ok(_ta.mark_packages_as_processing(
+            _PROJECT_ROOT,
+            suggestion_ids,
+            confirmed=confirmed,
+            confirmed_by=confirmed_by,
+        ))
+    except Exception as exc:
+        return _err(exc)
+
+
 # GRUP 9 — İsim Kesim
 
 @api_bp.route("/update_name_cut_queue_item_status", methods=["POST"])

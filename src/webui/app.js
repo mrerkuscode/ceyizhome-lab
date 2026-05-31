@@ -5157,7 +5157,7 @@ function bulkMarkTrendyolProcessed() {
     showTrendyolStatus("Trendyol’da işleme alınabilir seçili sipariş yok.", "warn");
     return;
   }
-  showTrendyolStatus(`${rows.length} sipariş Trendyol işlem adımı için hazır. Canlı Trendyol durumu otomatik değiştirilmedi; operatör onayı gerekir.`, "warn");
+  openIslemeAlModal(rows);
 }
 
 // ── Toplu Analiz ──────────────────────────────────────────────────────────────
@@ -6370,15 +6370,7 @@ function markTrendyolMarketplaceProcessed(id) {
     showTrendyolStatus("Bu sipariş önce üretime aktarılmadan Trendyol’da işleme alınamaz.", "warn");
     return;
   }
-  openIntegrationDryRunModal("trendyol_status_update", {
-    source: "trendyol",
-    source_item_id: row.id,
-    record_id: row.id,
-    order_no: row.order_no || row.orderNo || "",
-    customer_name: row.customer_name || row.customerName || "",
-    title: row.product_name || row.productName || "Trendyol siparişi",
-    url: getTrendyolProductUrl(row)
-  });
+  openIslemeAlModal([row]);
 }
 
 function openTrendyolMarketplaceAction(id, action = "detail") {
@@ -23330,3 +23322,153 @@ function toggleNameCutFullBoard(btn) {
     }
   } catch (e) {}
 })();
+
+// ── İşleme Al Modal ───────────────────────────────────────────────────────────
+
+let _islemeAlPending = [];
+let _islemeAlSending = false;
+
+function openIslemeAlModal(rows = []) {
+  _islemeAlPending = rows.slice();
+  _islemeAlSending = false;
+
+  const modal = byId("islemeAlModal");
+  if (!modal) {
+    showTrendyolStatus("İşleme Al modalı bu oturumda hazır değil.", "warn");
+    return;
+  }
+
+  const orderListHtml = _islemeAlPending.map(row => `
+    <tr>
+      <td>${esc(row.order_number || row.id || "-")}</td>
+      <td>${esc(row.customer_name || "-")}</td>
+      <td>${esc(row.product_name || "-")}</td>
+      <td><span class="trendyol-status-pill marketplace">İşleme Alınacak</span></td>
+    </tr>`).join("");
+
+  const bodyEl = byId("islemeAlBody");
+  if (bodyEl) {
+    bodyEl.innerHTML = `
+      <div class="isleme-al-warning danger">
+        <b>⚠️ Geri alınamaz işlem!</b>
+        Bu siparişler Trendyol'da "İşleme Alındı" statüsüne geçirilecektir.
+        Bu işlem <strong>geri alınamaz</strong>. Müşteriye bildirim gönderilebilir.
+      </div>
+      <p><b>${_islemeAlPending.length} sipariş</b> seçildi:</p>
+      <div class="isleme-al-table-wrap">
+        <table class="data-table compact">
+          <thead><tr><th>Sipariş No</th><th>Müşteri</th><th>Ürün</th><th>Hedef Statü</th></tr></thead>
+          <tbody>${orderListHtml}</tbody>
+        </table>
+      </div>
+      <div id="islemeAlResult" hidden></div>
+    `;
+  }
+
+  const confirmBtn = byId("islemeAlConfirmBtn");
+  if (confirmBtn) {
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = "Onayla ve Trendyol'a Gönder";
+  }
+
+  modal.hidden = false;
+}
+
+function closeIslemeAlModal() {
+  const modal = byId("islemeAlModal");
+  if (modal) modal.hidden = true;
+  _islemeAlPending = [];
+  _islemeAlSending = false;
+}
+
+async function confirmIslemeAl() {
+  if (_islemeAlSending) return;
+  if (!_islemeAlPending.length) {
+    closeIslemeAlModal();
+    return;
+  }
+
+  if (_islemeAlPending.length > 20) {
+    const extra = confirm(
+      `⚠️ Toplu işlem uyarısı\n\n${_islemeAlPending.length} sipariş seçili — bu normalden fazla.\n` +
+      `Devam etmek için "Tamam", iptal etmek için "İptal" seçin.`
+    );
+    if (!extra) return;
+  }
+
+  _islemeAlSending = true;
+  const confirmBtn = byId("islemeAlConfirmBtn");
+  if (confirmBtn) {
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = "Gönderiliyor…";
+  }
+
+  const ids = _islemeAlPending.map(row => row.id).filter(Boolean);
+  let result = null;
+  try {
+    const resp = await fetch("/api/mark_trendyol_orders_processing", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ suggestion_ids: ids, confirmed: true, confirmed_by: "operator" }),
+    });
+    result = await resp.json();
+  } catch (err) {
+    result = { status: "FAIL", message: `Ağ hatası: ${err?.message || err}`, results: [] };
+  }
+
+  _islemeAlSending = false;
+  showIslemeAlResults(result);
+
+  if (currentState?.trendyol?.suggestions && result?.results?.length) {
+    for (const r of result.results) {
+      if (r.status === "OK") {
+        const sug = (currentState.trendyol.suggestions || []).find(s => s.id === r.suggestion_id);
+        if (sug) {
+          sug.trendyol_process_status = "processed";
+          sug.marketplace_processed = true;
+        }
+      }
+    }
+    renderTrendyolSuggestions(trendYolSuggestions());
+  }
+}
+
+function showIslemeAlResults(result = {}) {
+  const el = byId("islemeAlResult");
+  if (!el) return;
+
+  const items = result.results || [];
+  const tone = result.status === "OK" ? "ok" : result.status === "PARTIAL" ? "warn" : "bad";
+  const rowsHtml = items.map(r => {
+    const statusTone = r.status === "OK" ? "success" : r.status === "ALREADY" ? "info" : "danger";
+    const statusLabel = { OK: "Başarılı", FAIL: "Hata", ALREADY: "Zaten işlemde", DUPLICATE: "Duplicate", SKIP: "Atlandı" }[r.status] || r.status;
+    return `<tr>
+      <td>${esc(r.order_number || "-")}</td>
+      <td>${esc(r.customer_name || "-")}</td>
+      <td><span class="trendyol-status-pill ${statusTone}">${esc(statusLabel)}</span></td>
+      <td><small>${esc(r.message || "")}</small></td>
+    </tr>`;
+  }).join("");
+
+  el.hidden = false;
+  el.className = `status-line ${tone}`;
+  el.innerHTML = `
+    <b>${esc(result.message || "İşlem tamamlandı.")}</b>
+    ${items.length ? `
+    <div class="isleme-al-table-wrap" style="margin-top:8px">
+      <table class="data-table compact">
+        <thead><tr><th>Sipariş No</th><th>Müşteri</th><th>Sonuç</th><th>Mesaj</th></tr></thead>
+        <tbody>${rowsHtml}</tbody>
+      </table>
+    </div>` : ""}
+  `;
+
+  const confirmBtn = byId("islemeAlConfirmBtn");
+  if (confirmBtn) {
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = "Kapat";
+    confirmBtn.onclick = closeIslemeAlModal;
+  }
+
+  showTrendyolStatus(result.message || "İşleme Al tamamlandı.", tone === "ok" ? "ok" : "warn");
+}

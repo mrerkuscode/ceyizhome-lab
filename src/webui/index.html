@@ -877,6 +877,18 @@
       </div>
       <div id="studioShortcutHelp" class="studio-shortcut-help" hidden></div>
 
+      <!-- İşleme Al onay modalı -->
+      <div id="islemeAlModal" class="modal" hidden>
+        <div class="modal-inner" style="max-width:700px">
+          <div class="card-title"><h3>Trendyol'da İşleme Al</h3></div>
+          <div id="islemeAlBody"></div>
+          <div class="toolbar" style="margin-top:12px">
+            <button id="islemeAlConfirmBtn" class="btn primary" onclick="confirmIslemeAl()">Onayla ve Trendyol'a Gönder</button>
+            <button class="btn" onclick="closeIslemeAlModal()">Vazgeç</button>
+          </div>
+        </div>
+      </div>
+
       <section id="bulkLabel" class="page bulk-production-page">
         <div class="page-head bulk-production-head">
           <div>

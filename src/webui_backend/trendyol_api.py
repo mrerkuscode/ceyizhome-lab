@@ -1472,6 +1472,208 @@ def import_suggestion_to_customer_order(project_root: Path, suggestion_id: str) 
     return {"status": "OK", "message": "Trendyol satırı müşteri siparişine aktarıldı.", "order": order.get("order"), "suggestion": suggestion}
 
 
+def mark_packages_as_processing(
+    project_root: Path,
+    suggestion_ids: list[str],
+    *,
+    confirmed: bool = False,
+    confirmed_by: str = "operator",
+) -> dict[str, Any]:
+    """İnsan onaylı "İşleme Al" — seçili Trendyol sipariş paketlerini İşleme Alındı statüsüne taşır.
+
+    Güvenlik garantileri:
+    - confirmed=True olmadan hiçbir API çağrısı yapılmaz.
+    - read_only_mode=True ayarındaysa bile bu endpoint çalışır (bilinçli statü değişikliği).
+    - Token hiçbir log/audit satırına yazılmaz.
+    - Zaten "Picking" olan paketler tekrar gönderilmez (idempotency).
+    - Kısmi başarı raporlanır; "7/10 başarılı, 3 hata" net gösterilir.
+    - Her sipariş için per-item sonuç audit loguna yazılır.
+    """
+    if not confirmed:
+        return {
+            "status": "NOT_CONFIRMED",
+            "message": "İşleme Al işlemi onay olmadan başlatılamaz. Frontend'den confirmed=true gelmeli.",
+            "results": [],
+            "success_count": 0,
+            "fail_count": 0,
+        }
+    if not is_configured(project_root):
+        return {
+            "status": "CONFIG_MISSING",
+            "message": "Trendyol API ayarları eksik.",
+            "results": [],
+            "success_count": 0,
+            "fail_count": 0,
+        }
+    settings = get_settings(project_root, masked=False)
+    problem = _credential_configuration_problem(settings)
+    if problem:
+        return {
+            "status": "CONFIG_INVALID",
+            "message": problem,
+            "results": [],
+            "success_count": 0,
+            "fail_count": 0,
+        }
+
+    rows = list_suggestions(project_root)
+    id_set = {str(s) for s in (suggestion_ids or []) if s}
+    candidates = [row for row in rows if str(row.get("id") or "") in id_set]
+
+    if not candidates:
+        return {
+            "status": "NOT_FOUND",
+            "message": "Seçili sipariş bulunamadı.",
+            "results": [],
+            "success_count": 0,
+            "fail_count": 0,
+        }
+
+    supplier = _supplier_id(project_root)
+    results: list[dict[str, Any]] = []
+    success_count = 0
+    fail_count = 0
+    already_count = 0
+    sent_line_ids: set[str] = set()
+
+    for row in candidates:
+        order_number = str(row.get("order_number") or "")
+        package_id = str(row.get("package_id") or "")
+        line_id = str(row.get("line_id") or "")
+        customer_name = str(row.get("customer_name") or "")
+        product_name = str(row.get("product_name") or "")
+        sug_id = str(row.get("id") or "")
+
+        result_entry: dict[str, Any] = {
+            "suggestion_id": sug_id,
+            "order_number": order_number,
+            "package_id": package_id,
+            "line_id": line_id,
+            "customer_name": customer_name,
+            "product_name": product_name,
+            "status": "",
+            "message": "",
+            "api_response_code": None,
+        }
+
+        if not line_id:
+            result_entry["status"] = "SKIP"
+            result_entry["message"] = "orderLineId eksik; API'ye gönderilemedi."
+            results.append(result_entry)
+            fail_count += 1
+            continue
+
+        current_ty_status = str(row.get("trendyol_package_status") or row.get("status") or "").lower()
+        if current_ty_status in {"picking", "invoiced", "shipped", "delivered", "undelivered", "returned"}:
+            result_entry["status"] = "ALREADY"
+            result_entry["message"] = f"Paket zaten '{current_ty_status}' statüsünde; tekrar gönderilmedi."
+            already_count += 1
+            results.append(result_entry)
+            continue
+
+        if line_id in sent_line_ids:
+            result_entry["status"] = "DUPLICATE"
+            result_entry["message"] = "Aynı orderLineId bu batch'te zaten gönderildi; tekrar gönderilmedi."
+            results.append(result_entry)
+            already_count += 1
+            continue
+
+        sent_line_ids.add(line_id)
+
+        try:
+            _put_json(
+                project_root,
+                f"/order/sellers/{supplier}/orders/{line_id}/process/package",
+                {},
+                v2=False,
+                timeout=30,
+            )
+            result_entry["status"] = "OK"
+            result_entry["message"] = "İşleme alındı."
+            success_count += 1
+            for r in rows:
+                if str(r.get("id") or "") == sug_id:
+                    r["trendyol_process_status"] = "processed"
+                    r["marketplace_processed"] = True
+                    r["processed_at"] = _now()
+                    r["updated_at"] = _now()
+        except RuntimeError as exc:
+            error_msg = _safe_trendyol_service_message(str(exc), stage=bool(settings.get("stage")))
+            code_match = re.search(r"HTTP (\d+)", str(exc))
+            result_entry["status"] = "FAIL"
+            result_entry["message"] = error_msg
+            result_entry["api_response_code"] = int(code_match.group(1)) if code_match else None
+            fail_count += 1
+        except Exception as exc:  # noqa: BLE001
+            result_entry["status"] = "FAIL"
+            result_entry["message"] = str(exc)[:200]
+            fail_count += 1
+
+        results.append(result_entry)
+        time.sleep(0.15)
+
+    if success_count > 0:
+        _save_suggestions(project_root, rows)
+
+    _write_isleme_al_audit_log(project_root, results, confirmed_by=confirmed_by)
+
+    total = len(candidates)
+    if fail_count == 0 and success_count > 0:
+        final_status = "OK"
+    elif success_count == 0 and fail_count > 0:
+        final_status = "FAIL"
+    elif already_count == total:
+        final_status = "ALREADY"
+    else:
+        final_status = "PARTIAL"
+
+    message = (
+        f"{success_count} sipariş Trendyol'da işleme alındı."
+        if fail_count == 0
+        else f"{success_count} başarılı, {fail_count} hata, {already_count} zaten işlemde."
+    )
+
+    return {
+        "status": final_status,
+        "message": message,
+        "results": results,
+        "success_count": success_count,
+        "fail_count": fail_count,
+        "already_count": already_count,
+        "total": total,
+    }
+
+
+def _write_isleme_al_audit_log(project_root: Path, results: list[dict[str, Any]], *, confirmed_by: str) -> None:
+    """Audit log — token/secret ASLA yazılmaz."""
+    today = datetime.now().strftime("%Y-%m-%d")
+    log_dir = project_root / "output" / today / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_path = log_dir / "isleme_al_audit.jsonl"
+    entry = {
+        "event": "trendyol_isleme_al",
+        "timestamp": _now(),
+        "confirmed_by": confirmed_by,
+        "total": len(results),
+        "success": sum(1 for r in results if r.get("status") == "OK"),
+        "fail": sum(1 for r in results if r.get("status") == "FAIL"),
+        "already": sum(1 for r in results if r.get("status") in {"ALREADY", "DUPLICATE"}),
+        "items": [
+            {
+                "order_number": r.get("order_number"),
+                "package_id": r.get("package_id"),
+                "line_id": r.get("line_id"),
+                "status": r.get("status"),
+                "api_response_code": r.get("api_response_code"),
+                "message": r.get("message"),
+            }
+            for r in results
+        ],
+    }
+    with log_path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+
 def summary(project_root: Path) -> dict[str, int]:
     suggestions = list_suggestions(project_root)
     questions = list_questions(project_root)
@@ -2665,6 +2867,36 @@ def _fetch_json(project_root: Path, path: str, *, v2: bool, force_stage: bool | 
     except urllib.error.HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
         raise RuntimeError(_format_trendyol_http_error(exc.code, body, stage=stage)) from exc
+
+
+def _put_json(project_root: Path, path: str, body: dict[str, Any], *, v2: bool, timeout: int = 30) -> dict[str, Any]:
+    """HTTP PUT to Trendyol API. Token is built from settings file — never logged."""
+    settings = get_settings(project_root, masked=False)
+    problem = _credential_configuration_problem(settings)
+    if problem:
+        raise RuntimeError(problem)
+    stage = bool(settings.get("stage"))
+    base = (STAGE_BASE_URL_V2 if stage else LIVE_BASE_URL_V2) if v2 else (STAGE_BASE_URL if stage else LIVE_BASE_URL)
+    url = f"{base}{path}"
+    token = base64.b64encode(f"{settings['api_key']}:{settings['api_secret']}".encode("utf-8")).decode("ascii")
+    payload_bytes = json.dumps(body, ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=payload_bytes,
+        method="PUT",
+        headers={
+            "Authorization": f"Basic {token}",
+            "User-Agent": f"{settings['supplier_id']} - SelfIntegration",
+            "Content-Type": "application/json",
+        },
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
+            raw = response.read().decode("utf-8")
+            return json.loads(raw) if raw.strip() else {"status": "OK"}
+    except urllib.error.HTTPError as exc:
+        body_text = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(_format_trendyol_http_error(exc.code, body_text, stage=stage)) from exc
 
 
 def _format_trendyol_http_error(code: int, body: str, *, stage: bool) -> str:
