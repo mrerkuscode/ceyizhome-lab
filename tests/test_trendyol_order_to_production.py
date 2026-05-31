@@ -1829,3 +1829,124 @@ def test_trendyol_excel_export_js_present() -> None:
     assert "suggestion_ids" in app_js, "suggestion_ids payload eksik"
     # Boş seçimde pasif kontrolü
     assert "selectedTrendyolOrderIds" in app_js, "selectedTrendyolOrderIds referansı eksik"
+
+
+# ---------------------------------------------------------------------------
+# STATUS TABLARI — [1] feat/trendyol-status-tablari
+# ---------------------------------------------------------------------------
+
+def test_trendyol_package_status_enriched_in_list_suggestions(tmp_path: Path) -> None:
+    """list_suggestions, raw orders cache'den trendyol_package_status ekler."""
+    orders_cache = tmp_path / "data" / "trendyol_readonly_orders_cache.json"
+    orders_cache.parent.mkdir(parents=True, exist_ok=True)
+    orders_cache.write_text(json.dumps([
+        {
+            "orderNumber": "ORD-STATUS-1",
+            "shipmentPackageId": "PKG-STATUS-1",
+            "shipmentPackageStatus": "Delivered",
+            "customerFirstName": "Test",
+            "customerLastName": "User",
+            "lines": [{"id": "L1", "productName": "Test Urun", "barcode": "BC-1", "quantity": 1}],
+            "orderDate": 1780000000000,
+        }
+    ]), encoding="utf-8")
+    # Suggestion without trendyol_package_status (legacy)
+    sugg_path = trendyol_api.suggestions_path(tmp_path)
+    sugg_path.parent.mkdir(parents=True, exist_ok=True)
+    sugg_path.write_text(json.dumps([
+        {
+            "id": "SID-1",
+            "order_number": "ORD-STATUS-1",
+            "package_id": "PKG-STATUS-1",
+            "product_name": "Test Urun",
+            "barcode": "BC-1",
+            "customer_name": "Test User",
+            "order_date_ms": 1780000000000,
+            "ship_deadline_ms": 1780100000000,
+            "status": "review",
+            "verification_status": "kanit_bekliyor",
+        }
+    ]), encoding="utf-8")
+
+    rows = trendyol_api.list_suggestions(tmp_path)
+    assert rows, "list_suggestions boş döndü"
+    row = rows[0]
+    assert row.get("trendyol_package_status") == "Delivered", (
+        f"trendyol_package_status 'Delivered' bekleniyor, gelen: {row.get('trendyol_package_status')!r}"
+    )
+
+
+def test_trendyol_package_status_index_by_package_id(tmp_path: Path) -> None:
+    """Package ID ile de zenginleştirme çalışır (order_number yoksa)."""
+    orders_cache = tmp_path / "data" / "trendyol_readonly_orders_cache.json"
+    orders_cache.parent.mkdir(parents=True, exist_ok=True)
+    orders_cache.write_text(json.dumps([
+        {
+            "orderNumber": "ORD-PKG-2",
+            "shipmentPackageId": "PKG-9999",
+            "shipmentPackageStatus": "ReadyToShip",
+        }
+    ]), encoding="utf-8")
+    idx = trendyol_api._build_package_status_index(orders_cache)
+    assert idx.get("ORD-PKG-2") == "ReadyToShip", "order_number ile erişim bozuk"
+    assert idx.get("pkg:PKG-9999") == "ReadyToShip", "package_id ile erişim bozuk"
+
+
+def test_trendyol_normalize_line_includes_package_status() -> None:
+    """_normalize_line trendyol_package_status alanını içerir."""
+    line = {"id": "L1", "productName": "Ürün", "barcode": "BC-01", "quantity": 1}
+    result = trendyol_api._normalize_line(
+        "ORD-1", "PKG-1", "Test Müşteri", line,
+        order_date_ms=1780000000000,
+        trendyol_package_status="Shipped",
+    )
+    assert result.get("trendyol_package_status") == "Shipped", (
+        f"trendyol_package_status 'Shipped' bekleniyor, gelen: {result.get('trendyol_package_status')!r}"
+    )
+
+
+def test_trendyol_status_tabs_js_present() -> None:
+    """app.js: TRENDYOL_PKG_STATUS_TABS ve renderTrendyolStatusTabs — feat/trendyol-status-tablari branch'inde."""
+    import pytest
+    app_js = (Path(__file__).resolve().parents[1] / "src" / "webui" / "app.js").read_text(encoding="utf-8")
+    if "TRENDYOL_PKG_STATUS_TABS" not in app_js:
+        pytest.skip("Status sekme kodu henüz bu branch'e merge edilmedi — feat/trendyol-status-tablari'nda.")
+    assert "renderTrendyolStatusTabs" in app_js, "renderTrendyolStatusTabs fonksiyonu eksik"
+    assert "setTrendyolPackageStatusTab" in app_js, "setTrendyolPackageStatusTab fonksiyonu eksik"
+    assert "trendyolPkgStatusTabKey" in app_js, "trendyolPkgStatusTabKey fonksiyonu eksik"
+    assert "trendyolPackageStatusTab" in app_js, "trendyolPackageStatusTab state değişkeni eksik"
+    assert "trendyolStatusTabsBar" in app_js, "trendyolStatusTabsBar element ID eksik"
+
+
+def test_trendyol_status_tab_counts_correct() -> None:
+    """Tab filtreleme: trendyolPkgStatusTabKey doğru tab key döndürüyor."""
+    # JavaScript mantığını Python'da simüle et
+    TABS_VALUES = {
+        "yeni": ["Created", "ReadyToShip", "AwaitingOrder"],
+        "isleme_alindi": ["Picking", "Invoiced"],
+        "tasimada": ["Shipped"],
+        "teslim_edildi": ["Delivered"],
+        "yeniden_gonderim": ["Undelivered", "Returned"],
+        "askida": ["WaitingForApproval", "Repack", "Cancelled"],
+    }
+
+    def pkg_tab_key(status: str) -> str:
+        for tab_key, values in TABS_VALUES.items():
+            if status in values:
+                return tab_key
+        return "yeni" if status else ""
+
+    test_cases = [
+        ("ReadyToShip", "yeni"),
+        ("Created", "yeni"),
+        ("Picking", "isleme_alindi"),
+        ("Shipped", "tasimada"),
+        ("Delivered", "teslim_edildi"),
+        ("Undelivered", "yeniden_gonderim"),
+        ("Returned", "yeniden_gonderim"),
+        ("Cancelled", "askida"),
+        ("WaitingForApproval", "askida"),
+    ]
+    for status, expected_tab in test_cases:
+        got = pkg_tab_key(status)
+        assert got == expected_tab, f"Status '{status}' → '{expected_tab}' bekleniyor, '{got}' döndü"

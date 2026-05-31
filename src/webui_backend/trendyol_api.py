@@ -854,6 +854,7 @@ def build_suggestions_from_orders(
                 cargo_tracking_number=str(order.get("cargoTrackingNumber") or ""),
                 cargo_provider=str(order.get("cargoProviderName") or ""),
                 ship_deadline_ms=int(order.get("ship_deadline_ms") or order.get("agreedDeliveryDate") or 0),
+                trendyol_package_status=str(order.get("shipmentPackageStatus") or order.get("status") or ""),
             )
             normalized["source_api"] = normalized.get("source_api") or str(order.get("source_api") or "")
             unique_key = f"{normalized['order_number']}:{normalized['package_id']}:{normalized['line_id']}"
@@ -1234,6 +1235,30 @@ def approve_mapping_suggestion(project_root: Path, suggestion_id: str, overrides
     return {**result, "suggestions": rows}
 
 
+def _build_package_status_index(orders_cache_path: Path) -> dict[str, str]:
+    """Read raw orders cache → order_number/package_id → shipmentPackageStatus."""
+    if not orders_cache_path.exists():
+        return {}
+    try:
+        orders = json.loads(orders_cache_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {}
+    if not isinstance(orders, list):
+        return {}
+    result: dict[str, str] = {}
+    for order in orders:
+        status = str(order.get("shipmentPackageStatus") or order.get("status") or "")
+        if not status:
+            continue
+        order_number = str(order.get("orderNumber") or order.get("order_number") or "")
+        package_id = str(order.get("shipmentPackageId") or order.get("package_id") or "")
+        if order_number:
+            result[order_number] = status
+        if package_id:
+            result[f"pkg:{package_id}"] = status
+    return result
+
+
 def list_suggestions(project_root: Path) -> list[dict[str, Any]]:
     path = suggestions_path(project_root)
     if not path.exists():
@@ -1245,7 +1270,27 @@ def list_suggestions(project_root: Path) -> list[dict[str, Any]]:
     if not isinstance(data, list):
         return []
     product_index = _cached_product_reference_index(project_root)
-    return [_repair_trendyol_row(_enrich_line_with_catalog(row, product_index)) for row in data if isinstance(row, dict)]
+    pkg_status_index = _build_package_status_index(
+        project_root / "data" / "trendyol_readonly_orders_cache.json"
+    )
+
+    def _enrich_pkg_status(row: dict[str, Any]) -> dict[str, Any]:
+        if row.get("trendyol_package_status"):
+            return row
+        order_number = str(row.get("order_number") or "")
+        package_id = str(row.get("package_id") or "")
+        status = (
+            pkg_status_index.get(order_number)
+            or pkg_status_index.get(f"pkg:{package_id}")
+            or ""
+        )
+        return {**row, "trendyol_package_status": status} if status else row
+
+    return [
+        _enrich_pkg_status(_repair_trendyol_row(_enrich_line_with_catalog(row, product_index)))
+        for row in data
+        if isinstance(row, dict)
+    ]
 
 
 def _suggestion_line_key(row: dict[str, Any]) -> str:
@@ -2826,6 +2871,7 @@ def _normalize_line(
     cargo_tracking_number: str = "",
     cargo_provider: str = "",
     ship_deadline_ms: int = 0,
+    trendyol_package_status: str = "",
 ) -> dict[str, Any]:
     ts = int(order_date_ms or 0)
     if ts:
@@ -2858,6 +2904,7 @@ def _normalize_line(
         "cargo_tracking_number": str(cargo_tracking_number or ""),
         "cargo_provider": str(cargo_provider or ""),
         "ship_deadline_ms": int(ship_deadline_ms or 0),
+        "trendyol_package_status": str(trendyol_package_status or ""),
     }
 
 

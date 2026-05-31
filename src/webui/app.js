@@ -126,6 +126,17 @@ let selectedCustomerOrderId = "";
 let selectedTrendyolSuggestionId = "";
 let expandedTrendyolSuggestionId = "";
 let activeTrendyolTab = "orders";
+let trendyolPackageStatusTab = "";
+
+const TRENDYOL_PKG_STATUS_TABS = [
+  { key: "", label: "Tüm Siparişler" },
+  { key: "yeni", label: "Yeni", values: ["Created", "ReadyToShip", "AwaitingOrder"] },
+  { key: "isleme_alindi", label: "İşleme Alınanlar", values: ["Picking", "Invoiced"] },
+  { key: "tasimada", label: "Taşıma Durumunda", values: ["Shipped"] },
+  { key: "teslim_edildi", label: "Teslim Edilen", values: ["Delivered"] },
+  { key: "yeniden_gonderim", label: "Yeniden Gönderimler", values: ["Undelivered", "Returned"] },
+  { key: "askida", label: "Askıdaki", values: ["WaitingForApproval", "Repack", "Cancelled"] },
+];
 let activeView = "home";
 let activeSettingsSubpage = "general";
 let sidebarCollapsed = false;
@@ -4986,9 +4997,37 @@ function tscCard(row) {
     </article>`;
 }
 
+function trendyolPkgStatusTabKey(row) {
+  const status = String(row.trendyol_package_status || "");
+  for (const tab of TRENDYOL_PKG_STATUS_TABS) {
+    if (tab.key && Array.isArray(tab.values) && tab.values.includes(status)) return tab.key;
+  }
+  return status ? "yeni" : "";
+}
+
+function renderTrendyolStatusTabs(rows = []) {
+  const box = byId("trendyolStatusTabsBar");
+  if (!box) return;
+  const counts = { "": rows.length };
+  for (const tab of TRENDYOL_PKG_STATUS_TABS) {
+    if (tab.key) counts[tab.key] = rows.filter(r => trendyolPkgStatusTabKey(r) === tab.key).length;
+  }
+  box.innerHTML = TRENDYOL_PKG_STATUS_TABS.map(tab => {
+    const count = counts[tab.key];
+    const active = trendyolPackageStatusTab === tab.key;
+    return `<button class="trendyol-pkg-tab${active ? " active" : ""}" onclick="setTrendyolPackageStatusTab(${jsArg(tab.key)})">${esc(tab.label)} <span class="tpkt-count">${count}</span></button>`;
+  }).join("");
+}
+
+function setTrendyolPackageStatusTab(key) {
+  trendyolPackageStatusTab = key === undefined ? "" : String(key);
+  updateTrendyolOrders(currentState.trendyol || {});
+}
+
 function renderTrendyolSuggestions(rows) {
   const list = byId("trendyolSuggestionsList");
   if (!list) return;
+  renderTrendyolStatusTabs(rows);
   const query = String(byId("trendyolSearch")?.value || "").toLocaleLowerCase("tr-TR").trim();
   const statusFilter = String(byId("trendyolStatusFilter")?.value || "");
   const filtered = rows.filter(row => {
@@ -5020,7 +5059,8 @@ function renderTrendyolSuggestions(rows) {
           : statusFilter === "verification_pending"
             ? verificationStatus === "alanlar_onay_bekliyor"
             : (!statusFilter || status === statusFilter || verificationStatus === statusFilter);
-    return (!query || haystack.includes(query)) && statusMatches;
+    const tabMatches = !trendyolPackageStatusTab || trendyolPkgStatusTabKey(row) === trendyolPackageStatusTab;
+    return (!query || haystack.includes(query)) && statusMatches && tabMatches;
   });
   if (filtered.length && !filtered.some(row => row.id === selectedTrendyolSuggestionId)) {
     selectedTrendyolSuggestionId = filtered[0].id || "";
@@ -5707,6 +5747,7 @@ function trendyolProductionTypeLabel(value) {
 }
 
 function clearTrendyolFilters() {
+  trendyolPackageStatusTab = "";
   const search = byId("trendyolSearch");
   const status = byId("trendyolStatusFilter");
   const topSearch = byId("trendyolTopSearch");
