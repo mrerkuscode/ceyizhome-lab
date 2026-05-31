@@ -1679,3 +1679,153 @@ def test_trendyol_ui_and_bridge_hooks_exist() -> None:
     assert "apply_trendyol_question_to_suggestion" in bridge
     assert "ignore_trendyol_question_for_suggestion" in bridge
 
+
+# ---------------------------------------------------------------------------
+# SEÇİLİ SİPARİŞLER EXCEL İNDİR — [3] feat/secili-siparis-excel-export
+# ---------------------------------------------------------------------------
+
+def test_export_selected_trendyol_orders_excel_creates_real_file(tmp_path: Path) -> None:
+    """export_selected_trendyol_orders_excel gerçek .xlsx dosyası üretir."""
+    # Setup: suggestions cache
+    sugg_path = trendyol_api.suggestions_path(tmp_path)
+    sugg_path.parent.mkdir(parents=True, exist_ok=True)
+    sugg_path.write_text(json.dumps([
+        {
+            "id": "EXCEL-01",
+            "order_number": "ORD-EXC-1",
+            "package_id": "PKG-EXC-1",
+            "line_id": "LINE-EXC-1",
+            "customer_name": "Test Müşteri",
+            "product_name": "Test Ürün",
+            "barcode": "BC-EXC-01",
+            "merchant_sku": "SKU-EXC-01",
+            "quantity": 2,
+            "label_text": "Ayşe & Ömer",
+            "name_cut_text": "Ayşe & Ömer",
+            "date_text": "15.05.2026",
+            "order_date": "30.05.2026 10:00",
+            "order_date_ms": 1780000000000,
+            "ship_deadline_ms": 1780347540000,
+            "question_text": "İsim: Ayşe & Ömer",
+            "answer_text": "",
+            "status": "review",
+            "verification_status": "alanlar_onay_bekliyor",
+            "production_type": "label_and_name_cut",
+            "confidence": 0.85,
+        }
+    ]), encoding="utf-8")
+
+    result = trendyol_api.export_selected_trendyol_orders_excel(tmp_path, ["EXCEL-01"])
+
+    assert result["status"] == "OK", f"Status OK bekleniyor, gelen: {result['status']} — {result.get('message')}"
+    assert result["row_count"] == 1, f"1 satır bekleniyor, gelen: {result['row_count']}"
+
+    output_path = Path(result["path"])
+    assert output_path.exists(), f"Excel dosyası yok: {output_path}"
+    assert output_path.suffix == ".xlsx", "Dosya .xlsx olmalı"
+    assert output_path.stat().st_size > 0, "Excel dosyası boş"
+
+    # Kolonları doğrula
+    df = pd.read_excel(output_path)
+    assert "order_no" in df.columns, f"order_no kolonu eksik, kolonlar: {list(df.columns)}"
+    assert "buyer_name" in df.columns, "buyer_name kolonu eksik"
+    assert "siparis_sorusu" in df.columns, "siparis_sorusu kolonu eksik"
+    assert "kargo_son_tarihi" in df.columns, "kargo_son_tarihi kolonu eksik"
+    row = df.iloc[0]
+    assert row["order_no"] == "ORD-EXC-1", f"order_no yanlış: {row['order_no']}"
+    assert row["buyer_name"] == "Test Müşteri", f"buyer_name yanlış: {row['buyer_name']}"
+    assert "Ayşe" in str(row.get("siparis_sorusu", "")), f"siparis_sorusu'nda isim yok: {row.get('siparis_sorusu')}"
+
+
+def test_export_selected_excel_path_in_reports_dir(tmp_path: Path) -> None:
+    """Excel output/YYYY-MM-DD/reports/ altına yazılıyor."""
+    sugg_path = trendyol_api.suggestions_path(tmp_path)
+    sugg_path.parent.mkdir(parents=True, exist_ok=True)
+    sugg_path.write_text(json.dumps([
+        {
+            "id": "EXCEL-02",
+            "order_number": "ORD-PATH-1",
+            "package_id": "PKG-PATH-1",
+            "line_id": "LINE-PATH-1",
+            "customer_name": "Path Test",
+            "product_name": "Ürün",
+            "barcode": "BC-PATH-01",
+            "quantity": 1,
+            "order_date_ms": 1780000000000,
+            "ship_deadline_ms": 1780347540000,
+            "status": "review",
+        }
+    ]), encoding="utf-8")
+
+    result = trendyol_api.export_selected_trendyol_orders_excel(tmp_path, ["EXCEL-02"])
+
+    assert result["status"] == "OK"
+    output_path = Path(result["path"])
+    assert "reports" in str(output_path), f"Dosya 'reports' dizininde olmalı, gelen: {output_path}"
+    assert output_path.exists()
+
+
+def test_export_selected_excel_empty_selection_returns_error(tmp_path: Path) -> None:
+    """Seçim yoksa ERROR döner, dosya üretilmez."""
+    sugg_path = trendyol_api.suggestions_path(tmp_path)
+    sugg_path.parent.mkdir(parents=True, exist_ok=True)
+    sugg_path.write_text(json.dumps([]), encoding="utf-8")
+
+    result = trendyol_api.export_selected_trendyol_orders_excel(tmp_path, [])
+
+    assert result["status"] == "ERROR", f"ERROR bekleniyor, gelen: {result['status']}"
+    assert not result.get("path"), "Boş seçimde dosya yolu dönmemeli"
+
+
+def test_export_selected_excel_no_token_in_output(tmp_path: Path) -> None:
+    """Excel dosyasında API secret/token YOK."""
+    import openpyxl
+
+    trendyol_api.save_settings(tmp_path, {
+        "supplier_id": "TEST_SUPPLIER",
+        "api_key": "SHOULD_NOT_BE_IN_EXCEL_KEY",
+        "api_secret": "SHOULD_NOT_BE_IN_EXCEL_SECRET",
+        "environment": "test",
+    })
+    sugg_path = trendyol_api.suggestions_path(tmp_path)
+    sugg_path.parent.mkdir(parents=True, exist_ok=True)
+    sugg_path.write_text(json.dumps([
+        {
+            "id": "TOKEN-TEST-01",
+            "order_number": "ORD-TK-1",
+            "package_id": "PKG-TK-1",
+            "line_id": "LINE-TK-1",
+            "customer_name": "Token Test Müşteri",
+            "product_name": "Ürün",
+            "barcode": "BC-TK-01",
+            "quantity": 1,
+            "order_date_ms": 1780000000000,
+            "ship_deadline_ms": 1780347540000,
+            "status": "review",
+        }
+    ]), encoding="utf-8")
+
+    result = trendyol_api.export_selected_trendyol_orders_excel(tmp_path, ["TOKEN-TEST-01"])
+    assert result["status"] == "OK"
+
+    # Excel içeriğini oku ve token varlığını kontrol et
+    wb = openpyxl.load_workbook(result["path"])
+    ws = wb.active
+    all_cell_values = " ".join(
+        str(cell.value or "")
+        for row in ws.iter_rows()
+        for cell in row
+    )
+    assert "SHOULD_NOT_BE_IN_EXCEL_KEY" not in all_cell_values, "API key Excel'de bulundu — güvenlik ihlali"
+    assert "SHOULD_NOT_BE_IN_EXCEL_SECRET" not in all_cell_values, "API secret Excel'de bulundu — güvenlik ihlali"
+
+
+def test_trendyol_excel_export_js_present() -> None:
+    """app.js: Excel export butonu ve fonksiyonu mevcut."""
+    app_js = (Path(__file__).resolve().parents[1] / "src" / "webui" / "app.js").read_text(encoding="utf-8")
+    assert "exportSelectedTrendyolOrdersExcel" in app_js, "exportSelectedTrendyolOrdersExcel fonksiyonu eksik"
+    assert "export_trendyol_selected_excel" in app_js, "API endpoint referansı eksik"
+    assert "Excel İndir" in app_js, "Excel İndir butonu etiketi eksik"
+    assert "suggestion_ids" in app_js, "suggestion_ids payload eksik"
+    # Boş seçimde pasif kontrolü
+    assert "selectedTrendyolOrderIds" in app_js, "selectedTrendyolOrderIds referansı eksik"

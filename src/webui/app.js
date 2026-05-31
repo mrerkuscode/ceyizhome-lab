@@ -5134,8 +5134,36 @@ function renderTrendyolBulkActionBar(rows = []) {
       <button class="btn small" onclick="bulkReviewTrendyolOrders()">Sorunluları kuyruğa gönder</button>
       <button class="btn small" ${processable ? "" : "disabled"} onclick="bulkMarkTrendyolProcessed()">Trendyol’da işleme al</button>
       <button class="btn small" onclick="clearTrendyolBulkSelection()">Seçimi Temizle</button>
+      <button class="btn small primary" type="button" onclick="exportSelectedTrendyolOrdersExcel()"
+              title="Seçili siparişleri .xlsx olarak indir (output/reports/ altına kaydedilir)">📥 Excel İndir</button>
     </div>
   `;
+}
+
+function exportSelectedTrendyolOrdersExcel() {
+  const ids = Array.from(selectedTrendyolOrderIds);
+  if (!ids.length) {
+    showTrendyolStatus("Excel indirmek için en az 1 sipariş seçin.", "warn");
+    return;
+  }
+  showTrendyolStatus(`${ids.length} sipariş Excel'e aktarılıyor...`, "ok");
+  apiPost("/export_trendyol_selected_excel", { suggestion_ids: ids })
+    .then(data => {
+      if (data && data.status === "OK") {
+        showTrendyolStatus(`✓ ${data.row_count} sipariş Excel'e aktarıldı: ${data.relative_path || data.path || ""}`, "ok");
+      } else if (data && data.status === "ROUTE_NOT_FOUND") {
+        showTrendyolStatus("Route henüz eklenmedi — Leyla src/server/routes.py'e export_trendyol_selected_excel route'unu eklemeli.", "warn");
+      } else {
+        showTrendyolStatus(`Excel export hatası: ${(data && data.message) || "Bilinmeyen hata"}`, "warn");
+      }
+    })
+    .catch(err => {
+      if (err && (err.status === 404 || String(err).includes("404"))) {
+        showTrendyolStatus("Route henüz eklenmedi (404) — PR'da hazır route kodu mevcut.", "warn");
+      } else {
+        showTrendyolStatus(`Excel export hatası: ${err}`, "warn");
+      }
+    });
 }
 
 function bulkImportReadyTrendyolOrders() {
@@ -7582,12 +7610,39 @@ function updateOutputStatus(statuses) {
 
 async function runRenderCheck() {
   updateOutputStatus({ render: 'pending' });
-  try {
-    const result = await fetch('/api/preflight/check', { method: 'POST' });
-    const data = await result.json();
-    updateOutputStatus({ render: data.ok ? 'ok' : 'fail' });
-  } catch {
+  const template = byId("manualTemplate")?.value || "";
+  if (!template) {
     updateOutputStatus({ render: 'fail' });
+    showStudioToolNotice("Render kontrolü için önce model seçin.", "warn");
+    return;
+  }
+  try {
+    const payload = manualPayload();
+    const quantity = currentManualQuantity();
+    const resp = await fetch('/api/preflight_manual_label', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ template_path: template, fields: payload, quantity })
+    });
+    const data = await resp.json();
+    const ok = data.status === "OK" || data.can_render === true;
+    updateOutputStatus({ render: ok ? 'ok' : 'fail' });
+    setManualPreflight(data);
+    if (!ok) {
+      const errs = (data.errors || [data.message || "Render kontrolü başarısız."]).join("; ");
+      showStudioToolNotice("Render kontrolü: " + errs, "error");
+    } else {
+      const warns = data.warnings || [];
+      showStudioToolNotice(
+        warns.length
+          ? `Render hazır ama ${warns.length} uyarı var: ${warns[0]}`
+          : "Render hazır — PDF/PNG üretilebilir.",
+        warns.length ? "warn" : "ok"
+      );
+    }
+  } catch (err) {
+    updateOutputStatus({ render: 'fail' });
+    showStudioToolNotice("Render kontrolü yapılamadı: " + String(err), "error");
   }
 }
 

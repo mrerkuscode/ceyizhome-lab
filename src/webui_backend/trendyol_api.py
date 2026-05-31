@@ -1754,6 +1754,91 @@ def export_ready_suggestions_to_excel(project_root: Path, suggestion_ids: list[s
     }
 
 
+def _selected_order_excel_row(row: dict[str, Any]) -> dict[str, Any]:
+    """Map a suggestion row to the columns required by the seçili sipariş Excel export.
+
+    API secrets/tokens are NEVER included — only production-relevant fields.
+    Kargo son tarihi (ship_deadline_ms) is formatted when available.
+    Sipariş sorusu/cevabı comes from question_contexts or question_text.
+    """
+    from datetime import datetime as _dt
+
+    def _ms_to_date(ms: int | None) -> str:
+        if not ms:
+            return ""
+        try:
+            return _dt.fromtimestamp(int(ms) / 1000).strftime("%d.%m.%Y %H:%M")
+        except (OSError, ValueError, OverflowError):
+            return ""
+
+    kargo_son = _ms_to_date(row.get("ship_deadline_ms"))
+    return {
+        "order_no": row.get("order_number") or "",
+        "buyer_name": row.get("customer_name") or "",
+        "product_name": repair_text(row.get("product_name") or ""),
+        "model_no": row.get("model_key") or _model_key_from_path(row.get("model_path")) or "",
+        "template_no": row.get("model_key") or "",
+        "process_type": row.get("production_type") or "",
+        "personalization_type": (
+            "LABEL_AND_NAME_CUT" if row.get("production_type") == "label_and_name_cut"
+            else "NAME" if row.get("production_type") == "name_cut"
+            else "LABEL" if row.get("production_type") == "label"
+            else "NO_PERSONALIZATION"
+        ),
+        "label_text": row.get("label_text") or "",
+        "laser_text": row.get("name_cut_text") or row.get("label_text") or "",
+        "quantity": row.get("quantity") or 1,
+        "material_type": "",
+        "status": row.get("verification_status") or row.get("status") or "",
+        "siparis_tarihi": row.get("order_date") or "",
+        "kargo_son_tarihi": kargo_son,
+        "needs_review": "evet" if not (row.get("user_verified") or _is_verified_ready(row)) else "hayır",
+        "siparis_sorusu": _question_evidence_text(row),
+        "siparis_cevabi": _answer_evidence_text(row),
+        "barcode": row.get("barcode") or "",
+        "merchant_sku": row.get("merchant_sku") or "",
+        "package_id": row.get("package_id") or "",
+        "line_id": row.get("line_id") or "",
+        "confidence": round(float(row.get("confidence") or 0), 3),
+    }
+
+
+def export_selected_trendyol_orders_excel(
+    project_root: Path,
+    suggestion_ids: list[str],
+) -> dict[str, Any]:
+    """Export selected Trendyol suggestions to .xlsx in output/YYYY-MM-DD/reports/.
+
+    Accepts any suggestion regardless of verification status (operatör seçimi).
+    API secrets/tokens never appear in the output (FORBIDDEN compliance).
+    """
+    rows = list_suggestions(project_root)
+    selected_ids = {str(s) for s in suggestion_ids if str(s).strip()}
+    candidates = [
+        row for row in rows
+        if not selected_ids or str(row.get("id") or "") in selected_ids
+    ]
+    if not candidates:
+        return {
+            "status": "ERROR",
+            "message": "Seçili sipariş bulunamadı. Listeden en az 1 satır seçin.",
+            "path": "",
+            "row_count": 0,
+        }
+    export_rows = [_selected_order_excel_row(row) for row in candidates]
+    target_dir = project_root / "output" / datetime.now().strftime("%Y-%m-%d") / "reports"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    target_path = target_dir / f"secili_siparisler_{datetime.now().strftime('%H%M%S_%f')[:13]}.xlsx"
+    pd.DataFrame(export_rows).to_excel(target_path, index=False)
+    return {
+        "status": "OK",
+        "message": f"{len(export_rows)} sipariş Excel dosyasına aktarıldı: {target_path.name}",
+        "path": str(target_path),
+        "relative_path": _relative(project_root, target_path),
+        "row_count": len(export_rows),
+    }
+
+
 def import_suggestions_to_bulk_production(project_root: Path, suggestion_ids: list[str] | None, label_models: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     """Create safe Toplu Uretim gallery rows from Trendyol suggestions.
 
