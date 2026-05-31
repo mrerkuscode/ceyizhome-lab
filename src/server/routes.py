@@ -606,6 +606,104 @@ def update_name_cut_queue_item_status():
         return _err(exc)
 
 
+@api_bp.route("/name_cut_production_scene", methods=["POST"])
+def name_cut_production_scene():
+    """Read-only: FontTools+pyclipper production scene (geometry, paths, placements).
+
+    Masaüstü bridge.build_name_cut_production_scene ile aynı payload/response formatı.
+    """
+    try:
+        from webui_backend import combined_production_api as _cpa
+        payload = request.get_json() or {}
+        items = payload.get("items") or []
+        config = payload.get("config") or {}
+        return _ok(_cpa.build_name_cut_production_scene(items, config))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/name_cut_preview_paths", methods=["POST"])
+def name_cut_preview_paths():
+    """Read-only: canvas önizleme için FontTools path'leri döner.
+
+    Masaüstü bridge.preview_name_cut_paths ile aynı payload/response formatı.
+    """
+    try:
+        from webui_backend import combined_production_api as _cpa
+        payload = request.get_json() or {}
+        items = payload.get("items") or []
+        config = payload.get("config") or {}
+        return _ok(_cpa.preview_name_cut_paths(items, config))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/name_cut_export", methods=["POST"])
+def name_cut_export():
+    """SVG/DXF/PDF export paketi oluşturur, export history'ye kaydeder.
+
+    Masaüstü bridge.prepare_name_cut_files ile aynı payload/response formatı.
+    RDWorks/lazer/yazıcı otomatik açılmaz.
+    """
+    try:
+        from webui_backend import combined_production_api as _cpa
+        from webui_backend import name_cut_queue_api as _ncq
+        payload = request.get_json() or {}
+        items = payload.get("items") or []
+        config = payload.get("config") or {}
+        # excel_path: manifest için; tarayıcı modunda kaynak Excel genellikle yok
+        excel_path = _PROJECT_ROOT / "input" / "browser_session.xlsx"
+        result = _cpa.export_name_cut_batch(_PROJECT_ROOT, excel_path, items, config)
+        if result.get("status") == "OK":
+            # Export history'ye kaydet
+            history_entry = {
+                "export_batch_id": result.get("export_batch_id", ""),
+                "created_at": result.get("created_at", ""),
+                "status": "OK",
+                "formats": config.get("formats") or ["svg", "dxf", "pdf"],
+                "quantity_total": sum(max(1, int(item.get("quantity") or 1)) for item in items),
+                "cut_direction": config.get("cut_direction", ""),
+                "exported_files": {
+                    "manifest": result.get("manifest_path", ""),
+                    "svg": result.get("svg_path", ""),
+                    "dxf": result.get("dxf_path", ""),
+                    "pdf": result.get("pdf_preview", ""),
+                    "png": result.get("png_preview", ""),
+                },
+            }
+            try:
+                _ncq.record_name_cut_export_history(_PROJECT_ROOT, history_entry)
+            except Exception:
+                pass
+            result["export_history"] = _ncq.list_name_cut_export_history(_PROJECT_ROOT)
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/mark_name_cut_queue_item_prepared", methods=["POST"])
+def mark_name_cut_queue_item_prepared():
+    """Seçili İsim Kesim kuyruğu kaydını 'prepared' olarak işaretle."""
+    try:
+        from webui_backend import name_cut_queue_api as _ncq
+        payload = request.get_json() or {}
+        item_id = str(payload.get("item_id") or "")
+        return _ok(_ncq.mark_name_cut_queue_item_prepared(_PROJECT_ROOT, item_id))
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/save_name_cut_queue_items", methods=["POST"])
+def save_name_cut_queue_items():
+    """İsim Kesim hazırlık kuyruğuna toplu kayıt ekler."""
+    try:
+        from webui_backend import name_cut_queue_api as _ncq
+        payload = request.get_json() or {}
+        return _ok(_ncq.save_name_cut_queue_items(_PROJECT_ROOT, payload))
+    except Exception as exc:
+        return _err(exc)
+
+
 # GRUP 10 — Güvenlik
 
 @api_bp.route("/save_live_integration_security_settings", methods=["POST"])

@@ -248,8 +248,62 @@
     },
 
     // GRUP 9 — İsim Kesim
+
     update_name_cut_queue_item_status: function (item_id, status, callback) {
       postJson("/api/update_name_cut_queue_item_status", { item_id: item_id, status: status }, callback);
+    },
+
+    // build_name_cut_production_scene: FontTools+pyclipper production geometry.
+    // Payload: JSON string {items, config}. Response: same format as desktop QWebChannel.
+    build_name_cut_production_scene: function (payload_json, callback) {
+      var body = (typeof payload_json === "string") ? JSON.parse(payload_json || "{}") : (payload_json || {});
+      postJson("/api/name_cut_production_scene", body, callback);
+    },
+
+    // preview_name_cut_paths: read-only canvas preview (wraps build_name_cut_production_scene).
+    // Masaüstü ile aynı format; bridge.build_name_cut_production_scene yoksa fallback olarak kullanılır.
+    preview_name_cut_paths: function (payload_json, callback) {
+      var body = (typeof payload_json === "string") ? JSON.parse(payload_json || "{}") : (payload_json || {});
+      postJson("/api/name_cut_preview_paths", body, callback);
+    },
+
+    // prepare_name_cut_files: SVG/DXF/PDF export. Response: {status, svg_path, dxf_path,
+    // pdf_preview, manifest_path, export_history, ...}. Dosyalar /api/files/<path> üzerinden indirilir.
+    // RDWorks/lazer otomatik açılmaz.
+    prepare_name_cut_files: function (payload_json, callback) {
+      var body = (typeof payload_json === "string") ? JSON.parse(payload_json || "{}") : (payload_json || {});
+      postJson("/api/name_cut_export", body, function (raw) {
+        var result;
+        try { result = JSON.parse(raw); } catch (_) { result = { status: "ERROR", message: "Parse hatası" }; }
+        // Tarayıcı modunda export dosyaları /api/files/ üzerinden erişilebilir.
+        // svg_path/dxf_path/pdf_preview "output/..." ile başlıyor; strip ederek URL yap.
+        function toFileUrl(relPath) {
+          if (!relPath) return "";
+          var p = String(relPath).replace(/\\/g, "/");
+          if (p.startsWith("output/")) p = p.slice("output/".length);
+          return "/api/files/" + p;
+        }
+        if (result && result.status === "OK") {
+          result.svg_download_url  = toFileUrl(result.svg_path);
+          result.dxf_download_url  = toFileUrl(result.dxf_path);
+          result.pdf_download_url  = toFileUrl(result.pdf_preview);
+          result.manifest_download_url = toFileUrl(result.manifest_path);
+        }
+        if (typeof callback === "function") callback(JSON.stringify(result));
+      });
+    },
+
+    // mark_name_cut_queue_item_prepared: kalıcı durum güncellemesi.
+    // Bridge imzası: mark_name_cut_queue_item_prepared(item_id, callback).
+    mark_name_cut_queue_item_prepared: function (item_id, callback) {
+      postJson("/api/mark_name_cut_queue_item_prepared", { item_id: String(item_id || "") }, callback);
+    },
+
+    // save_name_cut_queue_items: toplu İsim Kesim kuyruğu kaydı.
+    // Bridge imzası: save_name_cut_queue_items(payload_json, callback).
+    save_name_cut_queue_items: function (payload_json, callback) {
+      var body = (typeof payload_json === "string") ? JSON.parse(payload_json || "{}") : (payload_json || {});
+      postJson("/api/save_name_cut_queue_items", body, callback);
     },
 
     // GRUP 10 — Güvenlik
@@ -478,6 +532,6 @@
   cyzella.logChanged   = { connect: function () {} };
 
   window.cyzella = cyzella;
-  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job + Sprint 4: 3 Trendyol endpoints)");
+  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job + Sprint 4: Trendyol + İsim Kesim: build_name_cut_production_scene, preview_name_cut_paths, prepare_name_cut_files, mark_name_cut_queue_item_prepared, save_name_cut_queue_items)");
 
 }());
