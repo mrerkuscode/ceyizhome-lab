@@ -500,15 +500,11 @@
     "render_manual_label_fields_to_queue", "preview_manual_label_fields",
     "validate_manual_label_output",
     "create_label_model_from_wizard",
-    "choose_new_label_model_design_visual", "choose_label_model_preview",
     "import_template_pack", "importTemplatePack", "import_label_font",
     "validate_backup",
     "export_production_audit_events",
     "guard_live_integration_action",
-    "open_output_folder", "openOutput", "open_reports_folder", "openReports",
-    "open_print_folder", "openPrint", "open_input_folder", "openInput",
-    "open_laser_folder", "openLaser", "reveal_file_in_folder", "open_file_safe",
-    "open_svg", "open_project_file", "quitApplication",
+    "quitApplication",
     "editTemplate", "showHelp", "showSettings",
     "create_calibration_pdf"
   ];
@@ -525,6 +521,67 @@
       };
     }
   });
+
+  // ── Folder-open stubs: masaüstü-only, tarayıcıda açık mesaj ver ─────────────
+  var _desktopOnlyFolderActions = [
+    "open_output_folder", "openOutput", "open_reports_folder", "openReports",
+    "open_print_folder", "openPrint", "open_input_folder", "openInput",
+    "open_laser_folder", "openLaser", "reveal_file_in_folder", "open_file_safe",
+    "open_svg", "open_project_file"
+  ];
+  _desktopOnlyFolderActions.forEach(function (method) {
+    if (!cyzella[method]) {
+      cyzella[method] = function () {
+        var msg = "Bu özellik yalnızca masaüstü uygulamasında kullanılabilir.";
+        if (typeof window.showToast === "function") {
+          window.showToast(msg, "warn");
+        } else {
+          console.warn("[api_adapter] Desktop-only:", method, msg);
+        }
+      };
+    }
+  });
+
+  // ── choose_new_label_model_design_visual: tarayıcıda file-input + upload ───
+  if (!cyzella.choose_new_label_model_design_visual) {
+    cyzella.choose_new_label_model_design_visual = function (callback) {
+      var input = document.createElement("input");
+      input.type = "file";
+      input.accept = ".png,.jpg,.jpeg,.webp,.svg";
+      input.style.position = "fixed";
+      input.style.opacity = "0";
+      input.style.pointerEvents = "none";
+      document.body.appendChild(input);
+      input.addEventListener("change", function () {
+        document.body.removeChild(input);
+        var file = input.files && input.files[0];
+        if (!file) {
+          if (typeof callback === "function") callback(JSON.stringify({ status: "CANCELLED", message: "Görsel seçilmedi." }));
+          return;
+        }
+        var formData = new FormData();
+        formData.append("file", file);
+        fetch("/api/upload_label_preview", { method: "POST", body: formData })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.status !== "OK") {
+              if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", message: data.error || "Görsel yüklenemedi." }));
+              return;
+            }
+            if (typeof callback === "function") callback(JSON.stringify({
+              status: "OK",
+              path: data.path || "",
+              preview_url: data.path ? "/api/asset/" + data.path.replace(/^assets\//, "") : "",
+              file_name: file.name
+            }));
+          })
+          .catch(function (err) {
+            if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", message: String(err) }));
+          });
+      });
+      input.click();
+    };
+  }
 
   // ── Etiket Studio — Tarayıcı modu render/preflight (P0-3) ─────────────────
   // preflight_manual_label_fields: POST /api/preflight_manual_label

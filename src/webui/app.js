@@ -6830,8 +6830,14 @@ function _labelPreviewSrc(model) {
     const rel = model.preview_image_path.replace(/^assets\//, "");
     return "/api/asset/" + rel;
   }
-  if (model.preview_image && !model.preview_image.startsWith("file://")) {
-    return model.preview_image;
+  if (model.preview_image) {
+    if (!model.preview_image.startsWith("file://")) return model.preview_image;
+    // file:///C:/…/assets/x → /api/asset/x
+    try {
+      const decoded = decodeURIComponent(model.preview_image.replace(/^file:\/\/\//, "")).replace(/\\/g, "/");
+      const m = decoded.match(/\/assets\/(.+)$/i);
+      if (m) return "/api/asset/" + m[1];
+    } catch (e) {}
   }
   return null;
 }
@@ -9186,7 +9192,7 @@ async function _browserChoosePreviewForModel(templatePath) {
     document.body.removeChild(input);
     var file = input.files && input.files[0];
     if (!file) return; // user cancelled — say nothing
-    showLabelModelStatus("Görsel yükleniyor…", "ok");
+    showLabelModelStatus("Görsel yükleniyor…", "info");
     try {
       var formData = new FormData();
       formData.append("file", file);
@@ -12459,6 +12465,10 @@ function renderManualPreview() {
     box.innerHTML = `<div class="empty-state"><b>Önizleme oluşturuluyor...</b><p>Gerçek Label Designer render motoru kullanılıyor.</p></div>`;
     bridge.preview_manual_label_fields(template, JSON.stringify(manualPayload()), raw => {
       const result = typeof raw === "string" ? JSON.parse(raw || "{}") : (raw || {});
+      if (result.status === "NOT_IMPLEMENTED") {
+        box.innerHTML = `<div class="empty-state"><b>Gerçek Render bu modda kullanılamaz.</b><p>Masaüstü uygulamasını kullanın.</p></div>`;
+        return;
+      }
       if (result.status !== "OK" || !result.preview_url) {
         box.innerHTML = `<div class="empty-state"><b>Önizleme oluşturulamadı.</b><p>${esc(result.message || "Lütfen model alanlarını kontrol edin.")}</p></div>`;
         return;
@@ -12530,7 +12540,11 @@ function runManualPreflight(callback, options = {}) {
         if (data.status === "ERROR") { if (options.onError) options.onError(data); return; }
         if (callback) callback(data);
       })
-      .catch(function() { if (callback) callback({ status: "OK" }); });
+      .catch(function(err) {
+        var errResult = { status: "ERROR", message: "Preflight sunucuya ulaşamadı: " + String(err), errors: [], warnings: [] };
+        setManualPreflight(errResult);
+        if (options && options.onError) options.onError(errResult);
+      });
     return;
   }
   const payload = manualPayload();

@@ -1243,6 +1243,8 @@ def _build_package_status_index(orders_cache_path: Path) -> dict[str, str]:
         orders = json.loads(orders_cache_path.read_text(encoding="utf-8"))
     except (json.JSONDecodeError, OSError):
         return {}
+    if isinstance(orders, dict):
+        orders = orders.get("orders", orders)
     if not isinstance(orders, list):
         return {}
     result: dict[str, str] = {}

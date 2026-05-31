@@ -803,6 +803,18 @@ def bind_label_model_preview():
         return _err(exc)
 
 
+@api_bp.route("/export_trendyol_selected_excel", methods=["POST"])
+def export_trendyol_selected_excel():
+    """Export selected Trendyol suggestions to .xlsx in output/YYYY-MM-DD/reports/."""
+    try:
+        from webui_backend import trendyol_api as _ta
+        payload = request.get_json(force=True, silent=True) or {}
+        ids = [str(x) for x in (payload.get("suggestion_ids") or []) if str(x).strip()]
+        return _ok(_ta.export_selected_trendyol_orders_excel(_PROJECT_ROOT, ids))
+    except Exception as exc:
+        return _err(exc)
+
+
 # ── Sprint 3 — Subprocess / Job endpoints ───────────────────────────────────
 
 @api_bp.route("/start_render_labels", methods=["POST"])
@@ -855,7 +867,6 @@ def job_log(job_id: str):
 # ── Etiket Studio — Tarayıcı modu render/preflight (P0-3, P0-4) ──────────────
 
 @api_bp.route("/health", methods=["GET", "POST"])
-@api_bp.route("/preflight/check", methods=["GET", "POST"])  # eski alias — yalnız sağlık ping'i
 def health_check():
     return _ok({"ok": True, "status": "OK", "message": "Sunucu çalışıyor."})
 
