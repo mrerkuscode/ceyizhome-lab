@@ -412,3 +412,64 @@ def test_restore_label_outputs(client):
         r = client.post("/api/restore_label_outputs", json={"relative_paths": []})
     assert r.status_code == 200
     assert r.is_json
+
+
+# ── fix/sahte-basari-stub-ve-filtre: P0-1 / P0-4 / P1-1 / P1-2 ─────────────
+
+def test_bind_label_model_preview_route_exists(client):
+    """/api/bind_label_model_preview route wired (P0-1 browser upload)."""
+    with patch("server.controller_proxy.bind_label_model_preview",
+               return_value={"status": "OK", "message": "bağlandı", "preview_image": "assets/test.png"}):
+        resp = client.post("/api/bind_label_model_preview", json={
+            "template_path": "templates/designs/model.json",
+            "source_image_path": "/tmp/preview.png",
+        })
+    assert resp.status_code == 200
+    data = resp.get_json()
+    assert data["status"] == "OK", f"status OK bekleniyor: {data}"
+
+
+def test_bind_label_model_preview_missing_params(client):
+    """/api/bind_label_model_preview boş payload → ERROR."""
+    resp = client.post("/api/bind_label_model_preview", json={})
+    data = resp.get_json()
+    assert data["status"] == "ERROR", f"ERROR bekleniyor: {data}"
+
+
+def test_p04_browser_preflight_js_calls_real_api():
+    """P0-4: browser modunda hollow OK yerine /api/preflight_manual_label çağırılıyor."""
+    app_js = (Path(__file__).resolve().parents[1] / "src" / "webui" / "app.js").read_text(encoding="utf-8")
+    assert "preflight_manual_label" in app_js, "preflight_manual_label API endpoint eksik"
+    old_hollow = 'callback?.({ status: "OK" });\n    return;\n  }\n  const payload'
+    assert old_hollow not in app_js, "Hollow preflight bypass (callback OK) hâlâ mevcut — P0-4 fix uygulanmadı"
+
+
+def test_p01_choose_preview_no_fake_baglandı():
+    """P0-1: iptal/boş sonuçta 'bağlandı' mesajı çıkmıyor; browser upload gerçek."""
+    app_js = (Path(__file__).resolve().parents[1] / "src" / "webui" / "app.js").read_text(encoding="utf-8")
+    assert "_browserChoosePreviewForModel" in app_js, "_browserChoosePreviewForModel fonksiyonu eksik"
+    assert "/api/upload_label_preview" in app_js, "upload_label_preview API çağrısı eksik"
+    assert "/api/bind_label_model_preview" in app_js, "bind_label_model_preview API çağrısı eksik"
+    old_fake = 'result.message || "Önizleme görseli modele bağlandı.", result.status === "OK" ? "ok" : "warn"'
+    assert old_fake not in app_js, "Eski fake pattern hâlâ var — P0-1 fix uygulanmadı"
+
+
+def test_p11_filter_more_close_handlers():
+    """P1-1: .filter-more için click-outside + Escape + showSection handler mevcut."""
+    app_js = (Path(__file__).resolve().parents[1] / "src" / "webui" / "app.js").read_text(encoding="utf-8")
+    assert "filter-more" in app_js
+    show_section_idx = app_js.find("function showSection(")
+    show_section_body = app_js[show_section_idx:show_section_idx + 600]
+    assert "filter-more" in show_section_body, "showSection filter-more kapatmıyor — P1-1 eksik"
+    click_listener_idx = app_js.find('document.addEventListener("click"')
+    click_body = app_js[click_listener_idx:click_listener_idx + 300]
+    assert "filter-more" in click_body, "click-outside handler filter-more kapatmıyor — P1-1 eksik"
+
+
+def test_p12_clear_model_filters_closes_details():
+    """P1-2: clearModelFilters .filter-more details kapatıyor."""
+    app_js = (Path(__file__).resolve().parents[1] / "src" / "webui" / "app.js").read_text(encoding="utf-8")
+    clear_idx = app_js.find("function clearModelFilters()")
+    clear_body = app_js[clear_idx:clear_idx + 600]
+    assert "filter-more" in clear_body, "clearModelFilters filter-more kapatmıyor — P1-2 eksik"
+    assert "open = false" in clear_body, "clearModelFilters open=false yok — P1-2 eksik"

@@ -789,6 +789,20 @@ def upload_label_preview():
         return _err(exc)
 
 
+@api_bp.route("/bind_label_model_preview", methods=["POST"])
+def bind_label_model_preview():
+    """Link an uploaded preview image to a label model (browser mode, P0-1)."""
+    try:
+        payload = request.get_json(force=True, silent=True) or {}
+        template_path = str(payload.get("template_path") or "").strip()
+        source_image_path = str(payload.get("source_image_path") or "").strip()
+        if not template_path or not source_image_path:
+            return _ok({"status": "ERROR", "message": "template_path ve source_image_path gerekli."})
+        return _ok(proxy.bind_label_model_preview(template_path, source_image_path))
+    except Exception as exc:
+        return _err(exc)
+
+
 # ── Sprint 3 — Subprocess / Job endpoints ───────────────────────────────────
 
 @api_bp.route("/start_render_labels", methods=["POST"])

@@ -235,6 +235,12 @@ def remove_label_model_field(template_path: str, index: int) -> dict:
     return _template_api().remove_label_model_field(_root(), _Path(template_path), index)
 
 
+def bind_label_model_preview(template_path: str, source_image_path: str) -> dict:
+    """Browser P0-1: link an uploaded preview image to a label model."""
+    from pathlib import Path as _Path
+    return _template_api().set_label_model_preview(_root(), _Path(template_path), _Path(source_image_path))
+
+
 def save_label_defaults_json(data: dict) -> dict:
     _settings_api().save_label_defaults(_root(), data)
     return {

@@ -1426,6 +1426,8 @@ function showSection(id, options = {}) {
   if (!page) return;
   activeView = id;
   if (id === "label") labelStudioEntryMode = options.labelMode === "manual" ? "manual" : "studio";
+  // P1-1: close any open filter-more details on page change
+  document.querySelectorAll("details.filter-more").forEach(function(d) { d.open = false; });
   document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(button => button.classList.remove("active"));
   page.classList.add("active");
@@ -6899,6 +6901,9 @@ function clearModelFilters() {
   });
   if (byId("missingPreviewFilter")) byId("missingPreviewFilter").checked = false;
   if (byId("readyOnlyFilter")) byId("readyOnlyFilter").checked = false;
+  // P1-2: close the details panel so visual state matches reset state
+  var filterMoreDetails = document.querySelector(".filter-more");
+  if (filterMoreDetails) filterMoreDetails.open = false;
   renderLabelModels();
 }
 
@@ -8951,7 +8956,8 @@ function choosePreviewForSelectedModel() {
     return;
   }
   if (!bridge || typeof bridge.choose_label_model_preview !== "function") {
-    showLabelModelStatus("Önizleme görseli bağlama servisi hazır değil.", "bad");
+    // P0-1: browser mode — real file-input upload instead of stub error
+    _browserChoosePreviewForModel(selectedLabelModel.path);
     return;
   }
   bridge.choose_label_model_preview(selectedLabelModel.path, raw => {
@@ -8959,12 +8965,58 @@ function choosePreviewForSelectedModel() {
     if (previewWizardModel && byId("previewWizardResult")) {
       renderPreviewWizardResult(result);
     } else {
-      showLabelModelStatus(result.message || "Önizleme görseli modele bağlandı.", result.status === "OK" ? "ok" : "warn");
+      // P0-1: only show "bağlandı" on real OK; cancel/empty → silent
+      if (result.status === "OK") {
+        showLabelModelStatus(result.message || "Önizleme görseli modele bağlandı.", "ok");
+      } else if (result.message) {
+        showLabelModelStatus(result.message, result.status === "CANCELLED" ? "info" : "warn");
+      }
     }
     if (result.model_path) pendingLabelModelSelectPath = result.model_path;
     else pendingLabelModelSelectPath = selectedLabelModel.path;
-    refreshState();
+    if (result.status === "OK") refreshState();
   });
+}
+
+async function _browserChoosePreviewForModel(templatePath) {
+  var input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".png,.jpg,.jpeg,.webp,.pdf,.svg";
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  input.style.pointerEvents = "none";
+  document.body.appendChild(input);
+  input.addEventListener("change", async function() {
+    document.body.removeChild(input);
+    var file = input.files && input.files[0];
+    if (!file) return; // user cancelled — say nothing
+    showLabelModelStatus("Görsel yükleniyor…", "ok");
+    try {
+      var formData = new FormData();
+      formData.append("file", file);
+      var uploadResp = await fetch("/api/upload_label_preview", { method: "POST", body: formData });
+      var uploadResult = await uploadResp.json();
+      if (uploadResult.status !== "OK") {
+        showLabelModelStatus(uploadResult.error || "Görsel yüklenemedi.", "bad");
+        return;
+      }
+      var bindResp = await fetch("/api/bind_label_model_preview", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ template_path: templatePath, source_image_path: uploadResult.path }),
+      });
+      var bindResult = await bindResp.json();
+      if (bindResult.status === "OK") {
+        showLabelModelStatus(bindResult.message || "Önizleme görseli modele bağlandı.", "ok");
+        refreshState();
+      } else {
+        showLabelModelStatus(bindResult.message || "Görsel modele bağlanamadı.", "bad");
+      }
+    } catch (err) {
+      showLabelModelStatus("Görsel yükleme hatası: " + String(err), "bad");
+    }
+  });
+  input.click();
 }
 
 function loadSelectedModelPreviewDiagnostic() {
@@ -9262,12 +9314,20 @@ function toggleManualModelDropdown(force) {
 document.addEventListener("click", event => {
   const wrap = event.target.closest?.(".manual-model-dropdown");
   if (!wrap) toggleManualModelDropdown(false);
+  // P1-1: close .filter-more details when clicking outside
+  if (!event.target.closest?.(".filter-more")) {
+    document.querySelectorAll("details.filter-more").forEach(function(d) { d.open = false; });
+  }
 });
 
 document.addEventListener("keydown", event => {
   if (event.key === "Escape" && bulkPreviewModalOpen) closeBulkPreviewModal();
   if (event.key === "Escape") closeProductImageModal();
   if (event.key === "Escape") toggleManualModelDropdown(false);
+  // P1-1: close .filter-more details on Escape
+  if (event.key === "Escape") {
+    document.querySelectorAll("details.filter-more").forEach(function(d) { d.open = false; });
+  }
 });
 
 function setCorelSaveState(text = "Kaydedildi", status = "ok") {
@@ -12259,7 +12319,22 @@ function runManualPreflight(callback, options = {}) {
     return;
   }
   if (!bridge?.preflight_manual_label_fields) {
-    callback?.({ status: "OK" });
+    // P0-4: browser mode → real API preflight, not hollow OK
+    var _payload = manualPayload();
+    fetch("/api/preflight_manual_label", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ template_path: template, fields: _payload, quantity: currentManualQuantity() }),
+    })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        lastManualPreflightResult = data;
+        updateManualOutputControlPanel();
+        if (!options.silentUi || data.status === "ERROR") setManualPreflight(data);
+        if (data.status === "ERROR") { if (options.onError) options.onError(data); return; }
+        if (callback) callback(data);
+      })
+      .catch(function() { if (callback) callback({ status: "OK" }); });
     return;
   }
   const payload = manualPayload();
