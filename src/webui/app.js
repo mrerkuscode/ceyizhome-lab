@@ -151,6 +151,9 @@ let trendyolOrdersSyncRunning = false;
 let trendyolQuestionsSyncRunning = false;
 let trendyolAutoSyncPollTimer = null;
 let trendyolAutoSyncLastNewOrders = 0;
+let trendyolDateFilter = "";
+let trendyolNameFilter = "";
+let trendyolSortOrder = "guncel";
 const trendyolProductImageCache = new Map();
 const TRENDYOL_ORDER_RENDER_LIMIT = 50;
 const TRENDYOL_QUESTION_RENDER_LIMIT = 60;
@@ -3081,6 +3084,8 @@ function updateTrendyolOrders(payload = {}) {
   // Init/update auto-sync UI based on settings
   _initTrendyolAutoSyncFromSettings(settings);
   renderTrendyolModelSelect();
+  renderTrendyolDatePanel(suggestions);
+  renderTrendyolActiveChips();
   renderTrendyolQuickFilters(suggestions);
   renderTrendyolSuggestions(suggestions);
   renderTrendyolBulkActionBar(suggestions);
@@ -3281,6 +3286,124 @@ function renderTrendyolSummary(summary, suggestions = [], questions = []) {
     }
   }
 }
+
+// ---------- [2] Tarih paneli + filtre çubuğu -----------------------------------
+
+function _trendyolOrderDayKey(row) {
+  const d = String(row.order_date || "");
+  return d.length >= 10 ? d.substring(0, 10) : "";
+}
+
+function _parseTurkishDate(ddmmyyyy) {
+  const parts = ddmmyyyy.split(".");
+  if (parts.length !== 3) return null;
+  const [dd, mm, yyyy] = parts;
+  const d = new Date(parseInt(yyyy, 10), parseInt(mm, 10) - 1, parseInt(dd, 10));
+  return isNaN(d.getTime()) ? null : d;
+}
+
+function _formatDayLabel(ddmmyyyy) {
+  const d = _parseTurkishDate(ddmmyyyy);
+  if (!d) return ddmmyyyy;
+  const MONTHS = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
+  return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function renderTrendyolDatePanel(rows = []) {
+  const listBox = byId("trendyolDateList");
+  const calBox  = byId("trendyolMiniCalendar");
+  if (!listBox && !calBox) return;
+
+  // Build date → count map
+  const dateCounts = {};
+  rows.forEach(row => {
+    const day = _trendyolOrderDayKey(row);
+    if (day) dateCounts[day] = (dateCounts[day] || 0) + 1;
+  });
+
+  // Sorted dates newest-first
+  const dates = Object.keys(dateCounts).sort((a, b) => {
+    const da = _parseTurkishDate(a), db = _parseTurkishDate(b);
+    if (!da || !db) return 0;
+    return db - da;
+  });
+
+  // --- Date list ---
+  if (listBox) {
+    const allBtn = `<button class="ty-date-item${!trendyolDateFilter ? " active" : ""}" onclick="setTrendyolDateFilter('')">Tüm tarihler <span class="ty-date-count">(${rows.length})</span></button>`;
+    const itemsHtml = dates.slice(0, 30).map(day => {
+      const active = trendyolDateFilter === day;
+      return `<button class="ty-date-item${active ? " active" : ""}" onclick="setTrendyolDateFilter(${jsArg(day)})">${esc(_formatDayLabel(day))} <span class="ty-date-count">(${dateCounts[day]})</span></button>`;
+    }).join("");
+    listBox.innerHTML = allBtn + itemsHtml;
+  }
+
+  // --- Mini calendar ---
+  if (calBox) {
+    // Show month of most recent order, or current month
+    const refDate = dates.length ? _parseTurkishDate(dates[0]) : new Date();
+    const year = (refDate || new Date()).getFullYear();
+    const month = (refDate || new Date()).getMonth(); // 0-based
+    const firstDay = new Date(year, month, 1);
+    const lastDay  = new Date(year, month + 1, 0);
+    const startDow = (firstDay.getDay() + 6) % 7; // Monday=0
+    const MONTHS_FULL = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"];
+    const WEEKDAYS = ["Pt","Sa","Ça","Pe","Cu","Ct","Pz"];
+    let cells = "";
+    for (let i = 0; i < startDow; i++) cells += `<span class="ty-cal-day empty"></span>`;
+    for (let d = 1; d <= lastDay.getDate(); d++) {
+      const dayStr = `${String(d).padStart(2,"0")}.${String(month+1).padStart(2,"0")}.${year}`;
+      const hasOrders = !!dateCounts[dayStr];
+      const isActive = trendyolDateFilter === dayStr;
+      const cls = isActive ? "ty-cal-day active-day" : hasOrders ? "ty-cal-day has-orders" : "ty-cal-day";
+      const onclick = hasOrders ? ` onclick="setTrendyolDateFilter(${jsArg(dayStr)})"` : "";
+      cells += `<span class="${cls}"${onclick}>${d}</span>`;
+    }
+    const weekdaysRow = WEEKDAYS.map(w => `<span class="ty-cal-weekday">${w}</span>`).join("");
+    calBox.innerHTML = `<div class="ty-cal-head"><span>${esc(MONTHS_FULL[month])} ${year}</span></div><div class="ty-cal-grid">${weekdaysRow}${cells}</div>`;
+  }
+}
+
+function setTrendyolDateFilter(day) {
+  trendyolDateFilter = day ? String(day) : "";
+  updateTrendyolOrders(currentState.trendyol || {});
+}
+
+function setTrendyolNameFilter(val) {
+  trendyolNameFilter = val ? String(val) : "";
+  const sel = byId("trendyolNameFilter");
+  if (sel) sel.value = trendyolNameFilter;
+  updateTrendyolOrders(currentState.trendyol || {});
+}
+
+function setTrendyolSortOrder(val) {
+  trendyolSortOrder = val ? String(val) : "guncel";
+  const sel = byId("trendyolSortSelect");
+  if (sel) sel.value = trendyolSortOrder;
+  updateTrendyolOrders(currentState.trendyol || {});
+}
+
+function renderTrendyolActiveChips() {
+  const box = byId("trendyolActiveFilterChips");
+  if (!box) return;
+  const chips = [];
+  if (trendyolDateFilter) {
+    chips.push(`<span class="ty-chip">📅 ${esc(_formatDayLabel(trendyolDateFilter))}<button class="ty-chip-x" onclick="setTrendyolDateFilter('')" title="Tarihi temizle">×</button></span>`);
+  }
+  if (trendyolNameFilter === "yazilan") {
+    chips.push(`<span class="ty-chip">İsim: Yazılan<button class="ty-chip-x" onclick="setTrendyolNameFilter('')" title="Temizle">×</button></span>`);
+  } else if (trendyolNameFilter === "yazilmayan") {
+    chips.push(`<span class="ty-chip">İsim: Yazılmayan<button class="ty-chip-x" onclick="setTrendyolNameFilter('')" title="Temizle">×</button></span>`);
+  }
+  const sortSel = byId("trendyolSortSelect");
+  if (trendyolSortOrder && trendyolSortOrder !== "guncel" && sortSel) {
+    const sortLabel = Array.from(sortSel.options || []).find(o => o.value === trendyolSortOrder)?.textContent || trendyolSortOrder;
+    chips.push(`<span class="ty-chip">↕ ${esc(sortLabel)}<button class="ty-chip-x" onclick="setTrendyolSortOrder('guncel')" title="Sıralamayı temizle">×</button></span>`);
+  }
+  box.innerHTML = chips.join("");
+}
+
+// ---------- end [2] -----------------------------------------------------------
 
 function renderTrendyolQuickFilters(rows = []) {
   const box = byId("trendyolQuickFilters");
@@ -5030,6 +5153,11 @@ function renderTrendyolSuggestions(rows) {
   renderTrendyolStatusTabs(rows);
   const query = String(byId("trendyolSearch")?.value || "").toLocaleLowerCase("tr-TR").trim();
   const statusFilter = String(byId("trendyolStatusFilter")?.value || "");
+  const nameFilterVal = String(byId("trendyolNameFilter")?.value || trendyolNameFilter || "");
+  const sortVal = String(byId("trendyolSortSelect")?.value || trendyolSortOrder || "guncel");
+  // Sync state from selects
+  trendyolNameFilter = nameFilterVal;
+  trendyolSortOrder = sortVal;
   const filtered = rows.filter(row => {
     const status = row.import_status === "imported" ? "imported" : (trendyolVerifiedReady(row) ? "ready" : String(row.status || "review"));
     const verificationStatus = String(row.verification_status || "");
@@ -5060,7 +5188,14 @@ function renderTrendyolSuggestions(rows) {
             ? verificationStatus === "alanlar_onay_bekliyor"
             : (!statusFilter || status === statusFilter || verificationStatus === statusFilter);
     const tabMatches = !trendyolPackageStatusTab || trendyolPkgStatusTabKey(row) === trendyolPackageStatusTab;
-    return (!query || haystack.includes(query)) && statusMatches && tabMatches;
+    // Tarih filtresi
+    const dateMatches = !trendyolDateFilter || _trendyolOrderDayKey(row) === trendyolDateFilter;
+    // İsim filtresi
+    const hasName = Boolean(row.label_text || row.name_cut_text);
+    const nameMatches = !nameFilterVal
+      ? true
+      : nameFilterVal === "yazilan" ? hasName : !hasName;
+    return (!query || haystack.includes(query)) && statusMatches && tabMatches && dateMatches && nameMatches;
   });
   if (filtered.length && !filtered.some(row => row.id === selectedTrendyolSuggestionId)) {
     selectedTrendyolSuggestionId = filtered[0].id || "";
@@ -5078,8 +5213,21 @@ function renderTrendyolSuggestions(rows) {
     list.innerHTML = `<div class="empty-state"><b>Bu filtrelere uygun Trendyol satırı yok.</b><button class="btn small" onclick="clearTrendyolFilters()">Filtreleri Temizle</button></div>`;
     return;
   }
-  // Sırala: sipariş tarihine göre azalan (en yeni önce)
-  filtered.sort((a, b) => Number(b.order_date_ms || 0) - Number(a.order_date_ms || 0));
+  // Sırala
+  if (sortVal === "eski_once") {
+    filtered.sort((a, b) => Number(a.order_date_ms || 0) - Number(b.order_date_ms || 0));
+  } else if (sortVal === "kargo_acil") {
+    filtered.sort((a, b) => {
+      const da = Number(a.ship_deadline_ms || 0), db = Number(b.ship_deadline_ms || 0);
+      if (!da && !db) return 0;
+      if (!da) return 1;
+      if (!db) return -1;
+      return da - db;
+    });
+  } else {
+    // "guncel" | "yeni_once" | default: en yeni önce
+    filtered.sort((a, b) => Number(b.order_date_ms || 0) - Number(a.order_date_ms || 0));
+  }
   const allBulkSel = filtered.length > 0 && filtered.every(r => selectedTrendyolOrderIds.has(r.id || ""));
   const someBulkSel = filtered.some(r => selectedTrendyolOrderIds.has(r.id || ""));
   const selectAllHeader = `<div class="tsc-select-all-bar">
@@ -5752,10 +5900,17 @@ function clearTrendyolFilters() {
   const status = byId("trendyolStatusFilter");
   const topSearch = byId("trendyolTopSearch");
   const topStatus = byId("trendyolTopStatusFilter");
+  const nameSel = byId("trendyolNameFilter");
+  const sortSel = byId("trendyolSortSelect");
   if (search) search.value = "";
   if (status) status.value = "";
   if (topSearch) topSearch.value = "";
   if (topStatus) topStatus.value = "";
+  if (nameSel) nameSel.value = "";
+  if (sortSel) sortSel.value = "guncel";
+  trendyolDateFilter = "";
+  trendyolNameFilter = "";
+  trendyolSortOrder = "guncel";
   updateTrendyolOrders(currentState.trendyol || {});
 }
 

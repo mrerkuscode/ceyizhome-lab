@@ -1434,15 +1434,27 @@
             <div id="trendyolIntegrityStrip" hidden class="integrity-strip" style="padding:5px 10px;font-size:0.82em;background:var(--warn-bg,#fff3cd);color:var(--warn-text,#7c5600);border-radius:4px;margin-bottom:4px"></div>
             <div id="trendyolStatusTabsBar" class="trendyol-pkg-status-tabs"></div>
             <div id="trendyolQuickFilters" class="trendyol-status-tabs"></div>
-            <div class="order-filter-bar">
-              <input id="trendyolSearch" placeholder="Sipariş no, müşteri, ürün, barkod ara..." oninput="scheduleTrendyolOrdersUpdate()" />
-              <select id="trendyolStatusFilter" onchange="updateTrendyolOrders(currentState.trendyol||{})" style="width:auto"><option value="">Tüm durumlar</option><option value="ready">Üretime hazır</option><option value="review">Kontrol gerekli</option><option value="unmatched">Eşleşmeyen ürünler</option><option value="low_confidence">Düşük güven</option><option value="question_waiting">Kanıt bekliyor</option><option value="verification_pending">Onay bekliyor</option><option value="imported">Aktarıldı</option></select>
-              <button class="btn small ghost" onclick="clearTrendyolFilters()">Filtreleri Temizle</button>
-              <button class="btn small" type="button" title="Sipariş tarihine göre en yeni önce sıralar (otomatik)">Sırala: Güncel ↓</button>
-            </div>
-            <div id="trendyolBulkActionBar" class="trendyol-bulk-action-bar" hidden></div>
-            <div id="trendyolSuggestionsList" class="trendyol-suggestion-list">
-              <div class="ty-empty"><b>Henüz Trendyol siparişi çekilmedi.</b><p>API ayarlarını kaydedip "Son 48 Saati Çek" ile sipariş önerilerini oluşturun. Secret değerleri ekranda gösterilmez.</p></div>
+            <div class="trendyol-orders-layout">
+              <!-- Sol tarih paneli -->
+              <aside class="trendyol-date-panel" id="trendyolDatePanel">
+                <div id="trendyolMiniCalendar" class="ty-mini-cal"></div>
+                <div id="trendyolDateList" class="ty-date-list"></div>
+              </aside>
+              <!-- Sağ: filtre çubuğu + liste -->
+              <div class="trendyol-orders-main">
+                <div class="order-filter-bar">
+                  <input id="trendyolSearch" placeholder="Sipariş no, müşteri, ürün, barkod ara..." oninput="scheduleTrendyolOrdersUpdate()" />
+                  <select id="trendyolStatusFilter" onchange="updateTrendyolOrders(currentState.trendyol||{})"><option value="">Tüm durumlar</option><option value="ready">Üretime hazır</option><option value="review">Kontrol gerekli</option><option value="unmatched">Eşleşmeyen ürünler</option><option value="low_confidence">Düşük güven</option><option value="question_waiting">Kanıt bekliyor</option><option value="verification_pending">Onay bekliyor</option><option value="imported">Aktarıldı</option></select>
+                  <select id="trendyolNameFilter" onchange="updateTrendyolOrders(currentState.trendyol||{})"><option value="">İsim: Tümü</option><option value="yazilan">İsim Yazılan</option><option value="yazilmayan">İsim Yazılmayan</option></select>
+                  <select id="trendyolSortSelect" onchange="updateTrendyolOrders(currentState.trendyol||{})"><option value="guncel">Sırala: Güncel</option><option value="yeni_once">Sipariş tarihi ↓ Yeni</option><option value="eski_once">Sipariş tarihi ↑ Eski</option><option value="kargo_acil">Kargo son tarihi — acil önce</option></select>
+                  <button class="btn small ghost" onclick="clearTrendyolFilters()">Filtreleri Temizle</button>
+                </div>
+                <div id="trendyolActiveFilterChips" class="ty-filter-chips"></div>
+                <div id="trendyolBulkActionBar" class="trendyol-bulk-action-bar" hidden></div>
+                <div id="trendyolSuggestionsList" class="trendyol-suggestion-list">
+                  <div class="ty-empty"><b>Henüz Trendyol siparişi çekilmedi.</b><p>API ayarlarını kaydedip "Son 48 Saati Çek" ile sipariş önerilerini oluşturun. Secret değerleri ekranda gösterilmez.</p></div>
+                </div>
+              </div>
             </div>
           </article>
         </div>
