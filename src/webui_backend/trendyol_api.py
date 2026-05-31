@@ -809,6 +809,11 @@ def _order_from_v2_package(package: dict[str, Any], items: list[dict[str, Any]],
         "shipmentAddress": shipment_address,
         "cargoTrackingNumber": cargo_codes[0] if cargo_codes else "",
         "cargoProviderName": first_cargo.get("provider") or "",
+        "ship_deadline_ms": int(
+            v1_order.get("agreedDeliveryDate")
+            or package.get("agreedDeliveryDate")
+            or 0
+        ),
         "lines": lines,
         "source_api": "v2_packages_with_v1_enrichment" if v1_order else "v2_packages",
     }
@@ -848,6 +853,7 @@ def build_suggestions_from_orders(
                 shipping_address=order.get("shipmentAddress") if isinstance(order.get("shipmentAddress"), dict) else {},
                 cargo_tracking_number=str(order.get("cargoTrackingNumber") or ""),
                 cargo_provider=str(order.get("cargoProviderName") or ""),
+                ship_deadline_ms=int(order.get("ship_deadline_ms") or order.get("agreedDeliveryDate") or 0),
             )
             normalized["source_api"] = normalized.get("source_api") or str(order.get("source_api") or "")
             unique_key = f"{normalized['order_number']}:{normalized['package_id']}:{normalized['line_id']}"
@@ -1295,6 +1301,7 @@ def _refresh_existing_suggestion_from_line(
             ),
             "cargo_tracking_number": str(line.get("cargo_tracking_number") or row.get("cargo_tracking_number") or ""),
             "cargo_provider": str(line.get("cargo_provider") or row.get("cargo_provider") or ""),
+            "ship_deadline_ms": int(line.get("ship_deadline_ms") or row.get("ship_deadline_ms") or 0),
             "updated_at": _now(),
         }
     )
@@ -2312,6 +2319,7 @@ def _suggestion_from_line(line: dict[str, Any], mapping: dict[str, Any] | None, 
         "shipping_address": line.get("shipping_address") if isinstance(line.get("shipping_address"), dict) else {},
         "cargo_tracking_number": str(line.get("cargo_tracking_number") or ""),
         "cargo_provider": str(line.get("cargo_provider") or ""),
+        "ship_deadline_ms": int(line.get("ship_deadline_ms") or 0),
         "quantity": extracted.get("quantity") or line.get("quantity") or 1,
         "production_type": production_type,
         "model_key": (mapping or {}).get("model_key") or "",
@@ -2530,6 +2538,7 @@ def _normalize_line(
     shipping_address: dict[str, Any] | None = None,
     cargo_tracking_number: str = "",
     cargo_provider: str = "",
+    ship_deadline_ms: int = 0,
 ) -> dict[str, Any]:
     ts = int(order_date_ms or 0)
     if ts:
@@ -2561,6 +2570,7 @@ def _normalize_line(
         "shipping_address": shipping_address if isinstance(shipping_address, dict) else {},
         "cargo_tracking_number": str(cargo_tracking_number or ""),
         "cargo_provider": str(cargo_provider or ""),
+        "ship_deadline_ms": int(ship_deadline_ms or 0),
     }
 
 

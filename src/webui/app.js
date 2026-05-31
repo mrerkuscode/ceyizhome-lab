@@ -4236,8 +4236,25 @@ function trendyolProductionCheckStrip(checks = []) {
 }
 
 function trendyolRemainingTime(row = {}) {
-  const value = trendyolFirstValue(row, ["remaining_time", "remainingTime", "deadline_text", "cargo_deadline"]);
-  return value || "Süre bilgisi yok";
+  // Önce eski statik alanlar (varsa)
+  const staticVal = trendyolFirstValue(row, ["remaining_time", "remainingTime", "deadline_text", "cargo_deadline"]);
+  if (staticVal) return staticVal;
+
+  // ship_deadline_ms → kalan süre hesapla
+  const deadline = Number(row.ship_deadline_ms || 0);
+  if (!deadline) return "";
+
+  const diffMs = deadline - Date.now();
+  if (diffMs <= 0) return "Gecikti";
+
+  const totalMin = Math.floor(diffMs / 60000);
+  const days     = Math.floor(totalMin / 1440);
+  const hours    = Math.floor((totalMin % 1440) / 60);
+  const mins     = totalMin % 60;
+
+  if (days > 0) return `${days} gün ${hours} saat`;
+  if (hours > 0) return `${hours} saat ${mins} dk`;
+  return `${mins} dk`;
 }
 
 function trendyolCustomerContact(row = {}) {
@@ -4815,7 +4832,10 @@ function tscCard(row) {
     const pkgNo     = trendyolPackageNo(row);
     const dlvNo     = trendyolDeliveryNo(row);
     const slaRaw    = trendyolRemainingTime(row);
-    const sla       = (slaRaw && slaRaw !== "Süre bilgisi yok") ? slaRaw : "";
+    const sla       = (slaRaw && slaRaw !== "") ? slaRaw : "";
+    const deadline  = Number(row.ship_deadline_ms || 0);
+    const slaUrgent = sla === "Gecikti" || (deadline > 0 && (deadline - Date.now()) < 6 * 3600000);
+    const slaClass  = sla === "Gecikti" ? " tsc-sla-overdue" : slaUrgent ? " tsc-sla-urgent" : "";
     const sku       = trendyolMeaningfulSku(row.merchant_sku || row.stock_code);
     const psize     = row.product_size || "";
     const orderNum    = row.order_number || "-";
@@ -4843,7 +4863,7 @@ function tscCard(row) {
               <div class="tsc-kv-row"><span class="tsc-kv-k">Sipariş Tarihi:</span><b class="tsc-kv-v">${esc(orderDate||"-")}</b></div>
               ${pkgNo ? `<div class="tsc-kv-row"><span class="tsc-kv-k">Paket No:</span><b class="tsc-kv-v">${esc(pkgNo)}</b></div>` : ""}
               ${dlvNo ? `<div class="tsc-kv-row"><span class="tsc-kv-k">Teslimat No:</span><b class="tsc-kv-v">${esc(dlvNo)}</b></div>` : ""}
-              ${sla   ? `<div class="tsc-kv-row tsc-sla-row"><span class="tsc-kv-k">Kalan Süre:</span><b class="tsc-kv-v tsc-sla-v">${esc(sla)}</b></div>` : ""}
+              ${sla   ? `<div class="tsc-kv-row tsc-sla-row${slaClass}"><span class="tsc-kv-k">Kalan Süre:</span><b class="tsc-kv-v tsc-sla-v${slaClass}">${esc(sla)}</b></div>` : ""}
             </div>
             <div class="tsc-customer-name"><b>${esc(row.customer_name||"Müşteri")}</b></div>
             <div class="tsc-product-line">
