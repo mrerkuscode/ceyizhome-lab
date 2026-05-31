@@ -531,6 +531,11 @@ input[type=range]{accent-color:var(--accent)}
 .tool-chip{width:32px;height:32px;border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;display:grid;place-items:center;color:var(--text-2);cursor:pointer;font-weight:700;font-size:13px}
 .tool-chip:hover{background:var(--surface-2);color:var(--text)}.tool-chip.danger{color:var(--danger)}.tool-chip svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.8;fill:none}
 .studio-modelrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 14px;border-bottom:1px solid var(--line)}
+/* Hızlı ↔ Gelişmiş modu — P2-1 */
+#label.studio-mode-simple #corelDockTabText,
+#label.studio-mode-simple #corelDockTabSmart { display: none; }
+#label.studio-mode-advanced #corelDockTabText,
+#label.studio-mode-advanced #corelDockTabSmart { display: initial; }
 .model-select-button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;border:1px solid var(--line-strong);background:var(--surface);border-radius:var(--r-sm);padding:7px 14px;cursor:pointer;min-width:200px}
 .model-select-button span{font-size:13px;font-weight:600;color:var(--text)}.model-select-button small{font-size:11px;color:var(--muted)}
 .studio-body{display:grid;grid-template-columns:48px 1fr 252px;flex:1;min-height:0}

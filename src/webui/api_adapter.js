@@ -496,9 +496,9 @@
     "select_excel", "chooseExcel",
     "run_production", "runProduction",
     "bulk_generate_and_add_to_queue", "bulk_generate_selected_and_add_to_queue",
-    "render_manual_label", "render_manual_label_fields",
+    "render_manual_label",
     "render_manual_label_fields_to_queue", "preview_manual_label_fields",
-    "preflight_manual_label_fields", "validate_manual_label_output",
+    "validate_manual_label_output",
     "create_label_model_from_wizard",
     "choose_new_label_model_design_visual", "choose_label_model_preview",
     "import_template_pack", "importTemplatePack", "import_label_font",
@@ -526,12 +526,39 @@
     }
   });
 
+  // ── Etiket Studio — Tarayıcı modu render/preflight (P0-3) ─────────────────
+  // preflight_manual_label_fields: POST /api/preflight_manual_label
+  cyzella.preflight_manual_label_fields = function (template_path, payload_json, quantity, callback) {
+    var fields;
+    try { fields = JSON.parse(payload_json || "{}"); } catch (e) { fields = {}; }
+    fetch("/api/preflight_manual_label", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ template_path: template_path, fields: fields, quantity: quantity })
+    }).then(function (r) { return r.json(); })
+      .then(function (data) { if (typeof callback === "function") callback(JSON.stringify(data)); })
+      .catch(function (err) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", message: String(err) })); });
+  };
+
+  // render_manual_label_fields: POST /api/render_manual_label
+  cyzella.render_manual_label_fields = function (template_path, payload_json, quantity, callback) {
+    var fields;
+    try { fields = JSON.parse(payload_json || "{}"); } catch (e) { fields = {}; }
+    fetch("/api/render_manual_label", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ template_path: template_path, fields: fields, quantity: quantity })
+    }).then(function (r) { return r.json(); })
+      .then(function (data) { if (typeof callback === "function") callback(JSON.stringify(data)); })
+      .catch(function (err) { if (typeof callback === "function") callback(JSON.stringify({ status: "ERROR", message: String(err) })); });
+  };
+
   // ── Signals stub (QWebChannel emits these; browser mode ignores them) ────
 
   cyzella.stateChanged = { connect: function () {} };
   cyzella.logChanged   = { connect: function () {} };
 
   window.cyzella = cyzella;
-  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job + Sprint 4: Trendyol + İsim Kesim: build_name_cut_production_scene, preview_name_cut_paths, prepare_name_cut_files, mark_name_cut_queue_item_prepared, save_name_cut_queue_items)");
+  console.info("[api_adapter] Browser mode active — fetch-based bridge loaded (Sprint 1: 7 GET + Sprint 2: 30 POST + Sprint 3: 10 upload/job + Sprint 4: Trendyol + İsim Kesim + Sprint 5: Etiket Studio render/preflight)");
 
 }());

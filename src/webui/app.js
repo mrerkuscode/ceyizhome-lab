@@ -322,6 +322,7 @@ const NAME_CUT_SINGLE_PIECE_STATUSES = {
   needs_offset: { label: "Kalınlaştırma Gerekli", tone: "warn" },
   detached_marks: { label: "Nokta/İşaret Kopuk", tone: "warn" },
   collision_risk: { label: "Temas Riski", tone: "danger" },
+  reference_not_ready: { label: "Referans yok — üretime hazır değil", tone: "danger" },
   blocked: { label: "Üretime Engel", tone: "danger" }
 };
 const NAME_CUT_REPAIR_STATUS_META = {
@@ -7385,10 +7386,10 @@ function fieldOverlayHtml(model, useManualText = false) {
       ${manualGuideState.safe ? `<span class="safe-area-guide"></span>` : ""}
     </div>
   ` : "";
-  return `${model.preview_image ? `<img class="label-design-underlay" src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" onerror="handleCanvasBgError(this)" />` : ""}
+  return `${_bgSrc ? `<img class="label-design-underlay" src="${esc(_bgSrc)}" alt="${esc(model.model_name || "Model")}" onerror="handleCanvasBgError(this)" />` : ""}
   <div class="field-overlay-wrap" data-label-width="${esc(dims.width)}" data-label-height="${esc(dims.height)}"${previewStyle}>
-    ${model.preview_image ? `<div class="field-design-bg" style="background-image:url(&quot;${esc(cssUrl(model.preview_image))}&quot;)" aria-hidden="true"></div>` : ""}
-    ${model.preview_image ? `<img src="${esc(model.preview_image)}" alt="${esc(model.model_name || "Model")}" onload="syncFieldOverlay(this.closest('.field-overlay-wrap'))" />` : ""}
+    ${_bgSrc ? `<div class="field-design-bg" style="background-image:url(&quot;${esc(cssUrl(_bgSrc))}&quot;)" aria-hidden="true"></div>` : ""}
+    ${_bgSrc ? `<img src="${esc(_bgSrc)}" alt="${esc(model.model_name || "Model")}" onload="syncFieldOverlay(this.closest('.field-overlay-wrap'))" />` : ""}
     ${guideHtml}
     ${fieldBoxes(model, useManualText)}
   </div>`;
@@ -7543,13 +7544,14 @@ function handleCanvasBgError(imgEl) {
 
 function reloadCanvasBackground() {
   const model = selectedLabelModel;
-  if (!model || !model.preview_image) return;
+  const src = _labelPreviewSrc(model);
+  if (!model || !src) return;
   const errBanner = document.querySelector('#manualPreview .canvas-bg-load-error');
   if (errBanner) errBanner.remove();
   const img = document.querySelector('#manualPreview .label-design-underlay');
   if (img) {
     img.style.display = '';
-    img.src = model.preview_image + '?t=' + Date.now();
+    img.src = src;
   }
 }
 
@@ -15110,21 +15112,25 @@ function nameCutSinglePieceQuality(item = {}, layout = null, cfg = nameCutLayout
   const merged = { ...original, ...item };
   const text = formatNameCutName(merged.name_text || "");
   const status = String(merged.status || "").toUpperCase();
+  const repairStatus = String(merged.repairStatus || merged.repair_status || merged.laser_name_object?.repairStatus || "");
+  const isReferenceNotReady = repairStatus === "reference_mismatch" || repairStatus === "dxf_library_missing_design" || repairStatus === "canvas_export_reference_mismatch";
   const hasErrors = (merged.errors || []).length || status === "ERROR" || status === "BLOCKED" || merged.force_blocked;
   const hasDetachedMarks = !!merged.force_detached_marks || !!merged.detached_marks || (hasTurkishDiacriticForCutting(text) && (config.punctuation_fix === false || config.turkish_mark_bridge === false || config.dot_bridge_enabled === false) && !merged.diacritic_bridge_requested);
   const needsWeld = !!merged.force_needs_weld || merged.internal_weld_ready === false || config.weld_inside_name === false;
   const offset = Number(merged.offset_mm ?? config.offset_mm ?? 0);
   const needsOffset = !!merged.force_needs_offset || offset <= 0 || offset < Math.max(0.12, Number(config.min_stroke_mm || 0.28) * 0.45);
   const collisionRisk = !!merged.force_collision_risk || (layout && (layout.summary || {}).collision_free === false);
-  const productionReady = !hasErrors && !hasDetachedMarks && !needsWeld && !needsOffset && !collisionRisk;
+  const productionReady = !isReferenceNotReady && !hasErrors && !hasDetachedMarks && !needsWeld && !needsOffset && !collisionRisk;
   let qualityStatus = "ready_single_piece";
-  if (hasErrors) qualityStatus = "blocked";
+  if (isReferenceNotReady) qualityStatus = "reference_not_ready";
+  else if (hasErrors) qualityStatus = "blocked";
   else if (collisionRisk) qualityStatus = "collision_risk";
   else if (hasDetachedMarks) qualityStatus = "detached_marks";
   else if (needsWeld) qualityStatus = "needs_weld";
   else if (needsOffset) qualityStatus = "needs_offset";
   const meta = NAME_CUT_SINGLE_PIECE_STATUSES[qualityStatus] || NAME_CUT_SINGLE_PIECE_STATUSES.blocked;
   const notes = [];
+  if (isReferenceNotReady) notes.push("Referans/DXF yok — bu isim DXF kütüphanesine eklenmeli, üretime hazır değil.");
   if (productionReady) notes.push("Aynı isim içindeki harfler ve işaretler tek parça kontrolünden geçti.");
   if (needsWeld) notes.push("Harf/parça birleşimi gerçek path kontrolü gerektiriyor.");
   if (hasDetachedMarks) notes.push("Nokta veya Türkçe karakter işareti ana gövdeye bağlı görünmüyor.");
@@ -15137,7 +15143,7 @@ function nameCutSinglePieceQuality(item = {}, layout = null, cfg = nameCutLayout
     tone: meta.tone,
     production_ready: productionReady,
     letters_joined: !needsWeld,
-    single_piece: productionReady || (!needsWeld && !hasDetachedMarks && !hasErrors),
+    single_piece: productionReady || (!needsWeld && !hasDetachedMarks && !hasErrors && !isReferenceNotReady),
     weld: needsWeld ? "Kontrol" : "Hazır",
     offset: needsOffset ? "Gerekli" : "Uygulandı",
     marks: hasDetachedMarks ? "Kopuk" : "Bağlı",

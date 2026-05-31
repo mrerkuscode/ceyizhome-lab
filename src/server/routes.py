@@ -838,6 +838,73 @@ def job_log(job_id: str):
         return _err(exc)
 
 
+# ── Etiket Studio — Tarayıcı modu render/preflight (P0-3, P0-4) ──────────────
+
+@api_bp.route("/preflight/check", methods=["POST"])
+def preflight_check():
+    return _ok({"ok": True, "message": "Render sistemi hazır."})
+
+
+@api_bp.route("/preflight_manual_label", methods=["POST"])
+def preflight_manual_label_api():
+    try:
+        body = request.get_json() or {}
+        template_path_str = str(body.get("template_path") or "")
+        fields = {str(k): str(v) for k, v in (body.get("fields") or {}).items()}
+        quantity = max(1, int(body.get("quantity") or 1))
+
+        from webui_backend import production_safety  # lazy — Qt isteğe bağlı
+        template_path = _resolve_label_template_path(template_path_str)
+        result = production_safety.preflight_manual_label(
+            _PROJECT_ROOT, template_path, fields, quantity
+        )
+        return _ok(result)
+    except Exception as exc:
+        return _err(exc)
+
+
+@api_bp.route("/render_manual_label", methods=["POST"])
+def render_manual_label_api():
+    try:
+        body = request.get_json() or {}
+        template_path_str = str(body.get("template_path") or "")
+        fields = {str(k): str(v) for k, v in (body.get("fields") or {}).items()}
+        quantity = max(1, int(body.get("quantity") or 1))
+
+        from webui_backend import production_safety, label_api  # lazy — Qt isteğe bağlı
+        template_path = _resolve_label_template_path(template_path_str)
+
+        preflight = production_safety.preflight_manual_label(
+            _PROJECT_ROOT, template_path, fields, quantity
+        )
+        if preflight.get("status") == "ERROR":
+            return _ok({**preflight, "status": "ERROR"})
+
+        render_result = label_api.render_manual(
+            _PROJECT_ROOT, template_path,
+            str(fields.get("label_text") or ""),
+            quantity,
+            field_values=fields,
+        )
+        return _ok({
+            "status": "OK",
+            "message": f"PDF ve PNG oluşturuldu. Adet: {quantity}",
+            "batch_pdf_path": str(render_result.batch_pdf_path),
+            "pdf_path": str(render_result.pdf_path),
+            "png_path": str(render_result.png_path),
+            "output_dir": str(render_result.output_dir),
+            "quantity": render_result.quantity,
+            "preflight": preflight,
+        })
+    except Exception as exc:
+        return _err(exc)
+
+
+def _resolve_label_template_path(path_str: str) -> Path:
+    p = Path(path_str)
+    return p if p.is_absolute() else _PROJECT_ROOT / path_str
+
+
 @api_bp.route("/cancel_job/<job_id>", methods=["POST"])
 def cancel_job(job_id: str):
     try:
